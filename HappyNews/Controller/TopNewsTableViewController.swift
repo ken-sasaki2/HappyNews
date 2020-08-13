@@ -10,10 +10,36 @@ import UIKit
 import SegementSlide
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
+    
+    //XMLParserのインスタンスを作成
+    var parser = XMLParser()
+    
+    //RSSのパース内の現在の要素名を取得する変数
+    var currentElementName:String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //tableaviewの背景
+        tableView.backgroundColor = .white
+        
+        //XMLparseの処理
+        let yomiuriNews = "https://headlines.yahoo.co.jp/rss/ytv-dom.xml"
+        let url:URL = URL(string: yomiuriNews)!
+        
+        parser = XMLParser(contentsOf: url)!
+        
+        //XMLParserを委任
+        parser.delegate = self
+        
+        //parseの開始
+        parser.parse()
+    }
+    
+    //tableViewを返すメソッド
+    @objc var scrollView: UIScrollView {
+        
+        return tableView
     }
 
     // MARK: - Table view data source

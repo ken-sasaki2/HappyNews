@@ -15,6 +15,7 @@ class NewsViewController: SegementSlideDefaultViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //SegementSlideDefaultViewControllerの初期設定
         reloadData()
         defaultSelectedIndex = 0
     }
