@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865724E4C0F000B32D02 /* AppDelegate.swift */; };
 		45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865924E4C0F000B32D02 /* SceneDelegate.swift */; };
-		45D8865C24E4C0F000B32D02 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* ViewController.swift */; };
+		45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* NewsViewController.swift */; };
 		45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8865D24E4C0F000B32D02 /* Main.storyboard */; };
 		45D8866124E4C0F200B32D02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45D8866024E4C0F200B32D02 /* Assets.xcassets */; };
 		45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */; };
@@ -20,7 +20,7 @@
 		45D8865424E4C0F000B32D02 /* HappyNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D8865724E4C0F000B32D02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45D8865924E4C0F000B32D02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		45D8865B24E4C0F000B32D02 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		45D8865B24E4C0F000B32D02 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		45D8865E24E4C0F000B32D02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45D8866024E4C0F200B32D02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45D8866324E4C0F200B32D02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 			children = (
 				45D8865724E4C0F000B32D02 /* AppDelegate.swift */,
 				45D8865924E4C0F000B32D02 /* SceneDelegate.swift */,
-				45D8865B24E4C0F000B32D02 /* ViewController.swift */,
+				45D8865B24E4C0F000B32D02 /* NewsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -104,7 +104,6 @@
 				F96A87FECA201A625A6FABAE /* Pods-HappyNews.debug.xcconfig */,
 				A94EF47B29A9CEAAB707D9D7 /* Pods-HappyNews.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -213,7 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45D8865C24E4C0F000B32D02 /* ViewController.swift in Sources */,
+				45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */,
 				45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */,
 				45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */,
 			);
