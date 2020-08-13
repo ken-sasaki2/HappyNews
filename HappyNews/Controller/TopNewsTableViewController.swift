@@ -155,4 +155,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         print("エラー:" + parseError.localizedDescription)
     }
+    
+    //セルをタップした時呼ばれるメソッド
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //webViewにurlを渡して表示
+        
+    }
 }
