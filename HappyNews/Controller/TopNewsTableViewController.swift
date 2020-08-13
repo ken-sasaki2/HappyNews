@@ -102,4 +102,57 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         return cell
     }
     
+    //XML解析を開始する場合(parser.parse())に呼ばれるメソッド
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        
+        currentElementName = nil
+        
+        if elementName == "item" {
+            
+            newsItems.append(NewsItems())
+        } else {
+            
+            currentElementName = elementName
+        }
+    }
+    
+    //"item"の中身を判定するメソッド(要素の解析開始と値取得）
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        
+        if newsItems.count > 0 {
+            
+            //配列の番号を合わせる
+            let lastItem = newsItems[newsItems.count - 1]
+            
+            switch currentElementName {
+            case "title":
+                lastItem.title   = string
+            case "link":
+                lastItem.url     = string
+            case "pubData":
+                lastItem.pubDate = string
+            default:
+                break
+            }
+        }
+    }
+    
+    //RSS内のXMLファイルの各値の</item>に呼ばれるメソッド（要素の解析終了）
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        
+        //新しい箱を準備
+        self.currentElementName = nil
+    }
+    
+    //XML解析が終わったら呼ばれるメソッド
+    func parserDidEndDocument(_ parser: XMLParser) {
+        
+        //tableViewの更新
+        tableView.reloadData()
+    }
+    
+    //XML解析でエラーが発生した場合に呼ばれるメソッド
+    func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
+        print("エラー:" + parseError.localizedDescription)
+    }
 }
