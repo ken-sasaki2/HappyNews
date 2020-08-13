@@ -16,6 +16,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //RSSのパース内の現在の要素名を取得する変数
     var currentElementName:String!
+    
+    //NewsItems型のクラスが入る配列の宣言
+    var newsItems = [NewsItems]
 
     override func viewDidLoad() {
         super.viewDidLoad()
