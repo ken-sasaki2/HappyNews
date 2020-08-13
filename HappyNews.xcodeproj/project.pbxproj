@@ -84,6 +84,7 @@
 				45D8865924E4C0F000B32D02 /* SceneDelegate.swift */,
 				45D8865B24E4C0F000B32D02 /* NewsViewController.swift */,
 				45BCEE7324E4DF7A0023D738 /* TopNewsTableViewController.swift */,
+				45BCEE7724E545570023D738 /* WebViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -94,7 +95,6 @@
 				45D8865D24E4C0F000B32D02 /* Main.storyboard */,
 				45D8866024E4C0F200B32D02 /* Assets.xcassets */,
 				45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */,
-				45BCEE7724E545570023D738 /* WebViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -159,7 +159,20 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //セルをタップした時呼ばれるメソッド
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //webViewにurlを渡して表示
+        //WebViewControllerのインスタンス作成
+        let webViewController = WebViewController()
         
+        //モーダルで画面遷移
+        webViewController.modalTransitionStyle = .crossDissolve
+        
+        //タップしたセルを検知
+        let tapCell = newsItems[indexPath.row]
+        
+        //検知したセルのurlを取得
+        UserDefaults.standard.set(tapCell.url, forKey: "url")
+        
+        //webViewControllerで取り出す
+        present(webViewController, animated: true, completion: nil)
     }
+    
 }
