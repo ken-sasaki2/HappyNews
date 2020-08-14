@@ -163,7 +163,7 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
         let webViewController = WebViewController()
         
         //モーダルで画面遷移
-        webViewController.modalTransitionStyle = .crossDissolve
+        webViewController.modalTransitionStyle = .coverVertical
         
         //タップしたセルを検知
         let tapCell = newsItems[indexPath.row]
