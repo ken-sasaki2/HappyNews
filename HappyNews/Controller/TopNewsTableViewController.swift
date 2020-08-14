@@ -24,11 +24,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         super.viewDidLoad()
         
         //tableaviewの背景
-        tableView.backgroundColor = UIColor.lightGray
+        tableView.backgroundColor = UIColor.white
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlString = "https://www.nhk.or.jp/rss/news/cat1.xml"
+        let xmlString = "https://news.yahoo.co.jp/pickup/rss.xml"
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!

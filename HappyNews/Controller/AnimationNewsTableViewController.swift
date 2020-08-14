@@ -24,7 +24,7 @@ class AnimationNewsTableViewController: UITableViewController,SegementSlideConte
         super.viewDidLoad()
         
         //tableaviewの背景
-        tableView.backgroundColor = UIColor.lightGray
+        tableView.backgroundColor = UIColor.white
         
         //XMLParseの処理
         //XMLファイルを特定
