@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4543739324E5637A00107A49 /* EntameNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739224E5637A00107A49 /* EntameNewsTableViewController.swift */; };
+		4543739524E5675400107A49 /* SuportsNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739424E5675400107A49 /* SuportsNewsTableViewController.swift */; };
+		4543739724E5677600107A49 /* BusinessNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739624E5677600107A49 /* BusinessNewsTableViewController.swift */; };
+		4543739924E567A100107A49 /* TechnologyNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739824E567A100107A49 /* TechnologyNewsTableViewController.swift */; };
+		4543739B24E567C000107A49 /* KeizaiNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739A24E567C000107A49 /* KeizaiNewsTableViewController.swift */; };
+		4543739D24E567CF00107A49 /* SeiziNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739C24E567CF00107A49 /* SeiziNewsTableViewController.swift */; };
+		4543739F24E567E100107A49 /* WorldNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739E24E567E100107A49 /* WorldNewsTableViewController.swift */; };
+		454373A924E6260100107A49 /* TiikiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373A824E6260100107A49 /* TiikiTableViewController.swift */; };
+		454373AB24E626DE00107A49 /* GourmetNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373AA24E626DE00107A49 /* GourmetNewsTableViewController.swift */; };
+		454373AD24E6275800107A49 /* AnimalNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373AC24E6275800107A49 /* AnimalNewsTableViewController.swift */; };
+		454373AF24E627B800107A49 /* AnimationNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373AE24E627B800107A49 /* AnimationNewsTableViewController.swift */; };
+		454373B224E6281F00107A49 /* AppGameNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373B124E6281F00107A49 /* AppGameNewsTableViewController.swift */; };
 		45BCEE7424E4DF7A0023D738 /* TopNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7324E4DF7A0023D738 /* TopNewsTableViewController.swift */; };
 		45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7524E4F1970023D738 /* NewsItems.swift */; };
 		45BCEE7824E545570023D738 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7724E545570023D738 /* WebViewController.swift */; };
@@ -20,6 +32,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4543739224E5637A00107A49 /* EntameNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntameNewsTableViewController.swift; sourceTree = "<group>"; };
+		4543739424E5675400107A49 /* SuportsNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuportsNewsTableViewController.swift; sourceTree = "<group>"; };
+		4543739624E5677600107A49 /* BusinessNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessNewsTableViewController.swift; sourceTree = "<group>"; };
+		4543739824E567A100107A49 /* TechnologyNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnologyNewsTableViewController.swift; sourceTree = "<group>"; };
+		4543739A24E567C000107A49 /* KeizaiNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeizaiNewsTableViewController.swift; sourceTree = "<group>"; };
+		4543739C24E567CF00107A49 /* SeiziNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeiziNewsTableViewController.swift; sourceTree = "<group>"; };
+		4543739E24E567E100107A49 /* WorldNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldNewsTableViewController.swift; sourceTree = "<group>"; };
+		454373A824E6260100107A49 /* TiikiTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiikiTableViewController.swift; sourceTree = "<group>"; };
+		454373AA24E626DE00107A49 /* GourmetNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GourmetNewsTableViewController.swift; sourceTree = "<group>"; };
+		454373AC24E6275800107A49 /* AnimalNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalNewsTableViewController.swift; sourceTree = "<group>"; };
+		454373AE24E627B800107A49 /* AnimationNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationNewsTableViewController.swift; sourceTree = "<group>"; };
+		454373B124E6281F00107A49 /* AppGameNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGameNewsTableViewController.swift; sourceTree = "<group>"; };
 		45BCEE7324E4DF7A0023D738 /* TopNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNewsTableViewController.swift; sourceTree = "<group>"; };
 		45BCEE7524E4F1970023D738 /* NewsItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItems.swift; sourceTree = "<group>"; };
 		45BCEE7724E545570023D738 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +108,18 @@
 				45D8865924E4C0F000B32D02 /* SceneDelegate.swift */,
 				45D8865B24E4C0F000B32D02 /* NewsViewController.swift */,
 				45BCEE7324E4DF7A0023D738 /* TopNewsTableViewController.swift */,
+				4543739224E5637A00107A49 /* EntameNewsTableViewController.swift */,
+				4543739424E5675400107A49 /* SuportsNewsTableViewController.swift */,
+				4543739624E5677600107A49 /* BusinessNewsTableViewController.swift */,
+				4543739824E567A100107A49 /* TechnologyNewsTableViewController.swift */,
+				4543739A24E567C000107A49 /* KeizaiNewsTableViewController.swift */,
+				4543739C24E567CF00107A49 /* SeiziNewsTableViewController.swift */,
+				454373A824E6260100107A49 /* TiikiTableViewController.swift */,
+				4543739E24E567E100107A49 /* WorldNewsTableViewController.swift */,
+				454373AA24E626DE00107A49 /* GourmetNewsTableViewController.swift */,
+				454373AC24E6275800107A49 /* AnimalNewsTableViewController.swift */,
+				454373AE24E627B800107A49 /* AnimationNewsTableViewController.swift */,
+				454373B124E6281F00107A49 /* AppGameNewsTableViewController.swift */,
 				45BCEE7724E545570023D738 /* WebViewController.swift */,
 			);
 			path = Controller;
@@ -223,10 +259,22 @@
 			files = (
 				45BCEE7424E4DF7A0023D738 /* TopNewsTableViewController.swift in Sources */,
 				45BCEE7824E545570023D738 /* WebViewController.swift in Sources */,
+				454373A924E6260100107A49 /* TiikiTableViewController.swift in Sources */,
+				454373AB24E626DE00107A49 /* GourmetNewsTableViewController.swift in Sources */,
+				454373AD24E6275800107A49 /* AnimalNewsTableViewController.swift in Sources */,
 				45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */,
+				454373B224E6281F00107A49 /* AppGameNewsTableViewController.swift in Sources */,
+				4543739B24E567C000107A49 /* KeizaiNewsTableViewController.swift in Sources */,
+				4543739924E567A100107A49 /* TechnologyNewsTableViewController.swift in Sources */,
 				45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */,
+				4543739524E5675400107A49 /* SuportsNewsTableViewController.swift in Sources */,
 				45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */,
+				4543739D24E567CF00107A49 /* SeiziNewsTableViewController.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */,
+				4543739724E5677600107A49 /* BusinessNewsTableViewController.swift in Sources */,
+				4543739F24E567E100107A49 /* WorldNewsTableViewController.swift in Sources */,
+				454373AF24E627B800107A49 /* AnimationNewsTableViewController.swift in Sources */,
+				4543739324E5637A00107A49 /* EntameNewsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

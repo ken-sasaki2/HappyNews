@@ -9,7 +9,7 @@
 import UIKit
 import SegementSlide
 
-class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
+class WorldNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
     //XMLParserのインスタンスを作成
     var parser = XMLParser()
@@ -28,7 +28,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlString = "https://www.nhk.or.jp/rss/news/cat1.xml"
+        let xmlString = "http://feeds.afpbb.com/rss/afpbb/afpbbnews"
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
@@ -176,3 +176,5 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     }
     
 }
+
+
