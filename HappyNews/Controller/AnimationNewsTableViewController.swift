@@ -66,7 +66,7 @@ class AnimationNewsTableViewController: UITableViewController,SegementSlideConte
     //セルの高さを決めるメソッド
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return view.frame.size.height/6
+        return view.frame.size.height/8
     }
     
     //セルを構築する際に呼ばれるメソッド
@@ -85,7 +85,7 @@ class AnimationNewsTableViewController: UITableViewController,SegementSlideConte
         cell.textLabel?.text = newsItem.title
         
         //セルのフォントタイプとサイズ
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
         
         //セルのテキストカラー
         cell.textLabel?.textColor = UIColor.black
