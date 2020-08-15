@@ -126,11 +126,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             
             switch currentElementName {
             case "title":
-                lastItem.title   = string
+                lastItem.title     = string
             case "link":
-                lastItem.url     = string
+                lastItem.url       = string
             case "pubData":
-                lastItem.pubDate = string
+                lastItem.pubDate   = string
+                
             default:
                 break
             }
