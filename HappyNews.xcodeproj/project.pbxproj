@@ -419,6 +419,7 @@
 			baseConfigurationReference = F96A87FECA201A625A6FABAE /* Pods-HappyNews.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZXZ96723Y7;
 				INFOPLIST_FILE = HappyNews/Info.plist;
@@ -428,6 +429,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ken.HappyNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -438,6 +440,7 @@
 			baseConfigurationReference = A94EF47B29A9CEAAB707D9D7 /* Pods-HappyNews.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZXZ96723Y7;
 				INFOPLIST_FILE = HappyNews/Info.plist;
@@ -447,6 +450,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ken.HappyNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

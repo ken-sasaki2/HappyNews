@@ -131,6 +131,8 @@ class SeiziNewsTableViewController: UITableViewController,SegementSlideContentSc
                 lastItem.url     = string
             case "pubData":
                 lastItem.pubDate = string
+            case "category":
+                lastItem.category = string
             default:
                 break
             }

@@ -94,7 +94,7 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
         cell.textLabel?.numberOfLines = 3
         
         //セルのサブタイトル
-        cell.detailTextLabel?.text = newsItem.pubDate
+        cell.detailTextLabel?.text = newsItem.category
         
         //サブタイトルのテキストカラー
         cell.detailTextLabel?.textColor = UIColor.gray
@@ -131,6 +131,8 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
                 lastItem.url     = string
             case "pubData":
                 lastItem.pubDate = string
+            case "category":
+                lastItem.category = string
             default:
                 break
             }
