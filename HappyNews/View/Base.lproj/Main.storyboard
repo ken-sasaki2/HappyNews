@@ -42,7 +42,6 @@
         <!--Happy News-->
         <scene sceneID="eRC-Vw-ujz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cyp-PT-vk0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="iHm-Us-rS2" customClass="NewsViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kVr-hC-gKc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
@@ -52,6 +51,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Happy News" id="GYi-C8-BhN"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cyp-PT-vk0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2668" y="96"/>
         </scene>
