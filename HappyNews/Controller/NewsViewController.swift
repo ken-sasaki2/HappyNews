@@ -8,6 +8,7 @@
 
 import UIKit
 import SegementSlide
+import NaturalLanguage
 
 class NewsViewController: SegementSlideDefaultViewController {
     
@@ -18,7 +19,6 @@ class NewsViewController: SegementSlideDefaultViewController {
         //SegementSlideDefaultViewControllerの初期設定
         reloadData()
         defaultSelectedIndex = 0
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

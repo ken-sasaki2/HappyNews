@@ -8,6 +8,7 @@
 
 import UIKit
 import SegementSlide
+import NaturalLanguage
 
 class EntameNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     

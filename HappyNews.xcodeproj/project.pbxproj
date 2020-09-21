@@ -28,6 +28,7 @@
 		45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8865D24E4C0F000B32D02 /* Main.storyboard */; };
 		45D8866124E4C0F200B32D02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45D8866024E4C0F200B32D02 /* Assets.xcassets */; };
 		45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */; };
+		45E7875525181A8E00E4E14A /* HappyNews_TextClassification.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 45E7875425181A8E00E4E14A /* HappyNews_TextClassification.mlmodel */; };
 		CCDCCAE33D0F59D6087F56F9 /* Pods_HappyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		45D8866024E4C0F200B32D02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45D8866324E4C0F200B32D02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45D8866524E4C0F200B32D02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45E7875425181A8E00E4E14A /* HappyNews_TextClassification.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HappyNews_TextClassification.mlmodel; sourceTree = "<group>"; };
 		A94EF47B29A9CEAAB707D9D7 /* Pods-HappyNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyNews.release.xcconfig"; path = "Target Support Files/Pods-HappyNews/Pods-HappyNews.release.xcconfig"; sourceTree = "<group>"; };
 		E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F96A87FECA201A625A6FABAE /* Pods-HappyNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyNews.debug.xcconfig"; path = "Target Support Files/Pods-HappyNews/Pods-HappyNews.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		45D8865624E4C0F000B32D02 /* HappyNews */ = {
 			isa = PBXGroup;
 			children = (
+				45E7875425181A8E00E4E14A /* HappyNews_TextClassification.mlmodel */,
 				45D8866D24E4C11900B32D02 /* Model */,
 				45D8866C24E4C11300B32D02 /* View */,
 				45D8866B24E4C10800B32D02 /* Controller */,
@@ -259,6 +262,7 @@
 			files = (
 				45BCEE7424E4DF7A0023D738 /* TopNewsTableViewController.swift in Sources */,
 				45BCEE7824E545570023D738 /* WebViewController.swift in Sources */,
+				45E7875525181A8E00E4E14A /* HappyNews_TextClassification.mlmodel in Sources */,
 				454373A924E6260100107A49 /* TiikiTableViewController.swift in Sources */,
 				454373AB24E626DE00107A49 /* GourmetNewsTableViewController.swift in Sources */,
 				454373AD24E6275800107A49 /* AnimalNewsTableViewController.swift in Sources */,

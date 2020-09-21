@@ -8,6 +8,7 @@
 
 import UIKit
 import SegementSlide
+import NaturalLanguage
 
 class AppGameNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
