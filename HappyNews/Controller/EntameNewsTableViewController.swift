@@ -10,7 +10,7 @@ import UIKit
 import SegementSlide
 import NaturalLanguage
 
-class EntameNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
+class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
     //XMLParserのインスタンスを作成
     var parser = XMLParser()
@@ -20,6 +20,13 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
     
     //NewsItems型のクラスが入る配列の宣言
     var newsItems = [NewsItems]()
+    
+    //CoreMLモデルをアプリケーションへ追加
+    var sentimentClassifier: NLModel? = {
+        let model = try? NLModel(mlModel: HappyNews_TextClassification().model)
+        //モデルを返す
+        return model
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +36,7 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlString = "https://rss.allabout.co.jp/aa/latest/ch/entertainment/"
+        let xmlString = "https://news.yahoo.co.jp/pickup/rss.xml"
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
@@ -95,7 +102,7 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
         cell.textLabel?.numberOfLines = 3
         
         //セルのサブタイトル
-        cell.detailTextLabel?.text = newsItem.category
+        cell.detailTextLabel?.text = newsItem.pubDate
         
         //サブタイトルのテキストカラー
         cell.detailTextLabel?.textColor = UIColor.gray
@@ -127,13 +134,12 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
             
             switch currentElementName {
             case "title":
-                lastItem.title   = string
+                lastItem.title     = string
             case "link":
-                lastItem.url     = string
+                lastItem.url       = string
             case "pubData":
-                lastItem.pubDate = string
-            case "category":
-                lastItem.category = string
+                lastItem.pubDate   = string
+                
             default:
                 break
             }
@@ -179,4 +185,3 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
     }
     
 }
-

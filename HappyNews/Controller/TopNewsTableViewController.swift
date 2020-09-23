@@ -10,7 +10,7 @@ import UIKit
 import SegementSlide
 import NaturalLanguage
 
-class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
+class EntameNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
     //XMLParserのインスタンスを作成
     var parser = XMLParser()
@@ -20,13 +20,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //NewsItems型のクラスが入る配列の宣言
     var newsItems = [NewsItems]()
-    
-    //CoreMLモデルをアプリケーションへ追加
-    var sentimentClassifier: NLModel? = {
-        let model = try? NLModel(mlModel: HappyNews_TextClassification().model)
-        //モデルを返す
-        return model
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +29,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlString = "https://news.yahoo.co.jp/pickup/rss.xml"
+        let xmlString = "https://news.yahoo.co.jp/rss/topics/top-picks.xml"
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
@@ -102,7 +95,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         cell.textLabel?.numberOfLines = 3
         
         //セルのサブタイトル
-        cell.detailTextLabel?.text = newsItem.pubDate
+        cell.detailTextLabel?.text = newsItem.category
         
         //サブタイトルのテキストカラー
         cell.detailTextLabel?.textColor = UIColor.gray
@@ -134,12 +127,13 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             
             switch currentElementName {
             case "title":
-                lastItem.title     = string
+                lastItem.title   = string
             case "link":
-                lastItem.url       = string
+                lastItem.url     = string
             case "pubData":
-                lastItem.pubDate   = string
-                
+                lastItem.pubDate = string
+            case "category":
+                lastItem.category = string
             default:
                 break
             }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cia-9l-h0o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cia-9l-h0o">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,30 +16,14 @@
                     <view key="view" contentMode="scaleToFill" id="nyo-A4-Wdb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="KSG-Wf-fxk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="天気予報" id="DTh-QJ-bdQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n7e-xh-EDc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2667" y="743"/>
-        </scene>
-        <!--検索-->
-        <scene sceneID="H7D-td-q2h">
-            <objects>
-                <viewController id="CM4-6e-ewf" customClass="NewsViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="S9c-ZR-XVu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="olf-fq-AEv"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="検索" id="3x3-xM-oXf"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tgc-ia-I63" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4158" y="429"/>
         </scene>
         <!--Happy News-->
         <scene sceneID="eRC-Vw-ujz">
@@ -46,8 +32,8 @@
                     <view key="view" contentMode="scaleToFill" id="kVr-hC-gKc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Zhw-BI-Xt1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Happy News" id="GYi-C8-BhN"/>
                 </viewController>
@@ -68,7 +54,6 @@
                     <connections>
                         <segue destination="PtS-Eo-pUa" kind="relationship" relationship="viewControllers" id="c35-fw-RcI"/>
                         <segue destination="WZE-uf-ozE" kind="relationship" relationship="viewControllers" id="bOG-9J-lk0"/>
-                        <segue destination="JdE-zh-Kb0" kind="relationship" relationship="viewControllers" id="9tM-cL-AGP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8VG-Xu-TfV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -129,34 +114,12 @@
             </objects>
             <point key="canvasLocation" x="1886.9565217391305" y="742.63392857142856"/>
         </scene>
-        <!--検索-->
-        <scene sceneID="ODa-Wx-bsv">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JdE-zh-Kb0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="検索" image="magnifyingglass" catalog="system" id="abW-qC-i9l"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="PYL-4P-Khu">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.74969717540000003" blue="0.76400057399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="CM4-6e-ewf" kind="relationship" relationship="rootViewController" id="hMd-YS-jsU"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xBE-Y9-qY9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3414" y="429"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="cloud.sun" catalog="system" width="128" height="88"/>
+        <image name="cloud.sun" catalog="system" width="128" height="93"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
