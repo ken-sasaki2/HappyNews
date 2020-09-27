@@ -9,6 +9,7 @@
 import UIKit
 import SegementSlide
 import NaturalLanguage
+import CoreML
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
@@ -21,10 +22,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //NewsItems型のクラスが入る配列の宣言
     var newsItems = [NewsItems]()
     
-    //CoreMLモデルをアプリケーションへ追加
-    var sentimentClassifier: NLModel? = {
+    //CoreMLモデルの統合
+    private lazy var sentimentClassifier: NLModel? = {
         let model = try? NLModel(mlModel: HappyNews_TextClassification().model)
-        //モデルを返す
         return model
     }()
 
