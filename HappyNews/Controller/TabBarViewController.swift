@@ -34,6 +34,12 @@ class MainTabBarController: UITabBarController {
             //SearchViewControllerのTabBarのアイテムを設定
             searchViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
             
-            viewControllers = [newsViewController, searchViewController]
+            //WeatherViewControllerのインスタンスを作成
+            let weatherViewContoroller = WeatherViewController()
+            
+            //WeatherViewControllerのTabBarアイテムを設定
+            weatherViewContoroller.tabBarItem = UITabBarItem(tabBarSystemItem: .mostViewed, tag: 2)
+            
+            viewControllers = [newsViewController, searchViewController, weatherViewContoroller]
         }
     }
