@@ -9,37 +9,21 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-
-    //TabBar呼び出し
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        setupTab()
-    }
-}
     
-    //TabBarの作成
-    private extension MainTabBarController {
-        func setupTab() {
-            
-            //NewsViewControllerのインスタンスを作成
-            let newsViewController = NewsViewController()
-            
-            //NewsViewControllerのTabBarのアイテムを設定
-            newsViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
-            
-            //SearchViewControllerのインスタンスを作成
-            let searchViewController = SearchViewController()
-            
-            //SearchViewControllerのTabBarのアイテムを設定
-            searchViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
-            
-            //WeatherViewControllerのインスタンスを作成
-            let weatherViewContoroller = WeatherViewController()
-            
-            //WeatherViewControllerのTabBarアイテムを設定
-            weatherViewContoroller.tabBarItem = UITabBarItem(tabBarSystemItem: .mostViewed, tag: 2)
-            
-            viewControllers = [newsViewController, searchViewController, weatherViewContoroller]
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        switch item.tag {
+        case 0:
+            print("0番のアイテムをタップしました")
+        case 1:
+            print("1番のアイテムをタップしました")
+        case 2:
+            print("2番のアイテムをタップしました")
+        default:
+            break
         }
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
