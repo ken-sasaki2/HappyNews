@@ -16,8 +16,8 @@ class NewsViewController: SegementSlideDefaultViewController {
         super.viewDidLoad()
         
         //SegementSlideDefaultViewControllerの初期設定
-        reloadData()
         defaultSelectedIndex = 0
+        reloadData()
     }
     
     //ニュースタブのコード
