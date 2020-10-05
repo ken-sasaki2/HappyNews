@@ -20,7 +20,24 @@ extension UIColor {
 }
 
 class MainTabBarController: UITabBarController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
     
+        //tabbarの色を変更
+        tabBar.barTintColor = UIColor(hex: "ffffff")
+    
+        //tabbar背景の透過
+        UITabBar.appearance().backgroundImage = UIImage()
+    
+        //tabbarの選択色の設定
+        tabBar.tintColor = UIColor(hex: "2DCCD3")
+    
+        //tabbarの非選択色の設定
+        tabBar.unselectedItemTintColor =  UIColor.gray
+    }
+    
+    //tabbarをタップした場合のアクション
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         switch item.title {
         case "ニュース":
@@ -32,21 +49,5 @@ class MainTabBarController: UITabBarController {
         default:
             break
         }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //tabbarの色を変更
-        tabBar.barTintColor = UIColor(hex: "ffffff")
-        
-        //tabbar背景の透過
-        UITabBar.appearance().backgroundImage = UIImage()
-        
-        //tabbarの選択色の設定
-        tabBar.tintColor = UIColor(hex: "2DCCD3")
-        
-        //tabbarの非選択色の設定
-        tabBar.unselectedItemTintColor =  UIColor.gray
     }
 }

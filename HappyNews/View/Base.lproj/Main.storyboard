@@ -12,7 +12,7 @@
         <!--天気予報-->
         <scene sceneID="wgB-AZ-k0L">
             <objects>
-                <viewController id="SJT-nY-yBc" customClass="NewsViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SJT-nY-yBc" customClass="WeatherViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" tag="1" contentMode="scaleToFill" id="a13-PA-oSz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
