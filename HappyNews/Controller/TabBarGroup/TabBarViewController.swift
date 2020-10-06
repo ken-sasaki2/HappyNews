@@ -41,11 +41,11 @@ class MainTabBarController: UITabBarController {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         switch item.title {
         case "ニュース":
-            print("ニュースアイテムをタップしました")
+            print("タップするとTOPにスクロールして欲しい")
         case "天気":
-            print("天気アイテムをタップしました")
+            print("アクション未定")
         case "検索":
-            print("検索アイテムをタップしました")
+            print("アクション未定")
         default:
             break
         }
