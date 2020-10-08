@@ -21,12 +21,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //NewsItems型のクラスが入る配列の宣言
     var newsItems = [NewsItems]()
-    
-    //CoreMLモデルの統合
-    private lazy var sentimentClassifier: NLModel? = {
-        let model = try? NLModel(mlModel: HappyNews_TextClassification().model)
-        return model
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
