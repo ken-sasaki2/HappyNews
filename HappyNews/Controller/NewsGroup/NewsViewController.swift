@@ -11,18 +11,13 @@ import SegementSlide
 import NaturalLanguage
 
 class NewsViewController: SegementSlideDefaultViewController {
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //SegementSlideDefaultViewControllerの初期設定
-        reloadData()
         defaultSelectedIndex = 0
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        reloadData()
     }
     
     //ニュースタブのコード

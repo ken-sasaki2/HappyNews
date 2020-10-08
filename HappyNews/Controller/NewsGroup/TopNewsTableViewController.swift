@@ -183,5 +183,4 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //webViewControllerで取り出す
         present(webViewController, animated: true, completion: nil)
     }
-    
 }
