@@ -4,31 +4,31 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>IBMSwiftSDKCore.xcscheme</key>
+		<key>IBMSwiftSDKCore.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>IBMWatsonToneAnalyzerV3.xcscheme</key>
+		<key>IBMWatsonToneAnalyzerV3.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>Pods-HappyNews.xcscheme</key>
+		<key>Pods-HappyNews.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>SegementSlide.xcscheme</key>
+		<key>SegementSlide.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
