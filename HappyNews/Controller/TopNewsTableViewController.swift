@@ -21,6 +21,9 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
     
     //NewsItems型のクラスが入る配列の宣言
     var newsItems = [NewsItems]()
+    
+    //WatsonにアクセスするためのAPIkey
+    //q6GL14WCXtIbNgwYazVmBDNGlyd3jmxglni-pmk96g0z
 
     override func viewDidLoad() {
         super.viewDidLoad()
