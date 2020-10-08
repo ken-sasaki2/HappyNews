@@ -8,5 +8,6 @@ target 'HappyNews' do
   # Pods for HappyNews
 
 pod 'SegementSlide'
+pod 'IBMWatsonToneAnalyzerV3'
 
 end
