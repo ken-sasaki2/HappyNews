@@ -8,22 +8,22 @@
 
 import UIKit
 import SegementSlide
-import ToneAnalyzerV3
-
+//import ToneAnalyzerV3
+                                                                                    
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
     //Watson資格情報APIキー
     //q6GL14WCXtIbNgwYazVmBDNGlyd3jmxglni-pmk96g0z
     
     //Watson資格情報url
-    //https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com/instances/653470fb-83d1-4b26-8ff9-967987732a3f
+    //https:api.jp-tok.tone-analyzer.watson.cloud.ibm.com/instances/653470fb-83d1-4b26-8ff9-967987732a3f
     
     //資格情報を定義(API)
-    let authenticator = WatsonIAMAuthenticator(apiKey: "q6GL14WCXtIbNgwYazVmBDNGlyd3jmxglni-pmk96g0z")
-    
+//    let authenticator = WatsonIAMAuthenticator(apiKey: "q6GL14WCXtIbNgwYazVmBDNGlyd3jmxglni-pmk96g0z")
+
     //資格情報を定義(version, url)
-    let toneAnalyzer = ToneAnalyzer(version: "2017-09-21", authenticator: authenticator)
-    toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com/instances/653470fb-83d1-4b26-8ff9-967987732a3f"
+//    let toneAnalyzer = ToneAnalyzer(version: "2017-09-21", authenticator: authenticator)
+//    toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com/instances/653470fb-83d1-4b26-8ff9-967987732a3f"
     
     //XMLParserのインスタンスを作成
     var parser = XMLParser()

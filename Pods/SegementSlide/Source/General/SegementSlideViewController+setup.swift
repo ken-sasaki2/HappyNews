@@ -20,7 +20,7 @@ extension SegementSlideViewController {
         setupSegementSlideContentView()
         setupSegementSlideSwitcherView()
         observeScrollViewContentOffset()
-        observeWillClearAllReusableViewControllersNotification()
+        observeWillCleanUpAllReusableViewControllersNotification()
     }
     
     private func setupSegementSlideViews() {
@@ -64,6 +64,7 @@ extension SegementSlideViewController {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.isPagingEnabled = false
         scrollView.isScrollEnabled = true
+        scrollView.scrollsToTop = true
         scrollView.delegate = self
     }
     
@@ -79,29 +80,16 @@ extension SegementSlideViewController {
         })
     }
     
-    private func observeWillClearAllReusableViewControllersNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willClearAllReusableViewControllers(_:)), name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: nil)
+    private func observeWillCleanUpAllReusableViewControllersNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(willCleanUpAllReusableViewControllers(_:)), name: SegementSlideContentView.willCleanUpAllReusableViewControllersNotification, object: nil)
     }
     
     @objc
-    private func willClearAllReusableViewControllers(_ notification: Notification) {
+    private func willCleanUpAllReusableViewControllers(_ notification: Notification) {
         guard let object = notification.object as? SegementSlideViewController, object === self else {
             return
         }
-        childKeyValueObservation?.invalidate()
-        childKeyValueObservation = nil
-    }
-    
-    internal func setupBounces() {
-        innerBouncesType = bouncesType
-        switch innerBouncesType {
-        case .parent:
-            canParentViewScroll = true
-            canChildViewScroll = false
-        case .child:
-            canParentViewScroll = true
-            canChildViewScroll = true
-        }
+        cleanUpChildKeyValueObservations()
     }
     
     internal func layoutSegementSlideScrollView() {
@@ -184,19 +172,53 @@ extension SegementSlideViewController {
         }
     }
     
-    internal func resetChildViewControllerContentOffsetY() {
+    internal func setupBounces() {
+        innerBouncesType = bouncesType
+        resetScrollViewStatus()
+    }
+    
+    internal func resetScrollViewStatus() {
+        switch innerBouncesType {
+        case .parent:
+            canParentViewScroll = true
+            canChildViewScroll = false
+        case .child:
+            canParentViewScroll = true
+            canChildViewScroll = true
+        }
+    }
+    
+    internal func resetCurrentChildViewControllerContentOffsetY() {
+        guard let contentViewController = currentSegementSlideContentViewController,
+            let childScrollView = contentViewController.scrollView else {
+            return
+        }
+        childScrollView.contentOffset.y = 0
+    }
+    
+    internal func resetOtherCachedChildViewControllerContentOffsetY() {
         guard scrollView.contentOffset.y < headerStickyHeight else {
             return
         }
-        let collection = waitTobeResetContentOffsetY
+        guard cachedChildViewControllerIndex.count > 1 else {
+            return
+        }
+        let collection = cachedChildViewControllerIndex
         for index in collection {
             guard index != currentIndex,
-                let scrollView = dequeueReusableViewController(at: index)?.scrollView else {
+                let childScrollView = dequeueReusableViewController(at: index)?.scrollView else {
                 continue
             }
-            waitTobeResetContentOffsetY.remove(index)
-            scrollView.contentOffset.y = 0
+            cachedChildViewControllerIndex.remove(index)
+            childScrollView.forceStopScroll()
+            childScrollView.forceFixedContentOffsetY = 0
         }
+    }
+    
+    internal func cleanUpChildKeyValueObservations() {
+        let observations = childKeyValueObservations
+        observations.values.forEach({ $0.invalidate() })
+        childKeyValueObservations.removeAll()
     }
     
 }

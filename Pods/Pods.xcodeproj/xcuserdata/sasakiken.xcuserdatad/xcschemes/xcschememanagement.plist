@@ -4,43 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>IBMSwiftSDKCore.xcscheme_^#shared#^_</key>
+		<key>IBMSwiftSDKCore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
-			<key>orderHint</key>
-			<integer>0</integer>
+			<false/>
 		</dict>
-		<key>IBMWatsonToneAnalyzerV3.xcscheme_^#shared#^_</key>
+		<key>IBMWatsonToneAnalyzerV3.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<false/>
 		</dict>
 		<key>Pods-HappyNews.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
-		<key>Pods-HappyNews.xcscheme_^#shared#^_</key>
-		<dict>
 			<key>isShown</key>
-			<true/>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<false/>
 		</dict>
 		<key>SegementSlide.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>SegementSlide.xcscheme_^#shared#^_</key>
-		<dict>
 			<key>isShown</key>
-			<true/>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

@@ -11,17 +11,14 @@ import UIKit
 extension SegementSlideViewController: UIScrollViewDelegate {
     
     public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        guard let contentViewController = currentSegementSlideContentViewController,
-            let scrollView = contentViewController.scrollView else {
-            return true
-        }
-        scrollView.contentOffset.y = 0
+        resetScrollViewStatus()
+        resetCurrentChildViewControllerContentOffsetY()
         return true
     }
     
 }
 
-extension SegementSlideViewController: SegementSlideContentDelegate {@objc 
+extension SegementSlideViewController: SegementSlideContentDelegate {
     
     public var segementSlideContentScrollViewCount: Int {
         return switcherView.ssDataSource?.titles.count ?? 0
@@ -32,30 +29,41 @@ extension SegementSlideViewController: SegementSlideContentDelegate {@objc
     }
     
     public func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int, animated: Bool) {
-        waitTobeResetContentOffsetY.insert(index)
+        cachedChildViewControllerIndex.insert(index)
         if switcherView.ssSelectedIndex != index {
             switcherView.selectItem(at: index, animated: animated)
         }
-        childKeyValueObservation?.invalidate()
         guard let childViewController = segementSlideContentView.dequeueReusableViewController(at: index) else {
             return
         }
         defer {
             didSelectContentViewController(at: index)
         }
-        guard let scrollView = childViewController.scrollView else {
+        guard let childScrollView = childViewController.scrollView else {
             return
         }
-        let keyValueObservation = scrollView.observe(\.contentOffset, options: [.new, .old], changeHandler: { [weak self] (scrollView, change) in
+        let key = String(format: "%p", childScrollView)
+        guard !childKeyValueObservations.keys.contains(key) else {
+            return
+        }
+        let keyValueObservation = childScrollView.observe(\.contentOffset, options: [.new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else {
                 return
             }
             guard change.newValue != change.oldValue else {
                 return
             }
+            if let contentOffsetY = scrollView.forceFixedContentOffsetY {
+                scrollView.forceFixedContentOffsetY = nil
+                scrollView.contentOffset.y = contentOffsetY
+                return
+            }
+            guard index == self.currentIndex else {
+                return
+            }
             self.childScrollViewDidScroll(scrollView)
         })
-        childKeyValueObservation = keyValueObservation
+        childKeyValueObservations[key] = keyValueObservation
     }
     
 }

@@ -19,6 +19,7 @@
 		454373AD24E6275800107A49 /* AnimalNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373AC24E6275800107A49 /* AnimalNewsTableViewController.swift */; };
 		454373AF24E627B800107A49 /* AnimationNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373AE24E627B800107A49 /* AnimationNewsTableViewController.swift */; };
 		454373B224E6281F00107A49 /* AppGameNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373B124E6281F00107A49 /* AppGameNewsTableViewController.swift */; };
+		457204FE2531835400CDAE6B /* Pods_HappyNews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 457204FC2531835400CDAE6B /* Pods_HappyNews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45BCEE7424E4DF7A0023D738 /* TopNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7324E4DF7A0023D738 /* TopNewsTableViewController.swift */; };
 		45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7524E4F1970023D738 /* NewsItems.swift */; };
 		45BCEE7824E545570023D738 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7724E545570023D738 /* WebViewController.swift */; };
@@ -31,10 +32,28 @@
 		45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8865D24E4C0F000B32D02 /* Main.storyboard */; };
 		45D8866124E4C0F200B32D02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45D8866024E4C0F200B32D02 /* Assets.xcassets */; };
 		45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */; };
-		CCDCCAE33D0F59D6087F56F9 /* Pods_HappyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */; };
+		CCDCCAE33D0F59D6087F56F9 /* Pods_HappyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		DA9400CFD579F2C90135EF2F /* Pods_HappyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457204FC2531835400CDAE6B /* Pods_HappyNews.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		457204FB2531834C00CDAE6B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				457204FE2531835400CDAE6B /* Pods_HappyNews.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		4505443125308795002B6ABB /* IBMSwiftSDKCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IBMSwiftSDKCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45054433253087A9002B6ABB /* ToneAnalyzer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ToneAnalyzer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45054435253087B5002B6ABB /* SegementSlide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SegementSlide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4543739224E5637A00107A49 /* EntameNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntameNewsTableViewController.swift; sourceTree = "<group>"; };
 		4543739424E5675400107A49 /* SuportsNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuportsNewsTableViewController.swift; sourceTree = "<group>"; };
 		4543739624E5677600107A49 /* BusinessNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessNewsTableViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +66,10 @@
 		454373AC24E6275800107A49 /* AnimalNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalNewsTableViewController.swift; sourceTree = "<group>"; };
 		454373AE24E627B800107A49 /* AnimationNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationNewsTableViewController.swift; sourceTree = "<group>"; };
 		454373B124E6281F00107A49 /* AppGameNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGameNewsTableViewController.swift; sourceTree = "<group>"; };
+		457204F82531834C00CDAE6B /* IBMSwiftSDKCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IBMSwiftSDKCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		457204FC2531835400CDAE6B /* Pods_HappyNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_HappyNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		457204FF2531835C00CDAE6B /* SegementSlide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SegementSlide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		457205022531836000CDAE6B /* ToneAnalyzer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ToneAnalyzer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BCEE7324E4DF7A0023D738 /* TopNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNewsTableViewController.swift; sourceTree = "<group>"; };
 		45BCEE7524E4F1970023D738 /* NewsItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItems.swift; sourceTree = "<group>"; };
 		45BCEE7724E545570023D738 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +95,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCDCCAE33D0F59D6087F56F9 /* Pods_HappyNews.framework in Frameworks */,
+				DA9400CFD579F2C90135EF2F /* Pods_HappyNews.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +220,13 @@
 		E769ABD22E3A12EB1260365E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				457205022531836000CDAE6B /* ToneAnalyzer.framework */,
+				457204FF2531835C00CDAE6B /* SegementSlide.framework */,
+				457204FC2531835400CDAE6B /* Pods_HappyNews.framework */,
+				457204F82531834C00CDAE6B /* IBMSwiftSDKCore.framework */,
+				45054435253087B5002B6ABB /* SegementSlide.framework */,
+				45054433253087A9002B6ABB /* ToneAnalyzer.framework */,
+				4505443125308795002B6ABB /* IBMSwiftSDKCore.framework */,
 				E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */,
 			);
 			name = Frameworks;
@@ -212,7 +243,8 @@
 				45D8865024E4C0F000B32D02 /* Sources */,
 				45D8865124E4C0F000B32D02 /* Frameworks */,
 				45D8865224E4C0F000B32D02 /* Resources */,
-				894C8E53FFF9D74060472E4D /* [CP] Embed Pods Frameworks */,
+				457204FB2531834C00CDAE6B /* Embed Frameworks */,
+				0E0EA83643DB9974F2698330 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -270,7 +302,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		894C8E53FFF9D74060472E4D /* [CP] Embed Pods Frameworks */ = {
+		0E0EA83643DB9974F2698330 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -398,6 +430,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -458,6 +491,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -484,6 +518,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZXZ96723Y7;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = HappyNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -505,6 +540,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZXZ96723Y7;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = HappyNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

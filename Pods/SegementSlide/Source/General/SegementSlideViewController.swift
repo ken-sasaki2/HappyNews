@@ -23,12 +23,12 @@ open class SegementSlideViewController: UIViewController {
     
     internal var safeAreaTopConstraint: NSLayoutConstraint?
     internal var parentKeyValueObservation: NSKeyValueObservation?
-    internal var childKeyValueObservation: NSKeyValueObservation?
+    internal var childKeyValueObservations: [String: NSKeyValueObservation] = [:]
     internal var innerBouncesType: BouncesType = .parent
     internal var canParentViewScroll: Bool = true
     internal var canChildViewScroll: Bool = false
     internal var lastChildBouncesTranslationY: CGFloat = 0
-    internal var waitTobeResetContentOffsetY: Set<Int> = Set()
+    internal var cachedChildViewControllerIndex: Set<Int> = Set()
     
     public var headerStickyHeight: CGFloat {
         let headerHeight = headerView.frame.height.rounded(.up)
@@ -108,7 +108,7 @@ open class SegementSlideViewController: UIViewController {
     }
     
     open func setupContent() {
-        waitTobeResetContentOffsetY.removeAll()
+        cachedChildViewControllerIndex.removeAll()
     }
     
     open override func viewDidLayoutSubviews() {
@@ -167,8 +167,8 @@ open class SegementSlideViewController: UIViewController {
     
     deinit {
         parentKeyValueObservation?.invalidate()
-        childKeyValueObservation?.invalidate()
-        NotificationCenter.default.removeObserver(self, name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: nil)
+        cleanUpChildKeyValueObservations()
+        NotificationCenter.default.removeObserver(self, name: SegementSlideContentView.willCleanUpAllReusableViewControllersNotification, object: nil)
         #if DEBUG
         debugPrint("\(type(of: self)) deinit")
         #endif
