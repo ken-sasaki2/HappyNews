@@ -8,7 +8,7 @@
 
 import UIKit
 import SegementSlide
-//import ToneAnalyzerV3
+import ToneAnalyzer
                                                                                     
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
