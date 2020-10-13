@@ -20,7 +20,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //NewsItems型のクラスが入る配列の宣言
     var newsItems = [NewsItems]()
-
+    
+    //WatsonAPIキーを宣言
+    let authenticator = WatsonIAMAuthenticator(apiKey: "q6GL14WCXtIbNgwYazVmBDNGlyd3jmxglni-pmk96g0z")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +45,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //parseの開始
         parser.parse()
+        
+        //WatsonAPIのversionとURLを定義
+        let toneAnalyzer = ToneAnalyzer(version: "2017-09-21", authenticator: authenticator)
+            toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     }
 
     // MARK: - Table view data source
