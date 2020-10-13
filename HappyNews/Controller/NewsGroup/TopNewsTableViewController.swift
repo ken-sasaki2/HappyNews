@@ -21,8 +21,16 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //NewsItems型のクラスが入る配列の宣言
     var newsItems = [NewsItems]()
     
-    //WatsonAPIキーを宣言
+    //WatsonAPIキーのインスタンス作成
     let authenticator = WatsonIAMAuthenticator(apiKey: "q6GL14WCXtIbNgwYazVmBDNGlyd3jmxglni-pmk96g0z")
+    
+    //Watsonで使うサンプルテキスト
+    let sampleText = """
+    Team, I know that times are tough! Product \
+    sales have been disappointing for the past three \
+    quarters. We have a competitive product, but we \
+    need to do a better job of selling it!
+    """
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,13 +54,52 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //parseの開始
         parser.parse()
         
+    // MARK: - Watson ToneAnalyzer
         //WatsonAPIのversionとURLを定義
         let toneAnalyzer = ToneAnalyzer(version: "2017-09-21", authenticator: authenticator)
             toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
+        
+        //SSL検証を無効化(不要？)
+        //toneAnalyzer.disableSSLVerification()
+        
+        //エラー処理
+        toneAnalyzer.tone(toneContent: .text(sampleText)){
+          response, error in
+          if let error = error {
+            switch error {
+            case let .http(statusCode, message, metadata):
+              switch statusCode {
+              case .some(404):
+                // Handle Not Found (404) exceptz1zion
+                print("Not found")
+              case .some(413):
+                // Handle Request Too Large (413) exception
+                print("Payload too large")
+              default:
+                if let statusCode = statusCode {
+                  print("Error - code: \(statusCode), \(message ?? "")")
+                }
+              }
+            default:
+              print(error.localizedDescription)
+            }
+            return
+          }
+          //データ処理
+          guard let result = response?.result else {
+            print(error?.localizedDescription ?? "unknown error")
+            return
+          }
+          print(result)
+          //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
+          print(response?.statusCode as Any)
+          //ヘッダーパラメータ
+          print(response?.headers as Any)
+        }
     }
+    
 
     // MARK: - Table view data source
-    
     //tableViewを返すメソッド
     @objc var scrollView: UIScrollView {
         
