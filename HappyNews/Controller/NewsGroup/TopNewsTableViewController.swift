@@ -9,6 +9,7 @@
 import UIKit
 import SegementSlide
 import ToneAnalyzer
+import SwiftyJSON
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
@@ -24,7 +25,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //WatsonAPIキーのインスタンス作成
     let authenticator = WatsonIAMAuthenticator(apiKey: "q6GL14WCXtIbNgwYazVmBDNGlyd3jmxglni-pmk96g0z")
     
-    //Watsonで使うサンプルテキスト
+    //分析用サンプルテキスト
     let sampleText = """
     Team, I know that times are tough! Product \
     sales have been disappointing for the past three \
@@ -97,7 +98,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
           print(response?.headers as Any)
         }
     }
-    
 
     // MARK: - Table view data source
     //tableViewを返すメソッド
