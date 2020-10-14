@@ -10,6 +10,7 @@ import UIKit
 import SegementSlide
 import ToneAnalyzer
 import SwiftyJSON
+import Alamofire
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
