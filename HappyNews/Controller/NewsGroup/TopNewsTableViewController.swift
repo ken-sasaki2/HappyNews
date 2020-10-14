@@ -23,17 +23,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //NewsItems型のクラスが入る配列の宣言
     var newsItems = [NewsItems]()
     
-    //WatsonAPIキーのインスタンス作成
-    let authenticator = WatsonIAMAuthenticator(apiKey: "q6GL14WCXtIbNgwYazVmBDNGlyd3jmxglni-pmk96g0z")
-    
-    //分析用サンプルテキスト
-    let sampleText = """
-    Team, I know that times are tough! Product \
-    sales have been disappointing for the past three \
-    quarters. We have a competitive product, but we \
-    need to do a better job of selling it!
-    """
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,13 +45,31 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //parseの開始
         parser.parse()
         
+        //toneAnalyzer(感情分析)の開始
+        toneAnalyzer()
+    }
+    
     // MARK: - Watson ToneAnalyzer
+    //ToneAnalyzer(感情分析)用メソッド
+    func toneAnalyzer() {
+        
+        //WatsonAPIキーのインスタンス作成
+        let authenticator = WatsonIAMAuthenticator(apiKey: "q6GL14WCXtIbNgwYazVmBDNGlyd3jmxglni-pmk96g0z")
+        
         //WatsonAPIのversionとURLを定義
         let toneAnalyzer = ToneAnalyzer(version: "2017-09-21", authenticator: authenticator)
             toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
         
         //SSL検証を無効化(不要？)
         //toneAnalyzer.disableSSLVerification()
+        
+        //分析用サンプルテキスト
+        let sampleText = """
+        Team, I know that times are tough! Product \
+        sales have been disappointing for the past three \
+        quarters. We have a competitive product, but we \
+        need to do a better job of selling it!
+        """
         
         //エラー処理
         toneAnalyzer.tone(toneContent: .text(sampleText)){
