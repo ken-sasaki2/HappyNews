@@ -23,6 +23,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //NewsItems型のクラスが入る配列の宣言
     var newsItems = [NewsItems]()
     
+    //JSONの配列取得で必要
+    var count = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,7 +48,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //parseの開始
         parser.parse()
         
-        //toneAnalyzer(感情分析)の開始
+        //toneAnalyzer(感情分析)の呼び出し
         toneAnalyzer()
     }
     
@@ -106,6 +109,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
           print(response?.headers as Any)
         }
     }
+    
 
     // MARK: - Table view data source
     //tableViewを返すメソッド
