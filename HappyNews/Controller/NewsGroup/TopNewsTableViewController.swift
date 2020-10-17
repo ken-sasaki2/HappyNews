@@ -57,14 +57,14 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func toneAnalyzer() {
         
         //WatsonAPIキーのインスタンス作成
-        let authenticator = WatsonIAMAuthenticator(apiKey: "q6GL14WCXtIbNgwYazVmBDNGlyd3jmxglni-pmk96g0z")
+        let authenticator = WatsonIAMAuthenticator(apiKey: "36bKQ1j2Aga5xtwTHJKFoGwbPfxLnDUk6M7Dt6qVEhmr")
         
         //WatsonAPIのversionとURLを定義
-        let toneAnalyzer = ToneAnalyzer(version: "2017-09-21", authenticator: authenticator)
+        let toneAnalyzer = ToneAnalyzer(version: "2020-10-17", authenticator: authenticator)
             toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
         
         //SSL検証を無効化(不要？)
-        //toneAnalyzer.disableSSLVerification()
+//        toneAnalyzer.disableSSLVerification()
         
         //分析用サンプルテキスト
         let sampleText = """
@@ -109,7 +109,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
           print(response?.headers as Any)
         }
     }
-    
 
     // MARK: - Table view data source
     //tableViewを返すメソッド
