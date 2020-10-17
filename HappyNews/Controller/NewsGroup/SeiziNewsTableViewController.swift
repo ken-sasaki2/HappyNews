@@ -8,8 +8,6 @@
 
 import UIKit
 import SegementSlide
-import NaturalLanguage
-
 class SeiziNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
     //XMLParserのインスタンスを作成

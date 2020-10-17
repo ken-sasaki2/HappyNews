@@ -8,7 +8,9 @@
 
 import UIKit
 import SegementSlide
-import NaturalLanguage
+import ToneAnalyzer
+import SwiftyJSON
+import Alamofire
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
@@ -21,13 +23,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //NewsItems型のクラスが入る配列の宣言
     var newsItems = [NewsItems]()
     
-    //CoreMLモデルをアプリケーションへ追加
-    var sentimentClassifier: NLModel? = {
-        let model = try? NLModel(mlModel: HappyNews_TextClassification().model)
-        //モデルを返す
-        return model
-    }()
-
+    //JSONの配列取得で必要
+    var count = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,10 +47,70 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //parseの開始
         parser.parse()
+        
+        //toneAnalyzer(感情分析)の呼び出し
+        toneAnalyzer()
+    }
+    
+    // MARK: - Watson ToneAnalyzer
+    //ToneAnalyzer(感情分析)用メソッド
+    func toneAnalyzer() {
+        
+        //WatsonAPIキーのインスタンス作成
+        let authenticator = WatsonIAMAuthenticator(apiKey: "36bKQ1j2Aga5xtwTHJKFoGwbPfxLnDUk6M7Dt6qVEhmr")
+        
+        //WatsonAPIのversionとURLを定義
+        let toneAnalyzer = ToneAnalyzer(version: "2020-10-17", authenticator: authenticator)
+            toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
+        
+        //SSL検証を無効化(不要？)
+//        toneAnalyzer.disableSSLVerification()
+        
+        //分析用サンプルテキスト
+        let sampleText = """
+        Team, I know that times are tough! Product \
+        sales have been disappointing for the past three \
+        quarters. We have a competitive product, but we \
+        need to do a better job of selling it!
+        """
+        
+        //エラー処理
+        toneAnalyzer.tone(toneContent: .text(sampleText)){
+          response, error in
+          if let error = error {
+            switch error {
+            case let .http(statusCode, message, metadata):
+              switch statusCode {
+              case .some(404):
+                // Handle Not Found (404) exceptz1zion
+                print("Not found")
+              case .some(413):
+                // Handle Request Too Large (413) exception
+                print("Payload too large")
+              default:
+                if let statusCode = statusCode {
+                  print("Error - code: \(statusCode), \(message ?? "")")
+                }
+              }
+            default:
+              print(error.localizedDescription)
+            }
+            return
+          }
+          //データ処理
+          guard let result = response?.result else {
+            print(error?.localizedDescription ?? "unknown error")
+            return
+          }
+          print(result)
+          //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
+          print(response?.statusCode as Any)
+          //ヘッダーパラメータ
+          print(response?.headers as Any)
+        }
     }
 
     // MARK: - Table view data source
-    
     //tableViewを返すメソッド
     @objc var scrollView: UIScrollView {
         
