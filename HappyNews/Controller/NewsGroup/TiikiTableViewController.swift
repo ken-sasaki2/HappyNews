@@ -44,28 +44,23 @@ class TiikiTableViewController: UITableViewController,SegementSlideContentScroll
     }
 
     // MARK: - Table view data source
-    
     //tableViewを返すメソッド
     @objc var scrollView: UIScrollView {
-        
         return tableView
     }
 
     //セルのセクションを決めるメソッド
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 1
     }
     
     //セルの数を決めるメソッド
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return newsItems.count
     }
     
     //セルの高さを決めるメソッド
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return view.frame.size.height/8
     }
     
@@ -108,10 +103,8 @@ class TiikiTableViewController: UITableViewController,SegementSlideContentScroll
         currentElementName = nil
         
         if elementName == "item" {
-            
             newsItems.append(NewsItems())
         } else {
-            
             currentElementName = elementName
         }
     }
@@ -174,7 +167,6 @@ class TiikiTableViewController: UITableViewController,SegementSlideContentScroll
         //webViewControllerで取り出す
         present(webViewController, animated: true, completion: nil)
     }
-    
 }
 
 

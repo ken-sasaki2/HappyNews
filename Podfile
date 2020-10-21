@@ -10,5 +10,4 @@ target 'HappyNews' do
 pod 'SegementSlide'
 pod 'IBMWatsonToneAnalyzerV3', '~> 3.6.0'
 pod 'SwiftyJSON'
-pod 'Alamofire'
 end
