@@ -123,7 +123,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                     }
                     
                     //JSONデータ確認
-                    print("json: \(String(bytes: json, encoding: .utf8)!)")
+                    print("JSON: \(String(bytes: json, encoding: .utf8)!)")
                     
                     //JSON解析(score)
                     let jsonValue = JSON(json)

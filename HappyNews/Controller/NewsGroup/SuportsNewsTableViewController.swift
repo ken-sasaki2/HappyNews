@@ -44,28 +44,23 @@ class SuportsNewsTableViewController: UITableViewController,SegementSlideContent
     }
 
     // MARK: - Table view data source
-    
     //tableViewを返すメソッド
     @objc var scrollView: UIScrollView {
-        
         return tableView
     }
 
     //セルのセクションを決めるメソッド
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 1
     }
     
     //セルの数を決めるメソッド
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return newsItems.count
     }
     
     //セルの高さを決めるメソッド
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return view.frame.size.height/8
     }
     
@@ -108,10 +103,8 @@ class SuportsNewsTableViewController: UITableViewController,SegementSlideContent
         currentElementName = nil
         
         if elementName == "item" {
-            
             newsItems.append(NewsItems())
         } else {
-            
             currentElementName = elementName
         }
     }
@@ -120,7 +113,7 @@ class SuportsNewsTableViewController: UITableViewController,SegementSlideContent
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         
         if newsItems.count > 0 {
-            
+        
             //配列の番号を合わせる
             let lastItem = newsItems[newsItems.count - 1]
             
@@ -176,7 +169,6 @@ class SuportsNewsTableViewController: UITableViewController,SegementSlideContent
         //webViewControllerで取り出す
         present(webViewController, animated: true, completion: nil)
     }
-    
 }
 
 
