@@ -10,7 +10,6 @@ import UIKit
 import SegementSlide
 import ToneAnalyzer
 import SwiftyJSON
-import Alamofire
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
     
@@ -76,7 +75,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //エラー処理
         toneAnalyzer.tone(toneContent: .text(sampleText)) {
-
           response, error in
           if let error = error {
             switch error {
@@ -92,17 +90,19 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                     if let statusCode = statusCode {
                         print("Error - code: \(statusCode), \(message ?? "")")
                     }
-                }
+            }
             default:
               print(error.localizedDescription)
             }
             return
           }
+
           //データ処理
           guard let result = response?.result else {
             print(error?.localizedDescription ?? "unknown error")
             return
           }
+            
           //ステータスコードの定数を作成し条件分岐
           let statusCode = response?.statusCode
             switch statusCode == Optional(200) {
@@ -125,7 +125,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                     //JSONデータ確認
                     print("json: \(String(bytes: json, encoding: .utf8)!)")
                     
-                    //JSON解析を行う(score)
+                    //JSON解析(score)
                     let jsonValue = JSON(json)
                     let tonesScore = jsonValue["document_tone"]["tones"][self.count]["score"].float
                     
@@ -134,7 +134,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                     let decimalPoint = ceil(decimal! * 100)/100
                     let tone_score = decimalPoint
                     
-                    //JSON解析を行う(tone_name)
+                    //JSON解析(tone_name)
                     let tonesName = jsonValue["document_tone"]["tones"][self.count]["tone_name"].string
                     let tone_name = tonesName
                         
@@ -155,25 +155,21 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     // MARK: - Table view data source
     //tableViewを返すメソッド
     @objc var scrollView: UIScrollView {
-        
         return tableView
     }
 
     //セルのセクションを決めるメソッド
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 1
     }
     
     //セルの数を決めるメソッド
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return newsItems.count
     }
     
     //セルの高さを決めるメソッド
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return view.frame.size.height/8
     }
     
@@ -183,7 +179,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //スタイルを2行にかつシンプリに
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
 
-        //RSS(yomiuriNews)の取得したニュースの値が入る
+        //RSSで取得したニュースの値が入る
         let newsItem = newsItems[indexPath.row]
         
         //セルの背景
@@ -216,10 +212,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         currentElementName = nil
         
         if elementName == "item" {
-            
             newsItems.append(NewsItems())
         } else {
-            
             currentElementName = elementName
         }
     }
@@ -239,7 +233,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 lastItem.url       = string
             case "pubData":
                 lastItem.pubDate   = string
-                
             default:
                 break
             }

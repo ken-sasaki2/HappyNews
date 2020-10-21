@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (5.2.2)
   - IBMSwiftSDKCore (1.0.0)
   - IBMWatsonToneAnalyzerV3 (3.6.0):
     - IBMSwiftSDKCore (~> 1.0.0)
@@ -7,26 +6,23 @@ PODS:
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
-  - Alamofire
   - IBMWatsonToneAnalyzerV3 (~> 3.6.0)
   - SegementSlide
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
-    - Alamofire
     - IBMSwiftSDKCore
     - IBMWatsonToneAnalyzerV3
     - SegementSlide
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   IBMSwiftSDKCore: 54ad77b03a4d27b218ba514580197db3b89a96ca
   IBMWatsonToneAnalyzerV3: eca44fa804c5d60156c5b05c64fa20fe4d99d5cc
   SegementSlide: ad0a6de50cbcc071da9ec8b0f403a4e75b20ba9a
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 67bffb3e7ec44b50f8658b7d1e5e2a311b3ae9e0
+PODFILE CHECKSUM: b80dcf2861ac64c7c4b34ce4eaf6502a66f3bac7
 
 COCOAPODS: 1.9.3
