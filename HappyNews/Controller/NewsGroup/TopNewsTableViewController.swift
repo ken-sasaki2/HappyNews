@@ -20,10 +20,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //RSSのパース内の現在の要素名を取得する変数
     var currentElementName:String!
     
-    //NewsItems型のクラスが入る配列の宣言
+    //NewsItemsモデルのインスタンス作成
     var newsItems = [NewsItems]()
     
-    //JSONの配列取得で必要
+    //JSON解析で使用
     var count = 0
     
     override func viewDidLoad() {
@@ -75,23 +75,24 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //toneAnalyzer.disableSSLVerification()
         
         //エラー処理
-        toneAnalyzer.tone(toneContent: .text(sampleText)){
+        toneAnalyzer.tone(toneContent: .text(sampleText)) {
+
           response, error in
           if let error = error {
             switch error {
-            case let .http(statusCode, message, metadata):
-              switch statusCode {
-              case .some(404):
-                // Handle Not Found (404) exceptz1zion
-                print("Not found")
-              case .some(413):
-                // Handle Request Too Large (413) exception
-                print("Payload too large")
-              default:
-                if let statusCode = statusCode {
-                  print("Error - code: \(statusCode), \(message ?? "")")
+                case let .http(statusCode, message, metadata):
+            switch statusCode {
+                case .some(404):
+                    // Handle Not Found (404) exceptz1zion
+                    print("Not found")
+                case .some(413):
+                    // Handle Request Too Large (413) exception
+                    print("Payload too large")
+                default:
+                    if let statusCode = statusCode {
+                        print("Error - code: \(statusCode), \(message ?? "")")
+                    }
                 }
-              }
             default:
               print(error.localizedDescription)
             }
@@ -104,9 +105,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
           }
           //ステータスコードの定数を作成し条件分岐
           let statusCode = response?.statusCode
-            switch statusCode == Optional(200)  {
+            switch statusCode == Optional(200) {
                 case true:
-                    print("分析成功: \(statusCode)")
+                    print("success: \(statusCode)")
                     //分析結果の定数を作成
                     let analysisResult = result
                     
@@ -116,22 +117,37 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                     //可読性を高めるためにJSONを整形
                     encoder.outputFormatting = .prettyPrinted
                     
-                    //分析結果をJSONに変換
-                    guard let jsonValue = try? encoder.encode(analysisResult) else {
+                    //分析結果をJSON形式に変換
+                    guard let json = try? encoder.encode(analysisResult) else {
                         fatalError("Failed to encode to JSON.")
                     }
                     
                     //JSONデータ確認
-                    print("感情分析結果(JSON): \(String(bytes: jsonValue, encoding: .utf8)!)")
+                    print("json: \(String(bytes: json, encoding: .utf8)!)")
                     
-//                    let toneScore = self.jsonValue["tones"][self.count]["score"].float
+                    //JSON解析を行う(score)
+                    let jsonValue = JSON(json)
+                    let tonesScore = jsonValue["document_tone"]["tones"][self.count]["score"].float
+                    
+                    //tonesScoreの小数点を切り上げて取得
+                    let decimal = tonesScore
+                    let decimalPoint = ceil(decimal! * 100)/100
+                    let tone_score = decimalPoint
+                    
+                    //JSON解析を行う(tone_name)
+                    let tonesName = jsonValue["document_tone"]["tones"][self.count]["tone_name"].string
+                    let tone_name = tonesName
+                        
+                    print("=====ここから個別取得=====")
+                    print("document_tone.score    : \(tone_score)")
+                    print("document_tone.tone_name: \(tone_name)")
                     
                     //ヘッダーパラメータ
-                    print(response?.headers as Any)
+                    //print(response?.headers as Any)
                     
                 case false:
                     //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
-                    print("分析失敗: \(statusCode)")
+                    print("failure: \(statusCode)")
             }
         }
     }
