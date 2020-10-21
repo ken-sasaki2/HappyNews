@@ -72,7 +72,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         """
         
         //SSL検証を無効化(不要？)
-//        toneAnalyzer.disableSSLVerification()
+        //toneAnalyzer.disableSSLVerification()
         
         //エラー処理
         toneAnalyzer.tone(toneContent: .text(sampleText)){
@@ -102,13 +102,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             print(error?.localizedDescription ?? "unknown error")
             return
           }
-          //ステータスコードのインスタンスを作成し条件分岐
+          //ステータスコードの定数を作成し条件分岐
           let statusCode = response?.statusCode
             switch statusCode == Optional(200)  {
                 case true:
-                    print("分析成功")
-                    
-                    //分析結果のインスタンスを作成
+                    print("分析成功: \(statusCode)")
+                    //分析結果の定数を作成
                     let analysisResult = result
                     
                     //JSONへ変換するencoderを用意
@@ -129,12 +128,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                     
                     //ヘッダーパラメータ
                     print(response?.headers as Any)
-                case false:
-                    print("分析失敗")
                     
+                case false:
                     //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
-                    print("エラーコード: \(statusCode)")
-                }
+                    print("分析失敗: \(statusCode)")
+            }
         }
     }
 
