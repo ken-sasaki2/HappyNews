@@ -76,9 +76,32 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             print(error?.localizedDescription ?? "unknown error")
             return
           }
-          print("動いている？")
-          print(response?.statusCode)
-          print("response: \(languages)")
+            
+          let responseNum = response?.statusCode
+            switch responseNum == Optional(200) {
+            case true:
+                print("success: \(responseNum)")
+                //分析結果の定数を作成
+                let translations = languages
+                    
+                //JSONへ変換するencoderを用意
+                let encoder = JSONEncoder()
+                    
+                //可読性を高めるためにJSONを整形
+                encoder.outputFormatting = .prettyPrinted
+                    
+                //分析結果をJSON形式に変換
+                guard let translationValue = try? encoder.encode(translations) else {
+                    fatalError("Failed to encode to JSON.")
+                }
+                
+                //JSONデータ確認
+                print("JSON: \(String(bytes: translationValue, encoding: .utf8)!)")
+                
+            case false:
+                //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
+                print("failure: \(responseNum)")
+            }
         }
     }
     
@@ -111,18 +134,18 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
           //エラー処理
           if let error = error {
             switch error {
-                case let .http(statusCode, message, metadata):
-            switch statusCode {
+            case let .http(statusCode, message, metadata):
+                switch statusCode {
                 case .some(404):
                     // Handle Not Found (404) exceptz1zion
                     print("Not found")
                 case .some(413):
                     // Handle Request Too Large (413) exception
                     print("Payload too large")
-                default:
-                    if let statusCode = statusCode {
-                        print("Error - code: \(statusCode), \(message ?? "")")
-                    }
+            default:
+                if let statusCode = statusCode {
+                    print("Error - code: \(statusCode), \(message ?? "")")
+                }
             }
             default:
               print(error.localizedDescription)
@@ -139,48 +162,48 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
           //ステータスコードの定数を作成し条件分岐
           let statusCode = response?.statusCode
             switch statusCode == Optional(200) {
-                case true:
-                    print("success: \(statusCode)")
-                    //分析結果の定数を作成
-                    let analysisResult = result
+            case true:
+                print("success: \(statusCode)")
+                //分析結果の定数を作成
+                let analysisResult = result
                     
-                    //JSONへ変換するencoderを用意
-                    let encoder = JSONEncoder()
+                //JSONへ変換するencoderを用意
+                let encoder = JSONEncoder()
                     
-                    //可読性を高めるためにJSONを整形
-                    encoder.outputFormatting = .prettyPrinted
+                //可読性を高めるためにJSONを整形
+                encoder.outputFormatting = .prettyPrinted
                     
-                    //分析結果をJSON形式に変換
-                    guard let json = try? encoder.encode(analysisResult) else {
-                        fatalError("Failed to encode to JSON.")
-                    }
+                //分析結果をJSON形式に変換
+                guard let json = try? encoder.encode(analysisResult) else {
+                    fatalError("Failed to encode to JSON.")
+                }
                     
-                    //JSONデータ確認
-                    print("JSON: \(String(bytes: json, encoding: .utf8)!)")
+                //JSONデータ確認
+                print("JSON: \(String(bytes: json, encoding: .utf8)!)")
                     
-                    //JSON解析(score)
-                    let jsonValue = JSON(json)
-                    let tonesScore = jsonValue["document_tone"]["tones"][self.count]["score"].float
+                //JSON解析(score)
+                let jsonValue = JSON(json)
+                let tonesScore = jsonValue["document_tone"]["tones"][self.count]["score"].float
                     
-                    //tonesScoreの小数点を切り上げて取得
-                    let decimal = tonesScore
-                    let decimalPoint = ceil(decimal! * 100)/100
-                    let tone_score = decimalPoint
+                //tonesScoreの小数点を切り上げて取得
+                let decimal = tonesScore
+                let decimalPoint = ceil(decimal! * 100)/100
+                let tone_score = decimalPoint
                     
-                    //JSON解析(tone_name)
-                    let tonesName = jsonValue["document_tone"]["tones"][self.count]["tone_name"].string
-                    let tone_name = tonesName
+                //JSON解析(tone_name)
+                let tonesName = jsonValue["document_tone"]["tones"][self.count]["tone_name"].string
+                let tone_name = tonesName
                         
-                    print("=====ここから個別取得=====")
-                    print("document_tone.score    : \(tone_score)")
-                    print("document_tone.tone_name: \(tone_name)")
+                print("=====ここから個別取得=====")
+                print("document_tone.score    : \(tone_score)")
+                print("document_tone.tone_name: \(tone_name)")
                     
-                    //ヘッダーパラメータ
-                    //print(response?.headers as Any)
+                //ヘッダーパラメータ
+                //print(response?.headers as Any)
                     
-                case false:
-                    //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
-                    print("failure: \(statusCode)")
+            case false:
+                //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
+                print("failure: \(statusCode)")
             }
         }
     }
