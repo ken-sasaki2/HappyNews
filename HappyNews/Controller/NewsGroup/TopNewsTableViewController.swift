@@ -103,6 +103,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 print("failure: \(responseNum)")
             }
         
+        
             languageTranslator.translate(text: ["Hello, how are you today?"], modelID: "en-ja") {
                 response, error in
                 
@@ -111,7 +112,28 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                     return
               }
 
-              print(translation)
+              switch responseNum == Optional(200) {
+                case true:
+                    print("success: \(responseNum)")
+                        
+                    //JSONへ変換するencoderを用意
+                    let encoder = JSONEncoder()
+                        
+                    //可読性を高めるためにJSONを整形
+                    encoder.outputFormatting = .prettyPrinted
+                        
+                    //分析結果をJSON形式に変換
+                    guard let translations = try? encoder.encode(translation) else {
+                        fatalError("Failed to encode to JSON.")
+                    }
+                    
+                    //JSONデータ確認
+                    print("JSON: \(String(bytes: translations, encoding: .utf8)!)")
+                    
+                case false:
+                    //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
+                    print("failure: \(responseNum)")
+                }
             }
         }
     }
