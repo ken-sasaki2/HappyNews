@@ -47,12 +47,24 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //parseの開始
         parser.parse()
+
+        //languageTranslatorの呼び出し
+        languageTranslator()
         
-        //toneAnalyzer(感情分析)の呼び出し
+        //toneAnalyzerの呼び出し
         toneAnalyzer()
     }
     
     // MARK: - LanguageTranslator
+    //LanguageTranslator(言語変換機能)用メソッド
+    func languageTranslator() {
+        
+        let apiKey = WatsonIAMAuthenticator(apiKey: "pLM8kVDHyCCa5t0IjajFd-rBmLB_jnmG3nl2mgdSsshM")
+        
+        let languageTranslator = LanguageTranslator(version: "2018-05-01", authenticator: apiKey)
+            languageTranslator.serviceURL = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
+    }
+    
     
     
     
