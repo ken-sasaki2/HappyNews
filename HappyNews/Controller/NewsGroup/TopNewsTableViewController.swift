@@ -102,6 +102,17 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
                 print("failure: \(responseNum)")
             }
+        
+            languageTranslator.translate(text: ["Hello, how are you today?"], modelID: "en-ja") {
+                response, error in
+                
+                guard let translation = response?.result else {
+                    print(error?.localizedDescription ?? "unknown error")
+                    return
+              }
+
+              print(translation)
+            }
         }
     }
     
