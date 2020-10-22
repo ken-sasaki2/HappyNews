@@ -9,5 +9,6 @@ target 'HappyNews' do
 
 pod 'SegementSlide'
 pod 'IBMWatsonToneAnalyzerV3', '~> 3.6.0'
+pod 'IBMWatsonLanguageTranslatorV3', '~> 3.6.0'
 pod 'SwiftyJSON'
 end

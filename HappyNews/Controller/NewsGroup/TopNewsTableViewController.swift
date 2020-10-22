@@ -9,6 +9,7 @@
 import UIKit
 import SegementSlide
 import ToneAnalyzer
+import LanguageTranslator
 import SwiftyJSON
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
@@ -51,7 +52,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         toneAnalyzer()
     }
     
-    // MARK: - Watson ToneAnalyzer
+    // MARK: - LanguageTranslator
+    
+    
+    
+    // MARK: - ToneAnalyzer
     //ToneAnalyzer(感情分析)用メソッド
     func toneAnalyzer() {
         
