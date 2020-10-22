@@ -69,9 +69,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         let translator            = LanguageTranslator(version: "2018-05-01", authenticator: translatorKey)
             translator.serviceURL = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
         
-        //SSL検証を無効化(不要？)
-        //languageTranslator.disableSSLVerification()
-        
         //enからjaに翻訳（リクエスト送信）
         translator.translate(text: [sampleText], modelID: "en-ja") {
             response, error in
@@ -117,7 +114,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 }
                 
                 //JSONデータ確認
-                //print("translationJSON: \(String(bytes: translationJSON, encoding: .utf8)!)")
+                print("translationJSON: \(String(bytes: translationJSON, encoding: .utf8)!)")
                 
                 //JSON解析(translation)
                 let translationValue = JSON(translationJSON)
@@ -149,9 +146,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         let toneAnalyzer            = ToneAnalyzer(version: "2017-09-21", authenticator: toneAnalyzerKey)
             toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
         
-        //SSL検証を無効化(不要？)
-        //toneAnalyzer.disableSSLVerification()
-        
         //sampleTextを分析（リクエスト送信）
         toneAnalyzer.tone(toneContent: .text(sampleText)) {
           response, error in
@@ -179,7 +173,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
           }
 
           //データ処理
-          guard let result = response?.result else {
+          guard let toneAnalysisResult = response?.result else {
             print(error?.localizedDescription ?? "unknown error")
             return
           }
@@ -192,12 +186,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 //分析結果のデータをJSON形式に変換
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted
-                guard let toneAnalysisJSON = try? encoder.encode(result) else {
+                guard let toneAnalysisJSON = try? encoder.encode(toneAnalysisResult) else {
                     fatalError("Failed to encode to JSON.")
                 }
                     
                 //JSONデータ確認
-                //print("toneAnalysisJSON: \(String(bytes: toneAnalysisJSON, encoding: .utf8)!)")
+                print("toneAnalysisJSON: \(String(bytes: toneAnalysisJSON, encoding: .utf8)!)")
                     
                 //JSON解析(score)
                 let toneAnalysisValue = JSON(toneAnalysisJSON)
@@ -222,10 +216,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 ==========================================================
                 """
                 print(message)
-                    
-                //ヘッダーパラメータ
-                //print(response?.headers as Any)
-                    
+                
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
                 print("analysis failure: \(statusCode)")
