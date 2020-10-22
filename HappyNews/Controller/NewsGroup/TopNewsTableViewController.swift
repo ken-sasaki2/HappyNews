@@ -23,6 +23,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //NewsItemsモデルのインスタンス作成
     var newsItems = [NewsItems]()
     
+    //分析用サンプルテキスト
+    let sampleText = """
+    Team, I know that times are tough! Product sales have been disappointing for the past three quarters. We have a competitive product, but we need to do a better job of selling it!
+    """
+    
     //JSON解析で使用
     var count = 0
     
@@ -56,111 +61,98 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     }
     
     // MARK: - LanguageTranslator
-    //LanguageTranslator(言語変換機能)用メソッド
+    //翻訳機能
     func languageTranslator() {
         
-        //APIを認証するためのAPIキーとversionとurlを定義
-        let apiKey = WatsonIAMAuthenticator(apiKey: "pLM8kVDHyCCa5t0IjajFd-rBmLB_jnmG3nl2mgdSsshM")
-        
-        let languageTranslator = LanguageTranslator(version: "2018-05-01", authenticator: apiKey)
-            languageTranslator.serviceURL = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
+        //APIを認証するためのキーとversionとurlを定義
+        let translatorKey         = WatsonIAMAuthenticator(apiKey:"pLM8kVDHyCCa5t0IjajFd-rBmLB_jnmG3nl2mgdSsshM")
+        let translator            = LanguageTranslator(version: "2018-05-01", authenticator: translatorKey)
+            translator.serviceURL = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
         
         //SSL検証を無効化(不要？)
         //languageTranslator.disableSSLVerification()
         
-        //リクエスト送信
-        languageTranslator.listLanguages() {
-          response, error in
-
-          guard let languages = response?.result else {
-            print(error?.localizedDescription ?? "unknown error")
-            return
-          }
+        //enからjaに翻訳（リクエスト送信）
+        translator.translate(text: [sampleText], modelID: "en-ja") {
+            response, error in
             
-          let responseNum = response?.statusCode
-            switch responseNum == Optional(200) {
+            //エラー処理
+            if let error = error {
+                switch error {
+                case let .http(statusCode, message, metadata):
+                  switch statusCode {
+                  case .some(404):
+                    // Handle Not Found (404) exception
+                    print("Not found")
+                  case .some(413):
+                    // Handle Request Too Large (413) exception
+                    print("Payload too large")
+                  default:
+                    if let statusCode = statusCode {
+                      print("Error - code: \(statusCode), \(message ?? "")")
+                    }
+                  }
+                default:
+                  print(error.localizedDescription)
+                }
+                return
+              }
+            
+            //データ処理
+            guard let translationResult = response?.result else {
+                print(error?.localizedDescription ?? "unknown error")
+                return
+            }
+            
+            //レスポンスの結果で条件分岐
+            let responseCode = response?.statusCode
+            switch responseCode == Optional(200) {
             case true:
-                print("success: \(responseNum)")
-                //分析結果の定数を作成
-                let translations = languages
-                    
-                //JSONへ変換するencoderを用意
+                        
+                //翻訳のデータをJSON形式に変換
                 let encoder = JSONEncoder()
-                    
-                //可読性を高めるためにJSONを整形
                 encoder.outputFormatting = .prettyPrinted
-                    
-                //分析結果をJSON形式に変換
-                guard let translationValue = try? encoder.encode(translations) else {
+                guard let translationJSON = try? encoder.encode(translationResult) else {
                     fatalError("Failed to encode to JSON.")
                 }
                 
                 //JSONデータ確認
-                print("JSON: \(String(bytes: translationValue, encoding: .utf8)!)")
+                //print("translationJSON: \(String(bytes: translationJSON, encoding: .utf8)!)")
+                
+                //JSON解析(translation)
+                let translationValue = JSON(translationJSON)
+                let translation      = translationValue["translations"][self.count]["translation"].string
+                
+                //翻訳結果確認
+                let message = """
+                ==========================================================
+                翻訳結果:
+                successful translation: \(responseCode)
+                translation           : \(translation)
+                ==========================================================
+                """
+                print(message)
                 
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
-                print("failure: \(responseNum)")
-            }
-        
-        
-            languageTranslator.translate(text: ["Hello, how are you today?"], modelID: "en-ja") {
-                response, error in
-                
-                guard let translation = response?.result else {
-                    print(error?.localizedDescription ?? "unknown error")
-                    return
-              }
-
-              switch responseNum == Optional(200) {
-                case true:
-                    print("success: \(responseNum)")
-                        
-                    //JSONへ変換するencoderを用意
-                    let encoder = JSONEncoder()
-                        
-                    //可読性を高めるためにJSONを整形
-                    encoder.outputFormatting = .prettyPrinted
-                        
-                    //分析結果をJSON形式に変換
-                    guard let translations = try? encoder.encode(translation) else {
-                        fatalError("Failed to encode to JSON.")
-                    }
-                    
-                    //JSONデータ確認
-                    print("JSON: \(String(bytes: translations, encoding: .utf8)!)")
-                    
-                case false:
-                    //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
-                    print("failure: \(responseNum)")
-                }
+                print("translation failure: \(responseCode)")
             }
         }
     }
-    
+
     // MARK: - ToneAnalyzer
-    //ToneAnalyzer(感情分析)用メソッド
+    //感情分析
     func toneAnalyzer() {
         
-        //WatsonAPIキーのインスタンス作成
-        let authenticator = WatsonIAMAuthenticator(apiKey: "36bKQ1j2Aga5xtwTHJKFoGwbPfxLnDUk6M7Dt6qVEhmr")
-        
-        //WatsonAPIのversionとURLを定義
-        let toneAnalyzer = ToneAnalyzer(version: "2017-09-21", authenticator: authenticator)
+        //APIを認証するためのキーとversionとurlを定義
+        let toneAnalyzerKey         = WatsonIAMAuthenticator(apiKey:"36bKQ1j2Aga5xtwTHJKFoGwbPfxLnDUk6M7Dt6qVEhmr")
+        let toneAnalyzer            = ToneAnalyzer(version: "2017-09-21", authenticator: toneAnalyzerKey)
             toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
-        
-        //分析用サンプルテキスト
-        let sampleText = """
-        Team, I know that times are tough! Product \
-        sales have been disappointing for the past three \
-        quarters. We have a competitive product, but we \
-        need to do a better job of selling it!
-        """
         
         //SSL検証を無効化(不要？)
         //toneAnalyzer.disableSSLVerification()
         
-        //リクエスト送信
+        //sampleTextを分析（リクエスト送信）
         toneAnalyzer.tone(toneContent: .text(sampleText)) {
           response, error in
             
@@ -192,51 +184,51 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             return
           }
             
-          //ステータスコードの定数を作成し条件分岐
+          //レスポンスの結果で条件分岐
           let statusCode = response?.statusCode
             switch statusCode == Optional(200) {
             case true:
-                print("success: \(statusCode)")
-                //分析結果の定数を作成
-                let analysisResult = result
-                    
-                //JSONへ変換するencoderを用意
+                
+                //分析結果のデータをJSON形式に変換
                 let encoder = JSONEncoder()
-                    
-                //可読性を高めるためにJSONを整形
                 encoder.outputFormatting = .prettyPrinted
-                    
-                //分析結果をJSON形式に変換
-                guard let json = try? encoder.encode(analysisResult) else {
+                guard let toneAnalysisJSON = try? encoder.encode(result) else {
                     fatalError("Failed to encode to JSON.")
                 }
                     
                 //JSONデータ確認
-                print("JSON: \(String(bytes: json, encoding: .utf8)!)")
+                //print("toneAnalysisJSON: \(String(bytes: toneAnalysisJSON, encoding: .utf8)!)")
                     
                 //JSON解析(score)
-                let jsonValue = JSON(json)
-                let tonesScore = jsonValue["document_tone"]["tones"][self.count]["score"].float
+                let toneAnalysisValue = JSON(toneAnalysisJSON)
+                let tonesScore = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
                     
                 //tonesScoreの小数点を切り上げて取得
-                let decimal = tonesScore
+                let decimal      = tonesScore
                 let decimalPoint = ceil(decimal! * 100)/100
-                let tone_score = decimalPoint
+                let tone_score   = decimalPoint
                     
                 //JSON解析(tone_name)
-                let tonesName = jsonValue["document_tone"]["tones"][self.count]["tone_name"].string
+                let tonesName = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
                 let tone_name = tonesName
-                        
-                print("=====ここから個別取得=====")
-                print("document_tone.score    : \(tone_score)")
-                print("document_tone.tone_name: \(tone_name)")
+                
+                //感情分析結果確認
+                let message = """
+                ==========================================================
+                感情分析結果:
+                analysis success       : \(statusCode)
+                document_tone.score    : \(tone_score)
+                document_tone.tone_name: \(tone_name)
+                ==========================================================
+                """
+                print(message)
                     
                 //ヘッダーパラメータ
                 //print(response?.headers as Any)
                     
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
-                print("failure: \(statusCode)")
+                print("analysis failure: \(statusCode)")
             }
         }
     }
