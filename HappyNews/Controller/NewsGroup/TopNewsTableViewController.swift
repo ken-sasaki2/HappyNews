@@ -47,8 +47,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //parseの開始
         parser.parse()
-
-        //languageTranslatorの呼び出し
+        
+        //LanguageTranslatorの呼び出し
         languageTranslator()
         
         //toneAnalyzerの呼び出し
@@ -59,14 +59,28 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //LanguageTranslator(言語変換機能)用メソッド
     func languageTranslator() {
         
+        //APIを認証するためのAPIキーとversionとurlを定義
         let apiKey = WatsonIAMAuthenticator(apiKey: "pLM8kVDHyCCa5t0IjajFd-rBmLB_jnmG3nl2mgdSsshM")
         
         let languageTranslator = LanguageTranslator(version: "2018-05-01", authenticator: apiKey)
             languageTranslator.serviceURL = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
+        
+        //SSL検証を無効化(不要？)
+        //languageTranslator.disableSSLVerification()
+        
+        //リクエスト送信
+        languageTranslator.listLanguages() {
+          response, error in
+
+          guard let languages = response?.result else {
+            print(error?.localizedDescription ?? "unknown error")
+            return
+          }
+          print("動いている？")
+          print(response?.statusCode)
+          print("response: \(languages)")
+        }
     }
-    
-    
-    
     
     // MARK: - ToneAnalyzer
     //ToneAnalyzer(感情分析)用メソッド
@@ -90,9 +104,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //SSL検証を無効化(不要？)
         //toneAnalyzer.disableSSLVerification()
         
-        //エラー処理
+        //リクエスト送信
         toneAnalyzer.tone(toneContent: .text(sampleText)) {
           response, error in
+            
+          //エラー処理
           if let error = error {
             switch error {
                 case let .http(statusCode, message, metadata):

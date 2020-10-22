@@ -19,6 +19,8 @@
 		454373AD24E6275800107A49 /* AnimalNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373AC24E6275800107A49 /* AnimalNewsTableViewController.swift */; };
 		454373AF24E627B800107A49 /* AnimationNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373AE24E627B800107A49 /* AnimationNewsTableViewController.swift */; };
 		454373B224E6281F00107A49 /* AppGameNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454373B124E6281F00107A49 /* AppGameNewsTableViewController.swift */; };
+		45B635B22541657400825FB9 /* LanguageTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B635B12541657400825FB9 /* LanguageTranslation.swift */; };
+		45B635B9254166CF00825FB9 /* ToneAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B635B8254166CF00825FB9 /* ToneAnalysis.swift */; };
 		45BCEE7424E4DF7A0023D738 /* TopNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7324E4DF7A0023D738 /* TopNewsTableViewController.swift */; };
 		45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7524E4F1970023D738 /* NewsItems.swift */; };
 		45BCEE7824E545570023D738 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7724E545570023D738 /* WebViewController.swift */; };
@@ -47,6 +49,8 @@
 		454373AC24E6275800107A49 /* AnimalNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalNewsTableViewController.swift; sourceTree = "<group>"; };
 		454373AE24E627B800107A49 /* AnimationNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationNewsTableViewController.swift; sourceTree = "<group>"; };
 		454373B124E6281F00107A49 /* AppGameNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGameNewsTableViewController.swift; sourceTree = "<group>"; };
+		45B635B12541657400825FB9 /* LanguageTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTranslation.swift; sourceTree = "<group>"; };
+		45B635B8254166CF00825FB9 /* ToneAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		45BCEE7324E4DF7A0023D738 /* TopNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNewsTableViewController.swift; sourceTree = "<group>"; };
 		45BCEE7524E4F1970023D738 /* NewsItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItems.swift; sourceTree = "<group>"; };
 		45BCEE7724E545570023D738 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +82,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45B635B02541653000825FB9 /* WatsonAPI.swift */ = {
+			isa = PBXGroup;
+			children = (
+				45B635B12541657400825FB9 /* LanguageTranslation.swift */,
+				45B635B8254166CF00825FB9 /* ToneAnalysis.swift */,
+			);
+			path = WatsonAPI.swift;
+			sourceTree = "<group>";
+		};
 		45BE9B4B252801AE0013F34C /* NewsGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +169,7 @@
 		45D8866B24E4C10800B32D02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				45B635B02541653000825FB9 /* WatsonAPI.swift */,
 				45BE9B50252802130013F34C /* TabBarGroup */,
 				45BE9B4F252801FF0013F34C /* SearchGroup */,
 				45BE9B4E252801D30013F34C /* WheatherGroup */,
@@ -328,11 +342,13 @@
 				4543739924E567A100107A49 /* TechnologyNewsTableViewController.swift in Sources */,
 				45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */,
 				4543739524E5675400107A49 /* SuportsNewsTableViewController.swift in Sources */,
+				45B635B9254166CF00825FB9 /* ToneAnalysis.swift in Sources */,
 				45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */,
 				4543739D24E567CF00107A49 /* SeiziNewsTableViewController.swift in Sources */,
 				45BE9B452526D2120013F34C /* SearchViewController.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */,
 				4543739724E5677600107A49 /* BusinessNewsTableViewController.swift in Sources */,
+				45B635B22541657400825FB9 /* LanguageTranslation.swift in Sources */,
 				4543739F24E567E100107A49 /* WorldNewsTableViewController.swift in Sources */,
 				454373AF24E627B800107A49 /* AnimationNewsTableViewController.swift in Sources */,
 				4543739324E5637A00107A49 /* EntameNewsTableViewController.swift in Sources */,
