@@ -121,14 +121,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 let translation      = translationValue["translations"][self.count]["translation"].string
                 
                 //翻訳結果確認
-                let message = """
-                ==========================================================
-                翻訳結果:
-                successful translation: \(responseCode)
-                translation           : \(translation)
-                ==========================================================
-                """
-                print(message)
+                print("*****翻訳結果確認*****")
+                print("translation: \(translation)")
+                print("")
+               
                 
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
@@ -192,30 +188,26 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                     
                 //JSONデータ確認
                 print("toneAnalysisJSON: \(String(bytes: toneAnalysisJSON, encoding: .utf8)!)")
-                    
-                //JSON解析(score)
+                
+                //JSON解析(score)&小数点を切り上げて取得
                 let toneAnalysisValue = JSON(toneAnalysisJSON)
-                let tonesScore = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
-                    
-                //tonesScoreの小数点を切り上げて取得
-                let decimal      = tonesScore
-                let decimalPoint = ceil(decimal! * 100)/100
-                let tone_score   = decimalPoint
+                let toneScoreA = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
+                let scoreA = ceil(toneScoreA! * 100)/100
+                
+                let toneScoreB = toneAnalysisValue["document_tone"]["tones"][self.count + 1]["score"].float
+                let scoreB = ceil(toneScoreB! * 100)/100
                     
                 //JSON解析(tone_name)
-                let tonesName = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
-                let tone_name = tonesName
-                
+                let tone_nameA = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
+                let tone_nameB = toneAnalysisValue["document_tone"]["tones"][self.count + 1]["tone_name"].string
+
                 //感情分析結果確認
-                let message = """
-                ==========================================================
-                感情分析結果:
-                analysis success       : \(statusCode)
-                document_tone.score    : \(tone_score)
-                document_tone.tone_name: \(tone_name)
-                ==========================================================
-                """
-                print(message)
+                print("*****感情分析結果確認*****")
+                print("score     : \(scoreA)")
+                print("score     : \(scoreB)")
+                print("tone_name : \(tone_nameA)")
+                print("tone_name : \(tone_nameB)")
+
                 
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
