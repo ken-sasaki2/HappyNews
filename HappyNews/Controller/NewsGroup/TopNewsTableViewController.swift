@@ -105,7 +105,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             let responseCode = response?.statusCode
             switch responseCode == Optional(200) {
             case true:
-                        
                 //翻訳のデータをJSON形式に変換
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted
@@ -125,7 +124,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 print("translation: \(translation)")
                 print("")
                
-                
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
                 print("translation failure: \(responseCode)")
@@ -141,11 +139,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         let toneAnalyzerKey         = WatsonIAMAuthenticator(apiKey:"36bKQ1j2Aga5xtwTHJKFoGwbPfxLnDUk6M7Dt6qVEhmr")
         let toneAnalyzer            = ToneAnalyzer(version: "2017-09-21", authenticator: toneAnalyzerKey)
             toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
-        
+
         //sampleTextを分析（リクエスト送信）
         toneAnalyzer.tone(toneContent: .text(sampleText)) {
           response, error in
-            
+
           //エラー処理
           if let error = error {
             switch error {
@@ -173,42 +171,40 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             print(error?.localizedDescription ?? "unknown error")
             return
           }
-            
+
           //レスポンスの結果で条件分岐
           let statusCode = response?.statusCode
             switch statusCode == Optional(200) {
             case true:
-                
                 //分析結果のデータをJSON形式に変換
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted
                 guard let toneAnalysisJSON = try? encoder.encode(toneAnalysisResult) else {
                     fatalError("Failed to encode to JSON.")
                 }
-                    
+
                 //JSONデータ確認
                 print("toneAnalysisJSON: \(String(bytes: toneAnalysisJSON, encoding: .utf8)!)")
-                
+
                 //JSON解析(score)&小数点を切り上げて取得
                 let toneAnalysisValue = JSON(toneAnalysisJSON)
-                let toneScoreA = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
-                let scoreA = ceil(toneScoreA! * 100)/100
-                
-                let toneScoreB = toneAnalysisValue["document_tone"]["tones"][self.count + 1]["score"].float
-                let scoreB = ceil(toneScoreB! * 100)/100
-                    
+                let firstToneScore    = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
+                let firstScore        = ceil(firstToneScore! * 100)/100
+
+                let secondToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count+1]["score"].float
+                let secondScore       = ceil(secondToneScore! * 100)/100
+
                 //JSON解析(tone_name)
-                let tone_nameA = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
-                let tone_nameB = toneAnalysisValue["document_tone"]["tones"][self.count + 1]["tone_name"].string
+                let firstToneName  = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
+                let secondToneName = toneAnalysisValue["document_tone"]["tones"][self.count+1]["tone_name"].string
 
                 //感情分析結果確認
                 print("*****感情分析結果確認*****")
-                print("score     : \(scoreA)")
-                print("score     : \(scoreB)")
-                print("tone_name : \(tone_nameA)")
-                print("tone_name : \(tone_nameB)")
+                print("score     : \(firstScore)")
+                print("score     : \(secondScore)")
+                print("tone_name : \(firstToneName)")
+                print("tone_name : \(secondToneName)")
 
-                
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
                 print("analysis failure: \(statusCode)")
