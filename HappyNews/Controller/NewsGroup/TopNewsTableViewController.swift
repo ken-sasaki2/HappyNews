@@ -23,6 +23,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //NewsItemsモデルのインスタンス作成
     var newsItems = [NewsItems]()
     
+    var translatorApiKey  = "pLM8kVDHyCCa5t0IjajFd-rBmLB_jnmG3nl2mgdSsshM"
+    var translatorVersion = "2018-05-01"
+    var translatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
+
     //分析用サンプルテキスト
     let sampleText = """
     Team, I know that times are tough! Product sales have been disappointing for the past three quarters. We have a competitive product, but we need to do a better job of selling it!
@@ -53,11 +57,20 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //parseの開始
         parser.parse()
         
+        startTranslation()
+        
         //LanguageTranslatorの呼び出し
         languageTranslator()
         
         //toneAnalyzerの呼び出し
         toneAnalyzer()
+    }
+    
+    //LanguageTranslatorModelの呼び出し
+    func startTranslation() {
+        
+        //APILanguageTranslatorの認証コードをモデルへ渡す
+        let languageTranslatorModel = LanguageTranslatorModel(translatorApiKey: translatorApiKey, translatorVersion: translatorVersion, translatorURL: translatorURL)
     }
     
     // MARK: - LanguageTranslator

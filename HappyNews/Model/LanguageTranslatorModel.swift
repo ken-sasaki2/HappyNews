@@ -7,3 +7,25 @@
 //
 
 import Foundation
+import LanguageTranslator
+import SwiftyJSON
+
+class LanguageTranslatorModel {
+    
+    //外部から渡ってくる値
+    var translatorKey   : String?
+    var version         : String?
+    var serviceURL      : String?
+    
+    //NewsTableViewから値を受け取る
+    init(translatorApiKey: String, translatorVersion: String, translatorURL: String) {
+        
+        translatorKey = translatorApiKey
+        version       = translatorVersion
+        serviceURL    = translatorURL
+    }
+    
+    //JSON解析をおこなう
+    
+    //その値を返す
+}
