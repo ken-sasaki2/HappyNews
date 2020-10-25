@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4502CFF325456A8600554F78 /* AnalyzerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4502CFF225456A8600554F78 /* AnalyzerResult.swift */; };
 		4543739324E5637A00107A49 /* EntameNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739224E5637A00107A49 /* EntameNewsTableViewController.swift */; };
 		4543739524E5675400107A49 /* SuportsNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739424E5675400107A49 /* SuportsNewsTableViewController.swift */; };
 		4543739724E5677600107A49 /* BusinessNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739624E5677600107A49 /* BusinessNewsTableViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4502CFF225456A8600554F78 /* AnalyzerResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzerResult.swift; sourceTree = "<group>"; };
 		4543739224E5637A00107A49 /* EntameNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntameNewsTableViewController.swift; sourceTree = "<group>"; };
 		4543739424E5675400107A49 /* SuportsNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuportsNewsTableViewController.swift; sourceTree = "<group>"; };
 		4543739624E5677600107A49 /* BusinessNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessNewsTableViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */,
 				457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */,
 				4576898325453E5900D7E630 /* Translation.swift */,
+				4502CFF225456A8600554F78 /* AnalyzerResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				45BCEE7824E545570023D738 /* WebViewController.swift in Sources */,
 				454373A924E6260100107A49 /* TiikiTableViewController.swift in Sources */,
 				454373AB24E626DE00107A49 /* GourmetNewsTableViewController.swift in Sources */,
+				4502CFF325456A8600554F78 /* AnalyzerResult.swift in Sources */,
 				454373AD24E6275800107A49 /* AnimalNewsTableViewController.swift in Sources */,
 				45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */,
 				454373B224E6281F00107A49 /* AppGameNewsTableViewController.swift in Sources */,

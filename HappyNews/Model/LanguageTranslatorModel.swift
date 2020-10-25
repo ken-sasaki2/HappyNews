@@ -105,6 +105,9 @@ class LanguageTranslatorModel {
                 print("*****翻訳結果確認*****")
                 print("translation: \(self.translation)")
                 print("")
+                
+                //NewsTableViewControllerへ値を渡す
+                self.doneCatchTranslationProtocol?.catchData(arrayData: self.translationArray, resultCount: self.translationArray.count)
 
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
