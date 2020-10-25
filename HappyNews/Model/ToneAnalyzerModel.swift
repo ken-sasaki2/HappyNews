@@ -13,11 +13,16 @@ import SwiftyJSON
 class ToneAnalyzerModel {
     
     //外部から渡ってくる値
-    var analysisKey  : String?
-    var version      : String?
-    var serviceURL   : String?
-    var analysisText : String?
-    
+    var analysisKey     : String?
+    var version         : String?
+    var serviceURL      : String?
+    var analysisText    : String?
+    var firstScore      : Float?
+    var secondScore     : Float?
+    var firstToneName   : String?
+    var secondToneName  : String?
+    var analyzerArray = [Analyzer]()
+
     //JSON解析で使用
     var count = 0
     
@@ -87,21 +92,23 @@ class ToneAnalyzerModel {
                 //JSON解析(score)&小数点を切り上げて取得
                 let toneAnalysisValue = JSON(toneAnalysisJSON)
                 let firstToneScore    = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
-                let firstScore        = ceil(firstToneScore! * 100)/100
+                self.firstScore       = ceil(firstToneScore! * 100)/100
 
                 let secondToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count+1]["score"].float
-                let secondScore       = ceil(secondToneScore! * 100)/100
+                self.secondScore      = ceil(secondToneScore! * 100)/100
 
                 //JSON解析(tone_name)
-                let firstToneName  = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
-                let secondToneName = toneAnalysisValue["document_tone"]["tones"][self.count+1]["tone_name"].string
-
+                self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
+                self.secondToneName   = toneAnalysisValue["document_tone"]["tones"][self.count+1]["tone_name"].string
+            
+                self.analyzerArray.append(Analyzer(firstScore: self.firstScore!, secondScore: self.secondScore!, firstToneName: self.firstToneName!, secondToneName: self.secondToneName!))
+                
                 //感情分析結果確認
                 print("*****感情分析結果確認*****")
-                print("score     : \(firstScore)")
-                print("score     : \(secondScore)")
-                print("tone_name : \(firstToneName)")
-                print("tone_name : \(secondToneName)")
+                print("score     : \(self.firstScore)")
+                print("score     : \(self.secondScore)")
+                print("tone_name : \(self.firstToneName)")
+                print("tone_name : \(self.secondToneName)")
 
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)

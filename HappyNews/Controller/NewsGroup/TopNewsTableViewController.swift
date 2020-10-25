@@ -94,14 +94,14 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     }
     
     //ToneAnalyzerModelと通信をおこなう
-//    func startToneAnalyzer() {
-//
-//        //APIToneAnalyzerの認証コードをモデルへ渡す
-//        let toneAnalyzerModel = ToneAnalyzerModel(analysisApiKey: analysisApiKey, analysisVersion: analysisVersion, analysisURL: analysisURL, sampleText: sampleText)
-//
-//        //LanguageTranslatorModel.setLanguageTranslator()
-//    }
-//    
+    func startToneAnalyzer() {
+
+        //APIToneAnalyzerの認証コードをモデルへ渡す
+        let toneAnalyzerModel = ToneAnalyzerModel(analysisApiKey: analysisApiKey, analysisVersion: analysisVersion, analysisURL: analysisURL, sampleText: sampleText)
+
+        //LanguageTranslatorModel.setLanguageTranslator()
+    }
+    
     
     // MARK: - LanguageTranslator
     //翻訳機能
