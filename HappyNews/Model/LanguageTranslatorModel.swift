@@ -90,21 +90,12 @@ class LanguageTranslatorModel {
                     fatalError("Failed to encode to JSON.")
                 }
 
-                //JSONデータ確認
-                print("translationJSON: \(String(bytes: translationJSON, encoding: .utf8)!)")
-
                 //JSON解析(translation)
                 let translationValue = JSON(translationJSON)
                 self.translation     = translationValue["translations"][self.count]["translation"].string
                 
                 //構造体Translationに翻訳結果を追加
                 self.translationArray.append(Translation(translation: self.translation!))
-                print(self.translationArray.debugDescription)
-                
-                //翻訳結果確認
-                print("*****翻訳結果確認*****")
-                print("translation: \(self.translation)")
-                print("")
                 
                 //NewsTableViewControllerへ値を渡す
                 self.doneCatchTranslationProtocol?.catchData(arrayData: self.translationArray, resultCount: self.translationArray.count)
@@ -115,5 +106,4 @@ class LanguageTranslatorModel {
             }
         }
     }
-    //その値を返す
 }

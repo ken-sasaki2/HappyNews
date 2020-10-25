@@ -41,6 +41,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //JSON解析で使用
     var count = 0
     
+    //LanguageTranslationModelから渡ってくる値
+    var translationArray = [Translation]()
+    var translation      = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,19 +82,26 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         languageTranslatorModel.setLanguageTranslator()
     }
     
+    //渡って値を処理
     func catchData(arrayData: Array<Translation>, resultCount: Int) {
-        <#code#>
+        
+        translationArray = arrayData
+        
+        //翻訳結果確認
+        print("*****翻訳結果確認(Modelから受け渡し)*****")
+        print("テスト: \(translationArray)")
+        print("")
     }
     
     //ToneAnalyzerModelと通信をおこなう
-    func startToneAnalyzer() {
-        
-        //APIToneAnalyzerの認証コードをモデルへ渡す
-        let toneAnalyzerModel = ToneAnalyzerModel(analysisApiKey: analysisApiKey, analysisVersion: analysisVersion, analysisURL: analysisURL, sampleText: sampleText)
-        
-        //LanguageTranslatorModel.setLanguageTranslator()
-    }
-    
+//    func startToneAnalyzer() {
+//
+//        //APIToneAnalyzerの認証コードをモデルへ渡す
+//        let toneAnalyzerModel = ToneAnalyzerModel(analysisApiKey: analysisApiKey, analysisVersion: analysisVersion, analysisURL: analysisURL, sampleText: sampleText)
+//
+//        //LanguageTranslatorModel.setLanguageTranslator()
+//    }
+//    
     
     // MARK: - LanguageTranslator
     //翻訳機能
