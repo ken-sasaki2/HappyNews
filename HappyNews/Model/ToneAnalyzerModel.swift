@@ -10,6 +10,12 @@ import Foundation
 import ToneAnalyzer
 import SwiftyJSON
 
+protocol DoneCatchAnalyzerProtocol {
+    
+    //規則を決める
+    func catchData(arrayData: Array<Analyzer>, resultCount: Int)
+}
+
 class ToneAnalyzerModel {
     
     //外部から渡ってくる値
@@ -22,6 +28,7 @@ class ToneAnalyzerModel {
     var firstToneName   : String?
     var secondToneName  : String?
     var analyzerArray = [Analyzer]()
+    var doneCatchAnalyzerProtocol: DoneCatchAnalyzerProtocol?
 
     //JSON解析で使用
     var count = 0
@@ -86,9 +93,6 @@ class ToneAnalyzerModel {
                     fatalError("Failed to encode to JSON.")
                 }
 
-                //JSONデータ確認
-                print("toneAnalysisJSON: \(String(bytes: toneAnalysisJSON, encoding: .utf8)!)")
-
                 //JSON解析(score)&小数点を切り上げて取得
                 let toneAnalysisValue = JSON(toneAnalysisJSON)
                 let firstToneScore    = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
@@ -103,12 +107,7 @@ class ToneAnalyzerModel {
             
                 self.analyzerArray.append(Analyzer(firstScore: self.firstScore!, secondScore: self.secondScore!, firstToneName: self.firstToneName!, secondToneName: self.secondToneName!))
                 
-                //感情分析結果確認
-                print("*****感情分析結果確認*****")
-                print("score     : \(self.firstScore)")
-                print("score     : \(self.secondScore)")
-                print("tone_name : \(self.firstToneName)")
-                print("tone_name : \(self.secondToneName)")
+                self.doneCatchAnalyzerProtocol?.catchData(arrayData: self.analyzerArray, resultCount: self.analyzerArray.count)
 
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
