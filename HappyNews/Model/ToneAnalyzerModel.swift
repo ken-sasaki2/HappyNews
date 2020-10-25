@@ -97,16 +97,18 @@ class ToneAnalyzerModel {
                 let toneAnalysisValue = JSON(toneAnalysisJSON)
                 let firstToneScore    = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
                 self.firstScore       = ceil(firstToneScore! * 100)/100
-
+                
                 let secondToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count+1]["score"].float
                 self.secondScore      = ceil(secondToneScore! * 100)/100
-
+                
                 //JSON解析(tone_name)
                 self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
                 self.secondToneName   = toneAnalysisValue["document_tone"]["tones"][self.count+1]["tone_name"].string
             
+                //構造体Analyzerに感情分析結果を追加
                 self.analyzerArray.append(Analyzer(firstScore: self.firstScore!, secondScore: self.secondScore!, firstToneName: self.firstToneName!, secondToneName: self.secondToneName!))
                 
+                //NewsTableViewControllerへ値を渡す
                 self.doneCatchAnalyzerProtocol?.catchData(arrayData: self.analyzerArray, resultCount: self.analyzerArray.count)
 
             case false:

@@ -83,13 +83,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //APILanguageTranslatorの認証コードをモデルへ渡す
         let languageTranslatorModel = LanguageTranslatorModel(translatorApiKey: translatorApiKey, translatorVersion: translatorVersion, translatorURL: translatorURL, sampleText: sampleText)
         
-        //LanguageTranslatorModelを委任
+        //LanguageTranslatorModelの委託とJSON解析をset
         languageTranslatorModel.doneCatchTranslationProtocol = self
-        
         languageTranslatorModel.setLanguageTranslator()
     }
     
-    //渡って値を処理
+    //渡ってきた値を処理
     func catchData(arrayData: Array<Translation>, resultCount: Int) {
         
         translationArray = arrayData
@@ -107,11 +106,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //APIToneAnalyzerの認証コードをモデルへ渡す
         let toneAnalyzerModel = ToneAnalyzerModel(analysisApiKey: analysisApiKey, analysisVersion: analysisVersion, analysisURL: analysisURL, sampleText: sampleText)
         
+        //ToneAnalyzerModelの委託とJSON解析をset
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
-
         toneAnalyzerModel.setToneAnalyzer()
     }
     
+    //渡ってきた値を処理
     func catchData(arrayData: Array<Analyzer>, resultCount: Int) {
         
         analyzerArray = arrayData

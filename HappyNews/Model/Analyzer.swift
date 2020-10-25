@@ -22,6 +22,5 @@ struct Analyzer {
         self.secondScore     = secondScore
         self.firstToneName   = firstToneName
         self.secondToneName  = secondToneName
-        
     }
 }
