@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Translation {
+struct Translation: Codable {
     
     var translation: String?
     

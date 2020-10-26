@@ -38,14 +38,15 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     Team, I know that times are tough! Product sales have been disappointing for the past three quarters. We have a competitive product, but we need to do a better job of selling it!
     """
     
-    //JSON解析で使用
-    var count = 0
-    
     //LanguageTranslationModelから渡ってくる値
     var translationArray = [Translation]()
     
     //ToneAnalyzerModelから渡ってくる値
     var analyzerArray  = [Analyzer]()
+    
+    //JSON解析で使用
+    var count = 0
+    var translationContent: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,9 +94,21 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         translationArray = arrayTranslationData
         
+        //渡ってきた値をJSONに変換
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        guard let jsonValue = try? encoder.encode(translationArray) else {
+            fatalError("Failed to encode to JSON.")
+        }
+        
+        //JSON解析(jsonValue)
+        let json = JSON(jsonValue)
+        translationContent = json[self.count]["translation"].string
+        
         //翻訳結果確認
-        print("*****翻訳結果確認(Modelから受け渡し)*****")
-        print("translationArray: \(translationArray)")
+        print("*****翻訳結果確認*****")
+        print("JSON: \(json)")
+        print("translationConten: \(translationContent)")
         print("")
     }
     
@@ -117,7 +130,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         analyzerArray = arrayAnalyzerData
         
         //感情分析結果確認
-        print("*****感情分析結果確認(Modelから受け渡し)*****")
+        print("*****感情分析結果確認*****")
         print("analyzerArray: \(analyzerArray)")
         print("")
     }
