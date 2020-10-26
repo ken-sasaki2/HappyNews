@@ -13,7 +13,7 @@ import SwiftyJSON
 protocol DoneCatchAnalyzerProtocol {
     
     //規則を決める
-    func catchData(arrayData: Array<Analyzer>, resultCount: Int)
+    func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int)
 }
 
 class ToneAnalyzerModel {
@@ -109,7 +109,7 @@ class ToneAnalyzerModel {
                 self.analyzerArray.append(Analyzer(firstScore: self.firstScore!, secondScore: self.secondScore!, firstToneName: self.firstToneName!, secondToneName: self.secondToneName!))
                 
                 //NewsTableViewControllerへ値を渡す
-                self.doneCatchAnalyzerProtocol?.catchData(arrayData: self.analyzerArray, resultCount: self.analyzerArray.count)
+                self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: self.analyzerArray, resultCount: self.analyzerArray.count)
 
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)

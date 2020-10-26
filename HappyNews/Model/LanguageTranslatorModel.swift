@@ -13,7 +13,7 @@ import SwiftyJSON
 protocol DoneCatchTranslationProtocol {
     
     //規則を決める
-    func catchData(arrayData: Array<Translation>, resultCount: Int)
+    func catchTranslation(arrayTranslationData: Array<Translation>, resultCount: Int)
 }
 
 class LanguageTranslatorModel {
@@ -98,7 +98,7 @@ class LanguageTranslatorModel {
                 self.translationArray.append(Translation(translation: self.translation!))
                 
                 //NewsTableViewControllerへ値を渡す
-                self.doneCatchTranslationProtocol?.catchData(arrayData: self.translationArray, resultCount: self.translationArray.count)
+                self.doneCatchTranslationProtocol?.catchTranslation(arrayTranslationData: self.translationArray, resultCount: self.translationArray.count)
 
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)

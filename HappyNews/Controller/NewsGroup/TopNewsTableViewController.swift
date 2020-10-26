@@ -46,7 +46,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //ToneAnalyzerModelから渡ってくる値
     var analyzerArray  = [Analyzer]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,9 +89,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     }
     
     //渡ってきた値を処理
-    func catchData(arrayData: Array<Translation>, resultCount: Int) {
+    func catchTranslation(arrayTranslationData: Array<Translation>, resultCount: Int) {
         
-        translationArray = arrayData
+        translationArray = arrayTranslationData
         
         //翻訳結果確認
         print("*****翻訳結果確認(Modelから受け渡し)*****")
@@ -112,9 +112,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     }
     
     //渡ってきた値を処理
-    func catchData(arrayData: Array<Analyzer>, resultCount: Int) {
+    func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int) {
         
-        analyzerArray = arrayData
+        analyzerArray = arrayAnalyzerData
         
         //感情分析結果確認
         print("*****感情分析結果確認(Modelから受け渡し)*****")
