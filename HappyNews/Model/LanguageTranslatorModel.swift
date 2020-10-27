@@ -48,7 +48,7 @@ class LanguageTranslatorModel {
         translator .serviceURL    = serviceURL
 
         //enからjaに翻訳（リクエスト送信）
-        translator.translate(text: [analysisText!], modelID: "en-ja") {
+        translator.translate(text: [analysisText!], modelID: "ja-en") {
             response, error in
 
             //エラー処理
