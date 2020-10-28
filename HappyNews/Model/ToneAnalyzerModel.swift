@@ -34,12 +34,12 @@ class ToneAnalyzerModel {
     var count = 0
     
     //NewsTableViewから値を受け取る
-    init(analysisApiKey: String, analysisVersion: String, analysisURL: String, sampleText: String) {
+    init(analysisApiKey: String, analysisVersion: String, analysisURL: String, analysisContent: String) {
         
         analysisKey   = analysisApiKey
         version       = analysisVersion
         serviceURL    = analysisURL
-        analysisText  = sampleText
+        analysisText  = analysisContent
     }
     
     //感情分析

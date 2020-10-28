@@ -13,7 +13,7 @@ import LanguageTranslator
 import SwiftyJSON
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
-
+    
     //XMLParserのインスタンスを作成
     var parser = XMLParser()
     
@@ -35,7 +35,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
 
     //分析用サンプルテキスト
     let sampleText = """
-    Team, I know that times are tough! Product sales have been disappointing for the past three quarters. We have a competitive product, but we need to do a better job of selling it!
+    アメリカ大統領選挙で激戦州となっているペンシルべニア州で、黒人男性が警察官に銃で撃たれ死亡した。警察に怒ったデモ隊が一部暴徒化するなどけが人や逮捕者も出ている。26日午前4時、ペンシルベニア州
     """
     
     //LanguageTranslationModelから渡ってくる値
@@ -47,7 +47,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //JSON解析で使用
     var count = 0
     var translationContent: String?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,9 +72,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //翻訳機能開始
         startTranslation()
-        
-        //感情分析の開始
-        startToneAnalyzer()
     }
     
     // MARK: - LanguageTranslator
@@ -107,17 +104,19 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //翻訳結果確認
         print("*****翻訳結果確認*****")
-        print("JSON: \(json)")
         print("translationConten: \(translationContent)")
         print("")
+        
+        //startToneAnalyzerの呼び出し
+        startToneAnalyzer()
     }
     
     // MARK: - ToneAnalyzer
     //ToneAnalyzerModelと通信をおこなう
     func startToneAnalyzer() {
-
+        
         //APIToneAnalyzerの認証コードをモデルへ渡す
-        let toneAnalyzerModel = ToneAnalyzerModel(analysisApiKey: analysisApiKey, analysisVersion: analysisVersion, analysisURL: analysisURL, sampleText: sampleText)
+        let toneAnalyzerModel = ToneAnalyzerModel(analysisApiKey: analysisApiKey, analysisVersion: analysisVersion, analysisURL: analysisURL, analysisContent: translationContent!)
         
         //ToneAnalyzerModelの委託とJSON解析をset
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
