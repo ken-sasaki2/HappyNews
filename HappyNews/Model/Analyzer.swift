@@ -10,17 +10,22 @@ import Foundation
 
 struct Analyzer {
     
-    var firstScore      : Float
-    var secondScore     : Float
-    var firstToneName   : String
-    var secondToneName  : String
+    var firstScore     : Float?
+    var secondScore    : Float?
+    var thirdScore     : Float?
+    var firstToneName  : String?
+    var secondToneName : String?
+    var thirdToneName  : String?
     
     //構造体の初期化
-    init(firstScore: Float, secondScore: Float, firstToneName:String, secondToneName: String) {
+    init(firstScore: Float?, secondScore: Float?, thirdScore: Float?, firstToneName:String?, secondToneName: String?, thirdToneName: String?) {
         
-        self.firstScore      = firstScore
-        self.secondScore     = secondScore
-        self.firstToneName   = firstToneName
-        self.secondToneName  = secondToneName
+        self.firstScore     = firstScore
+        self.secondScore    = secondScore
+        self.thirdScore     = thirdScore
+        
+        self.firstToneName  = firstToneName
+        self.secondToneName = secondToneName
+        self.thirdToneName  = thirdToneName
     }
 }
