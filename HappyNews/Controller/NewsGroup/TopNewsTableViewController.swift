@@ -9,9 +9,10 @@
 import UIKit
 import SegementSlide
 import ToneAnalyzer
+import LanguageTranslator
 import SwiftyJSON
 
-class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate{
+class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
     //XMLParserのインスタンスを作成
     var parser = XMLParser()
@@ -22,8 +23,30 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //NewsItemsモデルのインスタンス作成
     var newsItems = [NewsItems]()
     
+    //LanguageTranslatorの認証キー
+    var translatorApiKey  = "pLM8kVDHyCCa5t0IjajFd-rBmLB_jnmG3nl2mgdSsshM"
+    var translatorVersion = "2018-05-01"
+    var translatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
+    
+    //ToneAnalyzerの認証キー
+    var analysisApiKey  = "36bKQ1j2Aga5xtwTHJKFoGwbPfxLnDUk6M7Dt6qVEhmr"
+    var analysisVersion = "2017-09-21"
+    var analysisURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
+
+    //分析用サンプルテキスト
+    let sampleText = """
+    アメリカ大統領選挙で激戦州となっているペンシルべニア州で、黒人男性が警察官に銃で撃たれ死亡した。警察に怒ったデモ隊が一部暴徒化するなどけが人や逮捕者も出ている。26日午前4時、ペンシルベニア州
+    """
+    
+    //LanguageTranslationModelから渡ってくる値
+    var translationArray = [Translation]()
+    
+    //ToneAnalyzerModelから渡ってくる値
+    var analyzerArray  = [Analyzer]()
+    
     //JSON解析で使用
     var count = 0
+    var translationContent: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,109 +70,68 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //parseの開始
         parser.parse()
         
-        //toneAnalyzer(感情分析)の呼び出し
-        toneAnalyzer()
+        //翻訳機能開始
+        startTranslation()
     }
     
-    // MARK: - Watson ToneAnalyzer
-    //ToneAnalyzer(感情分析)用メソッド
-    func toneAnalyzer() {
+    // MARK: - LanguageTranslator
+    //LanguageTranslatorMode通信をおこなう
+    func startTranslation() {
         
-        //WatsonAPIキーのインスタンス作成
-        let authenticator = WatsonIAMAuthenticator(apiKey: "36bKQ1j2Aga5xtwTHJKFoGwbPfxLnDUk6M7Dt6qVEhmr")
+        //APILanguageTranslatorの認証コードをモデルへ渡す
+        let languageTranslatorModel = LanguageTranslatorModel(translatorApiKey: translatorApiKey, translatorVersion: translatorVersion, translatorURL: translatorURL, sampleText: sampleText)
         
-        //WatsonAPIのversionとURLを定義
-        let toneAnalyzer = ToneAnalyzer(version: "2017-09-21", authenticator: authenticator)
-            toneAnalyzer.serviceURL = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
+        //LanguageTranslatorModelの委託とJSON解析をset
+        languageTranslatorModel.doneCatchTranslationProtocol = self
+        languageTranslatorModel.setLanguageTranslator()
+    }
+    
+    //渡ってきた値を処理
+    func catchTranslation(arrayTranslationData: Array<Translation>, resultCount: Int) {
         
-        //分析用サンプルテキスト
-        let sampleText = """
-        Team, I know that times are tough! Product \
-        sales have been disappointing for the past three \
-        quarters. We have a competitive product, but we \
-        need to do a better job of selling it!
-        """
+        translationArray = arrayTranslationData
         
-        //SSL検証を無効化(不要？)
-        //toneAnalyzer.disableSSLVerification()
-        
-        //エラー処理
-        toneAnalyzer.tone(toneContent: .text(sampleText)) {
-          response, error in
-          if let error = error {
-            switch error {
-                case let .http(statusCode, message, metadata):
-            switch statusCode {
-                case .some(404):
-                    // Handle Not Found (404) exceptz1zion
-                    print("Not found")
-                case .some(413):
-                    // Handle Request Too Large (413) exception
-                    print("Payload too large")
-                default:
-                    if let statusCode = statusCode {
-                        print("Error - code: \(statusCode), \(message ?? "")")
-                    }
-            }
-            default:
-              print(error.localizedDescription)
-            }
-            return
-          }
-
-          //データ処理
-          guard let result = response?.result else {
-            print(error?.localizedDescription ?? "unknown error")
-            return
-          }
-            
-          //ステータスコードの定数を作成し条件分岐
-          let statusCode = response?.statusCode
-            switch statusCode == Optional(200) {
-                case true:
-                    print("success: \(statusCode)")
-                    //分析結果の定数を作成
-                    let analysisResult = result
-                    
-                    //JSONへ変換するencoderを用意
-                    let encoder = JSONEncoder()
-                    
-                    //可読性を高めるためにJSONを整形
-                    encoder.outputFormatting = .prettyPrinted
-                    
-                    //分析結果をJSON形式に変換
-                    guard let json = try? encoder.encode(analysisResult) else {
-                        fatalError("Failed to encode to JSON.")
-                    }
-                    
-                    //JSONデータ確認
-                    print("JSON: \(String(bytes: json, encoding: .utf8)!)")
-                    
-                    //JSON解析(score)
-                    let jsonValue = JSON(json)
-                    let tonesScore = jsonValue["document_tone"]["tones"][self.count]["score"].float
-                    
-                    //tonesScoreの小数点を切り上げて取得
-                    let decimal = tonesScore
-                    let decimalPoint = ceil(decimal! * 100)/100
-                    let tone_score = decimalPoint
-                    
-                    //JSON解析(tone_name)
-                    let tonesName = jsonValue["document_tone"]["tones"][self.count]["tone_name"].string
-                    let tone_name = tonesName
-                        
-                    print("=====ここから個別取得=====")
-                    print("document_tone.score    : \(tone_score)")
-                    print("document_tone.tone_name: \(tone_name)")
-                    
-                    //ヘッダーパラメータ
-                    //print(response?.headers as Any)
-                    
-                case false:
-                    //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
-                    print("failure: \(statusCode)")
-            }
+        //渡ってきた値をJSONに変換
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        guard let jsonValue = try? encoder.encode(translationArray) else {
+            fatalError("Failed to encode to JSON.")
         }
+        
+        //JSON解析(jsonValue)
+        let json = JSON(jsonValue)
+        translationContent = json[self.count]["translation"].string
+        
+        //翻訳結果確認
+        print("*****翻訳結果確認*****")
+        print("translationConten: \(translationContent)")
+        print("")
+        
+        //startToneAnalyzerの呼び出し
+        startToneAnalyzer()
+    }
+    
+    // MARK: - ToneAnalyzer
+    //ToneAnalyzerModelと通信をおこなう
+    func startToneAnalyzer() {
+        
+        //APIToneAnalyzerの認証コードをモデルへ渡す
+        let toneAnalyzerModel = ToneAnalyzerModel(analysisApiKey: analysisApiKey, analysisVersion: analysisVersion, analysisURL: analysisURL, analysisContent: translationContent!)
+        
+        //ToneAnalyzerModelの委託とJSON解析をset
+        toneAnalyzerModel.doneCatchAnalyzerProtocol = self
+        toneAnalyzerModel.setToneAnalyzer()
+    }
+    
+    //渡ってきた値を処理
+    func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int) {
+        
+        analyzerArray = arrayAnalyzerData
+        
+        //感情分析結果確認
+        print("*****感情分析結果確認*****")
+        print("analyzerArray: \(analyzerArray)")
+        print("")
     }
 
     // MARK: - Table view data source

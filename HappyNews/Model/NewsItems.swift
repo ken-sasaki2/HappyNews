@@ -15,3 +15,4 @@ class NewsItems {
     var pubDate  :String?
     var category :String?
 }
+

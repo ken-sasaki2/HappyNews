@@ -198,11 +198,13 @@ fi
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/IBMSwiftSDKCore/IBMSwiftSDKCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/IBMWatsonLanguageTranslatorV3/LanguageTranslator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IBMWatsonToneAnalyzerV3/ToneAnalyzer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/IBMSwiftSDKCore/IBMSwiftSDKCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/IBMWatsonLanguageTranslatorV3/LanguageTranslator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IBMWatsonToneAnalyzerV3/ToneAnalyzer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
 fi
