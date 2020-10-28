@@ -35,7 +35,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
 
     //分析用サンプルテキスト
     let sampleText = """
-    アメリカ大統領選挙で激戦州となっているペンシルべニア州で、黒人男性が警察官に銃で撃たれ死亡した。警察に怒ったデモ隊が一部暴徒化するなどけが人や逮捕者も出ている。26日午前4時、ペンシルベニア州
+    MXGP権第15戦ロンメルGP　ホンダのT・ガイザー選手完全優勝
     """
     
     //LanguageTranslationModelから渡ってくる値
@@ -128,9 +128,16 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         analyzerArray = arrayAnalyzerData
         
+        //渡ってきた値をJSONに変換
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        guard let tones = try? encoder.encode(analyzerArray) else {
+            fatalError("Failed to encode to JSON.")
+        }
+        
         //感情分析結果確認
         print("*****感情分析結果確認*****")
-        print("analyzerArray: \(analyzerArray)")
+        print(String(bytes: tones, encoding: .utf8)!)
         print("")
     }
 

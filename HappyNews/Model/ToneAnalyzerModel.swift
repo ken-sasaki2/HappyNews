@@ -96,7 +96,7 @@ class ToneAnalyzerModel {
                     fatalError("Failed to encode to JSON.")
                 }
 
-                //JSON解析(score)
+                //JSON型へ変換
                 let toneAnalysisValue = JSON(toneAnalysisJSON)
                 
                 //感情分析結果の配列の要素数を取得し、その数によってJSON解析数を分岐
@@ -106,6 +106,7 @@ class ToneAnalyzerModel {
                     let  firstToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
                     self.firstScore       = ceil(firstToneScore! * 100)/100
                     self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
+                    
                 } else if self.length == 2 {
                     
                     let  firstToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
@@ -115,6 +116,7 @@ class ToneAnalyzerModel {
                     let  secondToneScore  = toneAnalysisValue["document_tone"]["tones"][self.count+1]["score"].float
                     self.secondScore      = ceil(secondToneScore! * 100)/100
                     self.secondToneName   = toneAnalysisValue["document_tone"]["tones"][self.count+1]["tone_name"].string
+                    
                 } else if self.length == 3 {
                     
                     let  firstToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float

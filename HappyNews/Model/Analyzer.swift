@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Analyzer {
+struct Analyzer: Codable {
     
     var firstScore     : Float?
     var secondScore    : Float?
