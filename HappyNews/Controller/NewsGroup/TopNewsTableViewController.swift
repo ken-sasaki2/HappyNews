@@ -99,7 +99,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //スタイルを2行にかつシンプルに
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell" )
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
 
         //RSSで取得したニュースの値が入る
         let newsItem = newsItems[indexPath.row]

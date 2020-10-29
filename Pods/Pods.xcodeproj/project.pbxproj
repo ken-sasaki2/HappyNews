@@ -7,272 +7,297 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01789FBDF9C29DD4AA9B375A8418250C /* SegementSlideDefaultSwitcherView+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB4022BA6C45A10E5708086E1BD808 /* SegementSlideDefaultSwitcherView+ex.swift */; };
-		01D32523EBAA4095D3030FA8C947526F /* ToneAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A2123F3D5D24A6FD6AC7660B70FC3 /* ToneAnalysis.swift */; };
-		05FC777B726D8B67F48CCA2986C5BE7B /* SegementSlideSwitcherDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7233982616F7B210ACAD95F629AD8B4C /* SegementSlideSwitcherDelegate.swift */; };
-		0FB56883BFA1FB8F7FAFECA3FA80F985 /* ToneAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2F4753D83A26AB7E975232BF4A83B5 /* ToneAnalyzer.swift */; };
-		14B9896F505D854D8C16E318E1CCBD73 /* InsecureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB61C55FA1FCDCA40502BB35EE51BAB2 /* InsecureConnection.swift */; };
-		161D8DE1CCC889D43E16305E8F6CF3B3 /* DocumentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313AF6C2D20E899B1EE96CA13A4FFA5 /* DocumentList.swift */; };
-		16243F482791D3093CFAF721A3291CC5 /* TranslationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E95D36B5F0DF509C28FAF2F8D4D942 /* TranslationModels.swift */; };
-		18DDEC8005B616FFC0A7738DCEC48706 /* IBMSwiftSDKCore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 72C4CF05D158672E89E595D9FD2186B3 /* IBMSwiftSDKCore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		19082CDC95D2C9A6E6F37C9E05E5AACF /* SegementSlideDefaultSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F086C550ED592C3ED6F550C820E4AE29 /* SegementSlideDefaultSwitcherView.swift */; };
-		1942F7D3B7722A5637C3FC0BE44B1E6C /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 45F36F84AF0CA78BBB958CECB6D50594 /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E54A502C6279B55F5F84030022D3374 /* SegementSlideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F8364CEBD22B076B0B5248915AC96 /* SegementSlideScrollView.swift */; };
-		20D3BF579BE4E401569C0FF1B94EAB97 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5D78AB8FAA5BE769C4F7DF042A93A4 /* Shared.swift */; };
-		242397FBBB47DE967E9647E6AA35FD02 /* IdentifiableLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA3C51D8A0FE615600BFE3D055370 /* IdentifiableLanguages.swift */; };
-		2AAD37619C70C3BAC535E8E96EFA0EE3 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7535026C5A45C05D71FDF15438390C37 /* RestRequest.swift */; };
+		01D32523EBAA4095D3030FA8C947526F /* ToneAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B1B99EE68BEAB0D7D8A2A8CCA4A38 /* ToneAnalysis.swift */; };
+		02E7A08EE053B35874B597C3E1751A3E /* Pods-HappyNews-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2987A041A8F105FE4E3EF13E4B419FB7 /* Pods-HappyNews-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		04804159956F03307727801AB3B3F8FF /* SegementSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86C441EB0DE53DF6B2B35129DFB3C8D /* SegementSlideDefaultViewController.swift */; };
+		0CD376902F3A22500A8C50B736B64C14 /* Keys-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 58D2678D30E4F3B143E2B6BEF4B687C9 /* Keys-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0FB56883BFA1FB8F7FAFECA3FA80F985 /* ToneAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F49668982F8C12C2493DA18EDE6B77 /* ToneAnalyzer.swift */; };
+		14B9896F505D854D8C16E318E1CCBD73 /* InsecureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED92A8007C33D58B39642E1FFB2E30E /* InsecureConnection.swift */; };
+		161D8DE1CCC889D43E16305E8F6CF3B3 /* DocumentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6815BFB382746807F83CFE768E1A2 /* DocumentList.swift */; };
+		16243F482791D3093CFAF721A3291CC5 /* TranslationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF1EBD59F8D3CBA993B5ED8CB410448 /* TranslationModels.swift */; };
+		1699A2FEA177B8F64D038C9882878003 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06AF2F48C426BDBBEFDE8E6BF9848B2 /* Foundation.framework */; };
+		18DDEC8005B616FFC0A7738DCEC48706 /* IBMSwiftSDKCore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 72700C833329F8F21A53E3A9B911D959 /* IBMSwiftSDKCore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1942F7D3B7722A5637C3FC0BE44B1E6C /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 88E8CB1AE01136412A01E94E5474F87C /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20D3BF579BE4E401569C0FF1B94EAB97 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CC0A840651C799A560026FF767D1F3 /* Shared.swift */; };
+		242397FBBB47DE967E9647E6AA35FD02 /* IdentifiableLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037B8B8D0444F7C2FDFFD87871400C55 /* IdentifiableLanguages.swift */; };
+		273153CA20EDE1F7B682327CA8C49EDB /* SegementSlideViewController+delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191BA6EE9F51C156AB649E54BD15B9CC /* SegementSlideViewController+delegate.swift */; };
+		2AAD37619C70C3BAC535E8E96EFA0EE3 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18811441FAF67E28C1414E932F6AFAF /* RestRequest.swift */; };
 		2B18AB23AAF9F9AB8EE0702D286F58DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06AF2F48C426BDBBEFDE8E6BF9848B2 /* Foundation.framework */; };
-		2BC9A583F8385F2C89A3E063B4F2D63E /* SegementSlideContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60AC55494EAD1C0457A42DB01B12EB7 /* SegementSlideContentView.swift */; };
-		2BF6FBC0A64BF107C5D64C61F1397770 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D994B3A4577CB56842BA3F54DBF6DA /* SwiftyJSON-dummy.m */; };
-		2FED72A9BCCD747C37F0C918874F42A0 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE0AD097ABC6DBE5DC0CB25C852D674 /* Shared.swift */; };
-		400F73D81632F8C4BDA32C8C14806661 /* UtteranceAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57BFE6EFB78428D35A072918676D95 /* UtteranceAnalysis.swift */; };
-		40D57B8CE1BA13874CBA86C0198D5AD2 /* InsecureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C4613FD6B33A2284D6882BB0267E3B /* InsecureConnection.swift */; };
+		2BF6FBC0A64BF107C5D64C61F1397770 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A577F804E6DE32FCFE4817224AE6D558 /* SwiftyJSON-dummy.m */; };
+		2FED72A9BCCD747C37F0C918874F42A0 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066CA961969E2A1A3F7F66B5F37B0BF5 /* Shared.swift */; };
+		39E44781F5AE0CDA33415ED770EC125A /* SegementSlideViewController+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F964984A8AE2FE66C8D200665E493CD1 /* SegementSlideViewController+ex.swift */; };
+		400F73D81632F8C4BDA32C8C14806661 /* UtteranceAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54535D66E772BC4EFEB0DA624B8EE7 /* UtteranceAnalysis.swift */; };
+		40D57B8CE1BA13874CBA86C0198D5AD2 /* InsecureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249F1E30617BCFE5F4980488A4756942 /* InsecureConnection.swift */; };
 		464450D037D17ED5EE2322E180A6A9F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06AF2F48C426BDBBEFDE8E6BF9848B2 /* Foundation.framework */; };
-		4B6E9CA7EE2F07329886872B7230B012 /* SegementSlideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0B2D32DEEAF4996B0153705A2F1FD /* SegementSlideHeaderView.swift */; };
-		4D80E7E0D2C01BF107F0EBC996F2DBDC /* SegementSlideViewController+scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F70E8CABA6812A6DEC044CD715814AE /* SegementSlideViewController+scroll.swift */; };
-		59354C94A50B483675B4C9957DA0E761 /* CloudPakForDataAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37895047742E5A37CDC86DB4C82A143F /* CloudPakForDataAuthenticator.swift */; };
-		5E23AF5BA33DF108D10C3F0C29912CA1 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48348638001EE34938A8547334763C5D /* MultipartFormData.swift */; };
-		60297FEC5A4143956AF143C2DFA78FEF /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B5671BBFB01851B49296A450A99427 /* Languages.swift */; };
-		61064BEB821E61309BBDA0F72B3494EF /* SegementSlide-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D9DA42273C8030F8056C10A86FE81961 /* SegementSlide-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		610CA135D25BAD44E047A764D2C75608 /* TranslationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0EEE1B212060E5342C316ECD7869F /* TranslationResult.swift */; };
-		6158C551B1B3B0E3D861457DDBDA2469 /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C7EBEEFCCB6A5F6FB4CDF645FCDC2 /* String+Bounding.swift */; };
-		616A7E7E891CED75F33BE9E6D24B248E /* TranslationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91285C8F1D52920A0429F4F8B7CE4F33 /* TranslationModel.swift */; };
-		635CF24E659D33CB45FBBD9D4AB612DD /* TransparentSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A0D7B64AA2C1652D7DEB37D1F1F874 /* TransparentSlideDefaultViewController.swift */; };
-		63C95D41D5C9D72D3729C933D223C8B4 /* SegementSlideViewController+delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08AE7B372910360880CB66A69A82C55 /* SegementSlideViewController+delegate.swift */; };
-		6463CF8A091A1004DA4C7D6D4C465050 /* IBMSwiftSDKCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA35B55983A3D83C66E57813EA29E93 /* IBMSwiftSDKCore-dummy.m */; };
-		677E9A4A32533635EECB959814EA0D57 /* IBMWatsonLanguageTranslatorV3-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DD8594A3C46B3FEFE29CF796B81953E1 /* IBMWatsonLanguageTranslatorV3-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		692A36C0ED59F435C626863AEB74F8BF /* IBMWatsonToneAnalyzerV3-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A66F507A426230EAFB1EF4F1E386305 /* IBMWatsonToneAnalyzerV3-dummy.m */; };
-		6AEF4C7E00EC43F5E59703137532C2C6 /* LanguageTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C33DF8889A21F83D209F0B457D0DF0C /* LanguageTranslator.swift */; };
-		6FA1A1CCAC31B709EF1420192C3A2BE0 /* InsecureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB97EE57AE06CE0FC34C643DC2D0290 /* InsecureConnection.swift */; };
-		71E52EAD7D4259F60373ED7D0D48DD50 /* Pods-HappyNews-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 265EC3140FF21F5BD45B331037FA9898 /* Pods-HappyNews-dummy.m */; };
-		722837DAD490073211E982E6FC57970C /* ToneCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE462A8A5D729FAD2F36CEA3F4DBD95 /* ToneCategory.swift */; };
-		72DAF22B269EE662FEEBBB8A7A2FD7FB /* Utterance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13D64D81E21A0FD637D0B533D900B23 /* Utterance.swift */; };
-		73525B22008B8D3D95294F385CE54B6D /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54AE880A03726934676D5782213B0A0 /* BadgeView.swift */; };
-		743D96A10A58BA99CBB51782E9753128 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B4E1F435D10E44D1CB6FC4B0B8438 /* Translation.swift */; };
-		785C4BE567B07F4844634B5D0BFA82CA /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88EC443B95FDD8F5DFE27B337E65AC1 /* JWT.swift */; };
-		7B4CE5C84161E2BFE477F42DFD634382 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3ACA57D18B10168E118BE36EA74CFC /* SwiftyJSON.swift */; };
-		7F4E67B7B9E0F386A92164C80E5B1C04 /* ToneInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6804DDCE22D8FE18EBFF622C86CBA64 /* ToneInput.swift */; };
-		80DF81F082D9C2AE5DA1E8F9FEE8DA80 /* RestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3143F59CC3732174DEC3EFC3382DDED /* RestResponse.swift */; };
-		85290E4FF3E7B21D0CBD0A2CFB61E4A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06AF2F48C426BDBBEFDE8E6BF9848B2 /* Foundation.framework */; };
-		86D168DEEA9F1B0483E5D24C40382A93 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C54DBAC91DBA994A3B0F6E1B40E61AF /* Authentication.swift */; };
-		87C63B0411ADC349484FF1657BDA5879 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D18DB6AD7E357866AE05A7BC1F012B /* IdentifiableLanguage.swift */; };
-		891829B1B3A1FE3E3AEEB4517EFE6CA4 /* ConfigBasedAuthenticatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8E9F094F44139F8779ECBA2ACEFBC2 /* ConfigBasedAuthenticatorFactory.swift */; };
-		8A50C99A4CF0815E66F16BA6BB9715DD /* TransparentSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66186E78430D8420E290C62D7359C5B4 /* TransparentSlideViewController.swift */; };
-		8C19C43856075AF0D6A3A7D34DDE622E /* DocumentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E414B1B73E311CEE578E8C6155CFCA /* DocumentStatus.swift */; };
-		8C71C243B0BE05E2E709117C50ACFEB4 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7147B08D4E64903993C21A382D8E59D6 /* UIView+Constraint.swift */; };
-		8F604D5A0D9320F032CA87ECD56F959C /* SegementSlide-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8FA3E08E03E34C97B5F244071CAC4B /* SegementSlide-dummy.m */; };
+		4CF6A1E2D8A6BE0E772C496102C7EAD4 /* SegementSlide-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C1925B078FCAA988A2EE738E65B6C75F /* SegementSlide-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F325CC07C3D31CA141F39335FA817A0 /* SegementSlideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D25A630C415A79B69FF21AB7FD53A1 /* SegementSlideHeaderView.swift */; };
+		53A1614057B0B5234EC2B6FF357CF210 /* HappyNewsKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = D79B795EB47DE4AD2A31B9A318DCAC6C /* HappyNewsKeys.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		59354C94A50B483675B4C9957DA0E761 /* CloudPakForDataAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D23868718B63267CBC50EE0A83F61 /* CloudPakForDataAuthenticator.swift */; };
+		5E23AF5BA33DF108D10C3F0C29912CA1 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AC904533126A478F0FDA829FD9B6F5 /* MultipartFormData.swift */; };
+		5EB9D3A9295A6516BDBA77DCFE53CFD3 /* SegementSlide-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0868E4249840B3214AA99F4B6B3576D2 /* SegementSlide-dummy.m */; };
+		60297FEC5A4143956AF143C2DFA78FEF /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787D9B3F1AB25027D38E8923AC653BBC /* Languages.swift */; };
+		610CA135D25BAD44E047A764D2C75608 /* TranslationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9399D593FC094CA0C5445AAF2B630D8A /* TranslationResult.swift */; };
+		616A7E7E891CED75F33BE9E6D24B248E /* TranslationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A950528F48BFAFEE3229DD46C47A6C6 /* TranslationModel.swift */; };
+		6463CF8A091A1004DA4C7D6D4C465050 /* IBMSwiftSDKCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2118C1D1522B424FC177AD6A31B9A14D /* IBMSwiftSDKCore-dummy.m */; };
+		65EFC33546DCCB8EC20996C4134C681E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06AF2F48C426BDBBEFDE8E6BF9848B2 /* Foundation.framework */; };
+		677E9A4A32533635EECB959814EA0D57 /* IBMWatsonLanguageTranslatorV3-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C8A4B7F6C8C12E989B56C7A4F82B9CEC /* IBMWatsonLanguageTranslatorV3-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		68E472E47AA87DF59FE291D8A0792A51 /* TransparentSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B634F85BBC39AD0474A006CA034A2F /* TransparentSlideViewController.swift */; };
+		692A36C0ED59F435C626863AEB74F8BF /* IBMWatsonToneAnalyzerV3-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 916D681257610013CBCA1DD07FFC372D /* IBMWatsonToneAnalyzerV3-dummy.m */; };
+		6AEF4C7E00EC43F5E59703137532C2C6 /* LanguageTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0EB484A0E61142DDF859C834D96321 /* LanguageTranslator.swift */; };
+		6D7B1BD2355D7DCB7C0A403376594852 /* SegementSlideSwitcherDataSourceWeakBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C3F6FF7F344D9367CB34C4460565B8 /* SegementSlideSwitcherDataSourceWeakBox.swift */; };
+		6FA1A1CCAC31B709EF1420192C3A2BE0 /* InsecureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CE3E2BBF79B39F30838ED19E9EE4A7 /* InsecureConnection.swift */; };
+		722837DAD490073211E982E6FC57970C /* ToneCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0A4E55B9D1DBF9500D0799B6E5FAF3 /* ToneCategory.swift */; };
+		72DAF22B269EE662FEEBBB8A7A2FD7FB /* Utterance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B94B6ACDFE1177A9E6FB8EC6811DA79 /* Utterance.swift */; };
+		743D96A10A58BA99CBB51782E9753128 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A89472F9A6265F869D233DF811F58C /* Translation.swift */; };
+		785C4BE567B07F4844634B5D0BFA82CA /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA2BDC0E6E3135A92E85D77CD8A4C3 /* JWT.swift */; };
+		7B4CE5C84161E2BFE477F42DFD634382 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB4828A3F9BD54A6D724DA7904682E /* SwiftyJSON.swift */; };
+		7F4E67B7B9E0F386A92164C80E5B1C04 /* ToneInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A6791F40C45359E2E1D9590CF84FDF /* ToneInput.swift */; };
+		7FB05457C50253A5DDDB538A8EF71724 /* SegementSlideDefaultSwitcherConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2916CDFD255E46DD265B5B34514476 /* SegementSlideDefaultSwitcherConfig.swift */; };
+		80DF81F082D9C2AE5DA1E8F9FEE8DA80 /* RestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475DB7AE8AC21164DF55B4978E7334B5 /* RestResponse.swift */; };
+		86D168DEEA9F1B0483E5D24C40382A93 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B0150B7844CF550FF60405C164634A /* Authentication.swift */; };
+		87C63B0411ADC349484FF1657BDA5879 /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554CA9DF9BE040414DDF069E3B59D4C /* IdentifiableLanguage.swift */; };
+		891829B1B3A1FE3E3AEEB4517EFE6CA4 /* ConfigBasedAuthenticatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769F2F34F69E1C9680DCAB3CBEEC7E9 /* ConfigBasedAuthenticatorFactory.swift */; };
+		8C19C43856075AF0D6A3A7D34DDE622E /* DocumentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3221D7A9D5E6FC672335DD708139BBBA /* DocumentStatus.swift */; };
+		8FA95861BC50739E6FF715436DBDD0A6 /* UIScrollView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2370C3FC6E9FD5ADC5CE02B6C1917A75 /* UIScrollView+Scroll.swift */; };
+		9524BD88D23AA9B93E255CC43C1E2E18 /* Keys-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F53369EE58BC238933DF6F67AA70029D /* Keys-dummy.m */; };
 		95A87374C62996119537E16F837E821C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06AF2F48C426BDBBEFDE8E6BF9848B2 /* Foundation.framework */; };
-		9A5A4C89A39379E1A3EB09F39B2453E3 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9E3703445CF18AC7B61D753A837C09 /* RestError.swift */; };
-		9DF81BBA19BB83EFCE4A135FC418073D /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3CECEBB963D3A905A44EEBCD9662FF /* IdentifiedLanguage.swift */; };
-		A63B17C248300E559132DB223AB157B0 /* DocumentAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307A541F62CFC921F67257CC6DC38F5 /* DocumentAnalysis.swift */; };
-		AA9560C73201DC9B6F2D888C54935890 /* IAMAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36D33D1BDB611309B1CF3E6B7C37B8 /* IAMAuthenticator.swift */; };
-		AF1BC3E5F90DB30FC280C11BBAD9F357 /* SegementSlideDefaultSwitcherConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F8DD08EA61C5B14B0F8A2950E0785E /* SegementSlideDefaultSwitcherConfig.swift */; };
+		9A5A4C89A39379E1A3EB09F39B2453E3 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AD6B4B3FFEB45D5FEA0528CE62BE87 /* RestError.swift */; };
+		9DF81BBA19BB83EFCE4A135FC418073D /* IdentifiedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D52DAFC139F39686B828DD242B3663 /* IdentifiedLanguage.swift */; };
+		9E9CC8A3DA5A44CA3BB9BEE0284EFCFE /* SegementSlideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D43757BF572635C705C0A0FE665883B /* SegementSlideScrollView.swift */; };
+		A30B8BE0C607551D824E2BEE6D54C971 /* SegementSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5764B5BDECB761351032D77BACD65A3 /* SegementSlideViewController.swift */; };
+		A39C3DECE488CDF9045F6C630CC14814 /* SegementSlideContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD34BA5C29E6FF042E871B83FD7427CF /* SegementSlideContentView.swift */; };
+		A63B17C248300E559132DB223AB157B0 /* DocumentAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45DA29E042CBB86280C8EA85D1AD4A1 /* DocumentAnalysis.swift */; };
+		AA9560C73201DC9B6F2D888C54935890 /* IAMAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4FF1F42E9AD8328C8EF2C09D3DD8A2 /* IAMAuthenticator.swift */; };
 		B0C19DA641FDFE12421C69745271ABDD /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46ACAE2D7BB5CFD1E5306E8237994D96 /* IBMSwiftSDKCore.framework */; };
-		B787B5FCD2787858439AF870C5E0B711 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238DC0DFC7193AE8A9AE8F358DE68B6 /* CodableExtensions.swift */; };
-		B84642C814EFCDD03FFAA53191E8E4FE /* ToneChatScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88858A5F627549FF31BB33F260DA22B /* ToneChatScore.swift */; };
-		BA0AE5A92C5C9ABEE235B96227A94D6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06AF2F48C426BDBBEFDE8E6BF9848B2 /* Foundation.framework */; };
+		B17D819256862C5C963A4227FCDE4011 /* Pods-HappyNews-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 265EC3140FF21F5BD45B331037FA9898 /* Pods-HappyNews-dummy.m */; };
+		B24D2C57BF4FB7BD250FD0B7DA1BBBE7 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84781FAC41D154975AAB7E439BDA5924 /* BadgeView.swift */; };
+		B787B5FCD2787858439AF870C5E0B711 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17C1F0B6D844B4B11F293E97B8A2EDD /* CodableExtensions.swift */; };
+		B7A9A9AA09CAF1F40A6FFEC184BA99AB /* SegementSlideViewController+scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB7DE590247E4B8F4D386AF6BDC3A7 /* SegementSlideViewController+scroll.swift */; };
+		B84642C814EFCDD03FFAA53191E8E4FE /* ToneChatScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D249576BE92E9B1F4DE465A179540 /* ToneChatScore.swift */; };
 		BB912B1DCE7829C58D5F37ECB9FAC0B2 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46ACAE2D7BB5CFD1E5306E8237994D96 /* IBMSwiftSDKCore.framework */; };
-		BD1266A1CB57DD124BC4D72BA221144F /* SegementSlideSwitcherDataSourceWeakBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE20B386DEAA047567FD480B214E5CE /* SegementSlideSwitcherDataSourceWeakBox.swift */; };
-		BF17250B6898BFB18742692EB8AB3D02 /* IBMWatsonToneAnalyzerV3-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 81B78295716E7D229A6F6DE9D404B191 /* IBMWatsonToneAnalyzerV3-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C0B023BF1B280B8B23D088DFEACD3294 /* DeleteModelResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F70D9F4CFE57725AE2231483CBDEE9A /* DeleteModelResult.swift */; };
-		C106600CD1F7268999717B761B791BD7 /* TranslateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1786EEADC8CF83B9EA4EE9CC6908C3B8 /* TranslateRequest.swift */; };
-		C2B87F088618B312C15FA299C0EC9257 /* SegementSlideViewController+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A651737C54CCABAAD47BF7A6B4E35 /* SegementSlideViewController+ex.swift */; };
-		C519C177C9FCCB7C09CC9B1109966405 /* ToneScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6634DE710C90DABE6DADB0C5FFF3BC /* ToneScore.swift */; };
-		CEC15C86B95DC280ADF68D41A6A54CB8 /* ToneContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469694E9E6C25192B6DB84BD415A3177 /* ToneContent.swift */; };
-		CFFA7AE02F043DED068025210C7E7BEB /* SegementSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB7808AA937CCD814B018B2EA46358 /* SegementSlideViewController.swift */; };
-		D37F1A70EB98F4543B6A828DE7D552CA /* SegementSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB5E1B909BCDB369BF266AB97B285BF /* SegementSlideDefaultViewController.swift */; };
-		D38F8D6A49138667327F1C77F624C5AA /* ToneChatInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84393641E6C9A12ED78C46F7006615FC /* ToneChatInput.swift */; };
-		D69AD87E1C6B0476E19AB37D20A4D9DE /* UtteranceAnalyses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A36D6E3D1C271B712F6CE4BB9CD133 /* UtteranceAnalyses.swift */; };
-		D75AE0BE3046E4AE278FF5A098B5769A /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C12EAB8D6F13FA7466326F4C969E84 /* JSON.swift */; };
-		DCC039E863CD59AD6381563730C1F971 /* SentenceAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DAA3530AB6F63C7D90149A7714EF4 /* SentenceAnalysis.swift */; };
-		DDC7EA4C77884F85205AFD6FC5F56270 /* Pods-HappyNews-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2987A041A8F105FE4E3EF13E4B419FB7 /* Pods-HappyNews-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D3DCA0B46F1CFA8A37F8189B2B6442 /* SegementSlideViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B81A7E23190DC4A439746B413EAD6 /* SegementSlideViewController+setup.swift */; };
+		BE2C94F88C4D09BE8725F4E4DAC62565 /* SegementSlideSwitcherDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E27273270CA9B6ACA6DDF5277D9FF /* SegementSlideSwitcherDelegate.swift */; };
+		BF17250B6898BFB18742692EB8AB3D02 /* IBMWatsonToneAnalyzerV3-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B74999C3B748B19806FD171E1F21664 /* IBMWatsonToneAnalyzerV3-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C0B023BF1B280B8B23D088DFEACD3294 /* DeleteModelResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DD1BA9CB626B7EDC38003310DDB2A7 /* DeleteModelResult.swift */; };
+		C106600CD1F7268999717B761B791BD7 /* TranslateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5B37EE667D852093C5480B8193CAC8 /* TranslateRequest.swift */; };
+		C50F9068AE67E07345D17ED1EE78A3D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06AF2F48C426BDBBEFDE8E6BF9848B2 /* Foundation.framework */; };
+		C519C177C9FCCB7C09CC9B1109966405 /* ToneScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADAA6F6BF1039A1A7A33D07C7283E1F /* ToneScore.swift */; };
+		C778AFB9C4EAE99A909E1AA2EEC42697 /* SegementSlideDefaultSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F752E263FB56A62F726FBB9C1870F105 /* SegementSlideDefaultSwitcherView.swift */; };
+		CA561FB9A42713B9C8A1E9EC9BD8ED46 /* SegementSlideViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BB795237BF127A0A1721E7FDFD0D7A /* SegementSlideViewController+setup.swift */; };
+		CEC15C86B95DC280ADF68D41A6A54CB8 /* ToneContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8193ABD1AFCE8DE5C386405F8974CC69 /* ToneContent.swift */; };
+		D38F8D6A49138667327F1C77F624C5AA /* ToneChatInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B025B2A64D695A3878A441BF8C72F4B /* ToneChatInput.swift */; };
+		D69AD87E1C6B0476E19AB37D20A4D9DE /* UtteranceAnalyses.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7ED82DCC9786D878970360F2E202CF /* UtteranceAnalyses.swift */; };
+		D75AE0BE3046E4AE278FF5A098B5769A /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858D660E9478CF344ECCF6171005662E /* JSON.swift */; };
+		D95A6C80B0547454D6147C164E56C309 /* SegementSlideDefaultSwitcherView+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EC164CD62F236F01DD3EEBBC5B655B /* SegementSlideDefaultSwitcherView+ex.swift */; };
+		DCC039E863CD59AD6381563730C1F971 /* SentenceAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04741E5D15C67895B640E764EED8BF /* SentenceAnalysis.swift */; };
+		DD1AC41420B3E77B4FC2386ACB85232D /* HappyNewsKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = B36468B6170A2B7A5FC844172623C8E2 /* HappyNewsKeys.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E1723B8F79EC31857B7B5F5C17C135E8 /* TransparentSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837DE5B849056C5AA6B4B53172C03701 /* TransparentSlideDefaultViewController.swift */; };
+		E2360E795ED81BABECB86F2683E03697 /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A486899CC2F2882E2C965B8C62654C2 /* String+Bounding.swift */; };
+		E2E7D3ADF136AC7F5F1DD2A218796F75 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5385BA10F227359686A570AEEBEA34 /* UIView+Constraint.swift */; };
 		EA4B44AE2EB87B7E949CE6032A79AA43 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06AF2F48C426BDBBEFDE8E6BF9848B2 /* Foundation.framework */; };
-		EA997FE5653158E7D4885EE760044848 /* IBMWatsonLanguageTranslatorV3-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B274DE4000B79C03DA192DCDFC235A0A /* IBMWatsonLanguageTranslatorV3-dummy.m */; };
-		FA925312660FA9C00C4E441A49A8BDD7 /* IdentifiedLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8840AE5323DF88A2DA9BD5F23503B23 /* IdentifiedLanguages.swift */; };
-		FDFFB46B16962698755E53062E1F40FA /* CredentialUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624C2799445D33B9239053CF258CB98C /* CredentialUtils.swift */; };
-		FE092ACB25BC3B5EF2F5086F6639692D /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B1E6333A1AD4CE34C5B4FE2ABD3F32 /* Language.swift */; };
+		EA997FE5653158E7D4885EE760044848 /* IBMWatsonLanguageTranslatorV3-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5FBA48523A804FBD7959519C4E8190 /* IBMWatsonLanguageTranslatorV3-dummy.m */; };
+		FA925312660FA9C00C4E441A49A8BDD7 /* IdentifiedLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39159C5D73509B02585912216C9F3031 /* IdentifiedLanguages.swift */; };
+		FDFFB46B16962698755E53062E1F40FA /* CredentialUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104623B65C490C2232AEA59B975B6D79 /* CredentialUtils.swift */; };
+		FE092ACB25BC3B5EF2F5086F6639692D /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8518A4EDB1BC292A4CD8960077EFDE /* Language.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3CC9F46A3C2D68441407D3D8BC3F5E1D /* PBXContainerItemProxy */ = {
+		154631366B483A34C7AFFE2FFAADE9EA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 75570FD1720C349A424EB4CAD88C1A29;
-			remoteInfo = IBMWatsonToneAnalyzerV3;
+			remoteGlobalIDString = 5CE75F0DCD94A1A113665B974F74795F;
+			remoteInfo = Keys;
 		};
-		7CC138C4D7A1086CC3D8ED539CB9E07B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 055411E7F4239B4CB7D549A671F771E0;
-			remoteInfo = SegementSlide;
-		};
-		874937BE0A1D6272A5886B86552C5191 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C212BBFAF6FC8270BF5BEF8057998E30;
-			remoteInfo = IBMSwiftSDKCore;
-		};
-		9B459E442CFD75CC606D95581460D3E7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D118A6A04828FD3CDA8640CD2B6796D2;
-			remoteInfo = SwiftyJSON;
-		};
-		A3717C2104616C35845B7720DEF6CD7C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C212BBFAF6FC8270BF5BEF8057998E30;
-			remoteInfo = IBMSwiftSDKCore;
-		};
-		CFFEB4D5AB12584E9125A844E9761C44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C212BBFAF6FC8270BF5BEF8057998E30;
-			remoteInfo = IBMSwiftSDKCore;
-		};
-		D1E86E3113FC0CB40CE9DEFDB261B626 /* PBXContainerItemProxy */ = {
+		1FDD3A2F6E7160BBFFDE7B7B989D6DE5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B2B724283F9BE15AC7375A6203787C69;
 			remoteInfo = IBMWatsonLanguageTranslatorV3;
 		};
+		5EEF93FDD94A77C3B487A980AE8BE5DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 055411E7F4239B4CB7D549A671F771E0;
+			remoteInfo = SegementSlide;
+		};
+		BA6D134EA7952CDA0001E906EB12474F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D118A6A04828FD3CDA8640CD2B6796D2;
+			remoteInfo = SwiftyJSON;
+		};
+		C89286C874E0263A5E44403AB89B386D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75570FD1720C349A424EB4CAD88C1A29;
+			remoteInfo = IBMWatsonToneAnalyzerV3;
+		};
+		DDF3DF2ECA5F718A56550B46C2C2E415 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C212BBFAF6FC8270BF5BEF8057998E30;
+			remoteInfo = IBMSwiftSDKCore;
+		};
+		E8F274786CE5336AACA6CBF85103A85D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C212BBFAF6FC8270BF5BEF8057998E30;
+			remoteInfo = IBMSwiftSDKCore;
+		};
+		E8FE5E1A402C522A097C6ECC51144A76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C212BBFAF6FC8270BF5BEF8057998E30;
+			remoteInfo = IBMSwiftSDKCore;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00B1E6333A1AD4CE34C5B4FE2ABD3F32 /* Language.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Language.swift; path = Source/LanguageTranslatorV3/Models/Language.swift; sourceTree = "<group>"; };
-		044B4E1F435D10E44D1CB6FC4B0B8438 /* Translation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Translation.swift; path = Source/LanguageTranslatorV3/Models/Translation.swift; sourceTree = "<group>"; };
-		07368682D1B59B684E641F06C59F77E4 /* IBMWatsonLanguageTranslatorV3.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = IBMWatsonLanguageTranslatorV3.modulemap; sourceTree = "<group>"; };
-		0A36D33D1BDB611309B1CF3E6B7C37B8 /* IAMAuthenticator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IAMAuthenticator.swift; path = Sources/IBMSwiftSDKCore/Authentication/IAMAuthenticator.swift; sourceTree = "<group>"; };
-		0A3AA3C51D8A0FE615600BFE3D055370 /* IdentifiableLanguages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentifiableLanguages.swift; path = Source/LanguageTranslatorV3/Models/IdentifiableLanguages.swift; sourceTree = "<group>"; };
-		0A7D3549F3CFC921769F3DD20E72139F /* IBMSwiftSDKCore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMSwiftSDKCore-prefix.pch"; sourceTree = "<group>"; };
-		0B5D78AB8FAA5BE769C4F7DF042A93A4 /* Shared.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
-		0BA35B55983A3D83C66E57813EA29E93 /* IBMSwiftSDKCore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IBMSwiftSDKCore-dummy.m"; sourceTree = "<group>"; };
-		10C4613FD6B33A2284D6882BB0267E3B /* InsecureConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InsecureConnection.swift; path = Source/SupportingFiles/InsecureConnection.swift; sourceTree = "<group>"; };
-		1786EEADC8CF83B9EA4EE9CC6908C3B8 /* TranslateRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TranslateRequest.swift; path = Source/LanguageTranslatorV3/Models/TranslateRequest.swift; sourceTree = "<group>"; };
-		17C0B2D32DEEAF4996B0153705A2F1FD /* SegementSlideHeaderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideHeaderView.swift; path = Source/Header/SegementSlideHeaderView.swift; sourceTree = "<group>"; };
-		1C9E3703445CF18AC7B61D753A837C09 /* RestError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RestError.swift; path = Sources/IBMSwiftSDKCore/RestError.swift; sourceTree = "<group>"; };
-		25CD51F6556D45386A4437044B91A708 /* IBMSwiftSDKCore-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "IBMSwiftSDKCore-Info.plist"; sourceTree = "<group>"; };
-		25D00B5E0073244E950A5EE73386407B /* SegementSlide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SegementSlide.debug.xcconfig; sourceTree = "<group>"; };
+		037B8B8D0444F7C2FDFFD87871400C55 /* IdentifiableLanguages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentifiableLanguages.swift; path = Source/LanguageTranslatorV3/Models/IdentifiableLanguages.swift; sourceTree = "<group>"; };
+		0488301370038A8CBD2F1FBF1FBBD623 /* IBMWatsonToneAnalyzerV3.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = IBMWatsonToneAnalyzerV3.modulemap; sourceTree = "<group>"; };
+		066CA961969E2A1A3F7F66B5F37B0BF5 /* Shared.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
+		07E6815BFB382746807F83CFE768E1A2 /* DocumentList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DocumentList.swift; path = Source/LanguageTranslatorV3/Models/DocumentList.swift; sourceTree = "<group>"; };
+		0868E4249840B3214AA99F4B6B3576D2 /* SegementSlide-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SegementSlide-dummy.m"; sourceTree = "<group>"; };
+		089B1B99EE68BEAB0D7D8A2A8CCA4A38 /* ToneAnalysis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneAnalysis.swift; path = Source/ToneAnalyzerV3/Models/ToneAnalysis.swift; sourceTree = "<group>"; };
+		08AD6B4B3FFEB45D5FEA0528CE62BE87 /* RestError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RestError.swift; path = Sources/IBMSwiftSDKCore/RestError.swift; sourceTree = "<group>"; };
+		0D90DA2EE75E66DD6443042D50BFA2E0 /* IBMWatsonLanguageTranslatorV3.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = IBMWatsonLanguageTranslatorV3.modulemap; sourceTree = "<group>"; };
+		104623B65C490C2232AEA59B975B6D79 /* CredentialUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CredentialUtils.swift; path = Sources/IBMSwiftSDKCore/CredentialUtils.swift; sourceTree = "<group>"; };
+		18DC5F70B715F242417641C3510C599A /* SegementSlide-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SegementSlide-prefix.pch"; sourceTree = "<group>"; };
+		191BA6EE9F51C156AB649E54BD15B9CC /* SegementSlideViewController+delegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+delegate.swift"; path = "Source/General/SegementSlideViewController+delegate.swift"; sourceTree = "<group>"; };
+		1A5385BA10F227359686A570AEEBEA34 /* UIView+Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+Constraint.swift"; path = "Source/Utility/UIView+Constraint.swift"; sourceTree = "<group>"; };
+		1F1E27273270CA9B6ACA6DDF5277D9FF /* SegementSlideSwitcherDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideSwitcherDelegate.swift; path = Source/Switcher/SegementSlideSwitcherDelegate.swift; sourceTree = "<group>"; };
+		2118C1D1522B424FC177AD6A31B9A14D /* IBMSwiftSDKCore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IBMSwiftSDKCore-dummy.m"; sourceTree = "<group>"; };
+		2370C3FC6E9FD5ADC5CE02B6C1917A75 /* UIScrollView+Scroll.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIScrollView+Scroll.swift"; path = "Source/Utility/UIScrollView+Scroll.swift"; sourceTree = "<group>"; };
+		249F1E30617BCFE5F4980488A4756942 /* InsecureConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InsecureConnection.swift; path = Source/SupportingFiles/InsecureConnection.swift; sourceTree = "<group>"; };
+		24A89472F9A6265F869D233DF811F58C /* Translation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Translation.swift; path = Source/LanguageTranslatorV3/Models/Translation.swift; sourceTree = "<group>"; };
 		265EC3140FF21F5BD45B331037FA9898 /* Pods-HappyNews-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HappyNews-dummy.m"; sourceTree = "<group>"; };
+		26B634F85BBC39AD0474A006CA034A2F /* TransparentSlideViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransparentSlideViewController.swift; path = Source/General/TransparentSlideViewController.swift; sourceTree = "<group>"; };
+		27C764C9A59DEBE1A05079E20B63D2D7 /* IBMWatsonToneAnalyzerV3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMWatsonToneAnalyzerV3.release.xcconfig; sourceTree = "<group>"; };
 		2987A041A8F105FE4E3EF13E4B419FB7 /* Pods-HappyNews-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-HappyNews-umbrella.h"; sourceTree = "<group>"; };
-		2B6634DE710C90DABE6DADB0C5FFF3BC /* ToneScore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneScore.swift; path = Source/ToneAnalyzerV3/Models/ToneScore.swift; sourceTree = "<group>"; };
-		2E8E9F094F44139F8779ECBA2ACEFBC2 /* ConfigBasedAuthenticatorFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConfigBasedAuthenticatorFactory.swift; path = Sources/IBMSwiftSDKCore/Authentication/ConfigBasedAuthenticatorFactory.swift; sourceTree = "<group>"; };
-		2FE462A8A5D729FAD2F36CEA3F4DBD95 /* ToneCategory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneCategory.swift; path = Source/ToneAnalyzerV3/Models/ToneCategory.swift; sourceTree = "<group>"; };
-		318433CE5296FA27DAEBEB5AD87FD27C /* SegementSlide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SegementSlide.release.xcconfig; sourceTree = "<group>"; };
+		29BB795237BF127A0A1721E7FDFD0D7A /* SegementSlideViewController+setup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+setup.swift"; path = "Source/General/SegementSlideViewController+setup.swift"; sourceTree = "<group>"; };
+		2A0EB484A0E61142DDF859C834D96321 /* LanguageTranslator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LanguageTranslator.swift; path = Source/LanguageTranslatorV3/LanguageTranslator.swift; sourceTree = "<group>"; };
+		2B1707BE06347A9264DF6F60F2F99623 /* IBMWatsonToneAnalyzerV3-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMWatsonToneAnalyzerV3-prefix.pch"; sourceTree = "<group>"; };
+		2C5FBA48523A804FBD7959519C4E8190 /* IBMWatsonLanguageTranslatorV3-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IBMWatsonLanguageTranslatorV3-dummy.m"; sourceTree = "<group>"; };
+		3221D7A9D5E6FC672335DD708139BBBA /* DocumentStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DocumentStatus.swift; path = Source/LanguageTranslatorV3/Models/DocumentStatus.swift; sourceTree = "<group>"; };
+		34DD1BA9CB626B7EDC38003310DDB2A7 /* DeleteModelResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeleteModelResult.swift; path = Source/LanguageTranslatorV3/Models/DeleteModelResult.swift; sourceTree = "<group>"; };
 		3646CE007556A1D92D2A075B5D82CF8C /* Pods-HappyNews.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-HappyNews.modulemap"; sourceTree = "<group>"; };
-		37895047742E5A37CDC86DB4C82A143F /* CloudPakForDataAuthenticator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CloudPakForDataAuthenticator.swift; path = Sources/IBMSwiftSDKCore/Authentication/CloudPakForDataAuthenticator.swift; sourceTree = "<group>"; };
-		3E96739534145CD6E38D0955367FB292 /* IBMWatsonLanguageTranslatorV3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMWatsonLanguageTranslatorV3.debug.xcconfig; sourceTree = "<group>"; };
-		3F70D9F4CFE57725AE2231483CBDEE9A /* DeleteModelResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeleteModelResult.swift; path = Source/LanguageTranslatorV3/Models/DeleteModelResult.swift; sourceTree = "<group>"; };
-		3FAB4022BA6C45A10E5708086E1BD808 /* SegementSlideDefaultSwitcherView+ex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideDefaultSwitcherView+ex.swift"; path = "Source/Switcher/SegementSlideDefaultSwitcherView+ex.swift"; sourceTree = "<group>"; };
-		3FE8C54B4C0517F46915657E47183836 /* IBMWatsonToneAnalyzerV3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMWatsonToneAnalyzerV3.release.xcconfig; sourceTree = "<group>"; };
+		3769F2F34F69E1C9680DCAB3CBEEC7E9 /* ConfigBasedAuthenticatorFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConfigBasedAuthenticatorFactory.swift; path = Sources/IBMSwiftSDKCore/Authentication/ConfigBasedAuthenticatorFactory.swift; sourceTree = "<group>"; };
+		39159C5D73509B02585912216C9F3031 /* IdentifiedLanguages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentifiedLanguages.swift; path = Source/LanguageTranslatorV3/Models/IdentifiedLanguages.swift; sourceTree = "<group>"; };
+		3AC823427F3D9AE33BCD8A6DCC026B68 /* IBMSwiftSDKCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMSwiftSDKCore.debug.xcconfig; sourceTree = "<group>"; };
+		3B74999C3B748B19806FD171E1F21664 /* IBMWatsonToneAnalyzerV3-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMWatsonToneAnalyzerV3-umbrella.h"; sourceTree = "<group>"; };
+		3B94B6ACDFE1177A9E6FB8EC6811DA79 /* Utterance.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utterance.swift; path = Source/ToneAnalyzerV3/Models/Utterance.swift; sourceTree = "<group>"; };
+		3E08A4842597BE131702C1797FB13176 /* IBMWatsonLanguageTranslatorV3-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "IBMWatsonLanguageTranslatorV3-Info.plist"; sourceTree = "<group>"; };
+		3E54535D66E772BC4EFEB0DA624B8EE7 /* UtteranceAnalysis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UtteranceAnalysis.swift; path = Source/ToneAnalyzerV3/Models/UtteranceAnalysis.swift; sourceTree = "<group>"; };
+		4174EAFBB81AB2649D8226FE7200D8AB /* Keys.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Keys.modulemap; sourceTree = "<group>"; };
 		42680C948568347510E3E5881F7FDB51 /* SegementSlide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SegementSlide.framework; path = SegementSlide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42CF8D9035709E0D188A59194B8CB708 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
-		43E414B1B73E311CEE578E8C6155CFCA /* DocumentStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DocumentStatus.swift; path = Source/LanguageTranslatorV3/Models/DocumentStatus.swift; sourceTree = "<group>"; };
-		44A36D6E3D1C271B712F6CE4BB9CD133 /* UtteranceAnalyses.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UtteranceAnalyses.swift; path = Source/ToneAnalyzerV3/Models/UtteranceAnalyses.swift; sourceTree = "<group>"; };
-		45F36F84AF0CA78BBB958CECB6D50594 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
-		469694E9E6C25192B6DB84BD415A3177 /* ToneContent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneContent.swift; path = Source/ToneAnalyzerV3/Models/ToneContent.swift; sourceTree = "<group>"; };
-		469D10CEA774F4A62ECFCF01981E0E39 /* SegementSlide-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SegementSlide-Info.plist"; sourceTree = "<group>"; };
+		427280F18EC44EA998F34EC624510DB6 /* SegementSlide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SegementSlide.debug.xcconfig; sourceTree = "<group>"; };
+		44B0EA8D868A8588D10FA56799DD36E0 /* IBMWatsonLanguageTranslatorV3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMWatsonLanguageTranslatorV3.release.xcconfig; sourceTree = "<group>"; };
 		46ACAE2D7BB5CFD1E5306E8237994D96 /* IBMSwiftSDKCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IBMSwiftSDKCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		48348638001EE34938A8547334763C5D /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Sources/IBMSwiftSDKCore/MultipartFormData.swift; sourceTree = "<group>"; };
-		48E95D36B5F0DF509C28FAF2F8D4D942 /* TranslationModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TranslationModels.swift; path = Source/LanguageTranslatorV3/Models/TranslationModels.swift; sourceTree = "<group>"; };
-		4D2F4753D83A26AB7E975232BF4A83B5 /* ToneAnalyzer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneAnalyzer.swift; path = Source/ToneAnalyzerV3/ToneAnalyzer.swift; sourceTree = "<group>"; };
-		527B81A7E23190DC4A439746B413EAD6 /* SegementSlideViewController+setup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+setup.swift"; path = "Source/General/SegementSlideViewController+setup.swift"; sourceTree = "<group>"; };
-		5285505ED0A87F8760D8C48A1AF46860 /* SwiftyJSON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.release.xcconfig; sourceTree = "<group>"; };
-		53B5671BBFB01851B49296A450A99427 /* Languages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Languages.swift; path = Source/LanguageTranslatorV3/Models/Languages.swift; sourceTree = "<group>"; };
-		5C54DBAC91DBA994A3B0F6E1B40E61AF /* Authentication.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Authentication.swift; path = Sources/IBMSwiftSDKCore/Authentication/Authentication.swift; sourceTree = "<group>"; };
-		61421CC3F260CDD732CCCECB422C012F /* IBMWatsonToneAnalyzerV3-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "IBMWatsonToneAnalyzerV3-Info.plist"; sourceTree = "<group>"; };
-		624C2799445D33B9239053CF258CB98C /* CredentialUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CredentialUtils.swift; path = Sources/IBMSwiftSDKCore/CredentialUtils.swift; sourceTree = "<group>"; };
-		640B54120A356E7992420CF923C9537D /* IBMWatsonLanguageTranslatorV3-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "IBMWatsonLanguageTranslatorV3-Info.plist"; sourceTree = "<group>"; };
-		66186E78430D8420E290C62D7359C5B4 /* TransparentSlideViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransparentSlideViewController.swift; path = Source/General/TransparentSlideViewController.swift; sourceTree = "<group>"; };
-		69DB0EA5A58AA4CACDFE977896E8F726 /* IBMWatsonLanguageTranslatorV3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMWatsonLanguageTranslatorV3.release.xcconfig; sourceTree = "<group>"; };
-		6A66F507A426230EAFB1EF4F1E386305 /* IBMWatsonToneAnalyzerV3-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IBMWatsonToneAnalyzerV3-dummy.m"; sourceTree = "<group>"; };
-		6C33DF8889A21F83D209F0B457D0DF0C /* LanguageTranslator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LanguageTranslator.swift; path = Source/LanguageTranslatorV3/LanguageTranslator.swift; sourceTree = "<group>"; };
+		475DB7AE8AC21164DF55B4978E7334B5 /* RestResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RestResponse.swift; path = Sources/IBMSwiftSDKCore/RestResponse.swift; sourceTree = "<group>"; };
+		48F49668982F8C12C2493DA18EDE6B77 /* ToneAnalyzer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneAnalyzer.swift; path = Source/ToneAnalyzerV3/ToneAnalyzer.swift; sourceTree = "<group>"; };
+		4A950528F48BFAFEE3229DD46C47A6C6 /* TranslationModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TranslationModel.swift; path = Source/LanguageTranslatorV3/Models/TranslationModel.swift; sourceTree = "<group>"; };
+		4EC10ECE56F9B1AB2DE2934FE13015FA /* Keys.podspec.json */ = {isa = PBXFileReference; includeInIndex = 1; path = Keys.podspec.json; sourceTree = "<group>"; };
+		52CC0A840651C799A560026FF767D1F3 /* Shared.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
+		536218F3EE0BF9239309E0F8CEC330D7 /* IBMWatsonLanguageTranslatorV3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMWatsonLanguageTranslatorV3.debug.xcconfig; sourceTree = "<group>"; };
+		58D2678D30E4F3B143E2B6BEF4B687C9 /* Keys-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Keys-umbrella.h"; sourceTree = "<group>"; };
+		5A2916CDFD255E46DD265B5B34514476 /* SegementSlideDefaultSwitcherConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideDefaultSwitcherConfig.swift; path = Source/Switcher/SegementSlideDefaultSwitcherConfig.swift; sourceTree = "<group>"; };
+		5A486899CC2F2882E2C965B8C62654C2 /* String+Bounding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Bounding.swift"; path = "Source/Utility/String+Bounding.swift"; sourceTree = "<group>"; };
+		5BE1094FA3F7BE0EF386834D17F781BA /* IBMSwiftSDKCore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMSwiftSDKCore-prefix.pch"; sourceTree = "<group>"; };
+		5BE2F8A7E83C396BA0C21FB884CB0267 /* IBMWatsonToneAnalyzerV3-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "IBMWatsonToneAnalyzerV3-Info.plist"; sourceTree = "<group>"; };
+		5C58B8DE637A2C44919FA0948E599003 /* SegementSlide-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SegementSlide-Info.plist"; sourceTree = "<group>"; };
+		60DB7DE590247E4B8F4D386AF6BDC3A7 /* SegementSlideViewController+scroll.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+scroll.swift"; path = "Source/General/SegementSlideViewController+scroll.swift"; sourceTree = "<group>"; };
+		61437F89DB2DD4152221E19CCD707376 /* SwiftyJSON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.debug.xcconfig; sourceTree = "<group>"; };
+		64AC904533126A478F0FDA829FD9B6F5 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Sources/IBMSwiftSDKCore/MultipartFormData.swift; sourceTree = "<group>"; };
+		69EC164CD62F236F01DD3EEBBC5B655B /* SegementSlideDefaultSwitcherView+ex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideDefaultSwitcherView+ex.swift"; path = "Source/Switcher/SegementSlideDefaultSwitcherView+ex.swift"; sourceTree = "<group>"; };
 		6C713D4358322B47E99DDBAA2179F4B9 /* Pods-HappyNews-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HappyNews-frameworks.sh"; sourceTree = "<group>"; };
-		7147B08D4E64903993C21A382D8E59D6 /* UIView+Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+Constraint.swift"; path = "Source/Utility/UIView+Constraint.swift"; sourceTree = "<group>"; };
-		7233982616F7B210ACAD95F629AD8B4C /* SegementSlideSwitcherDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideSwitcherDelegate.swift; path = Source/Switcher/SegementSlideSwitcherDelegate.swift; sourceTree = "<group>"; };
-		72C4CF05D158672E89E595D9FD2186B3 /* IBMSwiftSDKCore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMSwiftSDKCore-umbrella.h"; sourceTree = "<group>"; };
-		74A28C90E7DD288D5579131BC6A3F3FC /* SegementSlide-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SegementSlide-prefix.pch"; sourceTree = "<group>"; };
-		7535026C5A45C05D71FDF15438390C37 /* RestRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RestRequest.swift; path = Sources/IBMSwiftSDKCore/RestRequest.swift; sourceTree = "<group>"; };
+		6E764095AF4095EC6B4F568152D54076 /* Keys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Keys.debug.xcconfig; sourceTree = "<group>"; };
+		6E8518A4EDB1BC292A4CD8960077EFDE /* Language.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Language.swift; path = Source/LanguageTranslatorV3/Models/Language.swift; sourceTree = "<group>"; };
+		6FF3FAFCC20C5186812E9FE6A288F274 /* Keys-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Keys-Info.plist"; sourceTree = "<group>"; };
+		70A6791F40C45359E2E1D9590CF84FDF /* ToneInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneInput.swift; path = Source/ToneAnalyzerV3/Models/ToneInput.swift; sourceTree = "<group>"; };
+		71D2B3DC738297210DF86032A3653D30 /* SwiftyJSON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.release.xcconfig; sourceTree = "<group>"; };
+		72700C833329F8F21A53E3A9B911D959 /* IBMSwiftSDKCore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMSwiftSDKCore-umbrella.h"; sourceTree = "<group>"; };
+		735D249576BE92E9B1F4DE465A179540 /* ToneChatScore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneChatScore.swift; path = Source/ToneAnalyzerV3/Models/ToneChatScore.swift; sourceTree = "<group>"; };
 		75C90B08D07A49D28393C23DFC2A9370 /* Pods-HappyNews-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HappyNews-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7AAB7808AA937CCD814B018B2EA46358 /* SegementSlideViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideViewController.swift; path = Source/General/SegementSlideViewController.swift; sourceTree = "<group>"; };
+		787D9B3F1AB25027D38E8923AC653BBC /* Languages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Languages.swift; path = Source/LanguageTranslatorV3/Models/Languages.swift; sourceTree = "<group>"; };
+		7C38765B97C0F6161869BCA9330D8858 /* Keys-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Keys-prefix.pch"; sourceTree = "<group>"; };
 		806EF617EF02E7D4FBCE3B2B0C559E59 /* ToneAnalyzer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ToneAnalyzer.framework; path = IBMWatsonToneAnalyzerV3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		81B78295716E7D229A6F6DE9D404B191 /* IBMWatsonToneAnalyzerV3-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMWatsonToneAnalyzerV3-umbrella.h"; sourceTree = "<group>"; };
+		806F894DE8B4B23A06531EB54B0CD61B /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
+		8193ABD1AFCE8DE5C386405F8974CC69 /* ToneContent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneContent.swift; path = Source/ToneAnalyzerV3/Models/ToneContent.swift; sourceTree = "<group>"; };
 		82BCE053B6DC05DD3B8B0C36B433DF49 /* Pods_HappyNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HappyNews.framework; path = "Pods-HappyNews.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		84393641E6C9A12ED78C46F7006615FC /* ToneChatInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneChatInput.swift; path = Source/ToneAnalyzerV3/Models/ToneChatInput.swift; sourceTree = "<group>"; };
-		8C0C7EBEEFCCB6A5F6FB4CDF645FCDC2 /* String+Bounding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Bounding.swift"; path = "Source/Utility/String+Bounding.swift"; sourceTree = "<group>"; };
-		8E8FA3E08E03E34C97B5F244071CAC4B /* SegementSlide-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SegementSlide-dummy.m"; sourceTree = "<group>"; };
-		8F3ACA57D18B10168E118BE36EA74CFC /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON/SwiftyJSON.swift; sourceTree = "<group>"; };
-		8FE36CFD7F1BDF377D4A7BF9CF79E718 /* SegementSlide.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SegementSlide.modulemap; sourceTree = "<group>"; };
-		91285C8F1D52920A0429F4F8B7CE4F33 /* TranslationModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TranslationModel.swift; path = Source/LanguageTranslatorV3/Models/TranslationModel.swift; sourceTree = "<group>"; };
-		94C9EB262A29C841D6228423AEDE00D2 /* SwiftyJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyJSON-Info.plist"; sourceTree = "<group>"; };
-		9B3A651737C54CCABAAD47BF7A6B4E35 /* SegementSlideViewController+ex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+ex.swift"; path = "Source/General/SegementSlideViewController+ex.swift"; sourceTree = "<group>"; };
-		9C8A2AD920C5C107110163D5CB5B8A86 /* IBMSwiftSDKCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMSwiftSDKCore.debug.xcconfig; sourceTree = "<group>"; };
+		82D52DAFC139F39686B828DD242B3663 /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentifiedLanguage.swift; path = Source/LanguageTranslatorV3/Models/IdentifiedLanguage.swift; sourceTree = "<group>"; };
+		837DE5B849056C5AA6B4B53172C03701 /* TransparentSlideDefaultViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransparentSlideDefaultViewController.swift; path = Source/General/TransparentSlideDefaultViewController.swift; sourceTree = "<group>"; };
+		84781FAC41D154975AAB7E439BDA5924 /* BadgeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BadgeView.swift; path = Source/Switcher/BadgeView.swift; sourceTree = "<group>"; };
+		858D660E9478CF344ECCF6171005662E /* JSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = Sources/IBMSwiftSDKCore/JSON.swift; sourceTree = "<group>"; };
+		88E8CB1AE01136412A01E94E5474F87C /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		8AAA99C6DAE2630ECDC7487366E37362 /* IBMSwiftSDKCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMSwiftSDKCore.release.xcconfig; sourceTree = "<group>"; };
+		8D43757BF572635C705C0A0FE665883B /* SegementSlideScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideScrollView.swift; path = Source/General/SegementSlideScrollView.swift; sourceTree = "<group>"; };
+		8F09C2EE1DB3B51E52594A88F9E63C7E /* SegementSlide.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SegementSlide.modulemap; sourceTree = "<group>"; };
+		916D681257610013CBCA1DD07FFC372D /* IBMWatsonToneAnalyzerV3-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IBMWatsonToneAnalyzerV3-dummy.m"; sourceTree = "<group>"; };
+		9399D593FC094CA0C5445AAF2B630D8A /* TranslationResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TranslationResult.swift; path = Source/LanguageTranslatorV3/Models/TranslationResult.swift; sourceTree = "<group>"; };
+		9554CA9DF9BE040414DDF069E3B59D4C /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentifiableLanguage.swift; path = Source/LanguageTranslatorV3/Models/IdentifiableLanguage.swift; sourceTree = "<group>"; };
+		99CE3E2BBF79B39F30838ED19E9EE4A7 /* InsecureConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InsecureConnection.swift; path = Sources/IBMSwiftSDKCore/Authentication/InsecureConnection.swift; sourceTree = "<group>"; };
+		9B025B2A64D695A3878A441BF8C72F4B /* ToneChatInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneChatInput.swift; path = Source/ToneAnalyzerV3/Models/ToneChatInput.swift; sourceTree = "<group>"; };
+		9D0A4E55B9D1DBF9500D0799B6E5FAF3 /* ToneCategory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneCategory.swift; path = Source/ToneAnalyzerV3/Models/ToneCategory.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9F70E8CABA6812A6DEC044CD715814AE /* SegementSlideViewController+scroll.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+scroll.swift"; path = "Source/General/SegementSlideViewController+scroll.swift"; sourceTree = "<group>"; };
-		A3143F59CC3732174DEC3EFC3382DDED /* RestResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RestResponse.swift; path = Sources/IBMSwiftSDKCore/RestResponse.swift; sourceTree = "<group>"; };
-		A54AE880A03726934676D5782213B0A0 /* BadgeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BadgeView.swift; path = Source/Switcher/BadgeView.swift; sourceTree = "<group>"; };
-		A64DAA3530AB6F63C7D90149A7714EF4 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SentenceAnalysis.swift; path = Source/ToneAnalyzerV3/Models/SentenceAnalysis.swift; sourceTree = "<group>"; };
-		A6F3AB10AB3803D86075E5F612585A20 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
-		A8D994B3A4577CB56842BA3F54DBF6DA /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
-		AB03D6BF71EB832F7474936B096B0BBF /* IBMWatsonToneAnalyzerV3.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = IBMWatsonToneAnalyzerV3.modulemap; sourceTree = "<group>"; };
-		AB57BFE6EFB78428D35A072918676D95 /* UtteranceAnalysis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UtteranceAnalysis.swift; path = Source/ToneAnalyzerV3/Models/UtteranceAnalysis.swift; sourceTree = "<group>"; };
+		A5764B5BDECB761351032D77BACD65A3 /* SegementSlideViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideViewController.swift; path = Source/General/SegementSlideViewController.swift; sourceTree = "<group>"; };
+		A577F804E6DE32FCFE4817224AE6D558 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
+		AC04741E5D15C67895B640E764EED8BF /* SentenceAnalysis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SentenceAnalysis.swift; path = Source/ToneAnalyzerV3/Models/SentenceAnalysis.swift; sourceTree = "<group>"; };
 		AD65897A82DC5E8562C08B168A315643 /* Pods-HappyNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HappyNews.debug.xcconfig"; sourceTree = "<group>"; };
+		ADE7C822B0763F201D9C6996FFCAF852 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
 		B06AF2F48C426BDBBEFDE8E6BF9848B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		B08AE7B372910360880CB66A69A82C55 /* SegementSlideViewController+delegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+delegate.swift"; path = "Source/General/SegementSlideViewController+delegate.swift"; sourceTree = "<group>"; };
-		B238DC0DFC7193AE8A9AE8F358DE68B6 /* CodableExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CodableExtensions.swift; path = Sources/IBMSwiftSDKCore/CodableExtensions.swift; sourceTree = "<group>"; };
-		B274DE4000B79C03DA192DCDFC235A0A /* IBMWatsonLanguageTranslatorV3-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IBMWatsonLanguageTranslatorV3-dummy.m"; sourceTree = "<group>"; };
-		B307A541F62CFC921F67257CC6DC38F5 /* DocumentAnalysis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DocumentAnalysis.swift; path = Source/ToneAnalyzerV3/Models/DocumentAnalysis.swift; sourceTree = "<group>"; };
-		B313AF6C2D20E899B1EE96CA13A4FFA5 /* DocumentList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DocumentList.swift; path = Source/LanguageTranslatorV3/Models/DocumentList.swift; sourceTree = "<group>"; };
-		B3C12EAB8D6F13FA7466326F4C969E84 /* JSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = Sources/IBMSwiftSDKCore/JSON.swift; sourceTree = "<group>"; };
-		B4F8DD08EA61C5B14B0F8A2950E0785E /* SegementSlideDefaultSwitcherConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideDefaultSwitcherConfig.swift; path = Source/Switcher/SegementSlideDefaultSwitcherConfig.swift; sourceTree = "<group>"; };
-		B6A0EEE1B212060E5342C316ECD7869F /* TranslationResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TranslationResult.swift; path = Source/LanguageTranslatorV3/Models/TranslationResult.swift; sourceTree = "<group>"; };
-		B88858A5F627549FF31BB33F260DA22B /* ToneChatScore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneChatScore.swift; path = Source/ToneAnalyzerV3/Models/ToneChatScore.swift; sourceTree = "<group>"; };
-		B9D18DB6AD7E357866AE05A7BC1F012B /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentifiableLanguage.swift; path = Source/LanguageTranslatorV3/Models/IdentifiableLanguage.swift; sourceTree = "<group>"; };
-		BAB97EE57AE06CE0FC34C643DC2D0290 /* InsecureConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InsecureConnection.swift; path = Sources/IBMSwiftSDKCore/Authentication/InsecureConnection.swift; sourceTree = "<group>"; };
+		B36468B6170A2B7A5FC844172623C8E2 /* HappyNewsKeys.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HappyNewsKeys.h; sourceTree = "<group>"; };
+		B45DA29E042CBB86280C8EA85D1AD4A1 /* DocumentAnalysis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DocumentAnalysis.swift; path = Source/ToneAnalyzerV3/Models/DocumentAnalysis.swift; sourceTree = "<group>"; };
+		B5C3F6FF7F344D9367CB34C4460565B8 /* SegementSlideSwitcherDataSourceWeakBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideSwitcherDataSourceWeakBox.swift; path = Source/Switcher/SegementSlideSwitcherDataSourceWeakBox.swift; sourceTree = "<group>"; };
+		BADAA6F6BF1039A1A7A33D07C7283E1F /* ToneScore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneScore.swift; path = Source/ToneAnalyzerV3/Models/ToneScore.swift; sourceTree = "<group>"; };
 		BCF75FD2A04FC9E854D9B1B47937EF00 /* Pods-HappyNews-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HappyNews-Info.plist"; sourceTree = "<group>"; };
-		BEE20B386DEAA047567FD480B214E5CE /* SegementSlideSwitcherDataSourceWeakBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideSwitcherDataSourceWeakBox.swift; path = Source/Switcher/SegementSlideSwitcherDataSourceWeakBox.swift; sourceTree = "<group>"; };
-		C13D64D81E21A0FD637D0B533D900B23 /* Utterance.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utterance.swift; path = Source/ToneAnalyzerV3/Models/Utterance.swift; sourceTree = "<group>"; };
-		C2E7EA069552A1FA60A582D4A628A1E5 /* IBMWatsonToneAnalyzerV3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMWatsonToneAnalyzerV3.debug.xcconfig; sourceTree = "<group>"; };
-		C6804DDCE22D8FE18EBFF622C86CBA64 /* ToneInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneInput.swift; path = Source/ToneAnalyzerV3/Models/ToneInput.swift; sourceTree = "<group>"; };
-		CDE0AD097ABC6DBE5DC0CB25C852D674 /* Shared.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
-		D15A10909555C8A14C1D214698BA9DF1 /* IBMWatsonToneAnalyzerV3-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMWatsonToneAnalyzerV3-prefix.pch"; sourceTree = "<group>"; };
-		D29F8364CEBD22B076B0B5248915AC96 /* SegementSlideScrollView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideScrollView.swift; path = Source/General/SegementSlideScrollView.swift; sourceTree = "<group>"; };
-		D60A2123F3D5D24A6FD6AC7660B70FC3 /* ToneAnalysis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToneAnalysis.swift; path = Source/ToneAnalyzerV3/Models/ToneAnalysis.swift; sourceTree = "<group>"; };
-		D6E22121AF9EFF656F630919A58B0DA1 /* IBMSwiftSDKCore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = IBMSwiftSDKCore.modulemap; sourceTree = "<group>"; };
+		BD34BA5C29E6FF042E871B83FD7427CF /* SegementSlideContentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideContentView.swift; path = Source/Content/SegementSlideContentView.swift; sourceTree = "<group>"; };
+		C18811441FAF67E28C1414E932F6AFAF /* RestRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RestRequest.swift; path = Sources/IBMSwiftSDKCore/RestRequest.swift; sourceTree = "<group>"; };
+		C1925B078FCAA988A2EE738E65B6C75F /* SegementSlide-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SegementSlide-umbrella.h"; sourceTree = "<group>"; };
+		C1DC16BBCBF5AF46879BC599500B9C22 /* IBMWatsonLanguageTranslatorV3-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMWatsonLanguageTranslatorV3-prefix.pch"; sourceTree = "<group>"; };
+		C31235A792A86CC523EF3877B79ABD75 /* SwiftyJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyJSON-Info.plist"; sourceTree = "<group>"; };
+		C86C441EB0DE53DF6B2B35129DFB3C8D /* SegementSlideDefaultViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideDefaultViewController.swift; path = Source/General/SegementSlideDefaultViewController.swift; sourceTree = "<group>"; };
+		C8A4B7F6C8C12E989B56C7A4F82B9CEC /* IBMWatsonLanguageTranslatorV3-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMWatsonLanguageTranslatorV3-umbrella.h"; sourceTree = "<group>"; };
+		C9647779A498E1AC9F76360CBFDEBD1E /* IBMSwiftSDKCore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = IBMSwiftSDKCore.modulemap; sourceTree = "<group>"; };
+		D2380AC5BDFCA0429907D820614717CE /* Keys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Keys.release.xcconfig; sourceTree = "<group>"; };
+		D3409E789CB10866020BAE0B94216208 /* IBMWatsonToneAnalyzerV3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMWatsonToneAnalyzerV3.debug.xcconfig; sourceTree = "<group>"; };
+		D79B795EB47DE4AD2A31B9A318DCAC6C /* HappyNewsKeys.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HappyNewsKeys.m; sourceTree = "<group>"; };
 		D7BC3B6AB1E4137B03F61EEDDCE61162 /* IBMSwiftSDKCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = IBMSwiftSDKCore.framework; path = IBMSwiftSDKCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8840AE5323DF88A2DA9BD5F23503B23 /* IdentifiedLanguages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentifiedLanguages.swift; path = Source/LanguageTranslatorV3/Models/IdentifiedLanguages.swift; sourceTree = "<group>"; };
-		D9DA42273C8030F8056C10A86FE81961 /* SegementSlide-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SegementSlide-umbrella.h"; sourceTree = "<group>"; };
-		DB3CECEBB963D3A905A44EEBCD9662FF /* IdentifiedLanguage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentifiedLanguage.swift; path = Source/LanguageTranslatorV3/Models/IdentifiedLanguage.swift; sourceTree = "<group>"; };
-		DD8594A3C46B3FEFE29CF796B81953E1 /* IBMWatsonLanguageTranslatorV3-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMWatsonLanguageTranslatorV3-umbrella.h"; sourceTree = "<group>"; };
+		DC9F9E6D9B4E0B6BED7FF1102BF2B380 /* SegementSlide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SegementSlide.release.xcconfig; sourceTree = "<group>"; };
+		DE7ED82DCC9786D878970360F2E202CF /* UtteranceAnalyses.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UtteranceAnalyses.swift; path = Source/ToneAnalyzerV3/Models/UtteranceAnalyses.swift; sourceTree = "<group>"; };
+		DED92A8007C33D58B39642E1FFB2E30E /* InsecureConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InsecureConnection.swift; path = Source/SupportingFiles/InsecureConnection.swift; sourceTree = "<group>"; };
+		E17C1F0B6D844B4B11F293E97B8A2EDD /* CodableExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CodableExtensions.swift; path = Sources/IBMSwiftSDKCore/CodableExtensions.swift; sourceTree = "<group>"; };
+		E1D25A630C415A79B69FF21AB7FD53A1 /* SegementSlideHeaderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideHeaderView.swift; path = Source/Header/SegementSlideHeaderView.swift; sourceTree = "<group>"; };
 		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E3ACE63D61D825EAFFF67B6CC99D7500 /* IBMWatsonLanguageTranslatorV3-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IBMWatsonLanguageTranslatorV3-prefix.pch"; sourceTree = "<group>"; };
-		E60AC55494EAD1C0457A42DB01B12EB7 /* SegementSlideContentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideContentView.swift; path = Source/Content/SegementSlideContentView.swift; sourceTree = "<group>"; };
-		E88EC443B95FDD8F5DFE27B337E65AC1 /* JWT.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JWT.swift; path = Sources/IBMSwiftSDKCore/Authentication/JWT.swift; sourceTree = "<group>"; };
+		E6B0150B7844CF550FF60405C164634A /* Authentication.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Authentication.swift; path = Sources/IBMSwiftSDKCore/Authentication/Authentication.swift; sourceTree = "<group>"; };
+		E8CACB8744373C1818777FFB8F84C67E /* Keys.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Keys.framework; path = Keys.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDE2C814BF69338F6D91B93214AFB0F /* Pods-HappyNews-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HappyNews-acknowledgements.plist"; sourceTree = "<group>"; };
-		EDB5E1B909BCDB369BF266AB97B285BF /* SegementSlideDefaultViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideDefaultViewController.swift; path = Source/General/SegementSlideDefaultViewController.swift; sourceTree = "<group>"; };
-		F04383D25C702D6A0AA678291F8B43E8 /* SwiftyJSON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.debug.xcconfig; sourceTree = "<group>"; };
-		F086C550ED592C3ED6F550C820E4AE29 /* SegementSlideDefaultSwitcherView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideDefaultSwitcherView.swift; path = Source/Switcher/SegementSlideDefaultSwitcherView.swift; sourceTree = "<group>"; };
-		F0A0D7B64AA2C1652D7DEB37D1F1F874 /* TransparentSlideDefaultViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransparentSlideDefaultViewController.swift; path = Source/General/TransparentSlideDefaultViewController.swift; sourceTree = "<group>"; };
+		ECF1EBD59F8D3CBA993B5ED8CB410448 /* TranslationModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TranslationModels.swift; path = Source/LanguageTranslatorV3/Models/TranslationModels.swift; sourceTree = "<group>"; };
+		EDDA2BDC0E6E3135A92E85D77CD8A4C3 /* JWT.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JWT.swift; path = Sources/IBMSwiftSDKCore/Authentication/JWT.swift; sourceTree = "<group>"; };
+		EE5B37EE667D852093C5480B8193CAC8 /* TranslateRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TranslateRequest.swift; path = Source/LanguageTranslatorV3/Models/TranslateRequest.swift; sourceTree = "<group>"; };
+		EF4FF1F42E9AD8328C8EF2C09D3DD8A2 /* IAMAuthenticator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IAMAuthenticator.swift; path = Sources/IBMSwiftSDKCore/Authentication/IAMAuthenticator.swift; sourceTree = "<group>"; };
+		F53369EE58BC238933DF6F67AA70029D /* Keys-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Keys-dummy.m"; sourceTree = "<group>"; };
+		F752E263FB56A62F726FBB9C1870F105 /* SegementSlideDefaultSwitcherView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SegementSlideDefaultSwitcherView.swift; path = Source/Switcher/SegementSlideDefaultSwitcherView.swift; sourceTree = "<group>"; };
 		F771DE5D26B911ACCCCBC22B0A0C4136 /* Pods-HappyNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HappyNews.release.xcconfig"; sourceTree = "<group>"; };
+		F964984A8AE2FE66C8D200665E493CD1 /* SegementSlideViewController+ex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SegementSlideViewController+ex.swift"; path = "Source/General/SegementSlideViewController+ex.swift"; sourceTree = "<group>"; };
 		FA4CD253F8AFFDA1AECB557B3A947BF0 /* LanguageTranslator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LanguageTranslator.framework; path = IBMWatsonLanguageTranslatorV3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB61C55FA1FCDCA40502BB35EE51BAB2 /* InsecureConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InsecureConnection.swift; path = Source/SupportingFiles/InsecureConnection.swift; sourceTree = "<group>"; };
-		FD9EF662A229319AD5BC34C98B697484 /* IBMSwiftSDKCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IBMSwiftSDKCore.release.xcconfig; sourceTree = "<group>"; };
+		FAAB3EEA84012B9E9FA88D2AA264ECB3 /* IBMSwiftSDKCore-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "IBMSwiftSDKCore-Info.plist"; sourceTree = "<group>"; };
+		FACB4828A3F9BD54A6D724DA7904682E /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON/SwiftyJSON.swift; sourceTree = "<group>"; };
+		FC8D23868718B63267CBC50EE0A83F61 /* CloudPakForDataAuthenticator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CloudPakForDataAuthenticator.swift; path = Sources/IBMSwiftSDKCore/Authentication/CloudPakForDataAuthenticator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		42728D3C18DF0AAC0444AD04CB21FFC1 /* Frameworks */ = {
+		17268C0CCA8EB013E01EE855DD23B660 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85290E4FF3E7B21D0CBD0A2CFB61E4A0 /* Foundation.framework in Frameworks */,
+				65EFC33546DCCB8EC20996C4134C681E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +319,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		922F925E12B3BC3FA3849031926595A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1699A2FEA177B8F64D038C9882878003 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AD9C5A8DAF4334B670E91B2EC08DBE2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -310,47 +343,59 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B5626343553AB03C7DFDA414A084B71E /* Frameworks */ = {
+		F4DAA629C2F72C3CB102CACC20DF7B3C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA0AE5A92C5C9ABEE235B96227A94D6F /* Foundation.framework in Frameworks */,
+				C50F9068AE67E07345D17ED1EE78A3D3 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		063C9237A0A699AD89B2B1CC787BD837 /* SwiftyJSON */ = {
+		15403F9267A5C7AF3D168FCBCB04E008 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				8F3ACA57D18B10168E118BE36EA74CFC /* SwiftyJSON.swift */,
-				3A87FA81FFBD4DB1A7B6A5528EE4224D /* Support Files */,
+				8F09C2EE1DB3B51E52594A88F9E63C7E /* SegementSlide.modulemap */,
+				0868E4249840B3214AA99F4B6B3576D2 /* SegementSlide-dummy.m */,
+				5C58B8DE637A2C44919FA0948E599003 /* SegementSlide-Info.plist */,
+				18DC5F70B715F242417641C3510C599A /* SegementSlide-prefix.pch */,
+				C1925B078FCAA988A2EE738E65B6C75F /* SegementSlide-umbrella.h */,
+				427280F18EC44EA998F34EC624510DB6 /* SegementSlide.debug.xcconfig */,
+				DC9F9E6D9B4E0B6BED7FF1102BF2B380 /* SegementSlide.release.xcconfig */,
 			);
-			name = SwiftyJSON;
-			path = SwiftyJSON;
+			name = "Support Files";
+			path = "../Target Support Files/SegementSlide";
 			sourceTree = "<group>";
 		};
-		0C9D833395FF4429AA05F82801098264 /* IBMSwiftSDKCore */ = {
+		162F3804E9E972651DF8AB11BF49A6C6 /* SegementSlide */ = {
 			isa = PBXGroup;
 			children = (
-				5C54DBAC91DBA994A3B0F6E1B40E61AF /* Authentication.swift */,
-				37895047742E5A37CDC86DB4C82A143F /* CloudPakForDataAuthenticator.swift */,
-				B238DC0DFC7193AE8A9AE8F358DE68B6 /* CodableExtensions.swift */,
-				2E8E9F094F44139F8779ECBA2ACEFBC2 /* ConfigBasedAuthenticatorFactory.swift */,
-				624C2799445D33B9239053CF258CB98C /* CredentialUtils.swift */,
-				0A36D33D1BDB611309B1CF3E6B7C37B8 /* IAMAuthenticator.swift */,
-				BAB97EE57AE06CE0FC34C643DC2D0290 /* InsecureConnection.swift */,
-				B3C12EAB8D6F13FA7466326F4C969E84 /* JSON.swift */,
-				E88EC443B95FDD8F5DFE27B337E65AC1 /* JWT.swift */,
-				48348638001EE34938A8547334763C5D /* MultipartFormData.swift */,
-				1C9E3703445CF18AC7B61D753A837C09 /* RestError.swift */,
-				7535026C5A45C05D71FDF15438390C37 /* RestRequest.swift */,
-				A3143F59CC3732174DEC3EFC3382DDED /* RestResponse.swift */,
-				E215444B74357B36F58CE78BF1B7E8A3 /* Support Files */,
+				84781FAC41D154975AAB7E439BDA5924 /* BadgeView.swift */,
+				BD34BA5C29E6FF042E871B83FD7427CF /* SegementSlideContentView.swift */,
+				5A2916CDFD255E46DD265B5B34514476 /* SegementSlideDefaultSwitcherConfig.swift */,
+				F752E263FB56A62F726FBB9C1870F105 /* SegementSlideDefaultSwitcherView.swift */,
+				69EC164CD62F236F01DD3EEBBC5B655B /* SegementSlideDefaultSwitcherView+ex.swift */,
+				C86C441EB0DE53DF6B2B35129DFB3C8D /* SegementSlideDefaultViewController.swift */,
+				E1D25A630C415A79B69FF21AB7FD53A1 /* SegementSlideHeaderView.swift */,
+				8D43757BF572635C705C0A0FE665883B /* SegementSlideScrollView.swift */,
+				B5C3F6FF7F344D9367CB34C4460565B8 /* SegementSlideSwitcherDataSourceWeakBox.swift */,
+				1F1E27273270CA9B6ACA6DDF5277D9FF /* SegementSlideSwitcherDelegate.swift */,
+				A5764B5BDECB761351032D77BACD65A3 /* SegementSlideViewController.swift */,
+				191BA6EE9F51C156AB649E54BD15B9CC /* SegementSlideViewController+delegate.swift */,
+				F964984A8AE2FE66C8D200665E493CD1 /* SegementSlideViewController+ex.swift */,
+				60DB7DE590247E4B8F4D386AF6BDC3A7 /* SegementSlideViewController+scroll.swift */,
+				29BB795237BF127A0A1721E7FDFD0D7A /* SegementSlideViewController+setup.swift */,
+				5A486899CC2F2882E2C965B8C62654C2 /* String+Bounding.swift */,
+				837DE5B849056C5AA6B4B53172C03701 /* TransparentSlideDefaultViewController.swift */,
+				26B634F85BBC39AD0474A006CA034A2F /* TransparentSlideViewController.swift */,
+				2370C3FC6E9FD5ADC5CE02B6C1917A75 /* UIScrollView+Scroll.swift */,
+				1A5385BA10F227359686A570AEEBEA34 /* UIView+Constraint.swift */,
+				15403F9267A5C7AF3D168FCBCB04E008 /* Support Files */,
 			);
-			name = IBMSwiftSDKCore;
-			path = IBMSwiftSDKCore;
+			name = SegementSlide;
+			path = SegementSlide;
 			sourceTree = "<group>";
 		};
 		192B532BB14DA21923D5B849993C7986 /* iOS */ = {
@@ -378,43 +423,38 @@
 			path = "Target Support Files/Pods-HappyNews";
 			sourceTree = "<group>";
 		};
-		3A87FA81FFBD4DB1A7B6A5528EE4224D /* Support Files */ = {
+		36E2B4A683A27F20A428D1CA65BF3A62 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				42CF8D9035709E0D188A59194B8CB708 /* SwiftyJSON.modulemap */,
-				A8D994B3A4577CB56842BA3F54DBF6DA /* SwiftyJSON-dummy.m */,
-				94C9EB262A29C841D6228423AEDE00D2 /* SwiftyJSON-Info.plist */,
-				A6F3AB10AB3803D86075E5F612585A20 /* SwiftyJSON-prefix.pch */,
-				45F36F84AF0CA78BBB958CECB6D50594 /* SwiftyJSON-umbrella.h */,
-				F04383D25C702D6A0AA678291F8B43E8 /* SwiftyJSON.debug.xcconfig */,
-				5285505ED0A87F8760D8C48A1AF46860 /* SwiftyJSON.release.xcconfig */,
+				FCD25B3053BD604141D6F74F251565E3 /* IBMSwiftSDKCore */,
+				7E1EFE234345F673A413161B1954642A /* IBMWatsonLanguageTranslatorV3 */,
+				FD35A947F4EB77A3190963B7DA7C3DAD /* IBMWatsonToneAnalyzerV3 */,
+				162F3804E9E972651DF8AB11BF49A6C6 /* SegementSlide */,
+				41FD6B6E060963C124D8C0140749FAA5 /* SwiftyJSON */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftyJSON";
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		3E282FD5DFAF8C5AAE7ABE6963AE5190 /* IBMWatsonToneAnalyzerV3 */ = {
+		3CE2532AB88F72694AE0D655804E3DF7 /* Keys */ = {
 			isa = PBXGroup;
 			children = (
-				B307A541F62CFC921F67257CC6DC38F5 /* DocumentAnalysis.swift */,
-				FB61C55FA1FCDCA40502BB35EE51BAB2 /* InsecureConnection.swift */,
-				A64DAA3530AB6F63C7D90149A7714EF4 /* SentenceAnalysis.swift */,
-				CDE0AD097ABC6DBE5DC0CB25C852D674 /* Shared.swift */,
-				D60A2123F3D5D24A6FD6AC7660B70FC3 /* ToneAnalysis.swift */,
-				4D2F4753D83A26AB7E975232BF4A83B5 /* ToneAnalyzer.swift */,
-				2FE462A8A5D729FAD2F36CEA3F4DBD95 /* ToneCategory.swift */,
-				84393641E6C9A12ED78C46F7006615FC /* ToneChatInput.swift */,
-				B88858A5F627549FF31BB33F260DA22B /* ToneChatScore.swift */,
-				469694E9E6C25192B6DB84BD415A3177 /* ToneContent.swift */,
-				C6804DDCE22D8FE18EBFF622C86CBA64 /* ToneInput.swift */,
-				2B6634DE710C90DABE6DADB0C5FFF3BC /* ToneScore.swift */,
-				C13D64D81E21A0FD637D0B533D900B23 /* Utterance.swift */,
-				44A36D6E3D1C271B712F6CE4BB9CD133 /* UtteranceAnalyses.swift */,
-				AB57BFE6EFB78428D35A072918676D95 /* UtteranceAnalysis.swift */,
-				F7DF5B6DA49BB1CB2E267F1EB4F4669F /* Support Files */,
+				B36468B6170A2B7A5FC844172623C8E2 /* HappyNewsKeys.h */,
+				D79B795EB47DE4AD2A31B9A318DCAC6C /* HappyNewsKeys.m */,
+				4FEB64C46601ADF02171E44BA1371782 /* Pod */,
+				FFB8FDA3DC721DC67124E8388FFDD746 /* Support Files */,
 			);
-			name = IBMWatsonToneAnalyzerV3;
-			path = IBMWatsonToneAnalyzerV3;
+			name = Keys;
+			path = CocoaPodsKeys;
+			sourceTree = "<group>";
+		};
+		41FD6B6E060963C124D8C0140749FAA5 /* SwiftyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				FACB4828A3F9BD54A6D724DA7904682E /* SwiftyJSON.swift */,
+				74DFB1BF42BCC05EEE8386F8DE2B9363 /* Support Files */,
+			);
+			name = SwiftyJSON;
+			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
 		4BDE46936B8ED7AF09FF89CBB7EF2E0A /* Frameworks */ = {
@@ -426,100 +466,105 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		614878307C22B67231078F02D00ABC22 /* IBMWatsonLanguageTranslatorV3 */ = {
+		4FEB64C46601ADF02171E44BA1371782 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				3F70D9F4CFE57725AE2231483CBDEE9A /* DeleteModelResult.swift */,
-				B313AF6C2D20E899B1EE96CA13A4FFA5 /* DocumentList.swift */,
-				43E414B1B73E311CEE578E8C6155CFCA /* DocumentStatus.swift */,
-				B9D18DB6AD7E357866AE05A7BC1F012B /* IdentifiableLanguage.swift */,
-				0A3AA3C51D8A0FE615600BFE3D055370 /* IdentifiableLanguages.swift */,
-				DB3CECEBB963D3A905A44EEBCD9662FF /* IdentifiedLanguage.swift */,
-				D8840AE5323DF88A2DA9BD5F23503B23 /* IdentifiedLanguages.swift */,
-				10C4613FD6B33A2284D6882BB0267E3B /* InsecureConnection.swift */,
-				00B1E6333A1AD4CE34C5B4FE2ABD3F32 /* Language.swift */,
-				53B5671BBFB01851B49296A450A99427 /* Languages.swift */,
-				6C33DF8889A21F83D209F0B457D0DF0C /* LanguageTranslator.swift */,
-				0B5D78AB8FAA5BE769C4F7DF042A93A4 /* Shared.swift */,
-				1786EEADC8CF83B9EA4EE9CC6908C3B8 /* TranslateRequest.swift */,
-				044B4E1F435D10E44D1CB6FC4B0B8438 /* Translation.swift */,
-				91285C8F1D52920A0429F4F8B7CE4F33 /* TranslationModel.swift */,
-				48E95D36B5F0DF509C28FAF2F8D4D942 /* TranslationModels.swift */,
-				B6A0EEE1B212060E5342C316ECD7869F /* TranslationResult.swift */,
-				A1BAA31E68BCDC253C155A6DD569FDE7 /* Support Files */,
+				4EC10ECE56F9B1AB2DE2934FE13015FA /* Keys.podspec.json */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		540DFDB0E31C494F9A1250AEB287F047 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D7BC3B6AB1E4137B03F61EEDDCE61162 /* IBMSwiftSDKCore.framework */,
+				E8CACB8744373C1818777FFB8F84C67E /* Keys.framework */,
+				FA4CD253F8AFFDA1AECB557B3A947BF0 /* LanguageTranslator.framework */,
+				82BCE053B6DC05DD3B8B0C36B433DF49 /* Pods_HappyNews.framework */,
+				42680C948568347510E3E5881F7FDB51 /* SegementSlide.framework */,
+				E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */,
+				806EF617EF02E7D4FBCE3B2B0C559E59 /* ToneAnalyzer.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		74DFB1BF42BCC05EEE8386F8DE2B9363 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				ADE7C822B0763F201D9C6996FFCAF852 /* SwiftyJSON.modulemap */,
+				A577F804E6DE32FCFE4817224AE6D558 /* SwiftyJSON-dummy.m */,
+				C31235A792A86CC523EF3877B79ABD75 /* SwiftyJSON-Info.plist */,
+				806F894DE8B4B23A06531EB54B0CD61B /* SwiftyJSON-prefix.pch */,
+				88E8CB1AE01136412A01E94E5474F87C /* SwiftyJSON-umbrella.h */,
+				61437F89DB2DD4152221E19CCD707376 /* SwiftyJSON.debug.xcconfig */,
+				71D2B3DC738297210DF86032A3653D30 /* SwiftyJSON.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyJSON";
+			sourceTree = "<group>";
+		};
+		7E1EFE234345F673A413161B1954642A /* IBMWatsonLanguageTranslatorV3 */ = {
+			isa = PBXGroup;
+			children = (
+				34DD1BA9CB626B7EDC38003310DDB2A7 /* DeleteModelResult.swift */,
+				07E6815BFB382746807F83CFE768E1A2 /* DocumentList.swift */,
+				3221D7A9D5E6FC672335DD708139BBBA /* DocumentStatus.swift */,
+				9554CA9DF9BE040414DDF069E3B59D4C /* IdentifiableLanguage.swift */,
+				037B8B8D0444F7C2FDFFD87871400C55 /* IdentifiableLanguages.swift */,
+				82D52DAFC139F39686B828DD242B3663 /* IdentifiedLanguage.swift */,
+				39159C5D73509B02585912216C9F3031 /* IdentifiedLanguages.swift */,
+				249F1E30617BCFE5F4980488A4756942 /* InsecureConnection.swift */,
+				6E8518A4EDB1BC292A4CD8960077EFDE /* Language.swift */,
+				787D9B3F1AB25027D38E8923AC653BBC /* Languages.swift */,
+				2A0EB484A0E61142DDF859C834D96321 /* LanguageTranslator.swift */,
+				52CC0A840651C799A560026FF767D1F3 /* Shared.swift */,
+				EE5B37EE667D852093C5480B8193CAC8 /* TranslateRequest.swift */,
+				24A89472F9A6265F869D233DF811F58C /* Translation.swift */,
+				4A950528F48BFAFEE3229DD46C47A6C6 /* TranslationModel.swift */,
+				ECF1EBD59F8D3CBA993B5ED8CB410448 /* TranslationModels.swift */,
+				9399D593FC094CA0C5445AAF2B630D8A /* TranslationResult.swift */,
+				827D7909DB638C14A083ECB7247D757E /* Support Files */,
 			);
 			name = IBMWatsonLanguageTranslatorV3;
 			path = IBMWatsonLanguageTranslatorV3;
 			sourceTree = "<group>";
 		};
-		67228D44E863E40208A250B5D571E9A0 /* Support Files */ = {
+		827D7909DB638C14A083ECB7247D757E /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				8FE36CFD7F1BDF377D4A7BF9CF79E718 /* SegementSlide.modulemap */,
-				8E8FA3E08E03E34C97B5F244071CAC4B /* SegementSlide-dummy.m */,
-				469D10CEA774F4A62ECFCF01981E0E39 /* SegementSlide-Info.plist */,
-				74A28C90E7DD288D5579131BC6A3F3FC /* SegementSlide-prefix.pch */,
-				D9DA42273C8030F8056C10A86FE81961 /* SegementSlide-umbrella.h */,
-				25D00B5E0073244E950A5EE73386407B /* SegementSlide.debug.xcconfig */,
-				318433CE5296FA27DAEBEB5AD87FD27C /* SegementSlide.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SegementSlide";
-			sourceTree = "<group>";
-		};
-		6E515909302512507C6AC38D8161F2C5 /* SegementSlide */ = {
-			isa = PBXGroup;
-			children = (
-				A54AE880A03726934676D5782213B0A0 /* BadgeView.swift */,
-				E60AC55494EAD1C0457A42DB01B12EB7 /* SegementSlideContentView.swift */,
-				B4F8DD08EA61C5B14B0F8A2950E0785E /* SegementSlideDefaultSwitcherConfig.swift */,
-				F086C550ED592C3ED6F550C820E4AE29 /* SegementSlideDefaultSwitcherView.swift */,
-				3FAB4022BA6C45A10E5708086E1BD808 /* SegementSlideDefaultSwitcherView+ex.swift */,
-				EDB5E1B909BCDB369BF266AB97B285BF /* SegementSlideDefaultViewController.swift */,
-				17C0B2D32DEEAF4996B0153705A2F1FD /* SegementSlideHeaderView.swift */,
-				D29F8364CEBD22B076B0B5248915AC96 /* SegementSlideScrollView.swift */,
-				BEE20B386DEAA047567FD480B214E5CE /* SegementSlideSwitcherDataSourceWeakBox.swift */,
-				7233982616F7B210ACAD95F629AD8B4C /* SegementSlideSwitcherDelegate.swift */,
-				7AAB7808AA937CCD814B018B2EA46358 /* SegementSlideViewController.swift */,
-				B08AE7B372910360880CB66A69A82C55 /* SegementSlideViewController+delegate.swift */,
-				9B3A651737C54CCABAAD47BF7A6B4E35 /* SegementSlideViewController+ex.swift */,
-				9F70E8CABA6812A6DEC044CD715814AE /* SegementSlideViewController+scroll.swift */,
-				527B81A7E23190DC4A439746B413EAD6 /* SegementSlideViewController+setup.swift */,
-				8C0C7EBEEFCCB6A5F6FB4CDF645FCDC2 /* String+Bounding.swift */,
-				F0A0D7B64AA2C1652D7DEB37D1F1F874 /* TransparentSlideDefaultViewController.swift */,
-				66186E78430D8420E290C62D7359C5B4 /* TransparentSlideViewController.swift */,
-				7147B08D4E64903993C21A382D8E59D6 /* UIView+Constraint.swift */,
-				67228D44E863E40208A250B5D571E9A0 /* Support Files */,
-			);
-			name = SegementSlide;
-			path = SegementSlide;
-			sourceTree = "<group>";
-		};
-		A1BAA31E68BCDC253C155A6DD569FDE7 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				07368682D1B59B684E641F06C59F77E4 /* IBMWatsonLanguageTranslatorV3.modulemap */,
-				B274DE4000B79C03DA192DCDFC235A0A /* IBMWatsonLanguageTranslatorV3-dummy.m */,
-				640B54120A356E7992420CF923C9537D /* IBMWatsonLanguageTranslatorV3-Info.plist */,
-				E3ACE63D61D825EAFFF67B6CC99D7500 /* IBMWatsonLanguageTranslatorV3-prefix.pch */,
-				DD8594A3C46B3FEFE29CF796B81953E1 /* IBMWatsonLanguageTranslatorV3-umbrella.h */,
-				3E96739534145CD6E38D0955367FB292 /* IBMWatsonLanguageTranslatorV3.debug.xcconfig */,
-				69DB0EA5A58AA4CACDFE977896E8F726 /* IBMWatsonLanguageTranslatorV3.release.xcconfig */,
+				0D90DA2EE75E66DD6443042D50BFA2E0 /* IBMWatsonLanguageTranslatorV3.modulemap */,
+				2C5FBA48523A804FBD7959519C4E8190 /* IBMWatsonLanguageTranslatorV3-dummy.m */,
+				3E08A4842597BE131702C1797FB13176 /* IBMWatsonLanguageTranslatorV3-Info.plist */,
+				C1DC16BBCBF5AF46879BC599500B9C22 /* IBMWatsonLanguageTranslatorV3-prefix.pch */,
+				C8A4B7F6C8C12E989B56C7A4F82B9CEC /* IBMWatsonLanguageTranslatorV3-umbrella.h */,
+				536218F3EE0BF9239309E0F8CEC330D7 /* IBMWatsonLanguageTranslatorV3.debug.xcconfig */,
+				44B0EA8D868A8588D10FA56799DD36E0 /* IBMWatsonLanguageTranslatorV3.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/IBMWatsonLanguageTranslatorV3";
 			sourceTree = "<group>";
 		};
-		A7F4B78285DDC563E19C84374A5B8154 /* Pods */ = {
+		918C67CEDF38AB6FC9603B3803A92E0F /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0C9D833395FF4429AA05F82801098264 /* IBMSwiftSDKCore */,
-				614878307C22B67231078F02D00ABC22 /* IBMWatsonLanguageTranslatorV3 */,
-				3E282FD5DFAF8C5AAE7ABE6963AE5190 /* IBMWatsonToneAnalyzerV3 */,
-				6E515909302512507C6AC38D8161F2C5 /* SegementSlide */,
-				063C9237A0A699AD89B2B1CC787BD837 /* SwiftyJSON */,
+				3CE2532AB88F72694AE0D655804E3DF7 /* Keys */,
 			);
-			name = Pods;
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		94412B9416057597ED993AA18255D7BE /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0488301370038A8CBD2F1FBF1FBBD623 /* IBMWatsonToneAnalyzerV3.modulemap */,
+				916D681257610013CBCA1DD07FFC372D /* IBMWatsonToneAnalyzerV3-dummy.m */,
+				5BE2F8A7E83C396BA0C21FB884CB0267 /* IBMWatsonToneAnalyzerV3-Info.plist */,
+				2B1707BE06347A9264DF6F60F2F99623 /* IBMWatsonToneAnalyzerV3-prefix.pch */,
+				3B74999C3B748B19806FD171E1F21664 /* IBMWatsonToneAnalyzerV3-umbrella.h */,
+				D3409E789CB10866020BAE0B94216208 /* IBMWatsonToneAnalyzerV3.debug.xcconfig */,
+				27C764C9A59DEBE1A05079E20B63D2D7 /* IBMWatsonToneAnalyzerV3.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/IBMWatsonToneAnalyzerV3";
 			sourceTree = "<group>";
 		};
 		A975EE07AD447AD47922B0F938AC3ADE /* Targets Support Files */ = {
@@ -530,63 +575,105 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		AEBC4732AB4A5FABB35AFA95F54DB8C5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D7BC3B6AB1E4137B03F61EEDDCE61162 /* IBMSwiftSDKCore.framework */,
-				FA4CD253F8AFFDA1AECB557B3A947BF0 /* LanguageTranslator.framework */,
-				82BCE053B6DC05DD3B8B0C36B433DF49 /* Pods_HappyNews.framework */,
-				42680C948568347510E3E5881F7FDB51 /* SegementSlide.framework */,
-				E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */,
-				806EF617EF02E7D4FBCE3B2B0C559E59 /* ToneAnalyzer.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				918C67CEDF38AB6FC9603B3803A92E0F /* Development Pods */,
 				4BDE46936B8ED7AF09FF89CBB7EF2E0A /* Frameworks */,
-				A7F4B78285DDC563E19C84374A5B8154 /* Pods */,
-				AEBC4732AB4A5FABB35AFA95F54DB8C5 /* Products */,
+				36E2B4A683A27F20A428D1CA65BF3A62 /* Pods */,
+				540DFDB0E31C494F9A1250AEB287F047 /* Products */,
 				A975EE07AD447AD47922B0F938AC3ADE /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		E215444B74357B36F58CE78BF1B7E8A3 /* Support Files */ = {
+		E16370FF3E57AD7AE1E92E37007F8FB0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				D6E22121AF9EFF656F630919A58B0DA1 /* IBMSwiftSDKCore.modulemap */,
-				0BA35B55983A3D83C66E57813EA29E93 /* IBMSwiftSDKCore-dummy.m */,
-				25CD51F6556D45386A4437044B91A708 /* IBMSwiftSDKCore-Info.plist */,
-				0A7D3549F3CFC921769F3DD20E72139F /* IBMSwiftSDKCore-prefix.pch */,
-				72C4CF05D158672E89E595D9FD2186B3 /* IBMSwiftSDKCore-umbrella.h */,
-				9C8A2AD920C5C107110163D5CB5B8A86 /* IBMSwiftSDKCore.debug.xcconfig */,
-				FD9EF662A229319AD5BC34C98B697484 /* IBMSwiftSDKCore.release.xcconfig */,
+				C9647779A498E1AC9F76360CBFDEBD1E /* IBMSwiftSDKCore.modulemap */,
+				2118C1D1522B424FC177AD6A31B9A14D /* IBMSwiftSDKCore-dummy.m */,
+				FAAB3EEA84012B9E9FA88D2AA264ECB3 /* IBMSwiftSDKCore-Info.plist */,
+				5BE1094FA3F7BE0EF386834D17F781BA /* IBMSwiftSDKCore-prefix.pch */,
+				72700C833329F8F21A53E3A9B911D959 /* IBMSwiftSDKCore-umbrella.h */,
+				3AC823427F3D9AE33BCD8A6DCC026B68 /* IBMSwiftSDKCore.debug.xcconfig */,
+				8AAA99C6DAE2630ECDC7487366E37362 /* IBMSwiftSDKCore.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/IBMSwiftSDKCore";
 			sourceTree = "<group>";
 		};
-		F7DF5B6DA49BB1CB2E267F1EB4F4669F /* Support Files */ = {
+		FCD25B3053BD604141D6F74F251565E3 /* IBMSwiftSDKCore */ = {
 			isa = PBXGroup;
 			children = (
-				AB03D6BF71EB832F7474936B096B0BBF /* IBMWatsonToneAnalyzerV3.modulemap */,
-				6A66F507A426230EAFB1EF4F1E386305 /* IBMWatsonToneAnalyzerV3-dummy.m */,
-				61421CC3F260CDD732CCCECB422C012F /* IBMWatsonToneAnalyzerV3-Info.plist */,
-				D15A10909555C8A14C1D214698BA9DF1 /* IBMWatsonToneAnalyzerV3-prefix.pch */,
-				81B78295716E7D229A6F6DE9D404B191 /* IBMWatsonToneAnalyzerV3-umbrella.h */,
-				C2E7EA069552A1FA60A582D4A628A1E5 /* IBMWatsonToneAnalyzerV3.debug.xcconfig */,
-				3FE8C54B4C0517F46915657E47183836 /* IBMWatsonToneAnalyzerV3.release.xcconfig */,
+				E6B0150B7844CF550FF60405C164634A /* Authentication.swift */,
+				FC8D23868718B63267CBC50EE0A83F61 /* CloudPakForDataAuthenticator.swift */,
+				E17C1F0B6D844B4B11F293E97B8A2EDD /* CodableExtensions.swift */,
+				3769F2F34F69E1C9680DCAB3CBEEC7E9 /* ConfigBasedAuthenticatorFactory.swift */,
+				104623B65C490C2232AEA59B975B6D79 /* CredentialUtils.swift */,
+				EF4FF1F42E9AD8328C8EF2C09D3DD8A2 /* IAMAuthenticator.swift */,
+				99CE3E2BBF79B39F30838ED19E9EE4A7 /* InsecureConnection.swift */,
+				858D660E9478CF344ECCF6171005662E /* JSON.swift */,
+				EDDA2BDC0E6E3135A92E85D77CD8A4C3 /* JWT.swift */,
+				64AC904533126A478F0FDA829FD9B6F5 /* MultipartFormData.swift */,
+				08AD6B4B3FFEB45D5FEA0528CE62BE87 /* RestError.swift */,
+				C18811441FAF67E28C1414E932F6AFAF /* RestRequest.swift */,
+				475DB7AE8AC21164DF55B4978E7334B5 /* RestResponse.swift */,
+				E16370FF3E57AD7AE1E92E37007F8FB0 /* Support Files */,
+			);
+			name = IBMSwiftSDKCore;
+			path = IBMSwiftSDKCore;
+			sourceTree = "<group>";
+		};
+		FD35A947F4EB77A3190963B7DA7C3DAD /* IBMWatsonToneAnalyzerV3 */ = {
+			isa = PBXGroup;
+			children = (
+				B45DA29E042CBB86280C8EA85D1AD4A1 /* DocumentAnalysis.swift */,
+				DED92A8007C33D58B39642E1FFB2E30E /* InsecureConnection.swift */,
+				AC04741E5D15C67895B640E764EED8BF /* SentenceAnalysis.swift */,
+				066CA961969E2A1A3F7F66B5F37B0BF5 /* Shared.swift */,
+				089B1B99EE68BEAB0D7D8A2A8CCA4A38 /* ToneAnalysis.swift */,
+				48F49668982F8C12C2493DA18EDE6B77 /* ToneAnalyzer.swift */,
+				9D0A4E55B9D1DBF9500D0799B6E5FAF3 /* ToneCategory.swift */,
+				9B025B2A64D695A3878A441BF8C72F4B /* ToneChatInput.swift */,
+				735D249576BE92E9B1F4DE465A179540 /* ToneChatScore.swift */,
+				8193ABD1AFCE8DE5C386405F8974CC69 /* ToneContent.swift */,
+				70A6791F40C45359E2E1D9590CF84FDF /* ToneInput.swift */,
+				BADAA6F6BF1039A1A7A33D07C7283E1F /* ToneScore.swift */,
+				3B94B6ACDFE1177A9E6FB8EC6811DA79 /* Utterance.swift */,
+				DE7ED82DCC9786D878970360F2E202CF /* UtteranceAnalyses.swift */,
+				3E54535D66E772BC4EFEB0DA624B8EE7 /* UtteranceAnalysis.swift */,
+				94412B9416057597ED993AA18255D7BE /* Support Files */,
+			);
+			name = IBMWatsonToneAnalyzerV3;
+			path = IBMWatsonToneAnalyzerV3;
+			sourceTree = "<group>";
+		};
+		FFB8FDA3DC721DC67124E8388FFDD746 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4174EAFBB81AB2649D8226FE7200D8AB /* Keys.modulemap */,
+				F53369EE58BC238933DF6F67AA70029D /* Keys-dummy.m */,
+				6FF3FAFCC20C5186812E9FE6A288F274 /* Keys-Info.plist */,
+				7C38765B97C0F6161869BCA9330D8858 /* Keys-prefix.pch */,
+				58D2678D30E4F3B143E2B6BEF4B687C9 /* Keys-umbrella.h */,
+				6E764095AF4095EC6B4F568152D54076 /* Keys.debug.xcconfig */,
+				D2380AC5BDFCA0429907D820614717CE /* Keys.release.xcconfig */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/IBMWatsonToneAnalyzerV3";
+			path = "../Target Support Files/Keys";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		3826B3DDBE80F832889D8AFDD9FA3B26 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CF6A1E2D8A6BE0E772C496102C7EAD4 /* SegementSlide-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3D7DD627DB5C5AD636646E57B685AFB2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -611,11 +698,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		71BBDA202B39EC0C01F2B5E92E158BA9 /* Headers */ = {
+		84D21A97E0DBC1AA90039D6FD7EF149D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDC7EA4C77884F85205AFD6FC5F56270 /* Pods-HappyNews-umbrella.h in Headers */,
+				DD1AC41420B3E77B4FC2386ACB85232D /* HappyNewsKeys.h in Headers */,
+				0CD376902F3A22500A8C50B736B64C14 /* Keys-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FBE57BFA5D4E5118F0240499306712 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02E7A08EE053B35874B597C3E1751A3E /* Pods-HappyNews-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,25 +723,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EABBBDB3C29103C456ADB67773D13CF8 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				61064BEB821E61309BBDA0F72B3494EF /* SegementSlide-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		055411E7F4239B4CB7D549A671F771E0 /* SegementSlide */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CA63E4754EA8B9BF5BF2BAA6DA9541FE /* Build configuration list for PBXNativeTarget "SegementSlide" */;
+			buildConfigurationList = 61D7E0478619C82C839EA79B6618CF50 /* Build configuration list for PBXNativeTarget "SegementSlide" */;
 			buildPhases = (
-				EABBBDB3C29103C456ADB67773D13CF8 /* Headers */,
-				18879CAB17A83A093681FF168C228C7F /* Sources */,
-				B5626343553AB03C7DFDA414A084B71E /* Frameworks */,
-				5F82F52BB7DAA13F328C31BDAE75A09B /* Resources */,
+				3826B3DDBE80F832889D8AFDD9FA3B26 /* Headers */,
+				8BE765DAD2316EF50B31AA7F590CE0B7 /* Sources */,
+				F4DAA629C2F72C3CB102CACC20DF7B3C /* Frameworks */,
+				A6DC347529E5DD39F882D950395994A7 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -658,25 +746,44 @@
 		};
 		3814A24D0B6C6AB50728BF796B1E5EBB /* Pods-HappyNews */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 250C7E317F0D24E58291F5D80E3D5CDE /* Build configuration list for PBXNativeTarget "Pods-HappyNews" */;
+			buildConfigurationList = FCEF5C0DA0C1CFA3DC470CAAE839803B /* Build configuration list for PBXNativeTarget "Pods-HappyNews" */;
 			buildPhases = (
-				71BBDA202B39EC0C01F2B5E92E158BA9 /* Headers */,
-				1CAEE3A6FB976BB3E0FD19EFAE8CFED5 /* Sources */,
-				42728D3C18DF0AAC0444AD04CB21FFC1 /* Frameworks */,
-				612A8CE45CB70D99E52098A3AEC45EE8 /* Resources */,
+				84FBE57BFA5D4E5118F0240499306712 /* Headers */,
+				F04C60161520B8CAD0435A870FB67A4C /* Sources */,
+				17268C0CCA8EB013E01EE855DD23B660 /* Frameworks */,
+				52B3B613F1F151C0825BBD2A64F69B05 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				AF363F5DDFB9327BF12DB6A92DE2FB83 /* PBXTargetDependency */,
-				FFE182E21590DECFD0E601D5C67CA0D1 /* PBXTargetDependency */,
-				65419D64FCFFB1684AAEC04795C85234 /* PBXTargetDependency */,
-				FDB5AB289D5C439B7B42C845E1956E55 /* PBXTargetDependency */,
-				E51B2CBECCE6A815A46DA5D6ED542D86 /* PBXTargetDependency */,
+				0A8B21180B6580BCC787A834054627FA /* PBXTargetDependency */,
+				5C8DC415378812353F065DAC2CC35445 /* PBXTargetDependency */,
+				23E8FAE51281276F0C76D67CDCBA7B6E /* PBXTargetDependency */,
+				5C463C8D0108975CBD3BDC26B24E819A /* PBXTargetDependency */,
+				D5900D8143F7D3A948D83795169D08E4 /* PBXTargetDependency */,
+				32CFF7F791623C47278326246F56E1DE /* PBXTargetDependency */,
 			);
 			name = "Pods-HappyNews";
 			productName = "Pods-HappyNews";
 			productReference = 82BCE053B6DC05DD3B8B0C36B433DF49 /* Pods_HappyNews.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5CE75F0DCD94A1A113665B974F74795F /* Keys */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 795CB2150073E63FDFE236FC26037B45 /* Build configuration list for PBXNativeTarget "Keys" */;
+			buildPhases = (
+				84D21A97E0DBC1AA90039D6FD7EF149D /* Headers */,
+				C72BC54A1621B8F126113ACD1040C8B4 /* Sources */,
+				922F925E12B3BC3FA3849031926595A0 /* Frameworks */,
+				578B49FAC5467E628C7F79081E2652E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Keys;
+			productName = Keys;
+			productReference = E8CACB8744373C1818777FFB8F84C67E /* Keys.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		75570FD1720C349A424EB4CAD88C1A29 /* IBMWatsonToneAnalyzerV3 */ = {
@@ -691,7 +798,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				C8B37B30BE33D2825DB13093A1985735 /* PBXTargetDependency */,
+				099F9CD8FCA3BFE8BB1F1C376BF17FD4 /* PBXTargetDependency */,
 			);
 			name = IBMWatsonToneAnalyzerV3;
 			productName = IBMWatsonToneAnalyzerV3;
@@ -710,7 +817,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				E4C4FC16286BBEA43C6AF39CFD966AD9 /* PBXTargetDependency */,
+				6661A003661DFAE5DF92907D46AEFD5C /* PBXTargetDependency */,
 			);
 			name = IBMWatsonLanguageTranslatorV3;
 			productName = IBMWatsonLanguageTranslatorV3;
@@ -771,13 +878,14 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = AEBC4732AB4A5FABB35AFA95F54DB8C5 /* Products */;
+			productRefGroup = 540DFDB0E31C494F9A1250AEB287F047 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				C212BBFAF6FC8270BF5BEF8057998E30 /* IBMSwiftSDKCore */,
 				B2B724283F9BE15AC7375A6203787C69 /* IBMWatsonLanguageTranslatorV3 */,
 				75570FD1720C349A424EB4CAD88C1A29 /* IBMWatsonToneAnalyzerV3 */,
+				5CE75F0DCD94A1A113665B974F74795F /* Keys */,
 				3814A24D0B6C6AB50728BF796B1E5EBB /* Pods-HappyNews */,
 				055411E7F4239B4CB7D549A671F771E0 /* SegementSlide */,
 				D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */,
@@ -793,6 +901,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		52B3B613F1F151C0825BBD2A64F69B05 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		578B49FAC5467E628C7F79081E2652E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DFBDD7114B18598AC1BA59DB016BBFB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -800,14 +922,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5F82F52BB7DAA13F328C31BDAE75A09B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		612A8CE45CB70D99E52098A3AEC45EE8 /* Resources */ = {
+		A6DC347529E5DD39F882D950395994A7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -837,41 +952,6 @@
 			files = (
 				2BF6FBC0A64BF107C5D64C61F1397770 /* SwiftyJSON-dummy.m in Sources */,
 				7B4CE5C84161E2BFE477F42DFD634382 /* SwiftyJSON.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		18879CAB17A83A093681FF168C228C7F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				73525B22008B8D3D95294F385CE54B6D /* BadgeView.swift in Sources */,
-				8F604D5A0D9320F032CA87ECD56F959C /* SegementSlide-dummy.m in Sources */,
-				2BC9A583F8385F2C89A3E063B4F2D63E /* SegementSlideContentView.swift in Sources */,
-				AF1BC3E5F90DB30FC280C11BBAD9F357 /* SegementSlideDefaultSwitcherConfig.swift in Sources */,
-				01789FBDF9C29DD4AA9B375A8418250C /* SegementSlideDefaultSwitcherView+ex.swift in Sources */,
-				19082CDC95D2C9A6E6F37C9E05E5AACF /* SegementSlideDefaultSwitcherView.swift in Sources */,
-				D37F1A70EB98F4543B6A828DE7D552CA /* SegementSlideDefaultViewController.swift in Sources */,
-				4B6E9CA7EE2F07329886872B7230B012 /* SegementSlideHeaderView.swift in Sources */,
-				1E54A502C6279B55F5F84030022D3374 /* SegementSlideScrollView.swift in Sources */,
-				BD1266A1CB57DD124BC4D72BA221144F /* SegementSlideSwitcherDataSourceWeakBox.swift in Sources */,
-				05FC777B726D8B67F48CCA2986C5BE7B /* SegementSlideSwitcherDelegate.swift in Sources */,
-				63C95D41D5C9D72D3729C933D223C8B4 /* SegementSlideViewController+delegate.swift in Sources */,
-				C2B87F088618B312C15FA299C0EC9257 /* SegementSlideViewController+ex.swift in Sources */,
-				4D80E7E0D2C01BF107F0EBC996F2DBDC /* SegementSlideViewController+scroll.swift in Sources */,
-				E9D3DCA0B46F1CFA8A37F8189B2B6442 /* SegementSlideViewController+setup.swift in Sources */,
-				CFFA7AE02F043DED068025210C7E7BEB /* SegementSlideViewController.swift in Sources */,
-				6158C551B1B3B0E3D861457DDBDA2469 /* String+Bounding.swift in Sources */,
-				635CF24E659D33CB45FBBD9D4AB612DD /* TransparentSlideDefaultViewController.swift in Sources */,
-				8A50C99A4CF0815E66F16BA6BB9715DD /* TransparentSlideViewController.swift in Sources */,
-				8C71C243B0BE05E2E709117C50ACFEB4 /* UIView+Constraint.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1CAEE3A6FB976BB3E0FD19EFAE8CFED5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				71E52EAD7D4259F60373ED7D0D48DD50 /* Pods-HappyNews-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,6 +1001,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BE765DAD2316EF50B31AA7F590CE0B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24D2C57BF4FB7BD250FD0B7DA1BBBE7 /* BadgeView.swift in Sources */,
+				5EB9D3A9295A6516BDBA77DCFE53CFD3 /* SegementSlide-dummy.m in Sources */,
+				A39C3DECE488CDF9045F6C630CC14814 /* SegementSlideContentView.swift in Sources */,
+				7FB05457C50253A5DDDB538A8EF71724 /* SegementSlideDefaultSwitcherConfig.swift in Sources */,
+				D95A6C80B0547454D6147C164E56C309 /* SegementSlideDefaultSwitcherView+ex.swift in Sources */,
+				C778AFB9C4EAE99A909E1AA2EEC42697 /* SegementSlideDefaultSwitcherView.swift in Sources */,
+				04804159956F03307727801AB3B3F8FF /* SegementSlideDefaultViewController.swift in Sources */,
+				4F325CC07C3D31CA141F39335FA817A0 /* SegementSlideHeaderView.swift in Sources */,
+				9E9CC8A3DA5A44CA3BB9BEE0284EFCFE /* SegementSlideScrollView.swift in Sources */,
+				6D7B1BD2355D7DCB7C0A403376594852 /* SegementSlideSwitcherDataSourceWeakBox.swift in Sources */,
+				BE2C94F88C4D09BE8725F4E4DAC62565 /* SegementSlideSwitcherDelegate.swift in Sources */,
+				273153CA20EDE1F7B682327CA8C49EDB /* SegementSlideViewController+delegate.swift in Sources */,
+				39E44781F5AE0CDA33415ED770EC125A /* SegementSlideViewController+ex.swift in Sources */,
+				B7A9A9AA09CAF1F40A6FFEC184BA99AB /* SegementSlideViewController+scroll.swift in Sources */,
+				CA561FB9A42713B9C8A1E9EC9BD8ED46 /* SegementSlideViewController+setup.swift in Sources */,
+				A30B8BE0C607551D824E2BEE6D54C971 /* SegementSlideViewController.swift in Sources */,
+				E2360E795ED81BABECB86F2683E03697 /* String+Bounding.swift in Sources */,
+				E1723B8F79EC31857B7B5F5C17C135E8 /* TransparentSlideDefaultViewController.swift in Sources */,
+				68E472E47AA87DF59FE291D8A0792A51 /* TransparentSlideViewController.swift in Sources */,
+				8FA95861BC50739E6FF715436DBDD0A6 /* UIScrollView+Scroll.swift in Sources */,
+				E2E7D3ADF136AC7F5F1DD2A218796F75 /* UIView+Constraint.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93E3457156C540F63D98A6C9BCE716B6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -944,57 +1052,80 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C72BC54A1621B8F126113ACD1040C8B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53A1614057B0B5234EC2B6FF357CF210 /* HappyNewsKeys.m in Sources */,
+				9524BD88D23AA9B93E255CC43C1E2E18 /* Keys-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F04C60161520B8CAD0435A870FB67A4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B17D819256862C5C963A4227FCDE4011 /* Pods-HappyNews-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		65419D64FCFFB1684AAEC04795C85234 /* PBXTargetDependency */ = {
+		099F9CD8FCA3BFE8BB1F1C376BF17FD4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IBMSwiftSDKCore;
+			target = C212BBFAF6FC8270BF5BEF8057998E30 /* IBMSwiftSDKCore */;
+			targetProxy = E8FE5E1A402C522A097C6ECC51144A76 /* PBXContainerItemProxy */;
+		};
+		0A8B21180B6580BCC787A834054627FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IBMSwiftSDKCore;
+			target = C212BBFAF6FC8270BF5BEF8057998E30 /* IBMSwiftSDKCore */;
+			targetProxy = DDF3DF2ECA5F718A56550B46C2C2E415 /* PBXContainerItemProxy */;
+		};
+		23E8FAE51281276F0C76D67CDCBA7B6E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = IBMWatsonToneAnalyzerV3;
 			target = 75570FD1720C349A424EB4CAD88C1A29 /* IBMWatsonToneAnalyzerV3 */;
-			targetProxy = 3CC9F46A3C2D68441407D3D8BC3F5E1D /* PBXContainerItemProxy */;
+			targetProxy = C89286C874E0263A5E44403AB89B386D /* PBXContainerItemProxy */;
 		};
-		AF363F5DDFB9327BF12DB6A92DE2FB83 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = IBMSwiftSDKCore;
-			target = C212BBFAF6FC8270BF5BEF8057998E30 /* IBMSwiftSDKCore */;
-			targetProxy = 874937BE0A1D6272A5886B86552C5191 /* PBXContainerItemProxy */;
-		};
-		C8B37B30BE33D2825DB13093A1985735 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = IBMSwiftSDKCore;
-			target = C212BBFAF6FC8270BF5BEF8057998E30 /* IBMSwiftSDKCore */;
-			targetProxy = CFFEB4D5AB12584E9125A844E9761C44 /* PBXContainerItemProxy */;
-		};
-		E4C4FC16286BBEA43C6AF39CFD966AD9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = IBMSwiftSDKCore;
-			target = C212BBFAF6FC8270BF5BEF8057998E30 /* IBMSwiftSDKCore */;
-			targetProxy = A3717C2104616C35845B7720DEF6CD7C /* PBXContainerItemProxy */;
-		};
-		E51B2CBECCE6A815A46DA5D6ED542D86 /* PBXTargetDependency */ = {
+		32CFF7F791623C47278326246F56E1DE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftyJSON;
 			target = D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */;
-			targetProxy = 9B459E442CFD75CC606D95581460D3E7 /* PBXContainerItemProxy */;
+			targetProxy = BA6D134EA7952CDA0001E906EB12474F /* PBXContainerItemProxy */;
 		};
-		FDB5AB289D5C439B7B42C845E1956E55 /* PBXTargetDependency */ = {
+		5C463C8D0108975CBD3BDC26B24E819A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SegementSlide;
-			target = 055411E7F4239B4CB7D549A671F771E0 /* SegementSlide */;
-			targetProxy = 7CC138C4D7A1086CC3D8ED539CB9E07B /* PBXContainerItemProxy */;
+			name = Keys;
+			target = 5CE75F0DCD94A1A113665B974F74795F /* Keys */;
+			targetProxy = 154631366B483A34C7AFFE2FFAADE9EA /* PBXContainerItemProxy */;
 		};
-		FFE182E21590DECFD0E601D5C67CA0D1 /* PBXTargetDependency */ = {
+		5C8DC415378812353F065DAC2CC35445 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = IBMWatsonLanguageTranslatorV3;
 			target = B2B724283F9BE15AC7375A6203787C69 /* IBMWatsonLanguageTranslatorV3 */;
-			targetProxy = D1E86E3113FC0CB40CE9DEFDB261B626 /* PBXContainerItemProxy */;
+			targetProxy = 1FDD3A2F6E7160BBFFDE7B7B989D6DE5 /* PBXContainerItemProxy */;
+		};
+		6661A003661DFAE5DF92907D46AEFD5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IBMSwiftSDKCore;
+			target = C212BBFAF6FC8270BF5BEF8057998E30 /* IBMSwiftSDKCore */;
+			targetProxy = E8F274786CE5336AACA6CBF85103A85D /* PBXContainerItemProxy */;
+		};
+		D5900D8143F7D3A948D83795169D08E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SegementSlide;
+			target = 055411E7F4239B4CB7D549A671F771E0 /* SegementSlide */;
+			targetProxy = 5EEF93FDD94A77C3B487A980AE8BE5DA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		009DB1577F07B2FF797B78F2D1142134 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F04383D25C702D6A0AA678291F8B43E8 /* SwiftyJSON.debug.xcconfig */;
+			baseConfigurationReference = 61437F89DB2DD4152221E19CCD707376 /* SwiftyJSON.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1029,7 +1160,7 @@
 		};
 		08ACF2F27BD9BA875B4EAAABCDB39694 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69DB0EA5A58AA4CACDFE977896E8F726 /* IBMWatsonLanguageTranslatorV3.release.xcconfig */;
+			baseConfigurationReference = 44B0EA8D868A8588D10FA56799DD36E0 /* IBMWatsonLanguageTranslatorV3.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1066,7 +1197,7 @@
 		};
 		0C9896C7563CB84B32833F4506F3096C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5285505ED0A87F8760D8C48A1AF46860 /* SwiftyJSON.release.xcconfig */;
+			baseConfigurationReference = 71D2B3DC738297210DF86032A3653D30 /* SwiftyJSON.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1093,6 +1224,45 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		11F6BF1F1046BE573EDB0BCF4632D96D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F771DE5D26B911ACCCCBC22B0A0C4136 /* Pods-HappyNews.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-HappyNews/Pods-HappyNews-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-HappyNews/Pods-HappyNews.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1164,9 +1334,83 @@
 			};
 			name = Debug;
 		};
-		162D1D1F69F9B3C546FF997D26901D4F /* Debug */ = {
+		302A3705F32BDFA1196C4366125541A2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 25D00B5E0073244E950A5EE73386407B /* SegementSlide.debug.xcconfig */;
+			baseConfigurationReference = D2380AC5BDFCA0429907D820614717CE /* Keys.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Keys/Keys-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Keys/Keys-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Keys/Keys.modulemap";
+				PRODUCT_MODULE_NAME = Keys;
+				PRODUCT_NAME = Keys;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4FD232CEEB8C2BAFB348E895EFFC8781 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD65897A82DC5E8562C08B168A315643 /* Pods-HappyNews.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-HappyNews/Pods-HappyNews-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-HappyNews/Pods-HappyNews.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5083AD2881E13341A7A4E003C9D7C65D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC9F9E6D9B4E0B6BED7FF1102BF2B380 /* SegementSlide.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1193,12 +1437,13 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.1;
+				SWIFT_VERSION = 5.2.4;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		871B6E28ABA34DAE69824AB9D22D3B7D /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1260,47 +1505,9 @@
 			};
 			name = Release;
 		};
-		95E251687BE4963174E7BF7F48331916 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD65897A82DC5E8562C08B168A315643 /* Pods-HappyNews.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-HappyNews/Pods-HappyNews-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-HappyNews/Pods-HappyNews.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		9EACEBDD16FD2C1E0E76E970E8971B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD9EF662A229319AD5BC34C98B697484 /* IBMSwiftSDKCore.release.xcconfig */;
+			baseConfigurationReference = 8AAA99C6DAE2630ECDC7487366E37362 /* IBMSwiftSDKCore.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1337,7 +1544,7 @@
 		};
 		A3F55008671F6354B9C641715225DC89 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3FE8C54B4C0517F46915657E47183836 /* IBMWatsonToneAnalyzerV3.release.xcconfig */;
+			baseConfigurationReference = 27C764C9A59DEBE1A05079E20B63D2D7 /* IBMWatsonToneAnalyzerV3.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1372,48 +1579,9 @@
 			};
 			name = Release;
 		};
-		B8248502DBEC5439C4C19E508068493D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F771DE5D26B911ACCCCBC22B0A0C4136 /* Pods-HappyNews.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-HappyNews/Pods-HappyNews-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-HappyNews/Pods-HappyNews.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		BD0CDF36EB1AA3B98F9647E4B681D424 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E96739534145CD6E38D0955367FB292 /* IBMWatsonLanguageTranslatorV3.debug.xcconfig */;
+			baseConfigurationReference = 536218F3EE0BF9239309E0F8CEC330D7 /* IBMWatsonLanguageTranslatorV3.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1449,7 +1617,7 @@
 		};
 		C011E0521F65A3842BFBEEDECA9E77E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C2E7EA069552A1FA60A582D4A628A1E5 /* IBMWatsonToneAnalyzerV3.debug.xcconfig */;
+			baseConfigurationReference = D3409E789CB10866020BAE0B94216208 /* IBMWatsonToneAnalyzerV3.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1483,9 +1651,44 @@
 			};
 			name = Debug;
 		};
+		C284737E46A9073FF59EBF46A190739F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E764095AF4095EC6B4F568152D54076 /* Keys.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Keys/Keys-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Keys/Keys-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Keys/Keys.modulemap";
+				PRODUCT_MODULE_NAME = Keys;
+				PRODUCT_NAME = Keys;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		CC4FDBB2CC4D77665CF33A47DF8B41BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C8A2AD920C5C107110163D5CB5B8A86 /* IBMSwiftSDKCore.debug.xcconfig */;
+			baseConfigurationReference = 3AC823427F3D9AE33BCD8A6DCC026B68 /* IBMSwiftSDKCore.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1519,9 +1722,9 @@
 			};
 			name = Debug;
 		};
-		E9E3BB2D9CFD60439F89339E12EC72D4 /* Release */ = {
+		E2B7A43FF93002D4489355F02E7C3FC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 318433CE5296FA27DAEBEB5AD87FD27C /* SegementSlide.release.xcconfig */;
+			baseConfigurationReference = 427280F18EC44EA998F34EC624510DB6 /* SegementSlide.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1548,13 +1751,12 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.1;
+				SWIFT_VERSION = 5.2.4;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1564,15 +1766,6 @@
 			buildConfigurations = (
 				BD0CDF36EB1AA3B98F9647E4B681D424 /* Debug */,
 				08ACF2F27BD9BA875B4EAAABCDB39694 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		250C7E317F0D24E58291F5D80E3D5CDE /* Build configuration list for PBXNativeTarget "Pods-HappyNews" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				95E251687BE4963174E7BF7F48331916 /* Debug */,
-				B8248502DBEC5439C4C19E508068493D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1595,11 +1788,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		61D7E0478619C82C839EA79B6618CF50 /* Build configuration list for PBXNativeTarget "SegementSlide" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2B7A43FF93002D4489355F02E7C3FC6 /* Debug */,
+				5083AD2881E13341A7A4E003C9D7C65D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		62468BF9C7EDA172E951A24083C3ECA7 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				009DB1577F07B2FF797B78F2D1142134 /* Debug */,
 				0C9896C7563CB84B32833F4506F3096C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		795CB2150073E63FDFE236FC26037B45 /* Build configuration list for PBXNativeTarget "Keys" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C284737E46A9073FF59EBF46A190739F /* Debug */,
+				302A3705F32BDFA1196C4366125541A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1613,11 +1824,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CA63E4754EA8B9BF5BF2BAA6DA9541FE /* Build configuration list for PBXNativeTarget "SegementSlide" */ = {
+		FCEF5C0DA0C1CFA3DC470CAAE839803B /* Build configuration list for PBXNativeTarget "Pods-HappyNews" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				162D1D1F69F9B3C546FF997D26901D4F /* Debug */,
-				E9E3BB2D9CFD60439F89339E12EC72D4 /* Release */,
+				4FD232CEEB8C2BAFB348E895EFFC8781 /* Debug */,
+				11F6BF1F1046BE573EDB0BCF4632D96D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
