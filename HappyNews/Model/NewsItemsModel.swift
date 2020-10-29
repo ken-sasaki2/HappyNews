@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NewsItems {
+class NewsItemsModel {
     
     var title    :String?
     var url      :String?

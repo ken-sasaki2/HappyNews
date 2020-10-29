@@ -131,8 +131,6 @@ class ToneAnalyzerModel {
                     self.thirdScore    = ceil(thirdToneScore! * 100)/100
                     self.thirdToneName = toneAnalysisValue["document_tone"]["tones"][self.count+2]["tone_name"].string
                 }
-                
-                print("cheack: \(toneAnalysisValue)")
     
                 //構造体Analyzerに感情分析結果を追加
                 self.analyzerArray.append(Analyzer(firstScore: self.firstScore, secondScore: self.secondScore, thirdScore: self.thirdScore, firstToneName: self.firstToneName, secondToneName: self.secondToneName, thirdToneName: self.thirdToneName))

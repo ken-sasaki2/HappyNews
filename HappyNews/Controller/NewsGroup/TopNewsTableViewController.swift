@@ -21,7 +21,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var currentElementName:String!
     
     //NewsItemsモデルのインスタンス作成
-    var newsItems = [NewsItems]()
+    var newsItems = [NewsItemsModel]()
     
     //LanguageTranslatorの認証キー
     var translatorApiKey  = "pLM8kVDHyCCa5t0IjajFd-rBmLB_jnmG3nl2mgdSsshM"
@@ -128,16 +128,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         analyzerArray = arrayAnalyzerData
         
-        //渡ってきた値をJSONに変換
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        guard let tones = try? encoder.encode(analyzerArray) else {
-            fatalError("Failed to encode to JSON.")
-        }
-        
         //感情分析結果確認
         print("*****感情分析結果確認*****")
-        print(String(bytes: tones, encoding: .utf8)!)
+        print("analyzerArray: \(analyzerArray)")
         print("")
     }
 
@@ -201,7 +194,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         currentElementName = nil
         
         if elementName == "item" {
-            newsItems.append(NewsItems())
+            newsItems.append(NewsItemsModel())
         } else {
             currentElementName = elementName
         }
