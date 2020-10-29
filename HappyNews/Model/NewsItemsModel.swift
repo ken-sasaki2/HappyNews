@@ -14,5 +14,6 @@ class NewsItemsModel {
     var url      :String?
     var pubDate  :String?
     var category :String?
+    
 }
 

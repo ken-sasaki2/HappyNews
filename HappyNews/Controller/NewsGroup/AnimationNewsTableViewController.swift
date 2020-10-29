@@ -18,7 +18,7 @@ class AnimationNewsTableViewController: UITableViewController,SegementSlideConte
     var currentElementName:String!
     
     //NewsItems型のクラスが入る配列の宣言
-    var newsItems = [NewsItems]()
+    var newsItems = [NewsItemsModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,7 +103,7 @@ class AnimationNewsTableViewController: UITableViewController,SegementSlideConte
         currentElementName = nil
         
         if elementName == "item" {
-            newsItems.append(NewsItems())
+            newsItems.append(NewsItemsModel())
         } else {
             currentElementName = elementName
         }
