@@ -11,21 +11,21 @@ import Foundation
 struct Analyzer: Codable {
     
     var firstScore     : Float?
-    var secondScore    : Float?
-    var thirdScore     : Float?
+//    var secondScore    : Float?
+//    var thirdScore     : Float?
     var firstToneName  : String?
-    var secondToneName : String?
-    var thirdToneName  : String?
+//    var secondToneName : String?
+//    var thirdToneName  : String?
     
     //構造体の初期化
-    init(firstScore: Float?, secondScore: Float?, thirdScore: Float?, firstToneName:String?, secondToneName: String?, thirdToneName: String?) {
+    init(firstScore: Float?, firstToneName:String?) {
         
         self.firstScore     = firstScore
-        self.secondScore    = secondScore
-        self.thirdScore     = thirdScore
+//        self.secondScore    = secondScore
+//        self.thirdScore     = thirdScore
         
         self.firstToneName  = firstToneName
-        self.secondToneName = secondToneName
-        self.thirdToneName  = thirdToneName
+//        self.secondToneName = secondToneName
+//        self.thirdToneName  = thirdToneName
     }
 }

@@ -98,42 +98,26 @@ class ToneAnalyzerModel {
 
                 //JSON型へ変換
                 let toneAnalysisValue = JSON(toneAnalysisJSON)
-                
-                //感情分析結果の配列の要素数を取得し、その数によってJSON解析数を分岐
-                self.length = toneAnalysisValue["document_tone"]["tones"].count
-                if self.length == 1 {
+                print("toneAnalysisValue: \(toneAnalysisValue)")
+                print("")
+              
+                //感情分析結果が"Joy"&"Score"が0.7以上なら値を取得
+                if toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"] == "Joy" && toneAnalysisValue["document_tone"]["tones"][self.count]["score"] > 0.7 {
                     
                     let  firstToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
                     self.firstScore       = ceil(firstToneScore! * 100)/100
                     self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
                     
-                } else if self.length == 2 {
-                    
-                    let  firstToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
-                    self.firstScore       = ceil(firstToneScore! * 100)/100
-                    self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
-                    
-                    let  secondToneScore  = toneAnalysisValue["document_tone"]["tones"][self.count+1]["score"].float
-                    self.secondScore      = ceil(secondToneScore! * 100)/100
-                    self.secondToneName   = toneAnalysisValue["document_tone"]["tones"][self.count+1]["tone_name"].string
-                    
-                } else if self.length == 3 {
-                    
-                    let  firstToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
-                    self.firstScore       = ceil(firstToneScore! * 100)/100
-                    self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
-                    
-                    let  secondToneScore  = toneAnalysisValue["document_tone"]["tones"][self.count+1]["score"].float
-                    self.secondScore      = ceil(secondToneScore! * 100)/100
-                    self.secondToneName   = toneAnalysisValue["document_tone"]["tones"][self.count+1]["tone_name"].string
-                    
-                    let thirdToneScore = toneAnalysisValue["document_tone"]["tones"][self.count+2]["score"].float
-                    self.thirdScore    = ceil(thirdToneScore! * 100)/100
-                    self.thirdToneName = toneAnalysisValue["document_tone"]["tones"][self.count+2]["tone_name"].string
+                    //感情分析結果確認
+                    print("*****感情分析結果確認*****")
+                    print("firstScore   : \(self.firstScore)")
+                    print("firstToneName: \(self.firstToneName)")
+                } else {
+                    print("Not a joy and a low score, so we didn't get it.")
                 }
     
                 //構造体Analyzerに感情分析結果を追加
-                self.analyzerArray.append(Analyzer(firstScore: self.firstScore, secondScore: self.secondScore, thirdScore: self.thirdScore, firstToneName: self.firstToneName, secondToneName: self.secondToneName, thirdToneName: self.thirdToneName))
+                self.analyzerArray.append(Analyzer(firstScore: self.firstScore, firstToneName: self.firstToneName))
                 
                 //NewsTableViewControllerへ値を渡す
                 self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: self.analyzerArray, resultCount: self.analyzerArray.count)

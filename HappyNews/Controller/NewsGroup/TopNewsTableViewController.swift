@@ -20,6 +20,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //RSSのパース内の現在の要素名を取得する変数
     var currentElementName:String!
     
+    //XMLファイルを保存するプロパティ
+    var xmlString: String?
+    
     //NewsItemsモデルのインスタンス作成
     var newsItems = [NewsItemsModel]()
 
@@ -35,7 +38,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
 
     //分析用サンプルテキスト
     let sampleText = """
-    MXGP権第15戦ロンメルGP　ホンダのT・ガイザー選手完全優勝
+    【天皇賞・秋（日曜＝１１月１日、東京芝２０００メートル）新バージョンアップ作戦】偉業達成が続く秋のＧⅠシリーズ。第１６２回天皇賞・秋ではアーモンドアイによる芝ＧⅠ・８勝目に注目が集まるが、
     """
     
     //LanguageTranslationModelから渡ってくる値
@@ -56,10 +59,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlString = "https://news.yahoo.co.jp/pickup/rss.xml"
+        xmlString = "https://news.yahoo.co.jp/pickup/rss.xml"
         
         //XMLファイルをURL型のurlに変換
-        let url:URL = URL(string: xmlString)!
+        let url:URL = URL(string: xmlString!)!
         
         //parserにurlを代入
         parser = XMLParser(contentsOf: url)!
@@ -227,11 +230,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         let json = JSON(jsonValue)
         translationContent = json[self.count]["translation"].string
         
-        //翻訳結果確認
-        print("*****翻訳結果確認*****")
-        print("translationConten: \(translationContent)")
-        print("")
-        
         //startToneAnalyzerの呼び出し
         startToneAnalyzer()
     }
@@ -252,10 +250,5 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int) {
         
         analyzerArray = arrayAnalyzerData
-        
-        //感情分析結果確認
-        print("*****感情分析結果確認*****")
-        print("analyzerArray: \(analyzerArray)")
-        print("")
     }
 }

@@ -94,7 +94,11 @@ class LanguageTranslatorModel {
                 let translationValue = JSON(translationJSON)
                 self.translation     = translationValue["translations"][self.count]["translation"].string
                 
-                //構造体Translationに翻訳結果を追加
+                print("*****翻訳結果確認*****")
+                print("translationConten: \(self.translation)")
+                print("")
+                
+                //構体Translationに翻訳結果を追加
                 self.translationArray.append(Translation(translation: self.translation!))
                 
                 //NewsTableViewControllerへ値を渡す
