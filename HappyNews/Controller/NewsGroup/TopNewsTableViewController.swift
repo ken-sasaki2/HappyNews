@@ -18,7 +18,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var parser = XMLParser()
     
     //RSSのパース内の現在の要素名を取得する変数
-    var currentElementName:String!
+    var currentElementName: String?
     
     //XMLファイルを保存するプロパティ
     var xmlString: String?
@@ -149,17 +149,16 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         if newsItems.count > 0 {
             
             //配列の番号を合わせる
-            let newsItem = newsItems[newsItems.count - 1]
-            
+            let lastItem = newsItems[newsItems.count - 1]
             switch currentElementName {
             case "title":
-                newsItem.title       = string
+                lastItem.title       = string
             case "link":
-                newsItem.url         = string
-            case "pubData":
-                newsItem.pubDate     = string
+                lastItem.url         = string
+            case "pubDate":
+                lastItem.pubDate     = string
             case "description":
-                newsItem.description = string
+                lastItem.description = string
             default:
                 break
             }
@@ -208,15 +207,27 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //LanguageTranslatorMode通信をおこなう
     func startTranslation() {
         
-        //配列の番号を合わせる
-        let translationContents = newsItems[newsItems.count - 7]
+        //XMLの要素を配列に保管
+        let textArray = [newsItems[newsItems.count - 1].title,
+                         newsItems[newsItems.count - 2].title,
+                         newsItems[newsItems.count - 3].title,
+                         newsItems[newsItems.count - 4].title,
+                         newsItems[newsItems.count - 5].title,
+                         newsItems[newsItems.count - 6].title,
+                         newsItems[newsItems.count - 7].title,
+                         newsItems[newsItems.count - 8].title
+                        ]
         
-        //APILanguageTranslatorの認証コードをモデルへ渡す
-        let languageTranslatorModel = LanguageTranslatorModel(translatorApiKey: translatorApiKey, translatorVersion: translatorVersion, translatorURL: translatorURL, translationContents: translationContents.title!)
-        
-        //LanguageTranslatorModelの委託とJSON解析をset
-        languageTranslatorModel.doneCatchTranslationProtocol = self
-        languageTranslatorModel.setLanguageTranslator()
+        for i in 0...7 {
+            let translationText = textArray[i]
+            
+            //APILanguageTranslatorの認証コードをモデルへ渡す
+            let languageTranslatorModel = LanguageTranslatorModel(translatorApiKey: translatorApiKey, translatorVersion: translatorVersion, translatorURL: translatorURL, translationText: translationText!)
+            
+            //LanguageTranslatorModelの委託とJSON解析をset
+            languageTranslatorModel.doneCatchTranslationProtocol = self
+            languageTranslatorModel.setLanguageTranslator()
+        }
     }
     
     //渡ってきた値を処理
