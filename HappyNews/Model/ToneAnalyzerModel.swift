@@ -101,26 +101,23 @@ class ToneAnalyzerModel {
                 print("toneAnalysisValue: \(toneAnalysisValue)")
                 print("")
               
-                //感情分析結果が"Joy"&"Score"が0.7以上なら値を取得
+                //感情分析結果が"Joy"&"Score"が0.5以上なら値を取得
                 if toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"] == "Joy" && toneAnalysisValue["document_tone"]["tones"][self.count]["score"] > 0.5 {
                     
                     let  firstToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
                     self.firstScore       = ceil(firstToneScore! * 100)/100
                     self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
                     
-                    let sentences_tone = toneAnalysisValue["sentences_tone"][self.count]["text"].string
-                    
                     //感情分析結果確認
                     print("*****感情分析結果確認*****")
-                    print("sentences_tone: \(sentences_tone)")
+                    print("analysisText : \(self.analysisText)")
                     print("firstScore   : \(self.firstScore)")
                     print("firstToneName: \(self.firstToneName)")
                     print("")
                 } else {
                     
-                    let sentences_tone = toneAnalysisValue["sentences_tone"][self.count]["text"].string
-                    
-                    print("sentences_tone: \(sentences_tone)")
+                    print("*****感情分析結果確認*****")
+                    print("analysisText : \(self.analysisText)")
                     print("Not a joy and a low score, so we didn't get it.")
                     print("")
                 }
