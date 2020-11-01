@@ -10,10 +10,10 @@ import Foundation
 
 class NewsItemsModel {
     
-    var title    :String?
-    var url      :String?
-    var pubDate  :String?
-    var category :String?
-    
+    var title       :String?
+    var url         :String?
+    var pubDate     :String?
+    var category    :String?
+    var description :String?
 }
 

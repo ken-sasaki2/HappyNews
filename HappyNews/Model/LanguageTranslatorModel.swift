@@ -31,12 +31,12 @@ class LanguageTranslatorModel {
     var count = 0
 
     //NewsTableViewから値を受け取る
-    init(translatorApiKey: String, translatorVersion: String, translatorURL: String, sampleText: String) {
+    init(translatorApiKey: String, translatorVersion: String, translatorURL: String, translationContents: String) {
 
         translatorKey = translatorApiKey
         version       = translatorVersion
         serviceURL    = translatorURL
-        analysisText  = sampleText
+        analysisText  = translationContents
     }
 
     //JSON解析をおこなう

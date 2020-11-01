@@ -38,9 +38,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
 
     //分析用サンプルテキスト
     let sampleText = """
-    【天皇賞・秋（日曜＝１１月１日、東京芝２０００メートル）新バージョンアップ作戦】偉業達成が続く秋のＧⅠシリーズ。第１６２回天皇賞・秋ではアーモンドアイによる芝ＧⅠ・８勝目に注目が集まるが、
+    巨人、2連覇「3つの核心」 原采配の妙、澤村トレードの真相、馬車馬のように働いた“あの投手”
     """
-    
+
     //LanguageTranslationModelから渡ってくる値
     var translationArray = [Translation]()
     
@@ -50,7 +50,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //JSON解析で使用
     var count = 0
     var translationContent: String?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -149,15 +149,17 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         if newsItems.count > 0 {
             
             //配列の番号を合わせる
-            let lastItem = newsItems[newsItems.count - 1]
+            let newsItem = newsItems[newsItems.count - 1]
             
             switch currentElementName {
             case "title":
-                lastItem.title     = string
+                newsItem.title       = string
             case "link":
-                lastItem.url       = string
+                newsItem.url         = string
             case "pubData":
-                lastItem.pubDate   = string
+                newsItem.pubDate     = string
+            case "description":
+                newsItem.description = string
             default:
                 break
             }
@@ -180,7 +182,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //XML解析でエラーが発生した場合に呼ばれるメソッド
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        print("エラー:" + parseError.localizedDescription)
+        print("error:" + parseError.localizedDescription)
     }
     
     //セルをタップした時呼ばれるメソッド
@@ -206,8 +208,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //LanguageTranslatorMode通信をおこなう
     func startTranslation() {
         
+        //配列の番号を合わせる
+        let translationContents = newsItems[newsItems.count - 7]
+        
         //APILanguageTranslatorの認証コードをモデルへ渡す
-        let languageTranslatorModel = LanguageTranslatorModel(translatorApiKey: translatorApiKey, translatorVersion: translatorVersion, translatorURL: translatorURL, sampleText: sampleText)
+        let languageTranslatorModel = LanguageTranslatorModel(translatorApiKey: translatorApiKey, translatorVersion: translatorVersion, translatorURL: translatorURL, translationContents: translationContents.title!)
         
         //LanguageTranslatorModelの委託とJSON解析をset
         languageTranslatorModel.doneCatchTranslationProtocol = self
