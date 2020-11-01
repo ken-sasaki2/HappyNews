@@ -108,13 +108,19 @@ class ToneAnalyzerModel {
                     self.firstScore       = ceil(firstToneScore! * 100)/100
                     self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
                     
+                    let sentences_tone = toneAnalysisValue["sentences_tone"][self.count]["text"].string
+                    
                     //感情分析結果確認
                     print("*****感情分析結果確認*****")
+                    print("sentences_tone: \(sentences_tone)")
                     print("firstScore   : \(self.firstScore)")
                     print("firstToneName: \(self.firstToneName)")
                     print("")
                 } else {
                     
+                    let sentences_tone = toneAnalysisValue["sentences_tone"][self.count]["text"].string
+                    
+                    print("sentences_tone: \(sentences_tone)")
                     print("Not a joy and a low score, so we didn't get it.")
                     print("")
                 }

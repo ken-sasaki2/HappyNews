@@ -35,12 +35,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var analysisApiKey  = "36bKQ1j2Aga5xtwTHJKFoGwbPfxLnDUk6M7Dt6qVEhmr"
     var analysisVersion = "2017-09-21"
     var analysisURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
-
-    //分析用サンプルテキスト
-    let sampleText = """
-    巨人、2連覇「3つの核心」 原采配の妙、澤村トレードの真相、馬車馬のように働いた“あの投手”
-    """
-
+    
     //LanguageTranslationModelから渡ってくる値
     var translationArray = [Translation]()
     
