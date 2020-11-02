@@ -28,7 +28,7 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlString = "https://rss.allabout.co.jp/aa/latest/ch/entertainment/"
+        let xmlString = "https://news.yahoo.co.jp/rss/categories/entertainment.xml"
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
@@ -113,7 +113,7 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         
         if newsItems.count > 0 {
-            
+        
             //配列の番号を合わせる
             let lastItem = newsItems[newsItems.count - 1]
             
@@ -169,6 +169,6 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
         //webViewControllerで取り出す
         present(webViewController, animated: true, completion: nil)
     }
-    
 }
+
 

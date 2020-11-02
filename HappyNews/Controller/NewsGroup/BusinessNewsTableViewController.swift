@@ -28,7 +28,7 @@ class BusinessNewsTableViewController: UITableViewController,SegementSlideConten
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlString = "https://headlines.yahoo.co.jp/rss/srnijugo-c_life.xml"
+        let xmlString = "https://news.yahoo.co.jp/rss/media/srnijugo/all.xml"
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
