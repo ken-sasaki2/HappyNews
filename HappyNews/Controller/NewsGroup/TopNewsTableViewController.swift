@@ -54,7 +54,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //XMLParseの処理
         //XMLファイルを特定
-        xmlString = "https://news.yahoo.co.jp/pickup/rss.xml"
+        xmlString = "https://news.yahoo.co.jp/rss/categories/domestic.xml"
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString!)!
@@ -179,41 +179,37 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         print("error:" + parseError.localizedDescription)
     }
     
-    //セルをタップした時呼ばれるメソッド
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //WebViewControllerのインスタンス作成
-        let webViewController = WebViewController()
-        
-        //モーダルで画面遷移
-        webViewController.modalTransitionStyle = .coverVertical
-        
-        //タップしたセルを検知
-        let tapCell = newsItems[indexPath.row]
-        
-        //検知したセルのurlを取得
-        UserDefaults.standard.set(tapCell.url, forKey: "url")
-        
-        //webViewControllerで取り出す
-        present(webViewController, animated: true, completion: nil)
-    }
-    
     // MARK: - LanguageTranslator
     //LanguageTranslatorMode通信をおこなう
     func startTranslation() {
         
         //XMLの要素を配列に保管
-        let textArray = [newsItems[newsItems.count - 1].title,
-                         newsItems[newsItems.count - 2].title,
-                         newsItems[newsItems.count - 3].title,
-                         newsItems[newsItems.count - 4].title,
-                         newsItems[newsItems.count - 5].title,
-                         newsItems[newsItems.count - 6].title,
-                         newsItems[newsItems.count - 7].title,
-                         newsItems[newsItems.count - 8].title
+        let textArray = [newsItems[newsItems.count - 1].description,
+                         newsItems[newsItems.count - 2].description,
+                         newsItems[newsItems.count - 3].description,
+                         newsItems[newsItems.count - 4].description,
+                         newsItems[newsItems.count - 5].description,
+                         newsItems[newsItems.count - 6].description,
+                         newsItems[newsItems.count - 7].description,
+                         newsItems[newsItems.count - 8].description,
+                         newsItems[newsItems.count - 9].description,
+                         newsItems[newsItems.count - 10].description,
+                         newsItems[newsItems.count - 11].description,
+                         newsItems[newsItems.count - 12].description,
+                         newsItems[newsItems.count - 13].description,
+                         newsItems[newsItems.count - 14].description,
+                         newsItems[newsItems.count - 15].description,
+                         newsItems[newsItems.count - 16].description,
+                         newsItems[newsItems.count - 17].description,
+                         newsItems[newsItems.count - 18].description,
+                         newsItems[newsItems.count - 19].description,
+                         newsItems[newsItems.count - 20].description,
+                         newsItems[newsItems.count - 21].description,
+                         newsItems[newsItems.count - 22].description,
                         ]
         
-        for i in 0...7 {
+        //textArrayの中身を順にLanguageTranslatorModelへ通信
+        for i in 0...21 {
             let translationText = textArray[i]
             
             //APILanguageTranslatorの認証コードをモデルへ渡す
@@ -261,5 +257,24 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int) {
         
         analyzerArray = arrayAnalyzerData
+    }
+    
+    //セルをタップした時呼ばれるメソッド
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //WebViewControllerのインスタンス作成
+        let webViewController = WebViewController()
+        
+        //モーダルで画面遷移
+        webViewController.modalTransitionStyle = .coverVertical
+        
+        //タップしたセルを検知
+        let tapCell = newsItems[indexPath.row]
+        
+        //検知したセルのurlを取得
+        UserDefaults.standard.set(tapCell.url, forKey: "url")
+        
+        //webViewControllerで取り出す
+        present(webViewController, animated: true, completion: nil)
     }
 }
