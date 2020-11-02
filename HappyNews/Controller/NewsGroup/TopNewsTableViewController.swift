@@ -27,7 +27,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsItems = [NewsItemsModel]()
 
     //LanguageTranslatorの認証キー
-    var translatorApiKey  = "pLM8kVDHyCCa5t0IjajFd-rBmLB_jnmG3nl2mgdSsshM"
+    var translatorApiKey  = "0g_NfjdaQ0smXLmgZqR3tPxT2g6H1ZbJuvVYtDL4k6fx"
     var translatorVersion = "2018-05-01"
     var translatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
@@ -54,7 +54,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //XMLParseの処理
         //XMLファイルを特定
-        xmlString = "https://news.yahoo.co.jp/rss/categories/domestic.xml"
+        xmlString = "https://news.yahoo.co.jp/rss/media/abema/all.xml"
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString!)!
@@ -206,10 +206,38 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                          newsItems[newsItems.count - 20].description,
                          newsItems[newsItems.count - 21].description,
                          newsItems[newsItems.count - 22].description,
+                         newsItems[newsItems.count - 23].description,
+                         newsItems[newsItems.count - 24].description,
+                         newsItems[newsItems.count - 25].description,
+                         newsItems[newsItems.count - 26].description,
+                         newsItems[newsItems.count - 27].description,
+                         newsItems[newsItems.count - 28].description,
+                         newsItems[newsItems.count - 29].description,
+                         newsItems[newsItems.count - 30].description,
+                         newsItems[newsItems.count - 31].description,
+                         newsItems[newsItems.count - 32].description,
+                         newsItems[newsItems.count - 33].description,
+                         newsItems[newsItems.count - 34].description,
+                         newsItems[newsItems.count - 35].description,
+                         newsItems[newsItems.count - 36].description,
+                         newsItems[newsItems.count - 37].description,
+                         newsItems[newsItems.count - 38].description,
+                         newsItems[newsItems.count - 39].description,
+                         newsItems[newsItems.count - 40].description,
+                         newsItems[newsItems.count - 41].description,
+                         newsItems[newsItems.count - 42].description,
+                         newsItems[newsItems.count - 43].description,
+                         newsItems[newsItems.count - 44].description,
+                         newsItems[newsItems.count - 45].description,
+                         newsItems[newsItems.count - 46].description,
+                         newsItems[newsItems.count - 47].description,
+                         newsItems[newsItems.count - 48].description,
+                         newsItems[newsItems.count - 49].description,
+                         newsItems[newsItems.count - 50].description
                         ]
         
         //textArrayの中身を順にLanguageTranslatorModelへ通信
-        for i in 0...21 {
+        for i in 0...49 {
             let translationText = textArray[i]
             
             //APILanguageTranslatorの認証コードをモデルへ渡す

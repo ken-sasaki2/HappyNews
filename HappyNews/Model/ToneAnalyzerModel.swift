@@ -98,8 +98,8 @@ class ToneAnalyzerModel {
 
                 //JSON型へ変換
                 let toneAnalysisValue = JSON(toneAnalysisJSON)
-                print("toneAnalysisValue: \(toneAnalysisValue)")
-                print("")
+//                print("toneAnalysisValue: \(toneAnalysisValue)")
+//                print("")
               
                 //感情分析結果が"Joy"&"Score"が0.5以上なら値を取得
                 if toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"] == "Joy" && toneAnalysisValue["document_tone"]["tones"][self.count]["score"] > 0.5 {
