@@ -28,7 +28,13 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlString = "https://news.yahoo.co.jp/rss/categories/entertainment.xml"
+        let xmlArray = ["https://news.yahoo.co.jp/rss/media/the_tv/all.xml",
+                        "https://news.yahoo.co.jp/rss/media/choani/all.xml",
+                        "https://news.yahoo.co.jp/rss/media/tabelog/all.xml"]
+        
+        for i in 0...2 {
+        
+        let xmlString = xmlArray[i]
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
@@ -41,6 +47,7 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
         
         //parseの開始
         parser.parse()
+        }
     }
 
     // MARK: - Table view data source
@@ -89,7 +96,7 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
         cell.textLabel?.numberOfLines = 3
         
         //セルのサブタイトル
-        cell.detailTextLabel?.text = newsItem.category
+        cell.detailTextLabel?.text = newsItem.pubDate
         
         //サブタイトルのテキストカラー
         cell.detailTextLabel?.textColor = UIColor.gray
@@ -119,13 +126,13 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
             
             switch currentElementName {
             case "title":
-                lastItem.title   = string
+                lastItem.title       = string
             case "link":
-                lastItem.url     = string
-            case "pubData":
-                lastItem.pubDate = string
-            case "category":
-                lastItem.category = string
+                lastItem.url         = string
+            case "pubDate":
+                lastItem.pubDate     = string
+            case "description":
+                lastItem.description = string
             default:
                 break
             }
@@ -148,7 +155,7 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
     
     //XML解析でエラーが発生した場合に呼ばれるメソッド
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        print("エラー:" + parseError.localizedDescription)
+        print("error:" + parseError.localizedDescription)
     }
     
     //セルをタップした時呼ばれるメソッド

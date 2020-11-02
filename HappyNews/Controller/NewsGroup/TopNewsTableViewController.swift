@@ -27,12 +27,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsItems = [NewsItemsModel]()
 
     //LanguageTranslatorの認証キー
-    var translatorApiKey  = "0g_NfjdaQ0smXLmgZqR3tPxT2g6H1ZbJuvVYtDL4k6fx"
+    var translatorApiKey  = "3KAUvxYUjf4NU_P71hdRAuPozSv7ffyTt-d0s2PoUHva"
     var translatorVersion = "2018-05-01"
     var translatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var analysisApiKey  = "36bKQ1j2Aga5xtwTHJKFoGwbPfxLnDUk6M7Dt6qVEhmr"
+    var analysisApiKey  = "H7zVk1CiYg4KL1i77AFhbNI-snepUjM8_XcZy1UTE4ms"
     var analysisVersion = "2017-09-21"
     var analysisURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -45,6 +45,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //JSON解析で使用
     var count = 0
     var translationContent: String?
+    var analyzer: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +55,16 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //XMLParseの処理
         //XMLファイルを特定
-        xmlString = "https://news.yahoo.co.jp/rss/media/abema/all.xml"
+        let xmlArray = ["https://news.yahoo.co.jp/rss/topics/domestic.xml",
+                        "https://news.yahoo.co.jp/rss/topics/world.xml",
+                        "https://news.yahoo.co.jp/rss/topics/local.xml"]
+        
+        for i in 0...2 {
+        
+        let xmlString = xmlArray[i]
         
         //XMLファイルをURL型のurlに変換
-        let url:URL = URL(string: xmlString!)!
+        let url:URL = URL(string: xmlString)!
         
         //parserにurlを代入
         parser = XMLParser(contentsOf: url)!
@@ -67,9 +74,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //parseの開始
         parser.parse()
-        
-        //翻訳機能開始
-        startTranslation()
+        }
     }
     
     // MARK: - Table view data source
@@ -95,35 +100,35 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //セルを構築する際に呼ばれるメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        //スタイルを2行にかつシンプルに
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
 
-        //RSSで取得したニュースの値が入る
-        let newsItem = newsItems[indexPath.row]
-        
-        //セルの背景
-        cell.backgroundColor = UIColor.white
-        
-        //セルのテキスト
-        cell.textLabel?.text = newsItem.title
+            //スタイルを2行にかつシンプルに
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
 
-        //セルのフォントタイプとサイズ
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
-        
-        //セルのテキストカラー
-        cell.textLabel?.textColor = UIColor.black
-        
-        //セルのテキストの行数
-        cell.textLabel?.numberOfLines = 3
-        
-        //セルのサブタイトル
-        cell.detailTextLabel?.text = newsItem.pubDate
-        
-        //サブタイトルのテキストカラー
-        cell.detailTextLabel?.textColor = UIColor.gray
+            //RSSで取得したニュースの値が入る
+            let newsItem = newsItems[indexPath.row]
+            
+            //セルの背景
+            cell.backgroundColor = UIColor.white
+            
+            //セルのテキスト
+            cell.textLabel?.text = newsItem.title
 
-        return cell
+            //セルのフォントタイプとサイズ
+            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
+            
+            //セルのテキストカラー
+            cell.textLabel?.textColor = UIColor.black
+            
+            //セルのテキストの行数
+            cell.textLabel?.numberOfLines = 3
+            
+            //セルのサブタイトル
+            cell.detailTextLabel?.text = newsItem.pubDate
+            
+            //サブタイトルのテキストカラー
+            cell.detailTextLabel?.textColor = UIColor.gray
+
+            return cell
     }
     
     //XML解析を開始する場合(parser.parse())に呼ばれるメソッド
@@ -179,6 +184,25 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         print("error:" + parseError.localizedDescription)
     }
     
+    //セルをタップした時呼ばれるメソッド
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //WebViewControllerのインスタンス作成
+        let webViewController = WebViewController()
+        
+        //モーダルで画面遷移
+        webViewController.modalTransitionStyle = .coverVertical
+        
+        //タップしたセルを検知
+        let tapCell = newsItems[indexPath.row]
+        
+        //検知したセルのurlを取得
+        UserDefaults.standard.set(tapCell.url, forKey: "url")
+        
+        //webViewControllerで取り出す
+        present(webViewController, animated: true, completion: nil)
+    }
+    
     // MARK: - LanguageTranslator
     //LanguageTranslatorMode通信をおこなう
     func startTranslation() {
@@ -207,37 +231,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                          newsItems[newsItems.count - 21].description,
                          newsItems[newsItems.count - 22].description,
                          newsItems[newsItems.count - 23].description,
-                         newsItems[newsItems.count - 24].description,
-                         newsItems[newsItems.count - 25].description,
-                         newsItems[newsItems.count - 26].description,
-                         newsItems[newsItems.count - 27].description,
-                         newsItems[newsItems.count - 28].description,
-                         newsItems[newsItems.count - 29].description,
-                         newsItems[newsItems.count - 30].description,
-                         newsItems[newsItems.count - 31].description,
-                         newsItems[newsItems.count - 32].description,
-                         newsItems[newsItems.count - 33].description,
-                         newsItems[newsItems.count - 34].description,
-                         newsItems[newsItems.count - 35].description,
-                         newsItems[newsItems.count - 36].description,
-                         newsItems[newsItems.count - 37].description,
-                         newsItems[newsItems.count - 38].description,
-                         newsItems[newsItems.count - 39].description,
-                         newsItems[newsItems.count - 40].description,
-                         newsItems[newsItems.count - 41].description,
-                         newsItems[newsItems.count - 42].description,
-                         newsItems[newsItems.count - 43].description,
-                         newsItems[newsItems.count - 44].description,
-                         newsItems[newsItems.count - 45].description,
-                         newsItems[newsItems.count - 46].description,
-                         newsItems[newsItems.count - 47].description,
-                         newsItems[newsItems.count - 48].description,
-                         newsItems[newsItems.count - 49].description,
-                         newsItems[newsItems.count - 50].description
+                         newsItems[newsItems.count - 24].description
                         ]
         
         //textArrayの中身を順にLanguageTranslatorModelへ通信
-        for i in 0...49 {
+        for i in 0...23 {
             let translationText = textArray[i]
             
             //APILanguageTranslatorの認証コードをモデルへ渡す
@@ -285,24 +283,17 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int) {
         
         analyzerArray = arrayAnalyzerData
-    }
     
-    //セルをタップした時呼ばれるメソッド
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //渡ってきた値をJSONに変換
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        guard let analyzers = try? encoder.encode(analyzerArray) else {
+            fatalError("Failed to encode to JSON.")
+        }
         
-        //WebViewControllerのインスタンス作成
-        let webViewController = WebViewController()
-        
-        //モーダルで画面遷移
-        webViewController.modalTransitionStyle = .coverVertical
-        
-        //タップしたセルを検知
-        let tapCell = newsItems[indexPath.row]
-        
-        //検知したセルのurlを取得
-        UserDefaults.standard.set(tapCell.url, forKey: "url")
-        
-        //webViewControllerで取り出す
-        present(webViewController, animated: true, completion: nil)
+        //JSON解析(jsonValue)
+        let json = JSON(analyzers)
+        analyzer = json[self.count]["firstToneName"].string
+        print("test: \(analyzer)")
     }
 }

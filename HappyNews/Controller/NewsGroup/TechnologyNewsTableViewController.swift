@@ -28,7 +28,13 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlString = "https://rss.itmedia.co.jp/rss/2.0/itmedia_all.xml"
+        let xmlArray = ["https://news.yahoo.co.jp/rss/topics/it.xml",
+                        "https://news.yahoo.co.jp/rss/topics/science.xml",
+                        "https://news.yahoo.co.jp/rss/media/zdn_m/all.xml"]
+        
+        for i in 0...2 {
+        
+        let xmlString = xmlArray[i]
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
@@ -41,6 +47,7 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
         
         //parseの開始
         parser.parse()
+        }
     }
 
     // MARK: - Table view data source
@@ -119,11 +126,13 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
             
             switch currentElementName {
             case "title":
-                lastItem.title   = string
+                lastItem.title       = string
             case "link":
-                lastItem.url     = string
-            case "pubData":
-                lastItem.pubDate = string
+                lastItem.url         = string
+            case "pubDate":
+                lastItem.pubDate     = string
+            case "description":
+                lastItem.description = string
             default:
                 break
             }
@@ -146,7 +155,7 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
     
     //XML解析でエラーが発生した場合に呼ばれるメソッド
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        print("エラー:" + parseError.localizedDescription)
+        print("error:" + parseError.localizedDescription)
     }
     
     //セルをタップした時呼ばれるメソッド

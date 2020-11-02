@@ -28,7 +28,13 @@ class BusinessNewsTableViewController: UITableViewController,SegementSlideConten
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlString = "https://news.yahoo.co.jp/rss/media/srnijugo/all.xml"
+        let xmlArray = ["https://news.yahoo.co.jp/rss/media/san/all.xml",
+                        "https://news.yahoo.co.jp/rss/media/srnijugo/all.xml",
+                        "https://news.yahoo.co.jp/rss/media/stoyos/all.xml"]
+        
+        for i in 0...2 {
+        
+        let xmlString = xmlArray[i]
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
@@ -41,6 +47,7 @@ class BusinessNewsTableViewController: UITableViewController,SegementSlideConten
         
         //parseの開始
         parser.parse()
+        }
     }
 
     // MARK: - Table view data source
@@ -119,11 +126,13 @@ class BusinessNewsTableViewController: UITableViewController,SegementSlideConten
             
             switch currentElementName {
             case "title":
-                lastItem.title   = string
+                lastItem.title       = string
             case "link":
-                lastItem.url     = string
-            case "pubData":
-                lastItem.pubDate = string
+                lastItem.url         = string
+            case "pubDate":
+                lastItem.pubDate     = string
+            case "description":
+                lastItem.description = string
             default:
                 break
             }
@@ -146,7 +155,7 @@ class BusinessNewsTableViewController: UITableViewController,SegementSlideConten
     
     //XML解析でエラーが発生した場合に呼ばれるメソッド
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        print("エラー:" + parseError.localizedDescription)
+        print("error:" + parseError.localizedDescription)
     }
     
     //セルをタップした時呼ばれるメソッド
