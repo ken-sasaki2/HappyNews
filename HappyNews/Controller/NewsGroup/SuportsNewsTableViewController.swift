@@ -67,7 +67,7 @@ class SuportsNewsTableViewController: UITableViewController,SegementSlideContent
     
     //セルの高さを決めるメソッド
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.size.height/8
+        return view.frame.size.height/7
     }
     
     //セルを構築する際に呼ばれるメソッド
