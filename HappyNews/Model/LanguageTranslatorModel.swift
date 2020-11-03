@@ -95,8 +95,8 @@ class LanguageTranslatorModel {
                 self.translation     = translationValue["translations"][self.count]["translation"].string
                 
                 print("*****翻訳結果確認*****")
-                print("analysisText     : \(self.analysisText)")
-                print("translationConten: \(self.translation)")
+//                print("analysisText     : \(self.analysisText)")
+                print("translationContent: \(self.translation)")
                 print("")
                 
                 //構体Translationに翻訳結果を追加
