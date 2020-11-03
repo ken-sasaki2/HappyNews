@@ -70,6 +70,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45B7643D2551FAFE00848960 /* LoadingGroup */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LoadingGroup;
+			sourceTree = "<group>";
+		};
 		45BE9B4B252801AE0013F34C /* NewsGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +147,7 @@
 		45D8866B24E4C10800B32D02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				45B7643D2551FAFE00848960 /* LoadingGroup */,
 				45BE9B50252802130013F34C /* TabBarGroup */,
 				45BE9B4F252801FF0013F34C /* SearchGroup */,
 				45BE9B4E252801D30013F34C /* WheatherGroup */,
