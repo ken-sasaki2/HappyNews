@@ -37,12 +37,12 @@ class ToneAnalyzerModel {
     var length: Int?
     
     //NewsTableViewから値を受け取る
-    init(analysisApiKey: String, analysisVersion: String, analysisURL: String, analysisContent: String) {
+    init(analysisApiKey: String, analysisVersion: String, analysisURL: String, translationContent: String) {
         
         analysisKey   = analysisApiKey
         version       = analysisVersion
         serviceURL    = analysisURL
-        analysisText  = analysisContent
+        analysisText  = translationContent
     }
     
     //感情分析
@@ -108,25 +108,27 @@ class ToneAnalyzerModel {
                     self.firstScore       = ceil(firstToneScore! * 100)/100
                     self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
                     
+                    //構造体Analyzerに感情分析結果を追加
+                    self.analyzerArray.append(Analyzer(firstScore: self.firstScore, firstToneName: self.firstToneName))
+                    
+                    //NewsTableViewControllerへ値を渡す
+                    self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: self.analyzerArray, resultCount: self.analyzerArray.count)
+                    
                     //感情分析結果確認
-                    print("*****感情分析結果確認*****")
-                    print("analysisText : \(self.analysisText)")
-                    print("firstScore   : \(self.firstScore)")
-                    print("firstToneName: \(self.firstToneName)")
-                    print("")
+//                    print("*****感情分析結果確認*****")
+//                    print("analysisText : \(self.analysisText)")
+//                    print("firstScore   : \(self.firstScore)")
+//                    print("firstToneName: \(self.firstToneName)")
+//                    print("")
                 } else {
                     
-                    print("*****感情分析結果確認*****")
-                    print("analysisText : \(self.analysisText)")
-                    print("Not a joy and a low score, so we didn't get it.")
-                    print("")
+                    self.analyzerArray.removeAll()
+//                    print("sasasa: \(self.analyzerArray)")
+//                    print("*****感情分析結果確認*****")
+//                    print("analysisText : \(self.analysisText)")
+//                    print("Not a joy and a low score, so we didn't get it.")
+//                    print("")
                 }
-    
-                //構造体Analyzerに感情分析結果を追加
-                self.analyzerArray.append(Analyzer(firstScore: self.firstScore, firstToneName: self.firstToneName))
-                
-                //NewsTableViewControllerへ値を渡す
-                self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: self.analyzerArray, resultCount: self.analyzerArray.count)
 
             case false:
                 //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
