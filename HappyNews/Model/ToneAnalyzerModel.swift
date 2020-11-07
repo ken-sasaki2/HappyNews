@@ -12,48 +12,42 @@ import SwiftyJSON
 
 protocol DoneCatchAnalyzerProtocol {
     
-    //規則を決める
     func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int)
 }
 
 class ToneAnalyzerModel {
     
-    //外部から渡ってくる値
-    var analysisKey    : String?
-    var version        : String?
-    var serviceURL     : String?
-    var analysisText   : String?
-    var firstScore     : Float?
-    var secondScore    : Float?
-    var thirdScore     : Float?
-    var firstToneName  : String?
-    var secondToneName : String?
-    var thirdToneName  : String?
+    //Controllerから渡ってくる値
+    var toneAnalyzerAccessKey    : String?
+    var toneAnalyzerAccessVersion: String?
+    var toneAnalyzerAccessURL    : String?
+    var analysisText             : String?
+    
+    //Controllerに値を返すときに使用
     var analyzerArray = [Analyzer]()
     var doneCatchAnalyzerProtocol: DoneCatchAnalyzerProtocol?
 
     //JSON解析で使用
     var count = 0
-    var length: Int?
     
     //NewsTableViewから値を受け取る
-    init(analysisApiKey: String, analysisVersion: String, analysisURL: String, translationContent: String) {
+    init(toneAnalyzerApiKey: String, toneAnalyzerVersion: String, toneAnalyzerURL: String, toneAnalyzerText: String) {
         
-        analysisKey   = analysisApiKey
-        version       = analysisVersion
-        serviceURL    = analysisURL
-        analysisText  = translationContent
+        toneAnalyzerAccessKey     = toneAnalyzerApiKey
+        toneAnalyzerAccessVersion = toneAnalyzerVersion
+        toneAnalyzerAccessURL     = toneAnalyzerURL
+        analysisText              = toneAnalyzerText
     }
     
-    //感情分析
+    //感情分析開始
     func setToneAnalyzer() {
-        print("何回呼ばれている？")
-        //APIを認証するためのキーとversionとurlを定義
-        let toneAnalyzerKey         = WatsonIAMAuthenticator(apiKey: analysisKey!)
-        let toneAnalyzer            = ToneAnalyzer(version: version!, authenticator: toneAnalyzerKey)
-            toneAnalyzer.serviceURL = serviceURL
+        
+        //API認証子
+        let toneAnalyzerKey = WatsonIAMAuthenticator(apiKey: toneAnalyzerAccessKey!)
+        let toneAnalyzer    = ToneAnalyzer(version: toneAnalyzerAccessVersion!, authenticator: toneAnalyzerKey)
+            toneAnalyzer.serviceURL = toneAnalyzerAccessURL
 
-        //sampleTextを分析（リクエスト送信）
+        //リクエスト送信
         toneAnalyzer.tone(toneContent: .text(analysisText!)) {
           response, error in
 
@@ -68,70 +62,55 @@ class ToneAnalyzerModel {
                 case .some(413):
                     // Handle Request Too Large (413) exception
                     print("Payload too large")
-            default:
-                if let statusCode = statusCode {
-                    print("Error - code: \(statusCode), \(message ?? "")")
+                default:
+                    if let statusCode = statusCode {
+                        print("Error - code: \(statusCode), \(message ?? "")")
+                    }
                 }
-            }
             default:
               print(error.localizedDescription)
             }
             return
           }
-
-          //データ処理
-          guard let toneAnalysisResult = response?.result else {
+          //analysisResult = レスポンス結果
+          guard let analysisResult = response?.result else {
             print(error?.localizedDescription ?? "unknown error")
             return
           }
 
-          //レスポンスの結果で条件分岐
-          let statusCode = response?.statusCode
+            //レスポンスのステータスコードで条件分岐
+            let statusCode = response?.statusCode
             switch statusCode == Optional(200) {
             case true:
-                //分析結果のデータをJSON形式に変換
+                //分析結果のデータをJSON形式に整形
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted
-                guard let toneAnalysisJSON = try? encoder.encode(toneAnalysisResult) else {
+                guard let analysisJSON = try? encoder.encode(analysisResult) else {
                     fatalError("Failed to encode to JSON.")
                 }
 
-                //JSON型へ変換
-                let toneAnalysisValue = JSON(toneAnalysisJSON)
+                //SwiftyJSONのJSON型へ変換
+                let toneAnalysisValue = JSON(analysisJSON)
                 
                 //感情分析結果が"Joy"&"Score"が0.5以上なら値を取得
                 if toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"] == "Joy" && toneAnalysisValue["document_tone"]["tones"][self.count]["score"] > 0.5 {
+
+                    //analyzer = Joy"&"Score"が0.5以上の感情分析結果
+                    let analyzer = Analyzer(toneScore: toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float,toneName: toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string)
                     
-                    let  firstToneScore   = toneAnalysisValue["document_tone"]["tones"][self.count]["score"].float
-                    self.firstScore       = ceil(firstToneScore! * 100)/100
-                    self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
-                    
-                    self.doneCatchAnalyzer()
-//                    //構造体Analyzerに感情分析結果を追加
-//                    self.analyzerArray.append(Analyzer(firstScore: self.firstScore, firstToneName: self.firstToneName))
-//
-//                    print(self.analyzerArray)
-//
-//                    //NewsTableViewControllerへ値を渡す
-//                    self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: self.analyzerArray, resultCount: self.analyzerArray.count)
-                    
-                } else {
-                    print("error: \(error)")
-                }
+                    //感情分析結果を配列に保存
+                    self.analyzerArray.append(analyzer)
+
+                    print(self.analyzerArray.count)
+                    print(self.analyzerArray.debugDescription)
+                } 
 
             case false:
-                //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
+                //ステータスコードの400範囲は障害、500範囲は内部システムエラー
                 print("analysis failure: \(statusCode)")
             }
+            //NewsTableViewControllerへ値を渡す
+            self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: self.analyzerArray, resultCount: self.analyzerArray.count)
         }
-    }
-    func doneCatchAnalyzer() {
-        print("呼ばれてる？")
-        //構造体Analyzerに感情分析結果を追加
-        self.analyzerArray.append(Analyzer(firstScore: self.firstScore, firstToneName: self.firstToneName))
-        print(self.analyzerArray)
-        
-        //NewsTableViewControllerへ値を渡す
-        self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: self.analyzerArray, resultCount: self.analyzerArray.count)
     }
 }

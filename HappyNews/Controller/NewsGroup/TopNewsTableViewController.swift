@@ -27,14 +27,14 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsItems = [NewsItemsModel]()
 
     //LanguageTranslatorの認証キー
-    var translatorApiKey  = "iVzXO8cqVz1thlC0oh8oja_0fyLSfge9OOLGMBXC2OSA"
-    var translatorVersion = "2018-05-01"
-    var translatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
+    var languageTranslatorApiKey  = "iVzXO8cqVz1thlC0oh8oja_0fyLSfge9OOLGMBXC2OSA"
+    var languageTranslatorVersion = "2018-05-01"
+    var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var analysisApiKey  = "Nnf9o1DmxcPlWejH9hg7Ofy90DZHKQ4VnqP8FgzQLpnR"
-    var analysisVersion = "2017-09-21"
-    var analysisURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
+    var toneAnalyzerApiKey  = "Ko0MJXr7im33kpia3B_-7eiAtc2dL2lZVnWzbDoiJLFF"
+    var toneAnalyzerVersion = "2017-09-21"
+    var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
     //LanguageTranslationModelから渡ってくる値
     var translationArray = [Translation]()
@@ -44,12 +44,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //JSON解析で使用
     var count = 0
-    var translationContent: String?
-    var analyzer          : String?
-    var score             : Float?
-    var name              : String?
-    var tonesArray        : Any = []
-    var joyArray          : Any = []
+    var toneAnalyzerText: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,13 +54,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlArray = ["https://news.yahoo.co.jp/rss/topics/sports.xml",
-                        "https://news.yahoo.co.jp/rss/topics/entertainment.xml"
-                       ]
-//
-        for i in 0...1 {
+        let xmlArray = "https://news.yahoo.co.jp/rss/media/entame/all.xml"
         
-        let xmlString = xmlArray[i]
+        //for i in 0...1 {
+        
+        let xmlString = xmlArray
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
@@ -78,10 +71,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //parseの開始
         parser.parse()
-        }
+        //}
         
-        //翻訳の呼び出し
-//        startTranslation()
+        //LanguageTranslatorの呼び出し
+        startTranslation()
     }
     
     // MARK: - Table view data source
@@ -159,146 +152,98 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     }
     
     // MARK: - LanguageTranslator
-    //LanguageTranslatorMode通信をおこなう
     func startTranslation() {
         
-        //XMLの要素を配列に保管
-        let textArray = [newsItems[newsItems.count - 1].description,
-                         newsItems[newsItems.count - 2].description,
-                         newsItems[newsItems.count - 3].description,
-                         newsItems[newsItems.count - 4].description,
-                         newsItems[newsItems.count - 5].description,
-                         newsItems[newsItems.count - 6].description,
-                         newsItems[newsItems.count - 7].description,
-                         newsItems[newsItems.count - 8].description,
-                         newsItems[newsItems.count - 9].description,
-                         newsItems[newsItems.count - 10].description,
-                         newsItems[newsItems.count - 11].description,
-                         newsItems[newsItems.count - 12].description,
-                         newsItems[newsItems.count - 13].description,
-                         newsItems[newsItems.count - 14].description
-//                         newsItems[newsItems.count - 15].description,
-//                         newsItems[newsItems.count - 16].description,
-//                         newsItems[newsItems.count - 17].description,
-//                         newsItems[newsItems.count - 18].description,
-//                         newsItems[newsItems.count - 19].description,
-//                         newsItems[newsItems.count - 20].description,
-//                         newsItems[newsItems.count - 21].description,
-//                         newsItems[newsItems.count - 22].description,
-//                         newsItems[newsItems.count - 23].description,
-//                         newsItems[newsItems.count - 24].description,
-//                         newsItems[newsItems.count - 25].description,
-//                         newsItems[newsItems.count - 26].description,
-//                         newsItems[newsItems.count - 27].description,
-//                         newsItems[newsItems.count - 28].description,
-//                         newsItems[newsItems.count - 29].description,
-//                         newsItems[newsItems.count - 30].description,
-//                         newsItems[newsItems.count - 31].description,
-//                         newsItems[newsItems.count - 32].description,
-//                         newsItems[newsItems.count - 33].description,
-//                         newsItems[newsItems.count - 34].description,
-//                         newsItems[newsItems.count - 35].description,
-//                         newsItems[newsItems.count - 36].description,
-//                         newsItems[newsItems.count - 37].description,
-//                         newsItems[newsItems.count - 38].description,
-//                         newsItems[newsItems.count - 39].description,
-//                         newsItems[newsItems.count - 40].description,
-//                         newsItems[newsItems.count - 41].description,
-//                         newsItems[newsItems.count - 42].description,
-//                         newsItems[newsItems.count - 43].description,
-//                         newsItems[newsItems.count - 44].description,
-//                         newsItems[newsItems.count - 45].description,
-//                         newsItems[newsItems.count - 46].description,
-//                         newsItems[newsItems.count - 47].description,
-//                         newsItems[newsItems.count - 48].description,
-//                         newsItems[newsItems.count - 49].description,
-//                         newsItems[newsItems.count - 50].description
-                        ]
+        //XMLのdescriptionを配列に保管
+        let newsTextArray = [newsItems[newsItems.count - 1].description,
+                             newsItems[newsItems.count - 2].description,
+                             newsItems[newsItems.count - 3].description,
+                             newsItems[newsItems.count - 4].description,
+                             newsItems[newsItems.count - 5].description,
+                             newsItems[newsItems.count - 6].description,
+                             newsItems[newsItems.count - 7].description,
+                             newsItems[newsItems.count - 8].description,
+                             newsItems[newsItems.count - 9].description,
+                             newsItems[newsItems.count - 10].description,
+                             newsItems[newsItems.count - 11].description,
+                             newsItems[newsItems.count - 12].description,
+                             newsItems[newsItems.count - 13].description,
+                             newsItems[newsItems.count - 14].description
+                            ]
         
-        //textArrayの中身を順にLanguageTranslatorModelへ通信
+        //newsTextArrayの要素とAPILanguageTranslatorの認証コードで通信
         for i in 0...13 {
-            let translationText = textArray[i]
             
-            //APILanguageTranslatorの認証コードをモデルへ渡す
-            let languageTranslatorModel = LanguageTranslatorModel(translatorApiKey: translatorApiKey, translatorVersion: translatorVersion, translatorURL: translatorURL, translationText: translationText!)
+            let newsText = newsTextArray[i]
             
-            //LanguageTranslatorModelの委託とJSON解析をset
+            let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsText: newsText!)
+            
+            //LanguageTranslatorModelの委託とJSON解析をセット
             languageTranslatorModel.doneCatchTranslationProtocol = self
             languageTranslatorModel.setLanguageTranslator()
         }
     }
     
-    //渡ってきた値を処理
+    //LanguageTranslatorModelから返ってきた値を処理
     func catchTranslation(arrayTranslationData: Array<Translation>, resultCount: Int) {
         
         translationArray = arrayTranslationData
         
-        //渡ってきた値をJSONに変換
+        //返ってきた値をJSONに整形
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-        guard let jsonValue = try? encoder.encode(translationArray) else {
+        guard let jsonArray = try? encoder.encode(translationArray) else {
             fatalError("Failed to encode to JSON.")
         }
         
-        //JSON解析(jsonValue)
-        let json = JSON(jsonValue)
-        translationContent = json[self.count]["translation"].string
+        //SwiftyJSONのJSON型に変換
+        let jsonValue = JSON(jsonArray)
+        
+        //toneAnalysisText = 翻訳結果
+        toneAnalyzerText = jsonValue[self.count]["translation"].string
         
         //startToneAnalyzerの呼び出し
         startToneAnalyzer()
     }
     
     // MARK: - ToneAnalyzer
-    //ToneAnalyzerModelと通信をおこなう
     func startToneAnalyzer() {
         
-        //APIToneAnalyzerの認証コードをモデルへ渡す
-        let toneAnalyzerModel = ToneAnalyzerModel(analysisApiKey: analysisApiKey, analysisVersion: analysisVersion, analysisURL: analysisURL, translationContent: translationContent!)
+        //toneAnalyzerTextとAPIToneAnalyzerの認証コードで通信
+        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, toneAnalyzerText: toneAnalyzerText!)
         
-        //ToneAnalyzerModelの委託とJSON解析をset
+        //ToneAnalyzerModelの委託とJSON解析をセット
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
         toneAnalyzerModel.setToneAnalyzer()
     }
     
-    //渡ってきた値を処理
+    //返ってきた値を処理
     func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int) {
         
         analyzerArray = arrayAnalyzerData
-//        print("受け取り: \(analyzerArray)")
     }
     
     //セルを構築する際に呼ばれるメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //RSSで取得したニュースの値が入る
+        let newsItem = newsItems[indexPath.row]
         
-            //スタイルを2行にかつシンプルに
-            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
+        //セルのスタイルを設定
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
+            
+        //セルを化粧
+        cell.backgroundColor = UIColor.white
+        cell.textLabel?.text = newsItem.title
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
+        cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.numberOfLines = 3
+            
+        //セルのサブタイトル
+        cell.detailTextLabel?.text = newsItem.pubDate
+        cell.detailTextLabel?.textColor = UIColor.gray
 
-            //RSSで取得したニュースの値が入る
-            let newsItem = newsItems[indexPath.row]
-            
-            //セルの背景
-            cell.backgroundColor = UIColor.white
-            
-            //セルのテキスト
-            cell.textLabel?.text = newsItem.title
-
-            //セルのフォントタイプとサイズ
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
-            
-            //セルのテキストカラー
-            cell.textLabel?.textColor = UIColor.black
-            
-            //セルのテキストの行数
-            cell.textLabel?.numberOfLines = 3
-            
-            //セルのサブタイトル
-            cell.detailTextLabel?.text = newsItem.pubDate
-            
-            //サブタイトルのテキストカラー
-            cell.detailTextLabel?.textColor = UIColor.gray
-
-            return cell
+        return cell
     }
     
     //セルをタップした時呼ばれるメソッド
