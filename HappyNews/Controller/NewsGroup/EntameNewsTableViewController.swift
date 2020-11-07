@@ -74,31 +74,21 @@ class EntameNewsTableViewController: UITableViewController,SegementSlideContentS
     //セルを構築する際に呼ばれるメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //スタイルを2行にかつシンプリに
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
-
-        //RSS(yomiuriNews)の取得したニュースの値が入る
+        //RSSで取得したニュースの値が入る
         let newsItem = newsItems[indexPath.row]
         
-        //セルの背景
+        //セルのスタイルを設定
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
+            
+        //セルを化粧
         cell.backgroundColor = UIColor.white
-        
-        //セルのテキスト
         cell.textLabel?.text = newsItem.title
-        
-        //セルのフォントタイプとサイズ
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
-        
-        //セルのテキストカラー
         cell.textLabel?.textColor = UIColor.black
-        
-        //セルのテキストの行数
         cell.textLabel?.numberOfLines = 3
-        
+            
         //セルのサブタイトル
         cell.detailTextLabel?.text = newsItem.pubDate
-        
-        //サブタイトルのテキストカラー
         cell.detailTextLabel?.textColor = UIColor.gray
 
         return cell

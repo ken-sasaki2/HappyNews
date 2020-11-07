@@ -8,15 +8,14 @@
 
 import Foundation
 
-struct Analyzer: Codable {
+struct Analyzer {
     
-    var firstScore     : Float?
-    var firstToneName  : String?
+    var toneScore : Float?
+    var toneName  : String?
     
     //構造体の初期化
-    init(firstScore: Float?, firstToneName:String?) {
-        
-        self.firstScore     = firstScore
-        self.firstToneName  = firstToneName
+    init(toneScore: Float?, toneName: String?) {
+        self.toneScore = toneScore
+        self.toneName  = toneName
     }
 }

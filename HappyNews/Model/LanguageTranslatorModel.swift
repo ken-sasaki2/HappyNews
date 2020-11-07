@@ -11,19 +11,19 @@ import LanguageTranslator
 import SwiftyJSON
 
 protocol DoneCatchTranslationProtocol {
-    
-    //規則を決める
+
     func catchTranslation(arrayTranslationData: Array<Translation>, resultCount: Int)
 }
 
 class LanguageTranslatorModel {
 
-    //外部から渡ってくる値
-    var translatorKey: String?
-    var version      : String?
-    var serviceURL   : String?
-    var analysisText : String?
-    var translation  : String?
+    //Controllerから渡ってくる値
+    var languageTranslatorAccessKey     : String?
+    var languageTranslatorAccessversion : String?
+    var languageTranslatorAccessURL     : String?
+    var translationText                 : String?
+    
+    //Controllerに値を返すときに使用
     var translationArray = [Translation]()
     var doneCatchTranslationProtocol: DoneCatchTranslationProtocol?
 
@@ -31,24 +31,24 @@ class LanguageTranslatorModel {
     var count = 0
 
     //NewsTableViewから値を受け取る
-    init(translatorApiKey: String, translatorVersion: String, translatorURL: String, translationText: String) {
+    init(languageTranslatorApiKey: String, languageTranslatorVersion: String, languageTranslatorURL: String, newsText: String) {
 
-        translatorKey = translatorApiKey
-        version       = translatorVersion
-        serviceURL    = translatorURL
-        analysisText  = translationText
+        languageTranslatorAccessKey     = languageTranslatorApiKey
+        languageTranslatorAccessversion = languageTranslatorVersion
+        languageTranslatorAccessURL     = languageTranslatorURL
+        translationText                 = newsText
     }
 
-    //JSON解析をおこなう
+    //翻訳開始
     func setLanguageTranslator() {
 
-        //APIを認証するためのキーとversionとurlを定義
-        let languageTranslatorKey = WatsonIAMAuthenticator(apiKey: translatorKey!)
-        let translator            = LanguageTranslator(version: version!, authenticator: languageTranslatorKey)
-        translator .serviceURL    = serviceURL
+        //API認証子
+        let languageTranslatorKey = WatsonIAMAuthenticator(apiKey: languageTranslatorAccessKey!)
+        let languageTranslator    = LanguageTranslator(version: languageTranslatorAccessversion!, authenticator: languageTranslatorKey)
+            languageTranslator.serviceURL = languageTranslatorAccessURL
 
-        //enからjaに翻訳（リクエスト送信）
-        translator.translate(text: [analysisText!], modelID: "ja-en") {
+        //リクエスト送信
+        languageTranslator.translate(text: [translationText!], modelID: "ja-en") {
             response, error in
 
             //エラー処理
@@ -64,7 +64,7 @@ class LanguageTranslatorModel {
                     print("Payload too large")
                   default:
                     if let statusCode = statusCode {
-                      print("Error - code: \(statusCode), \(message ?? "")")
+                        print("Error - code: \(statusCode), \(message ?? "")")
                     }
                   }
                 default:
@@ -72,43 +72,38 @@ class LanguageTranslatorModel {
                 }
                 return
               }
-
-            //データ処理
+            //translationResult = レスポンス結果
             guard let translationResult = response?.result else {
                 print(error?.localizedDescription ?? "unknown error")
                 return
             }
 
-            //レスポンスの結果で条件分岐
-            let responseCode = response?.statusCode
-            switch responseCode == Optional(200) {
+            //レスポンスのステータスコードで条件分岐
+            let statusCode = response?.statusCode
+            switch statusCode == Optional(200) {
             case true:
-                //翻訳のデータをJSON形式に変換
+                //レスポンス結果をJSON形式に整形
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted
                 guard let translationJSON = try? encoder.encode(translationResult) else {
                     fatalError("Failed to encode to JSON.")
                 }
 
-                //JSON解析(translation)
+                //SwiftyJSONのJSON型へ変換
                 let translationValue = JSON(translationJSON)
-                self.translation     = translationValue["translations"][self.count]["translation"].string
                 
-                print("*****翻訳結果確認*****")
-//                print("analysisText     : \(self.analysisText)")
-                print("translationContent: \(self.translation)")
-                print("")
+                //translation = 翻訳結果（JSON解析結果）
+                let translation = Translation(translation: translationValue["translations"][self.count]["translation"].string!)
                 
-                //構体Translationに翻訳結果を追加
-                self.translationArray.append(Translation(translation: self.translation!))
+                //翻訳結果を配列に保存
+                self.translationArray.append(translation)
                 
-                //NewsTableViewControllerへ値を渡す
-                self.doneCatchTranslationProtocol?.catchTranslation(arrayTranslationData: self.translationArray, resultCount: self.translationArray.count)
-
             case false:
-                //ステータスコードの表示(200範囲は成功、400範囲は障害、500範囲は内部システムエラー)
-                print("translation failure: \(responseCode)")
+                //ステータスコードの400範囲は障害、500範囲は内部システムエラー
+                print("translation failure: \(statusCode)")
             }
+            //NewsTableViewControllerへ値を渡す
+            self.doneCatchTranslationProtocol?.catchTranslation(arrayTranslationData: self.translationArray, resultCount: self.translationArray.count)
         }
     }
 }
