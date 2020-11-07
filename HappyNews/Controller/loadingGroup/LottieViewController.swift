@@ -20,7 +20,7 @@ class LottieViewController: UIViewController {
         //アニメーションの呼び出し
         addAnimationView()
         
-        //ラベルの表示
+        //ラベルの呼び出し
         addLabel()
     }
     
@@ -61,6 +61,5 @@ class LottieViewController: UIViewController {
         
         //ViewControllerに配置
         view.addSubview(textLabel)
-        
     }
 }
