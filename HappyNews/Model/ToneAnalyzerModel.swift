@@ -47,7 +47,7 @@ class ToneAnalyzerModel {
     
     //感情分析
     func setToneAnalyzer() {
-        
+        print("何回呼ばれている？")
         //APIを認証するためのキーとversionとurlを定義
         let toneAnalyzerKey         = WatsonIAMAuthenticator(apiKey: analysisKey!)
         let toneAnalyzer            = ToneAnalyzer(version: version!, authenticator: toneAnalyzerKey)
@@ -98,9 +98,7 @@ class ToneAnalyzerModel {
 
                 //JSON型へ変換
                 let toneAnalysisValue = JSON(toneAnalysisJSON)
-//                print("toneAnalysisValue: \(toneAnalysisValue)")
-//                print("")
-              
+                
                 //感情分析結果が"Joy"&"Score"が0.5以上なら値を取得
                 if toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"] == "Joy" && toneAnalysisValue["document_tone"]["tones"][self.count]["score"] > 0.5 {
                     
@@ -108,26 +106,17 @@ class ToneAnalyzerModel {
                     self.firstScore       = ceil(firstToneScore! * 100)/100
                     self.firstToneName    = toneAnalysisValue["document_tone"]["tones"][self.count]["tone_name"].string
                     
-                    //構造体Analyzerに感情分析結果を追加
-                    self.analyzerArray.append(Analyzer(firstScore: self.firstScore, firstToneName: self.firstToneName))
+                    self.doneCatchAnalyzer()
+//                    //構造体Analyzerに感情分析結果を追加
+//                    self.analyzerArray.append(Analyzer(firstScore: self.firstScore, firstToneName: self.firstToneName))
+//
+//                    print(self.analyzerArray)
+//
+//                    //NewsTableViewControllerへ値を渡す
+//                    self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: self.analyzerArray, resultCount: self.analyzerArray.count)
                     
-                    //NewsTableViewControllerへ値を渡す
-                    self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: self.analyzerArray, resultCount: self.analyzerArray.count)
-                    
-                    //感情分析結果確認
-//                    print("*****感情分析結果確認*****")
-//                    print("analysisText : \(self.analysisText)")
-//                    print("firstScore   : \(self.firstScore)")
-//                    print("firstToneName: \(self.firstToneName)")
-//                    print("")
                 } else {
-                    
-                    self.analyzerArray.removeAll()
-//                    print("sasasa: \(self.analyzerArray)")
-//                    print("*****感情分析結果確認*****")
-//                    print("analysisText : \(self.analysisText)")
-//                    print("Not a joy and a low score, so we didn't get it.")
-//                    print("")
+                    print("error: \(error)")
                 }
 
             case false:
@@ -135,5 +124,14 @@ class ToneAnalyzerModel {
                 print("analysis failure: \(statusCode)")
             }
         }
+    }
+    func doneCatchAnalyzer() {
+        print("呼ばれてる？")
+        //構造体Analyzerに感情分析結果を追加
+        self.analyzerArray.append(Analyzer(firstScore: self.firstScore, firstToneName: self.firstToneName))
+        print(self.analyzerArray)
+        
+        //NewsTableViewControllerへ値を渡す
+        self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: self.analyzerArray, resultCount: self.analyzerArray.count)
     }
 }

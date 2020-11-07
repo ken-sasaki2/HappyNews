@@ -27,12 +27,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsItems = [NewsItemsModel]()
 
     //LanguageTranslatorの認証キー
-    var translatorApiKey  = "6C5IxuHFxAFA7ZPTY9QEHf6onkhoSvo-_4TMh-Tu-kJC"
+    var translatorApiKey  = "iVzXO8cqVz1thlC0oh8oja_0fyLSfge9OOLGMBXC2OSA"
     var translatorVersion = "2018-05-01"
     var translatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var analysisApiKey  = "0cPs9esGLbUGBqaHn5oGRI8BH8h86uP3-gnlKkUqD6_F"
+    var analysisApiKey  = "Nnf9o1DmxcPlWejH9hg7Ofy90DZHKQ4VnqP8FgzQLpnR"
     var analysisVersion = "2017-09-21"
     var analysisURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -59,11 +59,13 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlArray = "https://news.yahoo.co.jp/rss/media/sanspo/all.xml"
+        let xmlArray = ["https://news.yahoo.co.jp/rss/topics/sports.xml",
+                        "https://news.yahoo.co.jp/rss/topics/entertainment.xml"
+                       ]
 //
-//        for i in 0...0 {
+        for i in 0...1 {
         
-        let xmlString = xmlArray
+        let xmlString = xmlArray[i]
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
@@ -76,10 +78,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //parseの開始
         parser.parse()
-//        }
+        }
         
         //翻訳の呼び出し
-        startTranslation()
+//        startTranslation()
     }
     
     // MARK: - Table view data source
@@ -174,47 +176,47 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                          newsItems[newsItems.count - 11].description,
                          newsItems[newsItems.count - 12].description,
                          newsItems[newsItems.count - 13].description,
-                         newsItems[newsItems.count - 14].description,
-                         newsItems[newsItems.count - 15].description,
-                         newsItems[newsItems.count - 16].description,
-                         newsItems[newsItems.count - 17].description,
-                         newsItems[newsItems.count - 18].description,
-                         newsItems[newsItems.count - 19].description,
-                         newsItems[newsItems.count - 20].description,
-                         newsItems[newsItems.count - 21].description,
-                         newsItems[newsItems.count - 22].description,
-                         newsItems[newsItems.count - 23].description,
-                         newsItems[newsItems.count - 24].description,
-                         newsItems[newsItems.count - 25].description,
-                         newsItems[newsItems.count - 26].description,
-                         newsItems[newsItems.count - 27].description,
-                         newsItems[newsItems.count - 28].description,
-                         newsItems[newsItems.count - 29].description,
-                         newsItems[newsItems.count - 30].description,
-                         newsItems[newsItems.count - 31].description,
-                         newsItems[newsItems.count - 32].description,
-                         newsItems[newsItems.count - 33].description,
-                         newsItems[newsItems.count - 34].description,
-                         newsItems[newsItems.count - 35].description,
-                         newsItems[newsItems.count - 36].description,
-                         newsItems[newsItems.count - 37].description,
-                         newsItems[newsItems.count - 38].description,
-                         newsItems[newsItems.count - 39].description,
-                         newsItems[newsItems.count - 40].description,
-                         newsItems[newsItems.count - 41].description,
-                         newsItems[newsItems.count - 42].description,
-                         newsItems[newsItems.count - 43].description,
-                         newsItems[newsItems.count - 44].description,
-                         newsItems[newsItems.count - 45].description,
-                         newsItems[newsItems.count - 46].description,
-                         newsItems[newsItems.count - 47].description,
-                         newsItems[newsItems.count - 48].description,
-                         newsItems[newsItems.count - 49].description,
-                         newsItems[newsItems.count - 50].description
+                         newsItems[newsItems.count - 14].description
+//                         newsItems[newsItems.count - 15].description,
+//                         newsItems[newsItems.count - 16].description,
+//                         newsItems[newsItems.count - 17].description,
+//                         newsItems[newsItems.count - 18].description,
+//                         newsItems[newsItems.count - 19].description,
+//                         newsItems[newsItems.count - 20].description,
+//                         newsItems[newsItems.count - 21].description,
+//                         newsItems[newsItems.count - 22].description,
+//                         newsItems[newsItems.count - 23].description,
+//                         newsItems[newsItems.count - 24].description,
+//                         newsItems[newsItems.count - 25].description,
+//                         newsItems[newsItems.count - 26].description,
+//                         newsItems[newsItems.count - 27].description,
+//                         newsItems[newsItems.count - 28].description,
+//                         newsItems[newsItems.count - 29].description,
+//                         newsItems[newsItems.count - 30].description,
+//                         newsItems[newsItems.count - 31].description,
+//                         newsItems[newsItems.count - 32].description,
+//                         newsItems[newsItems.count - 33].description,
+//                         newsItems[newsItems.count - 34].description,
+//                         newsItems[newsItems.count - 35].description,
+//                         newsItems[newsItems.count - 36].description,
+//                         newsItems[newsItems.count - 37].description,
+//                         newsItems[newsItems.count - 38].description,
+//                         newsItems[newsItems.count - 39].description,
+//                         newsItems[newsItems.count - 40].description,
+//                         newsItems[newsItems.count - 41].description,
+//                         newsItems[newsItems.count - 42].description,
+//                         newsItems[newsItems.count - 43].description,
+//                         newsItems[newsItems.count - 44].description,
+//                         newsItems[newsItems.count - 45].description,
+//                         newsItems[newsItems.count - 46].description,
+//                         newsItems[newsItems.count - 47].description,
+//                         newsItems[newsItems.count - 48].description,
+//                         newsItems[newsItems.count - 49].description,
+//                         newsItems[newsItems.count - 50].description
                         ]
         
         //textArrayの中身を順にLanguageTranslatorModelへ通信
-        for i in 0...49 {
+        for i in 0...13 {
             let translationText = textArray[i]
             
             //APILanguageTranslatorの認証コードをモデルへ渡す
@@ -262,22 +264,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int) {
         
         analyzerArray = arrayAnalyzerData
-        
-        //渡ってきた値をJSONに変換
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        guard let tones = try? encoder.encode(analyzerArray) else {
-            fatalError("Failed to encode to JSON.")
-        }
-        
-        //JSON解析(jsonValue)
-        let json = JSON(tones)
-        print("sasasa: \(json)")
-//        score = json[self.count]["firstScore"].float
-//        name  = json[self.count]["firstToneName"].string
-        
-//        tonesArray = [score, name] as [Any]
-//        print("kenken: \(tonesArray)")
+//        print("受け取り: \(analyzerArray)")
     }
     
     //セルを構築する際に呼ばれるメソッド

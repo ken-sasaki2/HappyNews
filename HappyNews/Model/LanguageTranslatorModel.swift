@@ -94,10 +94,9 @@ class LanguageTranslatorModel {
                 let translationValue = JSON(translationJSON)
                 self.translation     = translationValue["translations"][self.count]["translation"].string
                 
-                print("*****翻訳結果確認*****")
-//                print("analysisText     : \(self.analysisText)")
-                print("translationContent: \(self.translation)")
-                print("")
+//                print("*****翻訳結果確認*****")
+//                print("translationContent: \(self.translation)")
+//                print("")
                 
                 //構体Translationに翻訳結果を追加
                 self.translationArray.append(Translation(translation: self.translation!))
