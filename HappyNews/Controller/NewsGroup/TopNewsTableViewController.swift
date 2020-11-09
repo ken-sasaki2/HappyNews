@@ -32,12 +32,13 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "Ko0MJXr7im33kpia3B_-7eiAtc2dL2lZVnWzbDoiJLFF"
+    var toneAnalyzerApiKey  = "u48rN3eD8rBSy_ErEaVXRHblVyN0mtxRQvO9bFZa7HU-"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
     //LanguageTranslationModelから渡ってくる値
-    var translationArray = [Translation]()
+    var translationArray      = [Translation]()
+    var translationArrayCount = Int()
     
     //ToneAnalyzerModelから渡ってくる値
     var analyzerArray  = [Analyzer]()
@@ -170,39 +171,25 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                              newsItems[newsItems.count - 13].description,
                              newsItems[newsItems.count - 14].description
                             ]
-        
-        //newsTextArrayの要素とAPILanguageTranslatorの認証コードで通信
-        for i in 0...13 {
             
-            let newsText = newsTextArray[i]
-            
-            let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsText: newsText!)
+        //LanguageTranslatorModelへ通信
+        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
             
             //LanguageTranslatorModelの委託とJSON解析をセット
             languageTranslatorModel.doneCatchTranslationProtocol = self
             languageTranslatorModel.setLanguageTranslator()
-        }
     }
     
     //LanguageTranslatorModelから返ってきた値を処理
     func catchTranslation(arrayTranslationData: Array<Translation>, resultCount: Int) {
         
-        translationArray = arrayTranslationData
+        translationArray      = arrayTranslationData
+        translationArrayCount = resultCount
         
-        //返ってきた値をJSONに整形
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        guard let jsonArray = try? encoder.encode(translationArray) else {
-            fatalError("Failed to encode to JSON.")
-        }
+        print(translationArrayCount)
+        print(translationArray.debugDescription)
         
-        //SwiftyJSONのJSON型に変換
-        let jsonValue = JSON(jsonArray)
-        
-        //toneAnalysisText = 翻訳結果
-        toneAnalyzerText = jsonValue[self.count]["translation"].string
-        
-        //startToneAnalyzerの呼び出し
+        //ToneAnalyzerの呼び出し
         startToneAnalyzer()
     }
     
@@ -210,7 +197,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func startToneAnalyzer() {
         
         //toneAnalyzerTextとAPIToneAnalyzerの認証コードで通信
-        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, toneAnalyzerText: toneAnalyzerText!)
+        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
         
         //ToneAnalyzerModelの委託とJSON解析をセット
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
