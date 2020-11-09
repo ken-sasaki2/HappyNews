@@ -52,7 +52,7 @@ class LanguageTranslatorModel {
         
         for i in 0...13 {
             
-            self.translationText = translationTextArray[i] as! String
+            self.translationText = translationTextArray[i] as? String
 
             //リクエスト送信
             languageTranslator.translate(text: [self.translationText!], modelID: "ja-en") {
@@ -105,14 +105,11 @@ class LanguageTranslatorModel {
                     //翻訳結果を配列に保存
                     self.translationArray.append(translation)
                     
-                    //最後にappendされたtranslationArrayを Controllerへ返す
+                    //最後にappendされたtranslationArrayをControllerへ返す
                     if i > 12 {
                         //NewsTableViewControllerへ値を渡す
                         self.doneCatchTranslationProtocol?.catchTranslation(arrayTranslationData: self.translationArray, resultCount: self.translationArray.count)
                     }
-                    
-//                    print(self.translationArray.count)
-//                    print(self.translationArray)
                     
                 case false:
                     //ステータスコードの400範囲は障害、500範囲は内部システムエラー
