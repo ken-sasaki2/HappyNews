@@ -32,12 +32,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "u48rN3eD8rBSy_ErEaVXRHblVyN0mtxRQvO9bFZa7HU-"
+    var toneAnalyzerApiKey  = "QAAMvHC4-lcRp42b3wLdcKtjvk0rhyoQPKezFETypf8D"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
     //LanguageTranslationModelから渡ってくる値
-    var translationArray      = [Translation]()
+    var translationArray      = [String]()
     var translationArrayCount = Int()
     
     //ToneAnalyzerModelから渡ってくる値
@@ -45,7 +45,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //JSON解析で使用
     var count = 0
-    var toneAnalyzerText: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,7 +168,43 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                              newsItems[newsItems.count - 11].description,
                              newsItems[newsItems.count - 12].description,
                              newsItems[newsItems.count - 13].description,
-                             newsItems[newsItems.count - 14].description
+                             newsItems[newsItems.count - 14].description,
+                             newsItems[newsItems.count - 15].description,
+                             newsItems[newsItems.count - 16].description,
+                             newsItems[newsItems.count - 17].description,
+                             newsItems[newsItems.count - 18].description,
+                             newsItems[newsItems.count - 19].description,
+                             newsItems[newsItems.count - 20].description,
+                             newsItems[newsItems.count - 21].description,
+                             newsItems[newsItems.count - 22].description,
+                             newsItems[newsItems.count - 23].description,
+                             newsItems[newsItems.count - 24].description,
+                             newsItems[newsItems.count - 25].description,
+                             newsItems[newsItems.count - 26].description,
+                             newsItems[newsItems.count - 27].description,
+                             newsItems[newsItems.count - 28].description,
+                             newsItems[newsItems.count - 29].description,
+                             newsItems[newsItems.count - 30].description,
+                             newsItems[newsItems.count - 31].description,
+                             newsItems[newsItems.count - 32].description,
+                             newsItems[newsItems.count - 33].description,
+                             newsItems[newsItems.count - 34].description,
+                             newsItems[newsItems.count - 35].description,
+                             newsItems[newsItems.count - 36].description,
+                             newsItems[newsItems.count - 37].description,
+                             newsItems[newsItems.count - 38].description,
+                             newsItems[newsItems.count - 39].description,
+                             newsItems[newsItems.count - 40].description,
+                             newsItems[newsItems.count - 41].description,
+                             newsItems[newsItems.count - 42].description,
+                             newsItems[newsItems.count - 43].description,
+                             newsItems[newsItems.count - 44].description,
+                             newsItems[newsItems.count - 45].description,
+                             newsItems[newsItems.count - 46].description,
+                             newsItems[newsItems.count - 47].description,
+                             newsItems[newsItems.count - 48].description,
+                             newsItems[newsItems.count - 49].description,
+                             newsItems[newsItems.count - 50].description
                             ]
             
         //LanguageTranslatorModelへ通信
@@ -181,7 +216,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     }
     
     //LanguageTranslatorModelから返ってきた値を処理
-    func catchTranslation(arrayTranslationData: Array<Translation>, resultCount: Int) {
+    func catchTranslation(arrayTranslationData: Array<String>, resultCount: Int) {
         
         translationArray      = arrayTranslationData
         translationArrayCount = resultCount
@@ -189,8 +224,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         print(translationArrayCount)
         print(translationArray.debugDescription)
         
-        //ToneAnalyzerの呼び出し
-        startToneAnalyzer()
+        if translationArray != nil {
+            //ToneAnalyzerの呼び出し
+            startToneAnalyzer()
+        } else {
+            print("Failed because the value is nil.")
+        }
     }
     
     // MARK: - ToneAnalyzer
@@ -208,6 +247,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int) {
         
         analyzerArray = arrayAnalyzerData
+        
+        print(analyzerArray.count)
+        print(analyzerArray.debugDescription)
     }
     
     //セルを構築する際に呼ばれるメソッド

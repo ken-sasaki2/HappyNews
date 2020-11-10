@@ -12,7 +12,7 @@ import SwiftyJSON
 
 protocol DoneCatchTranslationProtocol {
 
-    func catchTranslation(arrayTranslationData: Array<Translation>, resultCount: Int)
+    func catchTranslation(arrayTranslationData: Array<String>, resultCount: Int)
 }
 
 class LanguageTranslatorModel {
@@ -25,13 +25,13 @@ class LanguageTranslatorModel {
     var translationText                 : String?
     
     //Controllerに値を返すときに使用
-    var translationArray = [Translation]()
+    var translationArray = [String]()
     var doneCatchTranslationProtocol: DoneCatchTranslationProtocol?
 
     //JSON解析で使用
     var count = 0
     var translationResult: String?
-    var resuleArray: [Any] = []
+    var resuleArray: [String] = []
 
     //NewsTableViewから値を受け取る
     init(languageTranslatorApiKey: String, languageTranslatorVersion: String, languageTranslatorURL: String, newsTextArray: [Any]) {
@@ -50,7 +50,7 @@ class LanguageTranslatorModel {
         let languageTranslator    = LanguageTranslator(version: languageTranslatorAccessversion!, authenticator: languageTranslatorKey)
             languageTranslator.serviceURL = languageTranslatorAccessURL
         
-        for i in 0..<14 {
+        for i in 0..<50 {
             
             self.translationText = translationTextArray[i] as? String
 
@@ -102,11 +102,17 @@ class LanguageTranslatorModel {
                     //translation = 翻訳結果（JSON解析結果）
                     let translation = Translation(translation: translationValue["translations"][self.count]["translation"].string!)
                     
+                    //ここはtranslation = Translation型
+                    //print(type(of: translation.translation))
+                    
                     //翻訳結果を配列に保存
-                    self.translationArray.append(translation)
+                    self.translationArray.append(translation.translation!)
+                    
+                    //ここはtranslationArray = Array<Translation>型
+                    //print(type(of: self.translationArray))
                     
                     //最後にappendされたtranslationArrayをControllerへ返す
-                    if i > 12 {
+                    if self.translationArray.count == 50  {
                         //NewsTableViewControllerへ値を渡す
                         self.doneCatchTranslationProtocol?.catchTranslation(arrayTranslationData: self.translationArray, resultCount: self.translationArray.count)
                     }
