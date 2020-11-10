@@ -50,7 +50,7 @@ class LanguageTranslatorModel {
         let languageTranslator    = LanguageTranslator(version: languageTranslatorAccessversion!, authenticator: languageTranslatorKey)
             languageTranslator.serviceURL = languageTranslatorAccessURL
         
-        for i in 0...13 {
+        for i in 0..<14 {
             
             self.translationText = translationTextArray[i] as? String
 
