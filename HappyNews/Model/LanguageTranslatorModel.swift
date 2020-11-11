@@ -31,7 +31,7 @@ class LanguageTranslatorModel {
     //JSON解析で使用
     var count = 0
 
-    //for文で使用
+    //配列の要素数
     var textCount = 50
 
     //NewsTableViewから値を受け取る
