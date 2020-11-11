@@ -30,8 +30,9 @@ class LanguageTranslatorModel {
 
     //JSON解析で使用
     var count = 0
-    var translationResult: String?
-    var resuleArray: [String] = []
+
+    //for文で使用
+    var textCount = 50
 
     //NewsTableViewから値を受け取る
     init(languageTranslatorApiKey: String, languageTranslatorVersion: String, languageTranslatorURL: String, newsTextArray: [Any]) {
@@ -50,7 +51,7 @@ class LanguageTranslatorModel {
         let languageTranslator    = LanguageTranslator(version: languageTranslatorAccessversion!, authenticator: languageTranslatorKey)
             languageTranslator.serviceURL = languageTranslatorAccessURL
         
-        for i in 0..<50 {
+        for i in 0..<self.textCount {
             
             self.translationText = translationTextArray[i] as? String
 
@@ -112,7 +113,7 @@ class LanguageTranslatorModel {
                     //print(type(of: self.translationArray))
                     
                     //最後にappendされたtranslationArrayをControllerへ返す
-                    if self.translationArray.count == 50  {
+                    if self.translationArray.count == self.textCount  {
                         //NewsTableViewControllerへ値を渡す
                         self.doneCatchTranslationProtocol?.catchTranslation(arrayTranslationData: self.translationArray, resultCount: self.translationArray.count)
                     }
