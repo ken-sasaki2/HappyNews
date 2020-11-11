@@ -103,14 +103,8 @@ class LanguageTranslatorModel {
                     //translation = 翻訳結果（JSON解析結果）
                     let translation = Translation(translation: translationValue["translations"][self.count]["translation"].string!)
                     
-                    //ここはtranslation = Translation型
-                    //print(type(of: translation.translation))
-                    
                     //翻訳結果を配列に保存
                     self.translationArray.append(translation.translation!)
-                    
-                    //ここはtranslationArray = Array<Translation>型
-                    //print(type(of: self.translationArray))
                     
                     //最後にappendされたtranslationArrayをControllerへ返す
                     if self.translationArray.count == self.textCount  {
