@@ -41,7 +41,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var translationArrayCount = Int()
     
     //ToneAnalyzerModelから渡ってくる値
-    var joyCount               = [Any]()
+    var joyCount               = [JSON]()
     var arrayAnalyzerDataCount = Int()
     
     //JSON解析で使用
@@ -222,6 +222,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         translationArray      = arrayTranslationData
         translationArrayCount = resultCount
         
+        //print(translationArray)
+        
         //配列内の要素を確認するとToneAnalyzerを呼び出す
         if translationArray != nil {
             
@@ -244,7 +246,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     }
     
     //ToneAnalyzerModelから返ってきた値の受け取り
-    func catchAnalyzer(arrayAnalyzerData: Array<Any>, resultCount: Int) {
+    func catchAnalyzer(arrayAnalyzerData: Array<JSON>, resultCount: Int) {
         
         joyCount               = arrayAnalyzerData
         arrayAnalyzerDataCount = resultCount
