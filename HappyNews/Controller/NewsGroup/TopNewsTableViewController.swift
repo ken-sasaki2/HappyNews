@@ -27,12 +27,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsItems = [NewsItemsModel]()
 
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "iVzXO8cqVz1thlC0oh8oja_0fyLSfge9OOLGMBXC2OSA"
+    var languageTranslatorApiKey  = "4cVyLBvPe85CWqge5F99RdCR2GHoIwLjzAQW7eNYtmyt"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "QAAMvHC4-lcRp42b3wLdcKtjvk0rhyoQPKezFETypf8D"
+    var toneAnalyzerApiKey  = "OjvQ7LPUlMtgqbjjAosaeuvWA0UbHbruHX4M00Bf6Ofa"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -41,7 +41,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var translationArrayCount = Int()
     
     //ToneAnalyzerModelから渡ってくる値
-    var analyzerArray  = [Analyzer]()
+    var joyCount               = [Any]()
+    var arrayAnalyzerDataCount = Int()
     
     //JSON解析で使用
     var count = 0
@@ -155,56 +156,56 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func startTranslation() {
         
         //XMLのdescriptionを配列に保管
-        let newsTextArray = [newsItems[newsItems.count - 1].description,
-                             newsItems[newsItems.count - 2].description,
-                             newsItems[newsItems.count - 3].description,
-                             newsItems[newsItems.count - 4].description,
-                             newsItems[newsItems.count - 5].description,
-                             newsItems[newsItems.count - 6].description,
-                             newsItems[newsItems.count - 7].description,
-                             newsItems[newsItems.count - 8].description,
-                             newsItems[newsItems.count - 9].description,
-                             newsItems[newsItems.count - 10].description,
-                             newsItems[newsItems.count - 11].description,
-                             newsItems[newsItems.count - 12].description,
-                             newsItems[newsItems.count - 13].description,
-                             newsItems[newsItems.count - 14].description,
-                             newsItems[newsItems.count - 15].description,
-                             newsItems[newsItems.count - 16].description,
-                             newsItems[newsItems.count - 17].description,
-                             newsItems[newsItems.count - 18].description,
-                             newsItems[newsItems.count - 19].description,
-                             newsItems[newsItems.count - 20].description,
-                             newsItems[newsItems.count - 21].description,
-                             newsItems[newsItems.count - 22].description,
-                             newsItems[newsItems.count - 23].description,
-                             newsItems[newsItems.count - 24].description,
-                             newsItems[newsItems.count - 25].description,
-                             newsItems[newsItems.count - 26].description,
-                             newsItems[newsItems.count - 27].description,
-                             newsItems[newsItems.count - 28].description,
-                             newsItems[newsItems.count - 29].description,
-                             newsItems[newsItems.count - 30].description,
-                             newsItems[newsItems.count - 31].description,
-                             newsItems[newsItems.count - 32].description,
-                             newsItems[newsItems.count - 33].description,
-                             newsItems[newsItems.count - 34].description,
-                             newsItems[newsItems.count - 35].description,
-                             newsItems[newsItems.count - 36].description,
-                             newsItems[newsItems.count - 37].description,
-                             newsItems[newsItems.count - 38].description,
-                             newsItems[newsItems.count - 39].description,
-                             newsItems[newsItems.count - 40].description,
-                             newsItems[newsItems.count - 41].description,
-                             newsItems[newsItems.count - 42].description,
-                             newsItems[newsItems.count - 43].description,
-                             newsItems[newsItems.count - 44].description,
-                             newsItems[newsItems.count - 45].description,
-                             newsItems[newsItems.count - 46].description,
-                             newsItems[newsItems.count - 47].description,
-                             newsItems[newsItems.count - 48].description,
-                             newsItems[newsItems.count - 49].description,
-                             newsItems[newsItems.count - 50].description
+        let newsTextArray = [newsItems[newsItems.count - 1].title,
+                             newsItems[newsItems.count - 2].title,
+                             newsItems[newsItems.count - 3].title,
+                             newsItems[newsItems.count - 4].title,
+                             newsItems[newsItems.count - 5].title,
+                             newsItems[newsItems.count - 6].title,
+                             newsItems[newsItems.count - 7].title,
+                             newsItems[newsItems.count - 8].title,
+                             newsItems[newsItems.count - 9].title,
+                             newsItems[newsItems.count - 10].title,
+                             newsItems[newsItems.count - 11].title,
+                             newsItems[newsItems.count - 12].title,
+                             newsItems[newsItems.count - 13].title,
+                             newsItems[newsItems.count - 14].title,
+                             newsItems[newsItems.count - 15].title,
+                             newsItems[newsItems.count - 16].title,
+                             newsItems[newsItems.count - 17].title,
+                             newsItems[newsItems.count - 18].title,
+                             newsItems[newsItems.count - 19].title,
+                             newsItems[newsItems.count - 20].title,
+                             newsItems[newsItems.count - 21].title,
+                             newsItems[newsItems.count - 22].title,
+                             newsItems[newsItems.count - 23].title,
+                             newsItems[newsItems.count - 24].title,
+                             newsItems[newsItems.count - 25].title,
+                             newsItems[newsItems.count - 26].title,
+                             newsItems[newsItems.count - 27].title,
+                             newsItems[newsItems.count - 28].title,
+                             newsItems[newsItems.count - 29].title,
+                             newsItems[newsItems.count - 30].title,
+                             newsItems[newsItems.count - 31].title,
+                             newsItems[newsItems.count - 32].title,
+                             newsItems[newsItems.count - 33].title,
+                             newsItems[newsItems.count - 34].title,
+                             newsItems[newsItems.count - 35].title,
+                             newsItems[newsItems.count - 36].title,
+                             newsItems[newsItems.count - 37].title,
+                             newsItems[newsItems.count - 38].title,
+                             newsItems[newsItems.count - 39].title,
+                             newsItems[newsItems.count - 40].title,
+                             newsItems[newsItems.count - 41].title,
+                             newsItems[newsItems.count - 42].title,
+                             newsItems[newsItems.count - 43].title,
+                             newsItems[newsItems.count - 44].title,
+                             newsItems[newsItems.count - 45].title,
+                             newsItems[newsItems.count - 46].title,
+                             newsItems[newsItems.count - 47].title,
+                             newsItems[newsItems.count - 48].title,
+                             newsItems[newsItems.count - 49].title,
+                             newsItems[newsItems.count - 50].title
                             ]
             
         //LanguageTranslatorModelへ通信
@@ -215,16 +216,15 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             languageTranslatorModel.setLanguageTranslator()
     }
     
-    //LanguageTranslatorModelから返ってきた値を処理
+    //LanguageTranslatorModelから返ってきた値の受け取り
     func catchTranslation(arrayTranslationData: Array<String>, resultCount: Int) {
         
         translationArray      = arrayTranslationData
         translationArrayCount = resultCount
         
-        print(translationArrayCount)
-        print(translationArray.debugDescription)
-        
+        //配列内の要素を確認するとToneAnalyzerを呼び出す
         if translationArray != nil {
+            
             //ToneAnalyzerの呼び出し
             startToneAnalyzer()
         } else {
@@ -235,7 +235,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     // MARK: - ToneAnalyzer
     func startToneAnalyzer() {
         
-        //toneAnalyzerTextとAPIToneAnalyzerの認証コードで通信
+        //translationArrayとAPIToneAnalyzerの認証コードで通信
         let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
         
         //ToneAnalyzerModelの委託とJSON解析をセット
@@ -243,13 +243,13 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         toneAnalyzerModel.setToneAnalyzer()
     }
     
-    //返ってきた値を処理
-    func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int) {
+    //ToneAnalyzerModelから返ってきた値の受け取り
+    func catchAnalyzer(arrayAnalyzerData: Array<Any>, resultCount: Int) {
         
-        analyzerArray = arrayAnalyzerData
+        joyCount               = arrayAnalyzerData
+        arrayAnalyzerDataCount = resultCount
         
-        print(analyzerArray.count)
-        print(analyzerArray.debugDescription)
+        print(joyCount.debugDescription)
     }
     
     //セルを構築する際に呼ばれるメソッド
