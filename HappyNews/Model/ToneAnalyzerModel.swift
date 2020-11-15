@@ -21,7 +21,6 @@ class ToneAnalyzerModel {
     var toneAnalyzerAccessVersion: String?
     var toneAnalyzerAccessURL    : String?
     var toneAnalyzerArray        : [String] = []
-    var toneAnalyzerText         : String?
     
     //JSON解析で使用
     var count      = 0
@@ -30,8 +29,7 @@ class ToneAnalyzerModel {
     var toneAnalysisArray: [JSON] = []
     var joyCountArray    : [Any]  = []
     
-    //Controllerに値を返すときに使用
-    var analyzerArray = [Any]()
+    //プロトコルのインスタンス
     var doneCatchAnalyzerProtocol: DoneCatchAnalyzerProtocol?
     
     //NewsTableViewから値を受け取る
@@ -77,7 +75,7 @@ class ToneAnalyzerModel {
                         return
                     }
                     //analysisResult = レスポンス結果
-                    guard let analysisResult = response?.result else {
+                    guard let toneAnalyzerResult = response?.result else {
                         print(error?.localizedDescription ?? "unknown error")
                         return
                     }
@@ -89,12 +87,12 @@ class ToneAnalyzerModel {
                         //分析結果のデータをJSON形式に整形
                         let encoder = JSONEncoder()
                         encoder.outputFormatting = .prettyPrinted
-                        guard let analysisJSON = try? encoder.encode(analysisResult) else {
+                        guard let toneAnalysisJSON = try? encoder.encode(toneAnalyzerResult) else {
                             fatalError("Failed to encode to JSON.")
                         }
 
                         //SwiftyJSONのJSON型へ変換
-                        self.toneAnalysisValue = JSON(analysisJSON)
+                        self.toneAnalysisValue = JSON(toneAnalysisJSON)
                         
                         //感情分析結果を配列に保存
                         self.toneAnalysisArray.append(self.toneAnalysisValue)
@@ -104,8 +102,6 @@ class ToneAnalyzerModel {
                             
                             //jsonAnalysisOfToneAnalyzerの呼び出し
                             self.jsonAnalysisOfToneAnalyzer()
-                        } else {
-                            print("Failed because of insufficient number of elements in toneAnalysisArray")
                         }
                         
                     case false:
@@ -130,11 +126,6 @@ class ToneAnalyzerModel {
                 
                 //条件を満たした要素のindex番号の取得（-1で整合性）
                 joyCountArray.append(toneAnalysisArray[0].count+i-1)
-                //print(joyCountArray.debugDescription)
-
-                //let analyzer = Analyzer(toneScore: toneAnalysisArray[i]["document_tone"]["tones"][count]["score"].float, toneName: toneAnalysisArray[i]["document_tone"]["tones"][count]["tone_name"].string)
-
-                //analyzerArray.append(analyzer)
             }
         }
         //最後にappendされた配列をControllerへ返す
