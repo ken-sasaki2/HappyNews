@@ -29,9 +29,7 @@ class LanguageTranslatorModel {
     var doneCatchTranslationProtocol: DoneCatchTranslationProtocol?
 
     //JSON解析で使用
-    var count = 0
-
-    //配列の要素数
+    var count     = 0
     var textCount = 50
 
     //NewsTableViewから値を受け取る
