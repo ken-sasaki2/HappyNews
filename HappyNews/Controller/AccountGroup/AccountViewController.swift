@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class AccountViewController: UIViewController {
     
     //中央のラベルを設定
     var centerLabel: UILabel = {
@@ -17,7 +17,7 @@ class SearchViewController: UIViewController {
         var label = UILabel()
         
         //labelのテキストとフォントとテキストカラー設定
-        label.text = "検索ページ"
+        label.text = "アカウントページ"
         label.font = UIFont.boldSystemFont(ofSize: 20.0)
         label.textColor = UIColor.black
         

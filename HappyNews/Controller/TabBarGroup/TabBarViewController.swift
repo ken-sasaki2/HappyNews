@@ -44,7 +44,7 @@ class MainTabBarController: UITabBarController {
             print("タップするとTOPにスクロールして欲しい")
         case "天気":
             print("アクション未定")
-        case "検索":
+        case "アカウント":
             print("アクション未定")
         default:
             break
