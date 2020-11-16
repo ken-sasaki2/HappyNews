@@ -27,24 +27,25 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsItems = [NewsItemsModel]()
 
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "iVzXO8cqVz1thlC0oh8oja_0fyLSfge9OOLGMBXC2OSA"
+    var languageTranslatorApiKey  = "4cVyLBvPe85CWqge5F99RdCR2GHoIwLjzAQW7eNYtmyt"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "Ko0MJXr7im33kpia3B_-7eiAtc2dL2lZVnWzbDoiJLFF"
+    var toneAnalyzerApiKey  = "OjvQ7LPUlMtgqbjjAosaeuvWA0UbHbruHX4M00Bf6Ofa"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
     //LanguageTranslationModelから渡ってくる値
-    var translationArray = [Translation]()
+    var translationArray      = [String]()
+    var translationArrayCount = Int()
     
     //ToneAnalyzerModelから渡ってくる値
-    var analyzerArray  = [Analyzer]()
+    var joyCountArray          = [Any]()
+    var arrayAnalyzerDataCount = Int()
     
     //JSON解析で使用
     var count = 0
-    var toneAnalyzerText: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,72 +156,100 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func startTranslation() {
         
         //XMLのdescriptionを配列に保管
-        let newsTextArray = [newsItems[newsItems.count - 1].description,
-                             newsItems[newsItems.count - 2].description,
-                             newsItems[newsItems.count - 3].description,
-                             newsItems[newsItems.count - 4].description,
-                             newsItems[newsItems.count - 5].description,
-                             newsItems[newsItems.count - 6].description,
-                             newsItems[newsItems.count - 7].description,
-                             newsItems[newsItems.count - 8].description,
-                             newsItems[newsItems.count - 9].description,
-                             newsItems[newsItems.count - 10].description,
-                             newsItems[newsItems.count - 11].description,
-                             newsItems[newsItems.count - 12].description,
-                             newsItems[newsItems.count - 13].description,
-                             newsItems[newsItems.count - 14].description
+        let newsTextArray = [newsItems[newsItems.count - 1].title,
+                             newsItems[newsItems.count - 2].title,
+                             newsItems[newsItems.count - 3].title,
+                             newsItems[newsItems.count - 4].title,
+                             newsItems[newsItems.count - 5].title,
+                             newsItems[newsItems.count - 6].title,
+                             newsItems[newsItems.count - 7].title,
+                             newsItems[newsItems.count - 8].title,
+                             newsItems[newsItems.count - 9].title,
+                             newsItems[newsItems.count - 10].title,
+                             newsItems[newsItems.count - 11].title,
+                             newsItems[newsItems.count - 12].title,
+                             newsItems[newsItems.count - 13].title,
+                             newsItems[newsItems.count - 14].title,
+                             newsItems[newsItems.count - 15].title,
+                             newsItems[newsItems.count - 16].title,
+                             newsItems[newsItems.count - 17].title,
+                             newsItems[newsItems.count - 18].title,
+                             newsItems[newsItems.count - 19].title,
+                             newsItems[newsItems.count - 20].title,
+                             newsItems[newsItems.count - 21].title,
+                             newsItems[newsItems.count - 22].title,
+                             newsItems[newsItems.count - 23].title,
+                             newsItems[newsItems.count - 24].title,
+                             newsItems[newsItems.count - 25].title,
+                             newsItems[newsItems.count - 26].title,
+                             newsItems[newsItems.count - 27].title,
+                             newsItems[newsItems.count - 28].title,
+                             newsItems[newsItems.count - 29].title,
+                             newsItems[newsItems.count - 30].title,
+                             newsItems[newsItems.count - 31].title,
+                             newsItems[newsItems.count - 32].title,
+                             newsItems[newsItems.count - 33].title,
+                             newsItems[newsItems.count - 34].title,
+                             newsItems[newsItems.count - 35].title,
+                             newsItems[newsItems.count - 36].title,
+                             newsItems[newsItems.count - 37].title,
+                             newsItems[newsItems.count - 38].title,
+                             newsItems[newsItems.count - 39].title,
+                             newsItems[newsItems.count - 40].title,
+                             newsItems[newsItems.count - 41].title,
+                             newsItems[newsItems.count - 42].title,
+                             newsItems[newsItems.count - 43].title,
+                             newsItems[newsItems.count - 44].title,
+                             newsItems[newsItems.count - 45].title,
+                             newsItems[newsItems.count - 46].title,
+                             newsItems[newsItems.count - 47].title,
+                             newsItems[newsItems.count - 48].title,
+                             newsItems[newsItems.count - 49].title,
+                             newsItems[newsItems.count - 50].title
                             ]
-        
-        //newsTextArrayの要素とAPILanguageTranslatorの認証コードで通信
-        for i in 0...13 {
             
-            let newsText = newsTextArray[i]
-            
-            let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsText: newsText!)
+        //LanguageTranslatorModelへ通信
+        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
             
             //LanguageTranslatorModelの委託とJSON解析をセット
             languageTranslatorModel.doneCatchTranslationProtocol = self
             languageTranslatorModel.setLanguageTranslator()
-        }
     }
-    
-    //LanguageTranslatorModelから返ってきた値を処理
-    func catchTranslation(arrayTranslationData: Array<Translation>, resultCount: Int) {
+    //LanguageTranslatorModelから返ってきた値の受け取り
+    func catchTranslation(arrayTranslationData: Array<String>, resultCount: Int) {
         
-        translationArray = arrayTranslationData
+        translationArray      = arrayTranslationData
+        translationArrayCount = resultCount
         
-        //返ってきた値をJSONに整形
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        guard let jsonArray = try? encoder.encode(translationArray) else {
-            fatalError("Failed to encode to JSON.")
+        //print(translationArray)
+        
+        //配列内の要素を確認するとToneAnalyzerを呼び出す
+        if translationArray != nil {
+            
+            //ToneAnalyzerの呼び出し
+            startToneAnalyzer()
+        } else {
+            print("Failed because the value is nil.")
         }
-        
-        //SwiftyJSONのJSON型に変換
-        let jsonValue = JSON(jsonArray)
-        
-        //toneAnalysisText = 翻訳結果
-        toneAnalyzerText = jsonValue[self.count]["translation"].string
-        
-        //startToneAnalyzerの呼び出し
-        startToneAnalyzer()
     }
     
     // MARK: - ToneAnalyzer
     func startToneAnalyzer() {
-        
-        //toneAnalyzerTextとAPIToneAnalyzerの認証コードで通信
-        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, toneAnalyzerText: toneAnalyzerText!)
+        //translationArrayとAPIToneAnalyzerの認証コードで通信
+        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
         
         //ToneAnalyzerModelの委託とJSON解析をセット
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
         toneAnalyzerModel.setToneAnalyzer()
     }
     
-    //返ってきた値を処理
-    func catchAnalyzer(arrayAnalyzerData: Array<Analyzer>, resultCount: Int) {
+    //ToneAnalyzerModelから返ってきた値の受け取り
+    func catchAnalyzer(arrayAnalyzerData: Array<Any>) {
         
-        analyzerArray = arrayAnalyzerData
+        joyCountArray = arrayAnalyzerData
+        
+        print("joyCountArray.count: \(joyCountArray.count)")
+        print("joyCountArray: \(joyCountArray.debugDescription)")
     }
     
     //セルを構築する際に呼ばれるメソッド
