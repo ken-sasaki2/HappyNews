@@ -42,10 +42,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //ToneAnalyzerModelから渡ってくる値
     var joyCountArray          = [Any]()
-    var arrayAnalyzerDataCount = Int()
-    
-    //JSON解析で使用
-    var count = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
