@@ -215,6 +215,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             languageTranslatorModel.doneCatchTranslationProtocol = self
             languageTranslatorModel.setLanguageTranslator()
     }
+  
     //LanguageTranslatorModelから返ってきた値の受け取り
     func catchTranslation(arrayTranslationData: Array<String>, resultCount: Int) {
         
@@ -237,7 +238,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func startToneAnalyzer() {
         //translationArrayとAPIToneAnalyzerの認証コードで通信
         let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
-        
+
         //ToneAnalyzerModelの委託とJSON解析をセット
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
         toneAnalyzerModel.setToneAnalyzer()
@@ -247,7 +248,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func catchAnalyzer(arrayAnalyzerData: Array<Any>) {
         
         joyCountArray = arrayAnalyzerData
-        
+      
         print("joyCountArray.count: \(joyCountArray.count)")
         print("joyCountArray: \(joyCountArray.debugDescription)")
     }

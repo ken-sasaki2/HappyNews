@@ -78,13 +78,12 @@ class LanguageTranslatorModel {
                     }
                     return
                 }
-                
                 //translationResult = レスポンス結果
                 guard let translationResult = response?.result else {
                     print(error?.localizedDescription ?? "unknown error")
                     return
                 }
-                
+              
                 //レスポンスのステータスコードで条件分岐
                 let statusCode = response?.statusCode
                 switch statusCode == Optional(200) {
