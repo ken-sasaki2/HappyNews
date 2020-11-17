@@ -80,6 +80,7 @@
         <!--ニュース-->
         <scene sceneID="ru0-5s-Yhg">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FJc-Fi-ZQB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tnJ-dH-bjW" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="ニュース" image="newspaper" catalog="system" id="jWs-PH-ZKM">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -95,17 +96,20 @@
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Lkk-GU-dMe">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="gcu-Dp-nhT" kind="relationship" relationship="rootViewController" id="Vyg-SX-1lO"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FJc-Fi-ZQB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3545" y="-679"/>
         </scene>
         <!--天気-->
         <scene sceneID="F8g-d6-iTA">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xwy-Fe-uDB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vMA-l7-hFC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title="天気" image="cloud.sun" catalog="system" id="swu-fd-Xef"/>
                     <toolbarItems/>
@@ -126,13 +130,13 @@
                         <segue destination="SJT-nY-yBc" kind="relationship" relationship="rootViewController" id="IM7-4z-B6M"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xwy-Fe-uDB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3545" y="65"/>
         </scene>
         <!--アカウント-->
         <scene sceneID="q7X-D9-K3y">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PI6-km-G9h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VdI-9B-FfR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="アカウント" image="person" catalog="system" id="fM2-Pg-nnj"/>
                     <toolbarItems/>
@@ -150,7 +154,6 @@
                         <segue destination="how-Ta-Bn6" kind="relationship" relationship="rootViewController" id="H1g-mN-wpH"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PI6-km-G9h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5012" y="-312"/>
         </scene>
