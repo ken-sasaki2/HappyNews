@@ -75,7 +75,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //}
         
         //LanguageTranslatorの呼び出し
-        startTranslation()
+        //startTranslation()
     }
     
     // MARK: - Table view data source
