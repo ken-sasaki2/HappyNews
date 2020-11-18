@@ -1,5 +1,5 @@
 //
-//  WeatherViewController.swift
+//  SearchViewController.swift
 //  HappyNews
 //
 //  Created by 佐々木　謙 on 2020/10/02.
@@ -8,17 +8,19 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
-
+class AccountViewController: UIViewController {
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //NavigationBarの呼び出し
-        setWeatherNavigationBar()
+        setAccountNavigationBar()
         
+        //UIviewのインスタンス作成(view)
         view = UIView()
         
+        //viewの背景を設定
         view.backgroundColor = .white
         
         centerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -30,15 +32,15 @@ class WeatherViewController: UIViewController {
         ])
     }
     
-    //天気予報ページのNavigationBar設定
-    func setWeatherNavigationBar() {
+    //アカウントページのNavigationBar設定
+    func setAccountNavigationBar() {
         
         //NavigationBarのtitleとその色とフォント
-        navigationItem.title = "天気予報"
+        navigationItem.title = "アカウント"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20.0)]
         
         //NavigationBarの色
-        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "ff4500")
+        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "ffa500")
         
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false
@@ -54,7 +56,7 @@ class WeatherViewController: UIViewController {
         var label = UILabel()
         
         //labelのテキストとフォントとテキストカラー設定
-        label.text = "天気予報ページ"
+        label.text = "アカウントページ"
         label.font = UIFont.boldSystemFont(ofSize: 20.0)
         label.textColor = UIColor.black
         
