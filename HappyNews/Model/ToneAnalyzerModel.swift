@@ -116,7 +116,7 @@ class ToneAnalyzerModel {
     func jsonAnalysisOfToneAnalyzer() {
         
         //感情分析結果が一つの配列に保存されているかの確認
-        
+        print("toneAnalysisArray: \(toneAnalysisArray)")
         print("toneAnalysisArray.count: \(toneAnalysisArray.count)")
         
         for i in 0...arrayCount-1 {
