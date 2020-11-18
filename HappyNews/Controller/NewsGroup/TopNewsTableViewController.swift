@@ -27,12 +27,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsItems = [NewsItemsModel]()
 
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "4cVyLBvPe85CWqge5F99RdCR2GHoIwLjzAQW7eNYtmyt"
+    var languageTranslatorApiKey  = "RQ83a3jtbvMMeNp3oUV0qkM2_DX1ALqxHe24pGoJ4242"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "OjvQ7LPUlMtgqbjjAosaeuvWA0UbHbruHX4M00Bf6Ofa"
+    var toneAnalyzerApiKey  = "PwabIwKh6rw5dPAtuBtk5YVDTZgI1E2z5Z1An9bhdYJC"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -71,7 +71,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //}
         
         //LanguageTranslatorの呼び出し
-        startTranslation()
+        //startTranslation()
     }
     
     // MARK: - Table view data source

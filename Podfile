@@ -6,13 +6,6 @@ target 'HappyNews' do
   use_frameworks!
 
   # Pods for HappyNews
-  
-plugin 'cocoapods-keys', {
-  :project => "HappyNews",
-  :keys => [
-    "translatorApiKey",
-    "analysisApiKey"
-]}
 
 pod 'SegementSlide'
 pod 'IBMWatsonToneAnalyzerV3', '~> 3.6.0'
