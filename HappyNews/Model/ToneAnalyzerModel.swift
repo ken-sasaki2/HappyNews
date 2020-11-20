@@ -96,7 +96,7 @@ class ToneAnalyzerModel {
                         
                         //感情分析結果を配列に保存
                         self.toneAnalysisArray.append(self.toneAnalysisValue)
-                        
+                        print("toneAnalysisArray: \(self.toneAnalysisArray)")
                         //感情分析結果がXMLの要素数と一致していれば実行
                         if self.toneAnalysisArray.count == self.arrayCount {
                             

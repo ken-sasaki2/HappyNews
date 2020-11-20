@@ -32,7 +32,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "PwabIwKh6rw5dPAtuBtk5YVDTZgI1E2z5Z1An9bhdYJC"
+    var toneAnalyzerApiKey  = "53IaSTsPKOLucqnO1QZI5waxsBfd5ESLNMo6bxujnXu-"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -71,7 +71,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //}
         
         //LanguageTranslatorの呼び出し
-        //startTranslation()
+        startTranslation()
     }
     
     // MARK: - Table view data source
@@ -151,58 +151,71 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     // MARK: - LanguageTranslator
     func startTranslation() {
         
+        //どの時点でエラーが発生するのか（429エラー） → A.感情分析時
+
+        //1.XMLのニュースの順番と翻訳前の配列の順番は同じかどうか → A.同じではない。
+        //2.翻訳前と翻訳後の配列の順番は同じかどうか → A.ときによる（通信状態によると仮説）
+        //3.感情分析前の配列（翻訳後の配列）の順番と感情分析後appendした後の配列の順番は同じかどうか
+        //  → A.同じではないかつ判断が難しい（詳細は動画）
+        //4.翻訳前の配列と感情分析後appendした後の配列の順番は同じかどうか → A.1,2,3の過程で同じでないので、同じではない。
+        
+//        print(newsItems.count)
+
+        
         //XMLのdescriptionを配列に保管
-        let newsTextArray = [newsItems[newsItems.count - 1].title,
-                             newsItems[newsItems.count - 2].title,
-                             newsItems[newsItems.count - 3].title,
-                             newsItems[newsItems.count - 4].title,
-                             newsItems[newsItems.count - 5].title,
-                             newsItems[newsItems.count - 6].title,
-                             newsItems[newsItems.count - 7].title,
-                             newsItems[newsItems.count - 8].title,
-                             newsItems[newsItems.count - 9].title,
-                             newsItems[newsItems.count - 10].title,
-                             newsItems[newsItems.count - 11].title,
-                             newsItems[newsItems.count - 12].title,
-                             newsItems[newsItems.count - 13].title,
-                             newsItems[newsItems.count - 14].title,
-                             newsItems[newsItems.count - 15].title,
-                             newsItems[newsItems.count - 16].title,
-                             newsItems[newsItems.count - 17].title,
-                             newsItems[newsItems.count - 18].title,
-                             newsItems[newsItems.count - 19].title,
-                             newsItems[newsItems.count - 20].title,
-                             newsItems[newsItems.count - 21].title,
-                             newsItems[newsItems.count - 22].title,
-                             newsItems[newsItems.count - 23].title,
-                             newsItems[newsItems.count - 24].title,
-                             newsItems[newsItems.count - 25].title,
-                             newsItems[newsItems.count - 26].title,
-                             newsItems[newsItems.count - 27].title,
-                             newsItems[newsItems.count - 28].title,
-                             newsItems[newsItems.count - 29].title,
-                             newsItems[newsItems.count - 30].title,
-                             newsItems[newsItems.count - 31].title,
-                             newsItems[newsItems.count - 32].title,
-                             newsItems[newsItems.count - 33].title,
-                             newsItems[newsItems.count - 34].title,
-                             newsItems[newsItems.count - 35].title,
-                             newsItems[newsItems.count - 36].title,
-                             newsItems[newsItems.count - 37].title,
-                             newsItems[newsItems.count - 38].title,
-                             newsItems[newsItems.count - 39].title,
-                             newsItems[newsItems.count - 40].title,
-                             newsItems[newsItems.count - 41].title,
-                             newsItems[newsItems.count - 42].title,
-                             newsItems[newsItems.count - 43].title,
-                             newsItems[newsItems.count - 44].title,
-                             newsItems[newsItems.count - 45].title,
-                             newsItems[newsItems.count - 46].title,
-                             newsItems[newsItems.count - 47].title,
-                             newsItems[newsItems.count - 48].title,
+        let newsTextArray = [newsItems[newsItems.count - 50].title,
                              newsItems[newsItems.count - 49].title,
-                             newsItems[newsItems.count - 50].title
+                             newsItems[newsItems.count - 48].title,
+                             newsItems[newsItems.count - 47].title,
+                             newsItems[newsItems.count - 46].title,
+                             newsItems[newsItems.count - 45].title,
+                             newsItems[newsItems.count - 44].title,
+                             newsItems[newsItems.count - 43].title,
+                             newsItems[newsItems.count - 42].title,
+                             newsItems[newsItems.count - 41].title,
+                             newsItems[newsItems.count - 40].title,
+                             newsItems[newsItems.count - 39].title,
+                             newsItems[newsItems.count - 38].title,
+                             newsItems[newsItems.count - 37].title,
+                             newsItems[newsItems.count - 36].title,
+                             newsItems[newsItems.count - 35].title,
+                             newsItems[newsItems.count - 34].title,
+                             newsItems[newsItems.count - 33].title,
+                             newsItems[newsItems.count - 32].title,
+                             newsItems[newsItems.count - 31].title,
+                             newsItems[newsItems.count - 30].title,
+                             newsItems[newsItems.count - 29].title,
+                             newsItems[newsItems.count - 28].title,
+                             newsItems[newsItems.count - 27].title,
+                             newsItems[newsItems.count - 26].title,
+                             newsItems[newsItems.count - 25].title,
+                             newsItems[newsItems.count - 24].title,
+                             newsItems[newsItems.count - 23].title,
+                             newsItems[newsItems.count - 22].title,
+                             newsItems[newsItems.count - 21].title,
+                             newsItems[newsItems.count - 20].title,
+                             newsItems[newsItems.count - 19].title,
+                             newsItems[newsItems.count - 18].title,
+                             newsItems[newsItems.count - 17].title,
+                             newsItems[newsItems.count - 16].title,
+                             newsItems[newsItems.count - 15].title,
+                             newsItems[newsItems.count - 14].title,
+                             newsItems[newsItems.count - 13].title,
+                             newsItems[newsItems.count - 12].title,
+                             newsItems[newsItems.count - 11].title,
+                             newsItems[newsItems.count - 10].title,
+                             newsItems[newsItems.count -  9].title,
+                             newsItems[newsItems.count -  8].title,
+                             newsItems[newsItems.count -  7].title,
+                             newsItems[newsItems.count -  6].title,
+                             newsItems[newsItems.count -  5].title,
+                             newsItems[newsItems.count -  4].title,
+                             newsItems[newsItems.count -  3].title,
+                             newsItems[newsItems.count -  2].title,
+                             newsItems[newsItems.count -  1].title
                             ]
+        
+        print(newsTextArray.debugDescription)
             
         //LanguageTranslatorModelへ通信
         let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
@@ -218,7 +231,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         translationArray      = arrayTranslationData
         translationArrayCount = resultCount
         
-        //print(translationArray)
+        print(translationArray)
         
         //配列内の要素を確認するとToneAnalyzerを呼び出す
         if translationArray != nil {
