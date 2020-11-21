@@ -25,6 +25,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //NewsItemsモデルのインスタンス作成
     var newsItems = [NewsItemsModel]()
+    
+    //RSSのnewsを補完する配列
+    var newsTextArray:[Any] = []
 
     //LanguageTranslatorの認証キー
     var languageTranslatorApiKey  = "RQ83a3jtbvMMeNp3oUV0qkM2_DX1ALqxHe24pGoJ4242"
@@ -153,69 +156,18 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //どの時点でエラーが発生するのか（429エラー） → A.感情分析時
 
-        //1.XMLのニュースの順番と翻訳前の配列の順番は同じかどうか → A.同じではない。
-        //2.翻訳前と翻訳後の配列の順番は同じかどうか → A.ときによる（通信状態によると仮説）
+        //1.XMLのニュースの順番と翻訳前の配列の順番は同じかどうか → 対応済み ✔︎
+        //2.翻訳前（1）と翻訳後(2)の配列の順番は同じかどうか → 翻訳前に何かしらのマークをつけて要素番号の把握ができるかどうか？
         //3.感情分析前の配列（翻訳後の配列）の順番と感情分析後appendした後の配列の順番は同じかどうか
         //  → A.同じではないかつ判断が難しい（詳細は動画）
         //4.翻訳前の配列と感情分析後appendした後の配列の順番は同じかどうか → A.1,2,3の過程で同じでないので、同じではない。
         
-//        print(newsItems.count)
+        //XMLのニュースの順番と整合性を合わせるためreversedを使用。$iは合わせた番号の可視化（50 = first, 1 = last）
+        for i in (1...50).reversed() {
+            newsTextArray.append(newsItems[newsItems.count - i].title!.description + "$\(i)")
+        }
 
-        
-        //XMLのdescriptionを配列に保管
-        let newsTextArray = [newsItems[newsItems.count - 50].title,
-                             newsItems[newsItems.count - 49].title,
-                             newsItems[newsItems.count - 48].title,
-                             newsItems[newsItems.count - 47].title,
-                             newsItems[newsItems.count - 46].title,
-                             newsItems[newsItems.count - 45].title,
-                             newsItems[newsItems.count - 44].title,
-                             newsItems[newsItems.count - 43].title,
-                             newsItems[newsItems.count - 42].title,
-                             newsItems[newsItems.count - 41].title,
-                             newsItems[newsItems.count - 40].title,
-                             newsItems[newsItems.count - 39].title,
-                             newsItems[newsItems.count - 38].title,
-                             newsItems[newsItems.count - 37].title,
-                             newsItems[newsItems.count - 36].title,
-                             newsItems[newsItems.count - 35].title,
-                             newsItems[newsItems.count - 34].title,
-                             newsItems[newsItems.count - 33].title,
-                             newsItems[newsItems.count - 32].title,
-                             newsItems[newsItems.count - 31].title,
-                             newsItems[newsItems.count - 30].title,
-                             newsItems[newsItems.count - 29].title,
-                             newsItems[newsItems.count - 28].title,
-                             newsItems[newsItems.count - 27].title,
-                             newsItems[newsItems.count - 26].title,
-                             newsItems[newsItems.count - 25].title,
-                             newsItems[newsItems.count - 24].title,
-                             newsItems[newsItems.count - 23].title,
-                             newsItems[newsItems.count - 22].title,
-                             newsItems[newsItems.count - 21].title,
-                             newsItems[newsItems.count - 20].title,
-                             newsItems[newsItems.count - 19].title,
-                             newsItems[newsItems.count - 18].title,
-                             newsItems[newsItems.count - 17].title,
-                             newsItems[newsItems.count - 16].title,
-                             newsItems[newsItems.count - 15].title,
-                             newsItems[newsItems.count - 14].title,
-                             newsItems[newsItems.count - 13].title,
-                             newsItems[newsItems.count - 12].title,
-                             newsItems[newsItems.count - 11].title,
-                             newsItems[newsItems.count - 10].title,
-                             newsItems[newsItems.count -  9].title,
-                             newsItems[newsItems.count -  8].title,
-                             newsItems[newsItems.count -  7].title,
-                             newsItems[newsItems.count -  6].title,
-                             newsItems[newsItems.count -  5].title,
-                             newsItems[newsItems.count -  4].title,
-                             newsItems[newsItems.count -  3].title,
-                             newsItems[newsItems.count -  2].title,
-                             newsItems[newsItems.count -  1].title
-                            ]
-        
-        print(newsTextArray.debugDescription)
+        print(newsTextArray)
             
         //LanguageTranslatorModelへ通信
         let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
@@ -237,7 +189,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         if translationArray != nil {
             
             //ToneAnalyzerの呼び出し
-            startToneAnalyzer()
+            //startToneAnalyzer()
         } else {
             print("Failed because the value is nil.")
         }
