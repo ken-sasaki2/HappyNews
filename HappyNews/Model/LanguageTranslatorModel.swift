@@ -155,10 +155,14 @@ class LanguageTranslatorModel {
                     //translation = 翻訳結果（JSON解析結果）
                     let translation = Translation(translation: translationValue["translations"][self.count]["translation"].string!)
                     
+                    //中継保管場所として翻訳結果を配列に保管
                     self.containsArray.append(translation.translation!)
                     
+                    //配列のcountが真ならばメソッドを呼び出す
                     if self.containsArray.count == self.textCount {
                         self.sortTheTranslationResults()
+                    } else {
+                        print("Not enough elements in the array")
                     }
                     
                 case false:
@@ -168,17 +172,11 @@ class LanguageTranslatorModel {
             }
         }
     }
-        
-    //翻訳前と翻訳後の配列の順番を合わせる手順
-    //①翻訳を終えたテキストの配列を作成(この時点での中身は順不同)
-    //②翻訳後のテキスト"$i"を含むテキストを繰り返し処理をおこない条件分岐
-    //③変数名が"$i"のiと一致したら構造体を用いて変数に代入
-    //④全ての処理を終えたら構造体を配列へappendし、翻訳前とXMLNewsの順番を合わせる
     
     //翻訳結果の並べ替えをおこなうメソッド
     func sortTheTranslationResults() {
         
-        //条件が一致するtextを構造体へ代入
+        //"$i"の検索をおこない意図した変数へ代入
         for i in (0...49).reversed() {
             
             switch containsArray.count == textCount {
@@ -287,6 +285,7 @@ class LanguageTranslatorModel {
             }
         }
         
+        //翻訳前と翻訳後の配列の順番を合わせる
         let translationArray = [sortNum50, sortNum49, sortNum48, sortNum47, sortNum46, sortNum45, sortNum44, sortNum43, sortNum42, sortNum41, sortNum40, sortNum39, sortNum38, sortNum37, sortNum36, sortNum35, sortNum34, sortNum33, sortNum32, sortNum31, sortNum30, sortNum29, sortNum28, sortNum27, sortNum26, sortNum25, sortNum24, sortNum23, sortNum22, sortNum21, sortNum20, sortNum19, sortNum18, sortNum17, sortNum16, sortNum15, sortNum14, sortNum13, sortNum12, sortNum11, sortNum10, sortNum9, sortNum8, sortNum7, sortNum6, sortNum5, sortNum4, sortNum3, sortNum2, sortNum1]
         
         //最後にappendされたtranslationArrayをControllerへ返す
