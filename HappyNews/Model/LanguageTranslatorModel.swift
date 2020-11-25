@@ -161,8 +161,6 @@ class LanguageTranslatorModel {
                     //配列のcountが真ならばメソッドを呼び出す
                     if self.containsArray.count == self.textCount {
                         self.sortTheTranslationResults()
-                    } else {
-                        print("Not enough elements in the array")
                     }
                     
                 case false:
@@ -286,13 +284,15 @@ class LanguageTranslatorModel {
         }
         
         //翻訳前と翻訳後の配列の順番を合わせる
-        let translationArray = [sortNum50, sortNum49, sortNum48, sortNum47, sortNum46, sortNum45, sortNum44, sortNum43, sortNum42, sortNum41, sortNum40, sortNum39, sortNum38, sortNum37, sortNum36, sortNum35, sortNum34, sortNum33, sortNum32, sortNum31, sortNum30, sortNum29, sortNum28, sortNum27, sortNum26, sortNum25, sortNum24, sortNum23, sortNum22, sortNum21, sortNum20, sortNum19, sortNum18, sortNum17, sortNum16, sortNum15, sortNum14, sortNum13, sortNum12, sortNum11, sortNum10, sortNum9, sortNum8, sortNum7, sortNum6, sortNum5, sortNum4, sortNum3, sortNum2, sortNum1]
+        let translationArray: [String] = [sortNum50, sortNum49, sortNum48, sortNum47, sortNum46, sortNum45, sortNum44, sortNum43, sortNum42, sortNum41, sortNum40, sortNum39, sortNum38, sortNum37, sortNum36, sortNum35, sortNum34, sortNum33, sortNum32, sortNum31, sortNum30, sortNum29, sortNum28, sortNum27, sortNum26, sortNum25, sortNum24, sortNum23, sortNum22, sortNum21, sortNum20, sortNum19, sortNum18, sortNum17, sortNum16, sortNum15, sortNum14, sortNum13, sortNum12, sortNum11, sortNum10, sortNum9, sortNum8, sortNum7, sortNum6, sortNum5, sortNum4, sortNum3, sortNum2, sortNum1]
         
         //最後にappendされたtranslationArrayをControllerへ返す
-        if translationArray != nil  {
+        if translationArray.count == textCount  {
             
             //NewsTableViewControllerへ値を渡す
             self.doneCatchTranslationProtocol?.catchTranslation(arrayTranslationData: translationArray, resultCount: translationArray.count)
+        } else {
+            print("Not enough elements in the array")
         }
     }
 }
