@@ -17,31 +17,58 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
     
     //認証リクエスト時に必要
     var currentNonce: String?
+    
+    //この後やること
+    //・全ての端末でbtnを画面中央に配置 ✔︎
+    //・Sign In With Appleのサイズ調整 ✔︎
+    //・日本語表記に変更
+    //・アカウントページに必要なUI作成
+    //→ログイン前はログインボタンの表示、ログイン後はログアウトボタンの表示、ログインすると通知を受け取れる説明
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //UIviewのインスタンス作成(view)
+        view = UIView()
+
+        //viewの背景を設定
+        view.backgroundColor = .white
         
         //通知を管理するオブジェクト
         let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOption) { (_, _) in
             print("success: Push notification OK")
         }
+
+        //NavigationBarの呼び出し
+        setAccountNavigationBar()
         
-        //'AppleLogin'ボタンの作成,ボタンのタイプとデザインを設定
+        //Sign In With Appleの呼び出し
+        createSignInWithApple()
+    }
+    
+    func createSignInWithApple() {
+        
+        //ボタンのタイプとデザインを設定
         let appleButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
         
-        //'AppleLogin'ボタンの配置場所の設定
-        appleButton.frame = CGRect(x: 56, y: 395, width: 264, height: 50)
+        //'Autosizing'を'AutoLayout' に変換
+        appleButton.translatesAutoresizingMaskIntoConstraints = false
         
-        //'AppleLogin'ボタンがタップされた時の挙動を記述してviewに反映
+        //ボタンがタップされた時の挙動を記述してviewに反映
         appleButton.addTarget(self, action: #selector(tap), for: .touchUpInside)
         view.addSubview(appleButton)
         
-        //NavigationBarの呼び出し
-        setAccountNavigationBar()
+        //ボタンのサイズを設定
+        appleButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        appleButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        //全機種で画面中央に配置
+        NSLayoutConstraint.activate([appleButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                                     appleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
     }
     
-    //'AppleLogin'ボタンをタップすると呼ばれる
+    //'Sign In With Apple'をタップすると呼ばれる
     @objc func tap() {
         
         //nonce = リプレイ攻撃を防ぐ変数
@@ -144,12 +171,12 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
             //エラー処理
             if let error = error {
                 print(error)
-                HUD.flash(.labeledError(title: "Unexpected errors", subtitle: "Try again."), delay: 0)
+                HUD.flash(.labeledError(title: "予期せぬエラーが発生", subtitle: "もう一度お試しください。"), delay: 0)
                 return
             }
             if let authResult = authResult {
                 
-                HUD.flash(.labeledSuccess(title: "Login Completed", subtitle: nil), onView: self.view, delay: 0) { _ in
+                HUD.flash(.labeledSuccess(title: "ログイン完了", subtitle: nil), onView: self.view, delay: 0) { _ in
                     
                     self.performSegue(withIdentifier: "next", sender: nil)
                 }
