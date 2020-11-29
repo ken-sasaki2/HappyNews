@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print(userInfo)
     }
     
-    //バックグラウンドにいる時の受信処理
+    //端末の電源がOFFの時やアプリが立ち上がっていない場合に呼ばれる（以下、バックグラウンド状態）
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // Print message ID.
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler(UIBackgroundFetchResult.newData)
     }
     
-    //アプリがフォアグラウンドに来たときに呼ばれる
+    //アプリがバックグラウンド状態から戻ってきた場合に呼ばれる（以下、フォアグラウンド状態）
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler([ .badge, .sound, .banner ])
     }
 
-    //バックグラウンドの際に来た通知をタップ後、アプリが起動したら呼ばれる
+    //バックグラウンド状態できた通知通をタップ後、アプリに移動（起動）したら呼ばれる
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
