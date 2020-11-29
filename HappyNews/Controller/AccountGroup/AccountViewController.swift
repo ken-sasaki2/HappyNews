@@ -17,19 +17,6 @@ class AccountViewController: UIViewController {
         //NavigationBarの呼び出し
         setAccountNavigationBar()
         
-        //UIviewのインスタンス作成(view)
-        view = UIView()
-        
-        //viewの背景を設定
-        view.backgroundColor = .white
-        
-        centerLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(centerLabel)
-        NSLayoutConstraint.activate([
-            centerLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            centerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
     }
     
     //アカウントページのNavigationBar設定
@@ -48,18 +35,4 @@ class AccountViewController: UIViewController {
         //NavigationBarの下線を消す
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
     }
-    
-    //中央のラベルを設定
-    var centerLabel: UILabel = {
-        
-        //UILabelのインスタンスを作成
-        var label = UILabel()
-        
-        //labelのテキストとフォントとテキストカラー設定
-        label.text = "アカウントページ"
-        label.font = UIFont.boldSystemFont(ofSize: 20.0)
-        label.textColor = UIColor.black
-        
-        return label
-    }()
 }
