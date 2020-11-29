@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import AuthenticationServices
+import CryptoKit
+import Firebase
+import PKHUD
+import FirebaseAuth
 
 class AccountViewController: UIViewController {
     
