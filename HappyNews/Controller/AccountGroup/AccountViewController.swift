@@ -61,7 +61,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         
         //ボタンのサイズを設定
         appleButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        appleButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        appleButton.heightAnchor.constraint(equalToConstant: 47).isActive = true
         
         //全機種で画面中央に配置
         NSLayoutConstraint.activate([appleButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
