@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class NextViewController: UIViewController {
 
@@ -34,7 +36,6 @@ class NextViewController: UIViewController {
         logOutButton.titleLabel?.font = UIFont.systemFont(ofSize: 19)
         logOutButton.backgroundColor = UIColor.black
         
-        
         //ログアウトボタンの角を丸める
         logOutButton.layer.cornerRadius = 5.0
         
@@ -54,13 +55,24 @@ class NextViewController: UIViewController {
     //ログアウトボタンがタップされると呼ばれる
     @objc func tapLogOutButton() {
         print("tap")
+        
+        //ここでログアウト
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
+        //サインアウトすると元の画面へ遷移
+        self.navigationController?.popViewController(animated: true)
     }
     
     //アカウントページのNavigationBar設定
     func setAccountNavigationBar() {
         
         //NavigationBarのtitleとその色とフォント
-        navigationItem.title = "アカウント"
+        navigationItem.title = "アカウントメニュー"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19.0)]
         
         //NavigationBarの色
@@ -71,6 +83,9 @@ class NextViewController: UIViewController {
         
         //NavigationBarの下線を消す
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        
+        //ログイン後の'back'ボタンを削除
+        self.navigationItem.hidesBackButton = true
     }
 
 }
