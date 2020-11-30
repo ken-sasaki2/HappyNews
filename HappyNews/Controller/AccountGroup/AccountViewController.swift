@@ -22,8 +22,11 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
     //・全ての端末でbtnを画面中央に配置 ✔︎
     //・Sign In With Appleのサイズ調整 ✔︎
     //・日本語表記に変更 ✔︎
+    //・ログアウト機能 ✔︎
     //・アカウントページに必要なUI作成
-    //→ログイン前はログインボタンの表示、ログイン後はログアウトボタンの表示、ログインすると通知を受け取れる説明
+    //・一度ログインすることでログイン状態を保持させる
+    //・お問い合わせメール送信ボタンの作成
+    //・レビューボタンの作成
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +46,58 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         //NavigationBarの呼び出し
         setAccountNavigationBar()
         
+        //ログイン案内テキストの表示
+        signInGuideText()
+        
         //Sign In With Appleの呼び出し
         createSignInWithApple()
+    }
+    
+    //アカウントページのNavigationBar設定
+    func setAccountNavigationBar() {
+        
+        //NavigationBarのtitleとその色とフォント
+        navigationItem.title = "アカウント"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19.0)]
+        
+        //NavigationBarの色
+        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "ffa500")
+        
+        //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
+        self.navigationController?.navigationBar.isTranslucent = false
+        
+        //NavigationBarの下線を消す
+        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+    }
+    
+    //'Sign In With Apple'上のテキスト
+    func signInGuideText() {
+        
+        let signInGuide = UITextField()
+        
+        //'Autosizing'を'AutoLayout' に変換
+        signInGuide.translatesAutoresizingMaskIntoConstraints = false
+        
+        //テキストの内容とフォントと背景色を設定し、テキストを中央揃えにして反映
+        signInGuide.text = "ログインして通知設定を保存しましょう。"
+        signInGuide.font = UIFont.systemFont(ofSize: 18)
+        signInGuide.backgroundColor = UIColor.clear
+        signInGuide.textAlignment = NSTextAlignment.center
+        view.addSubview(signInGuide)
+        	
+        //signInGuideのY軸のAutoLayoutを設定
+        let signInGuideTopConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 25)
+        
+        //signInGuideのX軸のAutoLayoutを設定
+        let signInGuideLeadingConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1.0, constant: self.view.frame.maxX/2)
+        
+        //signInGuideの幅を設定
+        let signInGuideWidthConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1.0, constant: 0)
+        
+        //AutoLayoutを反映
+        self.view.addConstraint(signInGuideTopConstraint)
+        self.view.addConstraint(signInGuideLeadingConstraint)
+        self.view.addConstraint(signInGuideWidthConstraint)
     }
     
     func createSignInWithApple() {
@@ -190,22 +243,5 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!
-    }
-    
-    //アカウントページのNavigationBar設定
-    func setAccountNavigationBar() {
-        
-        //NavigationBarのtitleとその色とフォント
-        navigationItem.title = "アカウント"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19.0)]
-        
-        //NavigationBarの色
-        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "ffa500")
-        
-        //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
-        self.navigationController?.navigationBar.isTranslucent = false
-        
-        //NavigationBarの下線を消す
-        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
     }
 }
