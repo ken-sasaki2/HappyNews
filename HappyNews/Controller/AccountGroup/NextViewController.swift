@@ -90,6 +90,27 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
+    //セルをタップすると呼ばれる
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch accountCellArray[indexPath.row] {
+        case "通知の設定":
+            print("0番")
+        case "レビュー":
+            print("1番")
+        case "お問い合わせ":
+            print("2番")
+        case "開発者(Twitter)":
+            print("3番")
+        case "ログアウト":
+            print("4番")
+        case "バージョン":
+            print("5番")
+        default:
+            print("タップ")
+        }
+    }
+    
     func createLogOutButton() {
 
         let logOutButton = UIButton()
