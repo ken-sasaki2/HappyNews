@@ -21,7 +21,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
     //この後やること
     //・全ての端末でbtnを画面中央に配置 ✔︎
     //・Sign In With Appleのサイズ調整 ✔︎
-    //・日本語表記に変更
+    //・日本語表記に変更 ✔︎
     //・アカウントページに必要なUI作成
     //→ログイン前はログインボタンの表示、ログイン後はログアウトボタンの表示、ログインすると通知を受け取れる説明
 
@@ -61,7 +61,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         
         //ボタンのサイズを設定
         appleButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        appleButton.heightAnchor.constraint(equalToConstant: 47).isActive = true
+        appleButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
         //全機種で画面中央に配置
         NSLayoutConstraint.activate([appleButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -197,7 +197,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         
         //NavigationBarのtitleとその色とフォント
         navigationItem.title = "アカウント"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20.0)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19.0)]
         
         //NavigationBarの色
         self.navigationController?.navigationBar.barTintColor = UIColor(hex: "ffa500")
