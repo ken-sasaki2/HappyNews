@@ -104,55 +104,19 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             print("3番")
         case "ログアウト":
             print("4番")
+            //ここでログアウト
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+            //サインアウトすると元の画面へ遷移
+            self.navigationController?.popViewController(animated: true)
         case "バージョン":
             print("5番")
         default:
             print("タップ")
         }
-    }
-    
-    func createLogOutButton() {
-
-        let logOutButton = UIButton()
-
-        //'Autosizing'を'AutoLayout' に変換
-        logOutButton.translatesAutoresizingMaskIntoConstraints = false
-
-        //ログアウトボタンのタイトルの色とサイズと背景色を設定
-        logOutButton.setTitle("ログアウト", for: UIControl.State.normal)
-        logOutButton.setTitleColor(UIColor.white, for: .normal)
-        logOutButton.titleLabel?.font = UIFont.systemFont(ofSize: 19, weight: .medium)
-        logOutButton.backgroundColor = UIColor.black
-
-        //ログアウトボタンの角を丸める
-        logOutButton.layer.cornerRadius = 5.0
-
-        //ログアウトボタンがタップされた時の挙動を記述してviewに反映
-        logOutButton.addTarget(self, action: #selector(tapLogOutButton), for: .touchUpInside)
-        view.addSubview(logOutButton)
-
-        //ログアウトボタンのサイズを設定
-        logOutButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        logOutButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-
-        //全機種で画面中央に配置
-        NSLayoutConstraint.activate([logOutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                                     logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
-    }
-
-    //ログアウトボタンがタップされると呼ばれる
-    @objc func tapLogOutButton() {
-        print("tap")
-
-        //ここでログアウト
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-
-        //サインアウトすると元の画面へ遷移
-        self.navigationController?.popViewController(animated: true)
     }
 }
