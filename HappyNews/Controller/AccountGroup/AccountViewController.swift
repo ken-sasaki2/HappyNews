@@ -35,7 +35,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         view = UIView()
 
         //viewの背景を設定
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: "f4f8fa")
         
         //通知を管理するオブジェクト
         let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -58,7 +58,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         
         //NavigationBarのtitleとその色とフォント
         navigationItem.title = "アカウント"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 19.0)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19, weight: .medium)]
         
         //NavigationBarの色
         self.navigationController?.navigationBar.barTintColor = UIColor(hex: "ffa500")
@@ -78,15 +78,16 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         //'Autosizing'を'AutoLayout' に変換
         signInGuide.translatesAutoresizingMaskIntoConstraints = false
         
-        //テキストの内容とフォントと背景色を設定し、テキストを中央揃えにして反映
+        //テキストの内容とフォントと色を設定し、中央揃えにしてviewに反映
         signInGuide.text = "ログインして通知設定を保存しましょう。"
-        signInGuide.font = UIFont.systemFont(ofSize: 18)
+        signInGuide.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        signInGuide.textColor = UIColor(hex: "333333")
         signInGuide.backgroundColor = UIColor.clear
         signInGuide.textAlignment = NSTextAlignment.center
         view.addSubview(signInGuide)
         	
         //signInGuideのY軸のAutoLayoutを設定
-        let signInGuideTopConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 25)
+        let signInGuideTopConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 27)
         
         //signInGuideのX軸のAutoLayoutを設定
         let signInGuideLeadingConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1.0, constant: self.view.frame.maxX/2)
@@ -112,13 +113,21 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         appleButton.addTarget(self, action: #selector(tap), for: .touchUpInside)
         view.addSubview(appleButton)
         
-        //ボタンのサイズを設定
-        appleButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        //appleButtonのY軸のAutoLayoutを設定
+        let appleButtonTopConstraint = NSLayoutConstraint(item: appleButton, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 67)
+        
+        //appleButtonのX軸のAutoLayoutを設定
+        NSLayoutConstraint.activate([appleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+        
+        //appleButtonの高さを設定
         appleButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
-        //全機種で画面中央に配置
-        NSLayoutConstraint.activate([appleButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                                     appleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+        //appleButtonの幅を設定
+        let appleButtonWidthConstraint = NSLayoutConstraint(item: appleButton, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 0.8, constant: 0)
+        
+        //AutoLayoutを反映
+        self.view.addConstraint(appleButtonTopConstraint)
+        self.view.addConstraint(appleButtonWidthConstraint)
     }
     
     //'Sign In With Apple'をタップすると呼ばれる
