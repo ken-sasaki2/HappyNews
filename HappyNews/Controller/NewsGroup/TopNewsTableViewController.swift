@@ -267,7 +267,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         cell.backgroundColor = UIColor.white
         cell.textLabel?.text = newsItem.title
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
-        cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.textColor = UIColor(hex: "333")
         cell.textLabel?.numberOfLines = 3
             
         //セルのサブタイトル
