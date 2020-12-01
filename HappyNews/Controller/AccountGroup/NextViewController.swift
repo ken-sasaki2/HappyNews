@@ -16,7 +16,8 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet var table: UITableView!
     
     //セルのテキストとアイコンの配列
-    let accountCellArray: [String] = ["通知の設定", "レビュー", "お問い合わせ", "開発者(Twitter)", "ログアウト", "バージョン"]
+    let accountCellArray: [String] = ["通知の設定", "レビュー", "お問い合わせ", "開発者(Twitter)", "ログアウト",
+                                      "HappyNews ver. 1.0"]
     let menuIconArray   : [String] = ["nofitication", "review", "mail", "twitter", "logout", "version"]
 
     override func viewDidLoad() {
@@ -87,12 +88,18 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let menuLabel = cell.viewWithTag(2) as! UILabel
             menuLabel.text = accountCellArray[indexPath.row]
         
+        //バージョンを表示するセルのタップを無効
+        if accountCellArray[indexPath.row] == "HappyNews ver. 1.0" {
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        }
+        
         return cell
     }
     
     //セルをタップすると呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        //セルのテキストを取得して分岐
         switch accountCellArray[indexPath.row] {
         case "通知の設定":
             print("0番")
@@ -103,7 +110,6 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         case "開発者(Twitter)":
             print("3番")
         case "ログアウト":
-            print("4番")
             //ここでログアウト
             let firebaseAuth = Auth.auth()
             do {
@@ -113,10 +119,8 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             //サインアウトすると元の画面へ遷移
             self.navigationController?.popViewController(animated: true)
-        case "バージョン":
-            print("5番")
         default:
-            print("タップ")
+            print("No response")
         }
     }
 }
