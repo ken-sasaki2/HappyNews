@@ -15,11 +15,19 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //インスタンス作成
     @IBOutlet var table: UITableView!
     
-    //セルのテキストとアイコンの配列
-    let accountCellArray: [String] = ["通知の設定", "レビュー", "お問い合わせ", "開発者(Twitter)", "ログアウト",
-                                      "HappyNews ver. 1.0"]
-    let menuIconArray   : [String] = ["nofitication", "review", "mail", "twitter", "logout", "version"]
-
+    //セクションのタイトル
+    let sectionTitleArray: [String] = ["設定", "このアプリについて", "アカウント"]
+    
+    //セクション毎のアイコンの配列
+    let settingSectionIconArray: [String] = ["notification"]
+    let appSectionIconArray    : [String] = ["review", "mail", "twitter", "version"]
+    let accountSectionIconArray: [String] = ["logout"]
+    
+    //セクション毎のセルのラベル
+    let settingCellLabelArray : [String] = ["通知の設定"]
+    let appCellLabelArray     : [String] = ["レビュー", "お問い合わせ", "開発者(Twitter)", "HappyNews ver. 1.0"]
+    let accountCellLabelArray : [String] = ["ログアウト"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,9 +57,33 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // MARK: - TableView
+    //セクションの数を決める
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionTitleArray.count
+    }
+    
+    //セクションのヘッダーのタイトルを決める
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitleArray[section]
+    }
+    
+    //セクションヘッダーの高さを決める
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
     //セルの数を決める
     func tableView(_ table: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return accountCellArray.count
+        
+        if section == 0 {
+            return settingSectionIconArray.count
+        } else if section == 1 {
+            return appSectionIconArray.count
+        } else if section == 2 {
+            return accountSectionIconArray.count
+        } else{
+            return 0
+        }
     }
     
     //セルの高さを設定
@@ -65,28 +97,45 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //tableCellのIDでUITableViewCellのインスタンスを生成
         let cell = table.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
         
-        //セルを化粧
-        cell.backgroundColor = UIColor(hex: "ffffff")
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
-        cell.textLabel?.textColor = UIColor(hex: "333333")
-        cell.textLabel?.numberOfLines = 1
+        if indexPath.section == 0 {
+            
+            //"設定"セクションのアイコン処理
+            let settingSectionIcon = UIImage(named: settingSectionIconArray[indexPath.row])
+            let settingIcon = cell.viewWithTag(1) as! UIImageView
+                settingIcon.image = settingSectionIcon
+            
+            //設定セクションのラベル処理
+            let settingLabel = cell.viewWithTag(2) as! UILabel
+                settingLabel.text = settingCellLabelArray[indexPath.row]
+            
+        } else if indexPath.section == 1 {
+            
+            //"このアプリについて"セクションのアイコン処理
+            let appSectionIcon = UIImage(named: appSectionIconArray[indexPath.row])
+            let appIcon = cell.viewWithTag(1) as! UIImageView
+                appIcon.image = appSectionIcon
+            
+            //"このアプリについて"セクションのラベル処理
+            let appLabel = cell.viewWithTag(2) as! UILabel
+                appLabel.text = appCellLabelArray[indexPath.row]
+            
+        } else if indexPath.section == 2 {
+            
+            //"アカウント"セクションのアイコン処理
+            let accountSectionIcon = UIImage(named: accountSectionIconArray[indexPath.row])
+            let accountIcon = cell.viewWithTag(1) as! UIImageView
+                accountIcon.image = accountSectionIcon
+            
+            //"アカウント"セクションのラベル処理
+            let accountLabel = cell.viewWithTag(2) as! UILabel
+                accountLabel.text = accountCellLabelArray[indexPath.row]
+        }
         
         //空のセルを削除
         table.tableFooterView = UIView(frame: .zero)
         
-        //iconとして配列の要素を取り出す
-        let icon = UIImage(named: menuIconArray[indexPath.row])
-        
-        //tag番号1でUIImageViewを指定してiconを反映
-        let menuIcon = cell.viewWithTag(1) as! UIImageView
-        menuIcon.image = icon
-        
-        //tag番号2でセルのテキストを設定してviewに反映
-        let menuLabel = cell.viewWithTag(2) as! UILabel
-            menuLabel.text = accountCellArray[indexPath.row]
-        
         //バージョンを表示するセルのタップを無効
-        if accountCellArray[indexPath.row] == "HappyNews ver. 1.0" {
+        if appCellLabelArray[indexPath.row] == "HappyNews ver. 1.0" {
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
         }
         
@@ -95,19 +144,31 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //セルをタップすると呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         //セルのテキストを取得して分岐
-        switch accountCellArray[indexPath.row] {
+        //"設定セクションの場合"
+        switch settingCellLabelArray[indexPath.row] {
         case "通知の設定":
             print("0番")
+        default:
+            print("No Response")
+        }
+        
+        //"このアプリについて"セクションの場合
+        switch appCellLabelArray[indexPath.row] {
         case "レビュー":
-            print("1番")
+            print("レビューがタップされました")
         case "お問い合わせ":
-            print("2番")
+            print("お問い合わせがタップされました")
         case "開発者(Twitter)":
-            print("3番")
+            print("開発者(Twitter)がタップされました")
+        default:
+            print("No Response")
+        }
+        
+        //"アカウント"セクションの場合
+        switch accountCellLabelArray[indexPath.row] {
         case "ログアウト":
-            //ここでログアウト
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
@@ -117,7 +178,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //サインアウトすると元の画面へ遷移
             self.navigationController?.popViewController(animated: true)
         default:
-            print("No response")
+            print("No Response")
         }
     }
 }
