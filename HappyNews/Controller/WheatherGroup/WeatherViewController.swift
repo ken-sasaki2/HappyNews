@@ -14,6 +14,9 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //ダークモード適用を回避
+        self.overrideUserInterfaceStyle = .light
+        
         //NavigationBarの呼び出し
         setWeatherNavigationBar()
         

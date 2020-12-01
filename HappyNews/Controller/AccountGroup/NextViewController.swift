@@ -23,11 +23,11 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //ダークモード適用を回避
+        self.overrideUserInterfaceStyle = .light
+        
         //NavigationBarの呼び出し
         setAccountNavigationBar()
-        
-        //ログアウトボタンの呼び出し
-        //createLogOutButton()
     }
     
     // MARK: - Navigation
