@@ -17,16 +17,6 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
     
     //認証リクエスト時に必要
     var currentNonce: String?
-    
-    //この後やること
-    //・全ての端末でbtnを画面中央に配置 ✔︎
-    //・Sign In With Appleのサイズ調整 ✔︎
-    //・日本語表記に変更 ✔︎
-    //・ログアウト機能 ✔︎
-    //・アカウントページに必要なUI作成
-    //・一度ログインすることでログイン状態を保持させる
-    //・お問い合わせメール送信ボタンの作成
-    //・レビューボタンの作成
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +25,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         view = UIView()
 
         //viewの背景を設定
-        view.backgroundColor = UIColor(hex: "f4f8fa")
+        view.backgroundColor = UIColor(hex: "ffffff")
         
         //通知を管理するオブジェクト
         let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -53,6 +43,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         createSignInWithApple()
     }
     
+    // MARK: - Navigation
     //アカウントページのNavigationBar設定
     func setAccountNavigationBar() {
         
@@ -70,6 +61,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
     }
     
+    // MARK: - SignInGuideText
     //'Sign In With Apple'上のテキスト
     func signInGuideText() {
         
@@ -101,6 +93,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         self.view.addConstraint(signInGuideWidthConstraint)
     }
     
+    // MARK: - SignInWithApple
     func createSignInWithApple() {
         
         //ボタンのタイプとデザインを設定
