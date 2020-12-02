@@ -107,6 +107,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //設定セクションのラベル処理
             let settingLabel = cell.viewWithTag(2) as! UILabel
                 settingLabel.text = settingCellLabelArray[indexPath.row]
+                settingLabel.textColor = UIColor(hex: "333333")
             
         } else if indexPath.section == 1 {
             
@@ -118,6 +119,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //"このアプリについて"セクションのラベル処理
             let appLabel = cell.viewWithTag(2) as! UILabel
                 appLabel.text = appCellLabelArray[indexPath.row]
+                appLabel.textColor = UIColor(hex: "333333")
             
         } else if indexPath.section == 2 {
             
@@ -129,7 +131,11 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //"アカウント"セクションのラベル処理
             let accountLabel = cell.viewWithTag(2) as! UILabel
                 accountLabel.text = accountCellLabelArray[indexPath.row]
+                accountLabel.textColor = UIColor.red
         }
+        
+        //セルを化粧
+        cell.backgroundColor = UIColor.white
         
         //空のセルを削除
         table.tableFooterView = UIView(frame: .zero)
