@@ -150,41 +150,47 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //セルをタップすると呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        //セルのテキストを取得して分岐
-        //"設定セクションの場合"
-        switch settingCellLabelArray[indexPath.row] {
-        case "通知の設定":
-            print("0番")
-        default:
-            print("No Response")
-        }
         
-        //"このアプリについて"セクションの場合
-        switch appCellLabelArray[indexPath.row] {
-        case "レビュー":
-            print("レビューがタップされました")
-        case "お問い合わせ":
-            print("お問い合わせがタップされました")
-        case "開発者(Twitter)":
-            print("開発者(Twitter)がタップされました")
-        default:
-            print("No Response")
-        }
-        
-        //"アカウント"セクションの場合
-        switch accountCellLabelArray[indexPath.row] {
-        case "ログアウト":
-            let firebaseAuth = Auth.auth()
-            do {
-                try firebaseAuth.signOut()
-            } catch let signOutError as NSError {
-                print ("Error signing out: %@", signOutError)
+        //セクション毎のタップアクションを分岐
+        if indexPath.section == 0 {
+            
+            //"設定セクションの場合"
+            switch indexPath.row {
+            case 0:
+                print("通知設定")
+            default:
+                0
             }
-            //サインアウトすると元の画面へ遷移
-            self.navigationController?.popViewController(animated: true)
-        default:
-            print("No Response")
+        } else if indexPath.section == 1 {
+            
+            //"このアプリについて"セクションの場合
+            switch indexPath.row {
+            case 0:
+                print("AppStoreへ遷移")
+            case 1:
+                print("メール起動")
+            case 2:
+                print("Twitterへ遷移")
+            default:
+                0
+            }
+        } else if indexPath.section == 2 {
+            
+            //"アカウント"セクションの場合
+            switch indexPath.row {
+            case 0:
+                print("ログアウト")
+                let firebaseAuth = Auth.auth()
+                do {
+                    try firebaseAuth.signOut()
+                } catch let signOutError as NSError {
+                    print ("Error signing out: %@", signOutError)
+                }
+                //サインアウトすると元の画面へ遷移
+                self.navigationController?.popViewController(animated: true)
+            default:
+                0
+            }
         }
     }
 }
