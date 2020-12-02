@@ -7,8 +7,12 @@ target 'HappyNews' do
 
   # Pods for HappyNews
 
-pod 'SegementSlide'
-pod 'IBMWatsonToneAnalyzerV3', '~> 3.6.0'
-pod 'IBMWatsonLanguageTranslatorV3', '~> 3.6.0'
-pod 'SwiftyJSON'
+  pod 'SegementSlide'
+  pod 'IBMWatsonToneAnalyzerV3', '~> 3.6.0'
+  pod 'IBMWatsonLanguageTranslatorV3', '~> 3.6.0'
+  pod 'SwiftyJSON'
+  pod 'Firebase'
+  pod 'Firebase/Auth'
+  pod 'PKHUD', '~> 5.0'
+  pod 'FirebaseMessaging'
 end

@@ -96,7 +96,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //セルの高さを決めるメソッド
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.size.height/7
+        return view.frame.size.height/6
     }
     
     //XML解析を開始する場合(parser.parse())に呼ばれるメソッド
@@ -266,8 +266,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //セルを化粧
         cell.backgroundColor = UIColor.white
         cell.textLabel?.text = newsItem.title
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
-        cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
+        cell.textLabel?.textColor = UIColor(hex: "333")
         cell.textLabel?.numberOfLines = 3
             
         //セルのサブタイトル
