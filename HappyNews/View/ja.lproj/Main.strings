@@ -1,0 +1,9 @@
+
+/* Class = "UITabBarItem"; title = "アカウント"; ObjectID = "fM2-Pg-nnj"; */
+"fM2-Pg-nnj.title" = "アカウント";
+
+/* Class = "UITabBarItem"; title = "ニュース"; ObjectID = "jWs-PH-ZKM"; */
+"jWs-PH-ZKM.title" = "ニュース";
+
+/* Class = "UITabBarItem"; title = "天気"; ObjectID = "swu-fd-Xef"; */
+"swu-fd-Xef.title" = "天気";
