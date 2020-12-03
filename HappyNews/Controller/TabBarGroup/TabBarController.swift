@@ -23,6 +23,7 @@ class TabBarController: UITabBarController {
         UITabBar.appearance().backgroundImage = UIImage()
     }
     
+    
     //tabbarをタップした場合のアクション
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         switch item.title {
