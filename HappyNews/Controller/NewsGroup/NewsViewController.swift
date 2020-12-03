@@ -21,6 +21,8 @@ extension UIColor {
 }
 
 class NewsViewController: SegementSlideDefaultViewController {
+    
+    //テスト
 
     override func viewDidLoad() {
         super.viewDidLoad()
