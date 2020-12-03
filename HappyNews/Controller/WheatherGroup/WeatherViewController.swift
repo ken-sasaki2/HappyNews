@@ -38,7 +38,7 @@ class WeatherViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .medium)]
         
         //NavigationBarの色
-        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "CD5A91")
+        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "ff4500")
         
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false

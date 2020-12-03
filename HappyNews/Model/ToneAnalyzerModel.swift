@@ -24,14 +24,10 @@ class ToneAnalyzerModel {
     
     //JSON解析で使用
     var count      = 0
-    var arrayCount = 50
+    var arrayCount = 35
+    var toneAnalysisValue = JSON()
     var toneAnalysisArray: [JSON] = []
     var joyCountArray    : [Any]  = []
-    
-    //429エラーが発生した場合に使用
-    var errorResponse: String?
-    var errorResult = JSON()
-    
     
     //プロトコルのインスタンス
     var doneCatchAnalyzerProtocol: DoneCatchAnalyzerProtocol?
@@ -51,72 +47,67 @@ class ToneAnalyzerModel {
         //API認証子
         let toneAnalyzerKey = WatsonIAMAuthenticator(apiKey: toneAnalyzerAccessKey!)
         let toneAnalyzer    = ToneAnalyzer(version: toneAnalyzerAccessVersion!, authenticator: toneAnalyzerKey)
-        toneAnalyzer.serviceURL = toneAnalyzerAccessURL
+            toneAnalyzer.serviceURL = toneAnalyzerAccessURL
         
         for i in 0..<50 {
+  
             //リクエスト送信
             toneAnalyzer.tone(toneContent: .text(toneAnalyzerArray[i])) {
-                response, error in
-                
-                //エラー処理
-                if let error = error {
-                    switch error {
-                    case let .http(statusCode, message, metadata):
-                        switch statusCode {
-                        case .some(404):
-                            print("Handle Not Found (404) exceptz1zion")
-                        case .some(413):
-                            print("Handle Request Too Large (413) exception")
-                        case .some(429):
-                            //429エラーが発生すると意図する値を作成してappend
-                            self.errorResponse = "errorResponse 429 error occurred"
-                            print(self.errorResponse)
-                            self.errorResult = JSON(self.errorResponse)
-                            self.toneAnalysisArray.append(self.errorResult)
-                        default:
-                            if let statusCode = statusCode {
-                                print("Error - code: \(statusCode), \(message ?? "")")
+                    response, error in
+
+                    //エラー処理
+                    if let error = error {
+                        switch error {
+                        case let .http(statusCode, message, metadata):
+                            switch statusCode {
+                            case .some(404):
+                                print("Handle Not Found (404) exceptz1zion")
+                            case .some(413):
+                                print("Handle Request Too Large (413) exception")
+                            default:
+                                if let statusCode = statusCode {
+                                    print("Error - code: \(statusCode), \(message ?? "")")
+                                }
                             }
+                        default:
+                            print(error.localizedDescription)
                         }
-                    default:
-                        print(error.localizedDescription)
+                        return
                     }
-                    return
-                }
-                
-                //toneAnalyzerResult = レスポンス結果
-                guard let toneAnalyzerResult = response?.result else {
-                    print(error?.localizedDescription ?? "unknown error")
-                    return
-                }
-                
-                //レスポンスのステータスコードで条件分岐
-                let statusCode = response?.statusCode
-                switch statusCode == Optional(200) {
-                case true:
-                    //取得対象をdocument_toneに設定し、JSON形式に整形
-                    let encoder = JSONEncoder()
-                    encoder.outputFormatting = .prettyPrinted
-                    guard let toneAnalysisJSON = try? encoder.encode(toneAnalyzerResult.documentTone) else {
-                        fatalError("Failed to encode to JSON.")
+                    //analysisResult = レスポンス結果
+                    guard let toneAnalyzerResult = response?.result else {
+                        print(error?.localizedDescription ?? "unknown error")
+                        return
                     }
-                    
-                    //正常に分析されたテキストをSwiftyJSONのJSON型へ変換
-                    let toneAnalysisValue = JSON(toneAnalysisJSON)
-                    
-                    //感情分析結果を配列に保存
-                    self.toneAnalysisArray.append(toneAnalysisValue)
-                    
-                    //感情分析結果がXMLの要素数と一致していれば実行
-                    if self.toneAnalysisArray.count == self.arrayCount {
-                        //jsonAnalysisOfToneAnalyzerの呼び出し
-                        self.jsonAnalysisOfToneAnalyzer()
+
+                    //レスポンスのステータスコードで条件分岐
+                    let statusCode = response?.statusCode
+                    switch statusCode == Optional(200) {
+                    case true:
+                        //分析結果のデータをJSON形式に整形
+                        let encoder = JSONEncoder()
+                        encoder.outputFormatting = .prettyPrinted
+                        guard let toneAnalysisJSON = try? encoder.encode(toneAnalyzerResult) else {
+                            fatalError("Failed to encode to JSON.")
+                        }
+
+                        //SwiftyJSONのJSON型へ変換
+                        self.toneAnalysisValue = JSON(toneAnalysisJSON)
+                        
+                        //感情分析結果を配列に保存
+                        self.toneAnalysisArray.append(self.toneAnalysisValue)
+                        
+                        //感情分析結果がXMLの要素数と一致していれば実行
+                        if self.toneAnalysisArray.count == self.arrayCount {
+                            
+                            //jsonAnalysisOfToneAnalyzerの呼び出し
+                            self.jsonAnalysisOfToneAnalyzer()
+                        }
+                        
+                    case false:
+                        //ステータスコードの400範囲は障害、500範囲は内部システムエラー
+                        print("analysis failure: \(statusCode)")
                     }
-                    
-                case false:
-                    //ステータスコードの400範囲は障害、500範囲は内部システムエラー
-                    print("analysis failure: \(statusCode)")
-                }
             }
         }
     }
@@ -125,20 +116,18 @@ class ToneAnalyzerModel {
     func jsonAnalysisOfToneAnalyzer() {
         
         //感情分析結果が一つの配列に保存されているかの確認
-        print("toneAnalysisArray: \(toneAnalysisArray.debugDescription)")
+        print("toneAnalysisArray: \(toneAnalysisArray)")
         print("toneAnalysisArray.count: \(toneAnalysisArray.count)")
         
         for i in 0...arrayCount-1 {
             
-            //感情分析結果が"Joy" && score0.5以上の要素を検索(document_toneのみ取得した場合)
-            if toneAnalysisArray[i]["tones"][count]["score"] > 0.5 && toneAnalysisArray[i]["tones"][count]["tone_name"] == "Joy" {
+            //感情分析結果が"Joy" && score0.5以上の要素を検索
+            if toneAnalysisArray[i]["document_tone"]["tones"][count]["score"] > 0.5 && toneAnalysisArray[i]["document_tone"]["tones"][count]["tone_name"] == "Joy" {
                 
                 //条件を満たした要素のindex番号の取得（-1で整合性）
                 joyCountArray.append(toneAnalysisArray[0].count+i-1)
             }
         }
-        print(joyCountArray.count)
-        print(joyCountArray.debugDescription)
         //最後にappendされた配列をControllerへ返す
         self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: joyCountArray)
     }

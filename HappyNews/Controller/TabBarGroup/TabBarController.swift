@@ -14,7 +14,7 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         //起動時のitemの色
-        UITabBar.appearance().tintColor = UIColor(hex: "00AECC")
+        UITabBar.appearance().tintColor = UIColor(hex: "2DCCD3")
         
         //tabbarの色を変更
         tabBar.barTintColor = UIColor(hex: "ffffff")
@@ -28,11 +28,11 @@ class TabBarController: UITabBarController {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         switch item.title {
         case "ニュース":
-            tabBar.tintColor = UIColor(hex: "00AECC")
+            tabBar.tintColor = UIColor(hex: "2DCCD3")
         case "天気":
-            tabBar.tintColor = UIColor(hex: "CD5A91")
+            tabBar.tintColor = UIColor(hex: "ff4500")
         case "アカウント":
-            tabBar.tintColor = UIColor(hex: "89609E")
+            tabBar.tintColor = UIColor(hex: "ffa500")
         default:
             //tabbarの非選択色の設定
             tabBar.unselectedItemTintColor =  UIColor.gray
