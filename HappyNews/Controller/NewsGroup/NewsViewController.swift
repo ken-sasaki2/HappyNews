@@ -21,6 +21,8 @@ extension UIColor {
 }
 
 class NewsViewController: SegementSlideDefaultViewController {
+    
+    //テスト
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,7 @@ class NewsViewController: SegementSlideDefaultViewController {
         
         //NavigationBarのtitleとその色とフォント
         navigationItem.title = "HapyNews"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20.0)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .medium)]
         
         //NavigationBarの色
         self.navigationController?.navigationBar.barTintColor = UIColor(hex: "00AECC")

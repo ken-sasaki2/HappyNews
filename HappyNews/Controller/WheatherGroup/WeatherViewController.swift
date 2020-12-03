@@ -35,7 +35,7 @@ class WeatherViewController: UIViewController {
         
         //NavigationBarのtitleとその色とフォント
         navigationItem.title = "天気予報"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20.0)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .medium)]
         
         //NavigationBarの色
         self.navigationController?.navigationBar.barTintColor = UIColor(hex: "CD5A91")

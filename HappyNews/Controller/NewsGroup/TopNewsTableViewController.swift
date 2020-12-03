@@ -95,7 +95,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //セルの高さを決めるメソッド
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.size.height/7
+        return view.frame.size.height/6
     }
     
     //XML解析を開始する場合(parser.parse())に呼ばれるメソッド
@@ -176,7 +176,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             languageTranslatorModel.doneCatchTranslationProtocol = self
             languageTranslatorModel.setLanguageTranslator()
     }
-    
+  
     //LanguageTranslatorModelから返ってきた値の受け取り
     func catchTranslation(arrayTranslationData: Array<String>, resultCount: Int) {
         
@@ -197,10 +197,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     // MARK: - ToneAnalyzer
     func startToneAnalyzer() {
-        
         //translationArrayとAPIToneAnalyzerの認証コードで通信
         let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
-        
+
         //ToneAnalyzerModelの委託とJSON解析をセット
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
         toneAnalyzerModel.setToneAnalyzer()
@@ -210,7 +209,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func catchAnalyzer(arrayAnalyzerData: Array<Any>) {
         
         joyCountArray = arrayAnalyzerData
-        
+      
         print("joyCountArray.count: \(joyCountArray.count)")
         print("joyCountArray: \(joyCountArray.debugDescription)")
     }
@@ -227,8 +226,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //セルを化粧
         cell.backgroundColor = UIColor.white
         cell.textLabel?.text = newsItem.title
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
-        cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
+        cell.textLabel?.textColor = UIColor(hex: "333")
         cell.textLabel?.numberOfLines = 3
             
         //セルのサブタイトル
