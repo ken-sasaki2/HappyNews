@@ -16,4 +16,5 @@ target 'HappyNews' do
   pod 'PKHUD', '~> 5.0'
   pod 'FirebaseMessaging'
   pod 'lottie-ios'
+
 end
