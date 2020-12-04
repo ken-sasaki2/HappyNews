@@ -168,8 +168,6 @@ class LanguageTranslatorModel {
                     print("translation failure: \(statusCode)")
                 }
             }
-            //NewsTableViewControllerへ値を渡す
-            self.doneCatchTranslationProtocol?.catchTranslation(arrayTranslationData: self.translationArray, resultCount: self.translationArray.count)
         }
     }
     

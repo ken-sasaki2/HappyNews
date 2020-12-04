@@ -221,6 +221,7 @@
 				45D8865024E4C0F000B32D02 /* Sources */,
 				45D8865124E4C0F000B32D02 /* Frameworks */,
 				45D8865224E4C0F000B32D02 /* Resources */,
+				51405F37FDE0AB3AED91D7E6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -280,6 +281,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		51405F37FDE0AB3AED91D7E6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyNews/Pods-HappyNews-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyNews/Pods-HappyNews-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HappyNews/Pods-HappyNews-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C388B91F10210D3A0A7A3F07 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -485,7 +503,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				"ORDER_FILE[arch=*]" = "$(inherited) -ObjC -l\"c++\" -l\"sqlite3\" -l\"z\" -framework \"CoreGraphics\" -framework \"CoreTelephony\" -framework \"FBLPromises\" -framework \"FIRAnalyticsConnector\" -framework \"FirebaseAnalytics\" -framework \"FirebaseAuth\" -framework \"FirebaseCore\" -framework \"FirebaseCoreDiagnostics\" -framework \"FirebaseInstallations\" -framework \"FirebaseInstanceID\" -framework \"FirebaseMessaging\" -framework \"Foundation\" -framework \"GTMSessionFetcher\" -framework \"GoogleAppMeasurement\" -framework \"GoogleDataTransport\" -framework \"GoogleUtilities\" -framework \"IBMSwiftSDKCore\" -framework \"LanguageTranslator\" -framework \"Lottie\" -framework \"PKHUD\" -framework \"QuartzCore\" -framework \"SafariServices\" -framework \"Security\" -framework \"SegementSlide\" -framework \"StoreKit\" -framework \"SwiftyJSON\" -framework \"SystemConfiguration\" -framework \"ToneAnalyzer\" -framework \"UIKit\" -framework \"nanopb\" -weak_framework \"UserNotifications\"";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ken.HappyNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -509,6 +526,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ORDER_FILE = "";
+				"ORDER_FILE[arch=*]" = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ken.HappyNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
