@@ -30,9 +30,9 @@ class TabBarController: UITabBarController {
         case "ニュース":
             tabBar.tintColor = UIColor(hex: "00AECC")
         case "天気":
-            tabBar.tintColor = UIColor(hex: "CD5A91")
+            tabBar.tintColor = UIColor(hex: "00AECC")
         case "アカウント":
-            tabBar.tintColor = UIColor(hex: "89609E")
+            tabBar.tintColor = UIColor(hex: "00AECC")
         default:
             //tabbarの非選択色の設定
             tabBar.unselectedItemTintColor =  UIColor.gray
