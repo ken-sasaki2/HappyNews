@@ -1,5 +1,5 @@
 //
-//  AnalyzerResult.swift
+//  AnalyzerProtocol.swift
 //  HappyNews
 //
 //  Created by 佐々木　謙 on 2020/10/25.
