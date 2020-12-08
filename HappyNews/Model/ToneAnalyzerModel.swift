@@ -90,6 +90,9 @@ class ToneAnalyzerModel {
                     return
                 }
                 
+                print("count: \(i)")
+               //print("toneAnalyzerResult: \(toneAnalyzerResult)")
+                
                 //レスポンスのステータスコードで条件分岐
                 let statusCode = response?.statusCode
                 switch statusCode == Optional(200) {
@@ -103,14 +106,16 @@ class ToneAnalyzerModel {
                     
                     //正常に分析されたテキストをSwiftyJSONのJSON型へ変換
                     let toneAnalysisValue = JSON(toneAnalysisJSON)
+//                    print(toneAnalysisValue.description)
                     
+                    //ここが一つの処理の終着点（通信が終了したということと定義）
                     //感情分析結果を配列に保存
                     self.toneAnalysisArray.append(toneAnalysisValue)
-                    
+
                     //感情分析結果がXMLの要素数と一致していれば実行
                     if self.toneAnalysisArray.count == self.arrayCount {
                         //jsonAnalysisOfToneAnalyzerの呼び出し
-                        self.jsonAnalysisOfToneAnalyzer()
+//                        self.jsonAnalysisOfToneAnalyzer()
                     }
                     
                 case false:
@@ -140,6 +145,6 @@ class ToneAnalyzerModel {
         print(joyCountArray.count)
         print(joyCountArray.debugDescription)
         //最後にappendされた配列をControllerへ返す
-        self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: joyCountArray)
+        //self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: joyCountArray)
     }
 }
