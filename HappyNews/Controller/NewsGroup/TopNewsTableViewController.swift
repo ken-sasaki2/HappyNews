@@ -28,14 +28,14 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //RSSのnewsを補完する配列
     var newsTextArray:[Any] = []
-
+    
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "RQ83a3jtbvMMeNp3oUV0qkM2_DX1ALqxHe24pGoJ4242"
+    var languageTranslatorApiKey  = "A7tchZCSHfIKxw-EKB1CGVwyapUznEhgRnBIf12SguuZ"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "53IaSTsPKOLucqnO1QZI5waxsBfd5ESLNMo6bxujnXu-"
+    var toneAnalyzerApiKey  = "Lqq0kjdoEbyWhVYeLTh-muZMC5KB1R_8ayTZURw6rjZw"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -45,7 +45,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //ToneAnalyzerModelから渡ってくる値
     var joyCountArray          = [Any]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -154,29 +154,21 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     // MARK: - LanguageTranslator
     func startTranslation() {
         
-        //どの時点でエラーが発生するのか（429エラー） → A.感情分析時
-
-        //1.XMLのニュースの順番と翻訳前の配列の順番は同じかどうか → 対応済み ✔︎
-        //2.翻訳前（1）と翻訳後(2)の配列の順番は同じかどうか → 翻訳前に何かしらのマークをつけて要素番号の把握ができるかどうか？
-        //3.感情分析前の配列（翻訳後の配列）の順番と感情分析後appendした後の配列の順番は同じかどうか
-        //  → A.同じではないかつ判断が難しい（詳細は動画）
-        //4.翻訳前の配列と感情分析後appendした後の配列の順番は同じかどうか → A.1,2,3の過程で同じでないので、同じではない。
-        
         //XMLのニュースの順番と整合性を合わせるためreversedを使用。$iは合わせた番号の可視化（50 = first, 1 = last）
         for i in (1...50).reversed() {
             newsTextArray.append(newsItems[newsItems.count - i].title!.description + "$\(i)")
         }
-
+        
         print(newsTextArray)
-            
+        
         //LanguageTranslatorModelへ通信
         let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
-            
-            //LanguageTranslatorModelの委託とJSON解析をセット
-            languageTranslatorModel.doneCatchTranslationProtocol = self
-            languageTranslatorModel.setLanguageTranslator()
+        
+        //LanguageTranslatorModelの委託とJSON解析をセット
+        languageTranslatorModel.doneCatchTranslationProtocol = self
+        languageTranslatorModel.setLanguageTranslator()
     }
-  
+    
     //LanguageTranslatorModelから返ってきた値の受け取り
     func catchTranslation(arrayTranslationData: Array<String>, resultCount: Int) {
         
@@ -189,7 +181,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         if translationArray != nil {
             
             //ToneAnalyzerの呼び出し
-            //startToneAnalyzer()
+            startToneAnalyzer()
         } else {
             print("Failed because the value is nil.")
         }
@@ -199,7 +191,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func startToneAnalyzer() {
         //translationArrayとAPIToneAnalyzerの認証コードで通信
         let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
-
+        
         //ToneAnalyzerModelの委託とJSON解析をセット
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
         toneAnalyzerModel.setToneAnalyzer()
@@ -209,7 +201,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func catchAnalyzer(arrayAnalyzerData: Array<Any>) {
         
         joyCountArray = arrayAnalyzerData
-      
+        
         print("joyCountArray.count: \(joyCountArray.count)")
         print("joyCountArray: \(joyCountArray.debugDescription)")
     }
@@ -222,18 +214,18 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //セルのスタイルを設定
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
-            
+        
         //セルを化粧
         cell.backgroundColor = UIColor.white
         cell.textLabel?.text = newsItem.title
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
         cell.textLabel?.textColor = UIColor(hex: "333")
         cell.textLabel?.numberOfLines = 3
-            
+        
         //セルのサブタイトル
         cell.detailTextLabel?.text = newsItem.pubDate
         cell.detailTextLabel?.textColor = UIColor.gray
-
+        
         return cell
     }
     
