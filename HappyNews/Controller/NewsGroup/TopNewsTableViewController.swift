@@ -44,7 +44,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var translationArrayCount = Int()
     
     //ToneAnalyzerModelから渡ってくる値
-    var joyCountArray          = [Any]()
+    var joyCountArray = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,27 +77,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         startTranslation()
     }
     
-    // MARK: - Table view data source
-    //tableViewを返すメソッド
-    @objc var scrollView: UIScrollView {
-        return tableView
-    }
-
-    //セルのセクションを決めるメソッド
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    //セルの数を決めるメソッド
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsItems.count
-    }
-    
-    //セルの高さを決めるメソッド
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.size.height/6
-    }
-    
+    // MARK: - XML Parser
     //XML解析を開始する場合(parser.parse())に呼ばれるメソッド
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         
@@ -198,12 +178,33 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     }
     
     //ToneAnalyzerModelから返ってきた値の受け取り
-    func catchAnalyzer(arrayAnalyzerData: Array<Any>) {
+    func catchAnalyzer(arrayAnalyzerData: Array<Int>) {
         
         joyCountArray = arrayAnalyzerData
         
         print("joyCountArray.count: \(joyCountArray.count)")
         print("joyCountArray: \(joyCountArray.debugDescription)")
+    }
+    
+    // MARK: - Table view data source
+    //tableViewを返すメソッド
+    @objc var scrollView: UIScrollView {
+        return tableView
+    }
+
+    //セルのセクションを決めるメソッド
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    //セルの数を決めるメソッド
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return joyCountArray.count
+    }
+    
+    //セルの高さを決めるメソッド
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.size.height/6
     }
     
     //セルを構築する際に呼ばれるメソッド

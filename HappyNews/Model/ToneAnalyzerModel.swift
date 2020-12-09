@@ -11,7 +11,7 @@ import SwiftyJSON
 
 //Controllerに値を渡す
 protocol DoneCatchAnalyzerProtocol {
-    func catchAnalyzer(arrayAnalyzerData: Array<Any>)
+    func catchAnalyzer(arrayAnalyzerData: Array<Int>)
 }
 
 class ToneAnalyzerModel {
@@ -26,7 +26,7 @@ class ToneAnalyzerModel {
     var count      = 0
     var arrayCount = 50
     var toneAnalysisArray: [JSON] = []
-    var joyCountArray    : [Any]  = []
+    var joyCountArray    : [Int]  = []
     
     //429エラーが発生した場合に使用
     var errorResponse: String?
@@ -57,7 +57,7 @@ class ToneAnalyzerModel {
         let dispatchGroup = DispatchGroup()
         let dispatchQueue = DispatchQueue(label: "queue")
         
-        for i in 0..<50 {
+        for i in 0..<arrayCount {
             
             //直列処理開始
             dispatchGroup.enter()
