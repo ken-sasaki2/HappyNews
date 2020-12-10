@@ -119,13 +119,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         self.currentElementName = nil
     }
     
-    //XML解析が終わったら呼ばれるメソッド
-    func parserDidEndDocument(_ parser: XMLParser) {
-        
-        //tableViewの更新
-        tableView.reloadData()
-    }
-    
     //XML解析でエラーが発生した場合に呼ばれるメソッド
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         print("error:" + parseError.localizedDescription)
@@ -182,9 +175,35 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         joyCountArray = arrayAnalyzerData
         
+        if joyCountArray != nil {
+            
+            //メインスレッドでUIの更新
+            DispatchQueue.main.async {
+                //tableViewの更新
+                self.tableView.reloadData()
+            }
+        }
+        
         print("joyCountArray.count: \(joyCountArray.count)")
         print("joyCountArray: \(joyCountArray.debugDescription)")
     }
+    
+    // # やりたいこと
+    //numberOfRowsInSectionに'joyCountArray.count'を指定してセルの数を調整
+    //catchAnalyzerで受け取ったInt型の配列の整数を指定してtableViewを構築
+    
+    // # 問題点
+    //numberOfRowsInSectionに'joyCountArray.count'を指定するとセルの構築がされない
+    
+    // # 調べたことと仮説
+    //numberOfRowsInSectionに'joyCountArray.count'を指定しているが、
+    //恐らく感情分析を終えるより先にtableViewを構築する一連の処理がよばれているため
+    //その時点では空の値の'joyCountArray.count'が呼ばれている。
+    
+    // # 仮設に対する対応
+    //これこそnotificationcenterで処理を終えてからtableViewの構築に取り掛かるように設定する
+    
+    
     
     // MARK: - Table view data source
     //tableViewを返すメソッド
