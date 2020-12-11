@@ -13,7 +13,9 @@ class LottieViewController: UIViewController {
     
     //AnimationViewの宣言
     var animationView = AnimationView()
-
+    
+    //ViewControlerのインスタンス作成
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,7 +30,7 @@ class LottieViewController: UIViewController {
     func addAnimationView() {
         
         //アニメーションファイルの指定
-        animationView = AnimationView(name: "analysis")
+        animationView = AnimationView(name: "search")
         
         //アニメーションの位置指定（画面中央）
         animationView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
@@ -52,7 +54,7 @@ class LottieViewController: UIViewController {
         textLabel.frame = CGRect(x: 0, y: 200, width: view.frame.size.width, height: view.frame.size.height)
         
         //テキストとカラーとフォントの設定
-        textLabel.text = "Happyなニュースを解析中"
+        textLabel.text = "Happyなニュースを解析中..."
         textLabel.textColor = UIColor.black
         textLabel.font = UIFont.boldSystemFont(ofSize: 24)
         
