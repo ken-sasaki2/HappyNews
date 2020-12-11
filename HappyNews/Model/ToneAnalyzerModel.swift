@@ -62,7 +62,6 @@ class ToneAnalyzerModel {
             //直列処理開始
             dispatchGroup.enter()
             dispatchQueue.async(group: dispatchGroup) {
-                print("#\(i)Start")
                 
                 //リクエスト送信
                 toneAnalyzer.tone(toneContent: .text(self.toneAnalyzerArray[i])) {
@@ -130,7 +129,6 @@ class ToneAnalyzerModel {
                     }
                 }
                 //直列処理完了
-                print("#\(i)End")
                 dispatchGroup.leave()
             }
         }
