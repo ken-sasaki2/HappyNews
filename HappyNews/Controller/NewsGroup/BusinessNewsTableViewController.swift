@@ -29,15 +29,15 @@ class BusinessNewsTableViewController: UITableViewController,SegementSlideConten
     //RSSのnewsを補完する配列
     var newsTextArray:[Any] = []
     
-    //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "A7tchZCSHfIKxw-EKB1CGVwyapUznEhgRnBIf12SguuZ"
-    var languageTranslatorVersion = "2018-05-01"
-    var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
-    
-    //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "Lqq0kjdoEbyWhVYeLTh-muZMC5KB1R_8ayTZURw6rjZw"
-    var toneAnalyzerVersion = "2017-09-21"
-    var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
+//    //LanguageTranslatorの認証キー
+//    var languageTranslatorApiKey  = "A7tchZCSHfIKxw-EKB1CGVwyapUznEhgRnBIf12SguuZ"
+//    var languageTranslatorVersion = "2018-05-01"
+//    var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
+//
+//    //ToneAnalyzerの認証キー
+//    var toneAnalyzerApiKey  = "Lqq0kjdoEbyWhVYeLTh-muZMC5KB1R_8ayTZURw6rjZw"
+//    var toneAnalyzerVersion = "2017-09-21"
+//    var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
     //LanguageTranslationModelから渡ってくる値
     var translationArray      = [String]()
@@ -137,11 +137,11 @@ class BusinessNewsTableViewController: UITableViewController,SegementSlideConten
         print(newsTextArray)
         
         //LanguageTranslatorModelへ通信
-        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
-        
+//        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
+//
         //LanguageTranslatorModelの委託とJSON解析をセット
-        languageTranslatorModel.doneCatchTranslationProtocol = self
-        languageTranslatorModel.setLanguageTranslator()
+//        languageTranslatorModel.doneCatchTranslationProtocol = self
+//        languageTranslatorModel.setLanguageTranslator()
     }
     
     //LanguageTranslatorModelから返ってきた値の受け取り
@@ -165,11 +165,11 @@ class BusinessNewsTableViewController: UITableViewController,SegementSlideConten
     // MARK: - ToneAnalyzer
     func startToneAnalyzer() {
         //translationArrayとAPIToneAnalyzerの認証コードで通信
-        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
+//        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
         
         //ToneAnalyzerModelの委託とJSON解析をセット
-        toneAnalyzerModel.doneCatchAnalyzerProtocol = self
-        toneAnalyzerModel.setToneAnalyzer()
+//        toneAnalyzerModel.doneCatchAnalyzerProtocol = self
+//        toneAnalyzerModel.setToneAnalyzer()
     }
     
     //ToneAnalyzerModelから返ってきた値の受け取り
