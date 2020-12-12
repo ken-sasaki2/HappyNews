@@ -27,7 +27,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //セクション毎のセルのラベル
     let settingCellLabelArray : [String] = ["通知の設定"]
-    let appCellLabelArray     : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者 (Twitter)", "HappyNews ver. 1.0"]
+    let appCellLabelArray     : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者（Twitter）", "HappyNews ver. 1.0"]
     let accountCellLabelArray : [String] = ["ログアウト"]
     
     override func viewDidLoad() {
@@ -176,7 +176,15 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             //シェア機能
             case 0:
-                print("")
+                //シェア用テキスト
+                let shareText = "『話題のAIを使ったニュース?!』 \n いますぐ'HappyNews'をダウンロードしよう! \n AppStoreURL"
+                
+                //URLクエリ内で使用できる文字列に変換
+                guard let encodedText = shareText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+                guard let tweetURL = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") else { return }
+                
+                //URLに載せてシェア画面を起動
+                UIApplication.shared.open(tweetURL, options: [:], completionHandler: nil)
                 
             //レビュー機能
             case 1:
