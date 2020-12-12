@@ -152,6 +152,9 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //セルをタップすると呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        //タップ時の選択色の常灯を消す
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
         //セクション毎のタップアクションを分岐
         if indexPath.section == 0 {
             
