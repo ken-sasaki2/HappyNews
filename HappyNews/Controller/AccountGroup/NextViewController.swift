@@ -27,7 +27,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //セクション毎のセルのラベル
     let settingCellLabelArray : [String] = ["通知の設定"]
-    let appCellLabelArray     : [String] = ["レビュー", "ご意見・ご要望", "開発者(Twitter)", "HappyNews ver. 1.0"]
+    let appCellLabelArray     : [String] = ["レビュー", "ご意見・ご要望", "開発者 (Twitter)", "HappyNews ver. 1.0"]
     let accountCellLabelArray : [String] = ["ログアウト"]
     
     override func viewDidLoad() {
@@ -203,9 +203,14 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 
             //Twitter紹介機能
             case 2:
-                print("Twitterへ遷移")
+                //TwitterのURLを定義して遷移
+                let twitterURL = NSURL(string: "https://twitter.com/ken_sasaki2")
+                if UIApplication.shared.canOpenURL(twitterURL! as URL) {
+                    UIApplication.shared.open(twitterURL! as URL, options: [:], completionHandler: nil)
+                }
+                
             default:
-                0
+                break
             }
             
         } else if indexPath.section == 2 {
