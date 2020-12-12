@@ -27,7 +27,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //セクション毎のセルのラベル
     let settingCellLabelArray : [String] = ["通知の設定"]
-    let appCellLabelArray     : [String] = ["レビュー", "お問い合わせ", "開発者(Twitter)", "HappyNews ver. 1.0"]
+    let appCellLabelArray     : [String] = ["レビュー", "ご意見・ご要望", "開発者(Twitter)", "HappyNews ver. 1.0"]
     let accountCellLabelArray : [String] = ["ログアウト"]
     
     override func viewDidLoad() {
@@ -161,29 +161,79 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             //"設定セクションの場合"
             switch indexPath.row {
+            
+            //通知機能
             case 0:
                 print("通知設定")
             default:
                 0
             }
+            
         } else if indexPath.section == 1 {
             
             //"このアプリについて"セクションの場合
             switch indexPath.row {
+            
+            //レビュー機能
             case 0:
-                //リクエストを要求
+                //レビューを要求
                 SKStoreReviewController.requestReview()
+                
+            //お問い合わせ機能
             case 1:
-                print("メール起動")
+                //メールを送信できるかの確認
+                if !MFMailComposeViewController.canSendMail() {
+                    print("Mail services are not available")
+                    return
+                }
+                
+                //インスタンスの作成と委託
+                let mailViewController = MFMailComposeViewController()
+                    mailViewController.mailComposeDelegate = self
+                
+                //宛先の設定
+                let toRecipients = ["nkeiisasa222@icloud.com"]
+                
+                //件名と宛先の表示
+                mailViewController.setSubject("'HappyNews'へのご意見・ご要望")
+                mailViewController.setToRecipients(toRecipients)
+                mailViewController.setMessageBody("", isHTML: false)
+                
+                self.present(mailViewController, animated: true, completion: nil)
+                
+                //メール機能終了処理
+                func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?) {
+                    print("呼ばれた？")
+                    //メールの結果で条件分岐
+                    switch result {
+                    case .cancelled:
+                        print("Email Send Cancelled")
+                    case .saved:
+                        print("Email Saved as a Draft")
+                    case .sent:
+                        print("Email Sent Successfully")
+                    case .failed:
+                        print("Email Send Failed")
+                    default:
+                        print("default")
+                    }
+                    //メールを閉じる
+                    controller.dismiss(animated: true, completion: nil)
+                }
+                
+            //Twitter紹介機能
             case 2:
                 print("Twitterへ遷移")
             default:
                 0
             }
+            
         } else if indexPath.section == 2 {
             
             //"アカウント"セクションの場合
             switch indexPath.row {
+            
+            //ログアウト機能
             case 0:
                 let firebaseAuth = Auth.auth()
                 do {
