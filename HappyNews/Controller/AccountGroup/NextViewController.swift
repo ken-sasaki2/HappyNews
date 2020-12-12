@@ -95,7 +95,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //セルを構築
     func tableView(_ table: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-           
+        
         //tableCellのIDでUITableViewCellのインスタンスを生成
         let cell = table.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
         
@@ -192,34 +192,14 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     mailViewController.mailComposeDelegate = self
                 
                 //宛先の設定
-                let toRecipients = ["nkeiisasa222@icloud.com"]
+                let toRecipients = ["nkeiisasa222@gmail.com"]
                 
                 //件名と宛先の表示
                 mailViewController.setSubject("'HappyNews'へのご意見・ご要望")
                 mailViewController.setToRecipients(toRecipients)
-                mailViewController.setMessageBody("", isHTML: false)
+                mailViewController.setMessageBody("▼アプリの不具合などの連絡はこちら \n \n \n \n ▼機能追加依頼はこちら \n \n \n \n ▼その他ご要望はこちら", isHTML: false)
                 
                 self.present(mailViewController, animated: true, completion: nil)
-                
-                //メール機能終了処理
-                func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?) {
-                    print("呼ばれた？")
-                    //メールの結果で条件分岐
-                    switch result {
-                    case .cancelled:
-                        print("Email Send Cancelled")
-                    case .saved:
-                        print("Email Saved as a Draft")
-                    case .sent:
-                        print("Email Sent Successfully")
-                    case .failed:
-                        print("Email Send Failed")
-                    default:
-                        print("default")
-                    }
-                    //メールを閉じる
-                    controller.dismiss(animated: true, completion: nil)
-                }
                 
             //Twitter紹介機能
             case 2:
@@ -247,5 +227,25 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 0
             }
         }
+    }
+    
+    //メール機能終了処理
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        //メールの結果で条件分岐
+        switch result {
+        case .cancelled:
+            print("Email Send Cancelled")
+        case .saved:
+            print("Email Saved as a Draft")
+        case .sent:
+            print("Email Sent Successfully")
+        case .failed:
+            print("Email Send Failed")
+        default:
+            print("default")
+        }
+        //メールを閉じる
+        controller.dismiss(animated: true, completion: nil)
     }
 }
