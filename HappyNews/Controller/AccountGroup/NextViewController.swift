@@ -166,7 +166,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             case 0:
                 print("通知設定")
             default:
-                0
+                break
             }
             
         } else if indexPath.section == 1 {
@@ -208,7 +208,6 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 if UIApplication.shared.canOpenURL(twitterURL! as URL) {
                     UIApplication.shared.open(twitterURL! as URL, options: [:], completionHandler: nil)
                 }
-                
             default:
                 break
             }
@@ -229,7 +228,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 //サインアウトすると元の画面へ遷移
                 self.navigationController?.popViewController(animated: true)
             default:
-                0
+                break
             }
         }
     }
