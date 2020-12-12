@@ -22,12 +22,12 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //セクション毎のアイコンの配列
     let settingSectionIconArray: [String] = ["notification"]
-    let appSectionIconArray    : [String] = ["review", "mail", "twitter", "version"]
+    let appSectionIconArray    : [String] = ["share", "review", "mail", "twitter", "version"]
     let accountSectionIconArray: [String] = ["logout"]
     
     //セクション毎のセルのラベル
     let settingCellLabelArray : [String] = ["通知の設定"]
-    let appCellLabelArray     : [String] = ["レビュー", "ご意見・ご要望", "開発者 (Twitter)", "HappyNews ver. 1.0"]
+    let appCellLabelArray     : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者 (Twitter)", "HappyNews ver. 1.0"]
     let accountCellLabelArray : [String] = ["ログアウト"]
     
     override func viewDidLoad() {
@@ -174,13 +174,17 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //"このアプリについて"セクションの場合
             switch indexPath.row {
             
-            //レビュー機能
+            //シェア機能
             case 0:
+                print("")
+                
+            //レビュー機能
+            case 1:
                 //レビューを要求
                 SKStoreReviewController.requestReview()
                 
             //お問い合わせ機能
-            case 1:
+            case 2:
                 //メールを送信できるかの確認
                 if !MFMailComposeViewController.canSendMail() {
                     print("Mail services are not available")
@@ -202,7 +206,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.present(mailViewController, animated: true, completion: nil)
                 
             //Twitter紹介機能
-            case 2:
+            case 3:
                 //TwitterのURLを定義して遷移
                 let twitterURL = NSURL(string: "https://twitter.com/ken_sasaki2")
                 if UIApplication.shared.canOpenURL(twitterURL! as URL) {
