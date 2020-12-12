@@ -21,18 +21,9 @@ extension UIColor {
 }
 
 class NewsViewController: SegementSlideDefaultViewController {
-    
-    var lottieAnimation = LottieViewController()
-    var topNews = TopNewsTableViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        lottieAnimation.viewDidLoad()
-        
-        if topNews.joyCountArray != nil {
-            lottieAnimation.removeAnimationView()
-        }
         
         //NavigationBarの呼び出し
         setNewsNavigationBar()
@@ -72,13 +63,13 @@ class NewsViewController: SegementSlideDefaultViewController {
         case 0:
             return TopNewsTableViewController()
         case 1:
-            return SuportsNewsTableViewController()
+            return nil//SuportsNewsTableViewController()
         case 2:
-            return EntameNewsTableViewController()
+            return nil//EntameNewsTableViewController()
         case 3:
-            return BusinessNewsTableViewController()
+            return nil//BusinessNewsTableViewController()
         case 4:
-            return TechnologyNewsTableViewController()
+            return nil//TechnologyNewsTableViewController()
         default:
             return TopNewsTableViewController()
         }
