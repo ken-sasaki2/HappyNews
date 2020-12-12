@@ -29,6 +29,7 @@ class NewsViewController: SegementSlideDefaultViewController {
         
         //NavigationBarの呼び出し
         setNewsNavigationBar()
+        scrollViewDidScroll(scrollView)
         
         //SegementSlideDefaultViewControllerの初期設定
         defaultSelectedIndex = 0
@@ -50,6 +51,15 @@ class NewsViewController: SegementSlideDefaultViewController {
         
         //NavigationBarの下線を消す
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+    }
+    
+    //スクロールでナビゲーションバーを隠す
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        } else {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
     }
     
     //ニュースタブのコード
