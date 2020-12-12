@@ -12,19 +12,23 @@ import ToneAnalyzer
 import LanguageTranslator
 import SwiftyJSON
 
+//LottieViewControllerと通信をおこなうプロトコル
+protocol AnalysisCompleteProtocol {
+    func analysisComplete(completeSign: String)
+}
+
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
-    //XMLParserのインスタンスを作成
-    var parser = XMLParser()
+    //インスタンスを作成
+    var parser    = XMLParser()
+    var newsItems = [NewsItemsModel]()
+    var analysisCompleteProtocol: AnalysisCompleteProtocol?
     
     //RSSのパース内の現在の要素名を取得する変数
     var currentElementName: String?
     
     //XMLファイルを保存するプロパティ
     var xmlString: String?
-    
-    //NewsItemsモデルのインスタンス作成
-    var newsItems = [NewsItemsModel]()
     
     //RSSのnewsを補完する配列
     var newsTextArray:[Any] = []
@@ -35,7 +39,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "Lqq0kjdoEbyWhVYeLTh-muZMC5KB1R_8ayTZURw6rjZw"
+    var toneAnalyzerApiKey  = "gB3ofBQrJN4gJ72yKvKSCpdgoS71nIG0ov-LN8ZHyN-e"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -73,7 +77,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         parser.parse()
         //}
         
-        //LanguageTranslatorの呼び出し
+        //翻訳機能の呼び出し
         startTranslation()
     }
     
@@ -127,6 +131,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     // MARK: - LanguageTranslator
     func startTranslation() {
         
+        print("何回呼ばれる？")
+        
         //XMLのニュースの順番と整合性を合わせるためreversedを使用。$iは合わせた番号の可視化（50 = first, 1 = last）
         for i in (1...50).reversed() {
             newsTextArray.append(newsItems[newsItems.count - i].title!.description + "$\(i)")
@@ -175,35 +181,27 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         joyCountArray = arrayAnalyzerData
         
-        if joyCountArray != nil {
+        print("joyCountArray.count: \(joyCountArray.count)")
+        print("joyCountArray: \(joyCountArray.debugDescription)")
+        
+        if joyCountArray != nil  {
             
             //メインスレッドでUIの更新
             DispatchQueue.main.async {
                 //tableViewの更新
                 self.tableView.reloadData()
+                //LottieViewControllerに通信を投げる
+                self.analysisCompleteProtocol?.analysisComplete(completeSign: "LoadingComplete")
             }
         }
-        
-        print("joyCountArray.count: \(joyCountArray.count)")
-        print("joyCountArray: \(joyCountArray.debugDescription)")
     }
     
     // # やりたいこと
-    //numberOfRowsInSectionに'joyCountArray.count'を指定してセルの数を調整
+    //numberOfRowsInSectionに'joyCountArray.count'を指定してセルの数を調整 ✔︎
     //catchAnalyzerで受け取ったInt型の配列の整数を指定してtableViewを構築
     
     // # 問題点
-    //numberOfRowsInSectionに'joyCountArray.count'を指定するとセルの構築がされない
-    
-    // # 調べたことと仮説
-    //numberOfRowsInSectionに'joyCountArray.count'を指定しているが、
-    //恐らく感情分析を終えるより先にtableViewを構築する一連の処理がよばれているため
-    //その時点では空の値の'joyCountArray.count'が呼ばれている。
-    
-    // # 仮設に対する対応
-    //これこそnotificationcenterで処理を終えてからtableViewの構築に取り掛かるように設定する
-    
-    
+    //numberOfRowsInSectionに'joyCountArray.count'を指定するとセルの構築がされない ✔︎
     
     // MARK: - Table view data source
     //tableViewを返すメソッド
