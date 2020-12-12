@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import StoreKit
 
 class NextViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -151,6 +152,9 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //セルをタップすると呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        //タップ時の選択色の常灯を消す
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
         //セクション毎のタップアクションを分岐
         if indexPath.section == 0 {
             
@@ -166,7 +170,8 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //"このアプリについて"セクションの場合
             switch indexPath.row {
             case 0:
-                print("AppStoreへ遷移")
+                //リクエストを要求
+                SKStoreReviewController.requestReview()
             case 1:
                 print("メール起動")
             case 2:
@@ -179,7 +184,6 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //"アカウント"セクションの場合
             switch indexPath.row {
             case 0:
-                print("ログアウト")
                 let firebaseAuth = Auth.auth()
                 do {
                     try firebaseAuth.signOut()
