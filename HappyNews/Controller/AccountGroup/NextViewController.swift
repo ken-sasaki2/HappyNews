@@ -236,14 +236,18 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         switch result {
         case .cancelled:
             print("Email Send Cancelled")
+            break
         case .saved:
             print("Email Saved as a Draft")
+            break
         case .sent:
             print("Email Sent Successfully")
+            break
         case .failed:
             print("Email Send Failed")
+            break
         default:
-            print("default")
+            break
         }
         //メールを閉じる
         controller.dismiss(animated: true, completion: nil)
