@@ -10,8 +10,9 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import StoreKit
+import MessageUI
 
-class NextViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NextViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
     //インスタンス作成
     @IBOutlet var table: UITableView!
