@@ -9,8 +9,10 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import StoreKit
+import MessageUI
 
-class NextViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NextViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
     //インスタンス作成
     @IBOutlet var table: UITableView!
@@ -20,12 +22,12 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //セクション毎のアイコンの配列
     let settingSectionIconArray: [String] = ["notification"]
-    let appSectionIconArray    : [String] = ["review", "mail", "twitter", "version"]
+    let appSectionIconArray    : [String] = ["share", "review", "mail", "twitter", "version"]
     let accountSectionIconArray: [String] = ["logout"]
     
     //セクション毎のセルのラベル
     let settingCellLabelArray : [String] = ["通知の設定"]
-    let appCellLabelArray     : [String] = ["レビュー", "お問い合わせ", "開発者(Twitter)", "HappyNews ver. 1.0"]
+    let appCellLabelArray     : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者（Twitter）", "HappyNews ver. 1.0"]
     let accountCellLabelArray : [String] = ["ログアウト"]
     
     override func viewDidLoad() {
@@ -41,7 +43,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //NavigationBarのtitleとその色とフォント
         navigationItem.title = "アカウント"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .medium)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .semibold)]
         
         //NavigationBarの色
         self.navigationController?.navigationBar.barTintColor = UIColor(hex: "00AECC")
@@ -93,7 +95,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //セルを構築
     func tableView(_ table: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-           
+        
         //tableCellのIDでUITableViewCellのインスタンスを生成
         let cell = table.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
         
@@ -151,35 +153,84 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //セルをタップすると呼ばれる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        //タップ時の選択色の常灯を消す
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
         //セクション毎のタップアクションを分岐
         if indexPath.section == 0 {
             
             //"設定セクションの場合"
             switch indexPath.row {
+            
+            //通知機能
             case 0:
                 print("通知設定")
             default:
-                0
+                break
             }
+            
         } else if indexPath.section == 1 {
             
             //"このアプリについて"セクションの場合
             switch indexPath.row {
+            
+            //シェア機能
             case 0:
-                print("AppStoreへ遷移")
+                //シェア用テキスト
+                let shareText = "『話題のAIを使ったニュース?!』 \n いますぐ'HappyNews'をダウンロードしよう! \n AppStoreURL"
+                
+                //URLクエリ内で使用できる文字列に変換
+                guard let encodedText = shareText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+                guard let tweetURL = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") else { return }
+                
+                //URLに載せてシェア画面を起動
+                UIApplication.shared.open(tweetURL, options: [:], completionHandler: nil)
+                
+            //レビュー機能
             case 1:
-                print("メール起動")
+                //レビューを要求
+                SKStoreReviewController.requestReview()
+                
+            //お問い合わせ機能
             case 2:
-                print("Twitterへ遷移")
+                //メールを送信できるかの確認
+                if !MFMailComposeViewController.canSendMail() {
+                    print("Mail services are not available")
+                    return
+                }
+                
+                //インスタンスの作成と委託
+                let mailViewController = MFMailComposeViewController()
+                    mailViewController.mailComposeDelegate = self
+                
+                //宛先の設定
+                let toRecipients = ["nkeiisasa222@gmail.com"]
+                
+                //件名と宛先の表示
+                mailViewController.setSubject("'HappyNews'へのご意見・ご要望")
+                mailViewController.setToRecipients(toRecipients)
+                mailViewController.setMessageBody("▼アプリの不具合などの連絡はこちら \n \n \n \n ▼機能追加依頼はこちら \n \n \n \n ▼その他ご要望はこちら", isHTML: false)
+                
+                self.present(mailViewController, animated: true, completion: nil)
+                
+            //Twitter紹介機能
+            case 3:
+                //TwitterのURLを定義して遷移
+                let twitterURL = NSURL(string: "https://twitter.com/ken_sasaki2")
+                if UIApplication.shared.canOpenURL(twitterURL! as URL) {
+                    UIApplication.shared.open(twitterURL! as URL, options: [:], completionHandler: nil)
+                }
             default:
-                0
+                break
             }
+            
         } else if indexPath.section == 2 {
             
             //"アカウント"セクションの場合
             switch indexPath.row {
+            
+            //ログアウト機能
             case 0:
-                print("ログアウト")
                 let firebaseAuth = Auth.auth()
                 do {
                     try firebaseAuth.signOut()
@@ -189,8 +240,32 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 //サインアウトすると元の画面へ遷移
                 self.navigationController?.popViewController(animated: true)
             default:
-                0
+                break
             }
         }
+    }
+    
+    //メール機能終了処理
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        //メールの結果で条件分岐
+        switch result {
+        case .cancelled:
+            print("Email Send Cancelled")
+            break
+        case .saved:
+            print("Email Saved as a Draft")
+            break
+        case .sent:
+            print("Email Sent Successfully")
+            break
+        case .failed:
+            print("Email Send Failed")
+            break
+        default:
+            break
+        }
+        //メールを閉じる
+        controller.dismiss(animated: true, completion: nil)
     }
 }

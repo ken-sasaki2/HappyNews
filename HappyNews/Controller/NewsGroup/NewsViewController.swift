@@ -27,6 +27,7 @@ class NewsViewController: SegementSlideDefaultViewController {
         
         //NavigationBarの呼び出し
         setNewsNavigationBar()
+        scrollViewDidScroll(scrollView)
         
         //SegementSlideDefaultViewControllerの初期設定
         defaultSelectedIndex = 0
@@ -38,7 +39,7 @@ class NewsViewController: SegementSlideDefaultViewController {
         
         //NavigationBarのtitleとその色とフォント
         navigationItem.title = "HapyNews"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .medium)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .semibold)]
         
         //NavigationBarの色
         self.navigationController?.navigationBar.barTintColor = UIColor(hex: "00AECC")
@@ -48,6 +49,15 @@ class NewsViewController: SegementSlideDefaultViewController {
         
         //NavigationBarの下線を消す
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+    }
+    
+    //スクロールでナビゲーションバーを隠す
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        } else {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
     }
     
     //ニュースタブのコード
