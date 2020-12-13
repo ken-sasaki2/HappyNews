@@ -46,8 +46,6 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
     //ToneAnalyzerModelから渡ってくる値
     var joyCountArray = [Int]()
     
-    var lottieAnimation = LottieViewController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
