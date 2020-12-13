@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GKE-uc-7Bx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mgb-5m-cPh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -115,10 +115,48 @@
             </objects>
             <point key="canvasLocation" x="4319" y="-679"/>
         </scene>
+        <!--Loading Animation View Controller-->
+        <scene sceneID="yXi-Ry-bYo">
+            <objects>
+                <viewController id="Mgb-5m-cPh" customClass="LoadingAnimationViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tzz-cy-5Ni">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="7cd-tG-2ds"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <segue destination="aTy-XU-1a7" kind="presentation" identifier="LoadingComplete" modalTransitionStyle="crossDissolve" id="UTR-iD-wE3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WZR-KE-7B6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1216" y="-312"/>
+        </scene>
+        <!--Success Animation View Controller-->
+        <scene sceneID="3QH-is-LII">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="aTy-XU-1a7" customClass="SuccessAnimationViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z1N-Xv-doh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="nkp-8y-0wd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0S3-5s-0FS"/>
+                    <connections>
+                        <segue destination="GKE-uc-7Bx" kind="presentation" identifier="success" modalTransitionStyle="flipHorizontal" id="vBD-R6-Rrb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iwp-Ne-5MF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1991" y="-312"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="oef-3q-T1I">
             <objects>
-                <tabBarController id="GKE-uc-7Bx" customClass="TabBarController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="fullScreen" id="GKE-uc-7Bx" customClass="TabBarController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="iYv-v7-B5M"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zfp-wr-nqD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
