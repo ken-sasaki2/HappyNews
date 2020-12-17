@@ -34,7 +34,7 @@ extension UIViewController {
         successAnimationView.backgroundColor = UIColor.white
         
         //アニメーションを最前面に表示
-        successAnimationView.layer.zPosition = 10
+        successAnimationView.layer.zPosition = 11
         
         //ViewControllerに配置
         view.addSubview(successAnimationView)
@@ -57,7 +57,7 @@ extension UIViewController {
         successTextLabel.textAlignment = .center
 
         //success後のラベルを最前面に表示
-        successTextLabel.layer.zPosition = 10
+        successTextLabel.layer.zPosition = 11
 
         //ViewControllerに配置
         view.addSubview(successTextLabel)
