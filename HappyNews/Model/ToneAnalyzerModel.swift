@@ -8,6 +8,7 @@
 import Foundation
 import ToneAnalyzer
 import SwiftyJSON
+import PKHUD
 
 //Controllerに値を渡す
 protocol DoneCatchAnalyzerProtocol {
@@ -71,10 +72,6 @@ class ToneAnalyzerModel {
                         switch error {
                         case let .http(statusCode, message, metadata):
                             switch statusCode {
-                            case .some(404):
-                                print("Handle Not Found (404) exceptz1zion")
-                            case .some(413):
-                                print("Handle Request Too Large (413) exception")
                             case .some(429):
                                 //429エラーが発生すると意図する値を作成してappend
                                 self.errorResponse = "errorResponse 429 error occurred"
@@ -84,6 +81,13 @@ class ToneAnalyzerModel {
                             default:
                                 if let statusCode = statusCode {
                                     print("Error - code: \(statusCode), \(message ?? "")")
+                                    //感情分析が失敗したことをユーザーに伝える
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                        HUD.show(.label("分析失敗"))
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                            HUD.hide(animated: true)
+                                        }
+                                    }
                                 }
                             }
                         default:
@@ -143,7 +147,7 @@ class ToneAnalyzerModel {
         for i in 0...arrayCount-1 {
             
             //感情分析結果が"Joy" && score0.5以上の要素を検索(document_toneのみ取得した場合)
-            if toneAnalysisArray[i]["tones"][count]["score"] > 0.5 && toneAnalysisArray[i]["tones"][count]["tone_name"] == "Joy" {
+            if toneAnalysisArray[i]["tones"][count]["score"] > 0.5 && toneAnalysisArray[i]["tones"][count]["tone_name"] == "Joy" || toneAnalysisArray[i]["tones"][count]["tone_id"] == "joy" {
                 
                 //条件を満たした要素のindex番号の取得（-1で整合性）
                 joyCountArray.append(toneAnalysisArray[0].count+i-1)

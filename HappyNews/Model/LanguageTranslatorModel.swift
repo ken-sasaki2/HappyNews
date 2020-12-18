@@ -9,6 +9,7 @@
 import Foundation
 import LanguageTranslator
 import SwiftyJSON
+import PKHUD
 
 protocol DoneCatchTranslationProtocol {
     
@@ -116,15 +117,16 @@ class LanguageTranslatorModel {
                     switch error {
                     case let .http(statusCode, message, metadata):
                         switch statusCode {
-                        case .some(404):
-                            // Handle Not Found (404) exception
-                            print("Not found")
-                        case .some(413):
-                            // Handle Request Too Large (413) exception
-                            print("Payload too large")
                         default:
                             if let statusCode = statusCode {
                                 print("Error - code: \(statusCode), \(message ?? "")")
+                                //感情分析が失敗したことをユーザーに伝える
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    HUD.show(.label("分析失敗"))
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                        HUD.hide(animated: true)
+                                    }
+                                }
                             }
                         }
                     default:
