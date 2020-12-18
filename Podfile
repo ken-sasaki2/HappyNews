@@ -15,6 +15,5 @@ target 'HappyNews' do
   pod 'Firebase/Auth'
   pod 'PKHUD', '~> 5.0'
   pod 'FirebaseMessaging'
-  pod 'lottie-ios'
 
 end
