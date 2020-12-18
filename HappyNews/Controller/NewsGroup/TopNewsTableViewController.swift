@@ -11,18 +11,13 @@ import SegementSlide
 import ToneAnalyzer
 import LanguageTranslator
 import SwiftyJSON
-
-//LottieViewControllerと通信をおこなうプロトコル
-protocol AnalysisCompleteProtocol {
-    func analysisComplete(completeSign: String)
-}
+import PKHUD
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
     //インスタンスを作成
     var parser    = XMLParser()
     var newsItems = [NewsItemsModel]()
-    var analysisCompleteProtocol: AnalysisCompleteProtocol?
     
     //RSSのパース内の現在の要素名を取得する変数
     var currentElementName: String?
@@ -39,7 +34,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "gB3ofBQrJN4gJ72yKvKSCpdgoS71nIG0ov-LN8ZHyN-e"
+    var toneAnalyzerApiKey  = "nwr83-Kid-pY38vaoYOjP5rZJmjGnV6SzWXymT0FmNpC"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -131,7 +126,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     // MARK: - LanguageTranslator
     func startTranslation() {
         
-        print("何回呼ばれる？")
+        //感情分析中であることをユーザーに伝える
+        HUD.show(.labeledProgress(title: "Happyを分析中...", subtitle: nil))
         
         //XMLのニュースの順番と整合性を合わせるためreversedを使用。$iは合わせた番号の可視化（50 = first, 1 = last）
         for i in (1...50).reversed() {
@@ -190,18 +186,17 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             DispatchQueue.main.async {
                 //tableViewの更新
                 self.tableView.reloadData()
-                //LottieViewControllerに通信を投げる
-                self.analysisCompleteProtocol?.analysisComplete(completeSign: "LoadingComplete")
+                
+                //感情分析が終了したことをユーザーに伝える
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    HUD.show(.label("分析が終了しました"))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        HUD.hide(animated: true)
+                    }
+                }
             }
         }
     }
-    
-    // # やりたいこと
-    //numberOfRowsInSectionに'joyCountArray.count'を指定してセルの数を調整 ✔︎
-    //catchAnalyzerで受け取ったInt型の配列の整数を指定してtableViewを構築
-    
-    // # 問題点
-    //numberOfRowsInSectionに'joyCountArray.count'を指定するとセルの構築がされない ✔︎
     
     // MARK: - Table view data source
     //tableViewを返すメソッド
