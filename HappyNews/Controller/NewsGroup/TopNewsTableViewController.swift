@@ -12,6 +12,7 @@ import ToneAnalyzer
 import LanguageTranslator
 import SwiftyJSON
 import PKHUD
+import Kingfisher
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
@@ -34,7 +35,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "nwr83-Kid-pY38vaoYOjP5rZJmjGnV6SzWXymT0FmNpC"
+    var toneAnalyzerApiKey  = "TYEPWEVoB0aLOSFnXafTHzawecCzER3ILh-RCucbd1ox"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -203,7 +204,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     @objc var scrollView: UIScrollView {
         return tableView
     }
-
+    
     //セルのセクションを決めるメソッド
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
