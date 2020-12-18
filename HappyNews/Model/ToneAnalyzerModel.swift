@@ -32,7 +32,6 @@ class ToneAnalyzerModel {
     var errorResponse: String?
     var errorResult = JSON()
     
-    
     //プロトコルのインスタンス
     var doneCatchAnalyzerProtocol: DoneCatchAnalyzerProtocol?
     
