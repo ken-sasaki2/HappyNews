@@ -234,14 +234,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             //ログアウト機能
             case 0:
-                let firebaseAuth = Auth.auth()
-                do {
-                    try firebaseAuth.signOut()
-                } catch let signOutError as NSError {
-                    print ("Error signing out: %@", signOutError)
-                }
-                //サインアウトすると元の画面へ遷移
-                self.navigationController?.popViewController(animated: true)
+                logoutAlert()
             default:
                 break
             }
@@ -270,5 +263,31 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         //メールを閉じる
         controller.dismiss(animated: true, completion: nil)
+    }
+    
+    //ログアウトタップ時のアラート機能
+    func logoutAlert() {
+        
+        //アラートの作成
+        let alert = UIAlertController(title: "ログアウトしますか？", message: "ログアウトすると通知の設定がリセットされます。", preferredStyle: .alert)
+        
+        //アラートのボタン
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .default))
+        alert.addAction(UIAlertAction(title: "ログアウト", style: .cancel, handler: {
+            action in
+            
+            //ログアウト機能
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+            //サインアウトすると元の画面へ遷移
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        //アラートの表示
+        present(alert, animated: true, completion: nil)
     }
 }
