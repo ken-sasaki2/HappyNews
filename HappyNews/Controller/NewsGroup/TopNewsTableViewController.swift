@@ -35,7 +35,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "TYEPWEVoB0aLOSFnXafTHzawecCzER3ILh-RCucbd1ox"
+    var toneAnalyzerApiKey  = "8dIrVdrkz1YRWrqORDKGcY2RBZHBvVsMij6cCk_JkkB6"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -106,6 +106,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 lastItem.pubDate     = string
             case "description":
                 lastItem.description = string
+            case "image":
+                lastItem.image       = string
             default:
                 break
             }
@@ -229,15 +231,34 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //セルのスタイルを設定
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
         
+        //サムネイルの設定
+        cell.imageView?.image = UIImage(url: "https://amd-pctr.c.yimg.jp/r/iwiz-amd/20201218-00008485-entame-000-1-view.jpg?w=450&h=300&q=90&exp=10800&pri=l")
+        cell.imageView?.image = cell.imageView?.image?.resize(_size: CGSize(width: 120, height: 100))
+    
         //セルを化粧
         cell.backgroundColor = UIColor.white
         cell.textLabel?.text = newsItem.title
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
         cell.textLabel?.textColor = UIColor(hex: "333")
-        cell.textLabel?.numberOfLines = 3
+        cell.textLabel?.numberOfLines = 2
+        
+        //インスタンス作成
+        let dateFormatter = DateFormatter()
+        
+        //フォーマット設定
+        dateFormatter.dateFormat = "yyyy'年'M'月'd'日('EEEEE') 'H'時'm'分's'秒'"
+
+        //ロケール設定（日本語・日本国固定）
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+
+        //タイムゾーン設定（日本標準時固定）
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
+        
+        //Date型 → string型
+        let pubDateString = dateFormatter.string(from: Date())
         
         //セルのサブタイトル
-        cell.detailTextLabel?.text = newsItem.pubDate
+        cell.detailTextLabel?.text = pubDateString
         cell.detailTextLabel?.textColor = UIColor.gray
         
         return cell
@@ -245,6 +266,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //セルをタップした時呼ばれるメソッド
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //タップ時の選択色の常灯を消す
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
         //WebViewControllerのインスタンス作成
         let webViewController = WebViewController()
