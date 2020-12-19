@@ -204,6 +204,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    // MARK: - Share
     //シェア機能
     func shareFunction() {
         
@@ -218,12 +219,14 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIApplication.shared.open(tweetURL, options: [:], completionHandler: nil)
     }
     
+    // MARK: - Review
     //レビュー機能
     func reviewFunction() {
         //レビューを要求
         SKStoreReviewController.requestReview()
     }
     
+    // MARK: - Mail
     //ご意見・ご要望機能
     func mailFunction() {
         
@@ -272,6 +275,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         controller.dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Twitter
     //Twitter紹介機能
     func twitterFunction() {
         
@@ -282,6 +286,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    // MARK: - Logout
     //ログアウト機能
     func logoutAlert() {
         
