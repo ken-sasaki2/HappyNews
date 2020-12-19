@@ -295,7 +295,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //アラートのボタン
         alert.addAction(UIAlertAction(title: "キャンセル", style: .default))
-        alert.addAction(UIAlertAction(title: "ログアウト", style: .cancel, handler: {
+        alert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
             action in
             
             //ログアウト機能
