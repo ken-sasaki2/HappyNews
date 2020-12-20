@@ -30,12 +30,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsTextArray:[Any] = []
     
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "A7tchZCSHfIKxw-EKB1CGVwyapUznEhgRnBIf12SguuZ"
+    var languageTranslatorApiKey  = "7NPTIvhRUuXIEegfJ8yd_Y3byKPM-EXIX5lm2uAyZwgO"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "8dIrVdrkz1YRWrqORDKGcY2RBZHBvVsMij6cCk_JkkB6"
+    var toneAnalyzerApiKey  = "nKytQRfDwDRxdfoDeWT8J5b6WSVHc-mBENfjuITXnYji"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -45,6 +45,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //ToneAnalyzerModelから渡ってくる値
     var joyCountArray = [Int]()
+    
+    //joyCountArrayの変換先
+    var joyStringArray = [String]()
+    
+    //joyの要素と認定されたニュースの配列
+    var joySelectionArray = [NewsItemsModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,11 +188,136 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func catchAnalyzer(arrayAnalyzerData: Array<Int>) {
         
         joyCountArray = arrayAnalyzerData
-        
         print("joyCountArray.count: \(joyCountArray.count)")
         print("joyCountArray: \(joyCountArray.debugDescription)")
         
-        if joyCountArray != nil  {
+        //containsプロパティを用いて配列の検索をおこなう為String型配列に変換
+        joyStringArray = joyCountArray.map { String($0) }
+        print("joyStringArray: \(joyStringArray.debugDescription)")
+        
+        //直列処理で使用するインスタンス
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "queue")
+        
+        for i in 0...joyStringArray.count-1 {
+            
+            //直列処理開始
+            dispatchGroup.enter()
+            dispatchQueue.async(group: dispatchGroup) {
+                
+                switch self.joyStringArray.count == self.joyCountArray.count {
+                case self.joyStringArray[i].contains("0"):
+                    self.joySelectionArray.append(self.newsItems[0])
+                case self.joyStringArray[i].contains("1"):
+                    self.joySelectionArray.append(self.newsItems[1])
+                case self.joyStringArray[i].contains("2"):
+                    self.joySelectionArray.append(self.newsItems[2])
+                case self.joyStringArray[i].contains("3"):
+                    self.joySelectionArray.append(self.newsItems[3])
+                case self.joyStringArray[i].contains("4"):
+                    self.joySelectionArray.append(self.newsItems[4])
+                case self.joyStringArray[i].contains("5"):
+                    self.joySelectionArray.append(self.newsItems[5])
+                case self.joyStringArray[i].contains("6"):
+                    self.joySelectionArray.append(self.newsItems[6])
+                case self.joyStringArray[i].contains("7"):
+                    self.joySelectionArray.append(self.newsItems[7])
+                case self.joyStringArray[i].contains("8"):
+                    self.joySelectionArray.append(self.newsItems[8])
+                case self.joyStringArray[i].contains("9"):
+                    self.joySelectionArray.append(self.newsItems[9])
+                case self.joyStringArray[i].contains("10"):
+                    self.joySelectionArray.append(self.newsItems[10])
+                case self.joyStringArray[i].contains("11"):
+                    self.joySelectionArray.append(self.newsItems[11])
+                case self.joyStringArray[i].contains("12"):
+                    self.joySelectionArray.append(self.newsItems[12])
+                case self.joyStringArray[i].contains("13"):
+                    self.joySelectionArray.append(self.newsItems[13])
+                case self.joyStringArray[i].contains("14"):
+                    self.joySelectionArray.append(self.newsItems[14])
+                case self.joyStringArray[i].contains("15"):
+                    self.joySelectionArray.append(self.newsItems[15])
+                case self.joyStringArray[i].contains("16"):
+                    self.joySelectionArray.append(self.newsItems[16])
+                case self.joyStringArray[i].contains("17"):
+                    self.joySelectionArray.append(self.newsItems[17])
+                case self.joyStringArray[i].contains("18"):
+                    self.joySelectionArray.append(self.newsItems[18])
+                case self.joyStringArray[i].contains("19"):
+                    self.joySelectionArray.append(self.newsItems[19])
+                case self.joyStringArray[i].contains("20"):
+                    self.joySelectionArray.append(self.newsItems[20])
+                case self.joyStringArray[i].contains("21"):
+                    self.joySelectionArray.append(self.newsItems[21])
+                case self.joyStringArray[i].contains("22"):
+                    self.joySelectionArray.append(self.newsItems[22])
+                case self.joyStringArray[i].contains("23"):
+                    self.joySelectionArray.append(self.newsItems[23])
+                case self.joyStringArray[i].contains("24"):
+                    self.joySelectionArray.append(self.newsItems[24])
+                case self.joyStringArray[i].contains("25"):
+                    self.joySelectionArray.append(self.newsItems[25])
+                case self.joyStringArray[i].contains("26"):
+                    self.joySelectionArray.append(self.newsItems[26])
+                case self.joyStringArray[i].contains("27"):
+                    self.joySelectionArray.append(self.newsItems[27])
+                case self.joyStringArray[i].contains("28"):
+                    self.joySelectionArray.append(self.newsItems[28])
+                case self.joyStringArray[i].contains("29"):
+                    self.joySelectionArray.append(self.newsItems[29])
+                case self.joyStringArray[i].contains("30"):
+                    self.joySelectionArray.append(self.newsItems[30])
+                case self.joyStringArray[i].contains("31"):
+                    self.joySelectionArray.append(self.newsItems[31])
+                case self.joyStringArray[i].contains("32"):
+                    self.joySelectionArray.append(self.newsItems[32])
+                case self.joyStringArray[i].contains("33"):
+                    self.joySelectionArray.append(self.newsItems[33])
+                case self.joyStringArray[i].contains("34"):
+                    self.joySelectionArray.append(self.newsItems[34])
+                case self.joyStringArray[i].contains("35"):
+                    self.joySelectionArray.append(self.newsItems[35])
+                case self.joyStringArray[i].contains("36"):
+                    self.joySelectionArray.append(self.newsItems[36])
+                case self.joyStringArray[i].contains("37"):
+                    self.joySelectionArray.append(self.newsItems[37])
+                case self.joyStringArray[i].contains("38"):
+                    self.joySelectionArray.append(self.newsItems[38])
+                case self.joyStringArray[i].contains("39"):
+                    self.joySelectionArray.append(self.newsItems[39])
+                case self.joyStringArray[i].contains("40"):
+                    self.joySelectionArray.append(self.newsItems[40])
+                case self.joyStringArray[i].contains("41"):
+                    self.joySelectionArray.append(self.newsItems[41])
+                case self.joyStringArray[i].contains("42"):
+                    self.joySelectionArray.append(self.newsItems[42])
+                case self.joyStringArray[i].contains("43"):
+                    self.joySelectionArray.append(self.newsItems[43])
+                case self.joyStringArray[i].contains("44"):
+                    self.joySelectionArray.append(self.newsItems[44])
+                case self.joyStringArray[i].contains("45"):
+                    self.joySelectionArray.append(self.newsItems[45])
+                case self.joyStringArray[i].contains("46"):
+                    self.joySelectionArray.append(self.newsItems[46])
+                case self.joyStringArray[i].contains("47"):
+                    self.joySelectionArray.append(self.newsItems[47])
+                case self.joyStringArray[i].contains("48"):
+                    self.joySelectionArray.append(self.newsItems[48])
+                case self.joyStringArray[i].contains("49"):
+                    self.joySelectionArray.append(self.newsItems[49])
+                default:
+                    break
+                }
+                //直列処理完了
+                dispatchGroup.leave()
+            }
+        }
+        
+        print("joySelectionArray: \(self.joySelectionArray.description)")
+        print("joySelectionArray.count: \(self.joySelectionArray.count)")
+        
+        if joySelectionArray.count == joyStringArray.count {
             
             //メインスレッドでUIの更新
             DispatchQueue.main.async {
@@ -217,7 +348,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //セルの数を決めるメソッド
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return joyCountArray.count
+        return joySelectionArray.count
     }
     
     //セルの高さを決めるメソッド
@@ -229,7 +360,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //RSSで取得したニュースの値が入る
-        let newsItem = newsItems[indexPath.row]
+        let newsItem = joySelectionArray[indexPath.row]
         
         //セルのスタイルを設定
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
