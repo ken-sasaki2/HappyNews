@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4502CFF325456A8600554F78 /* Analyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4502CFF225456A8600554F78 /* Analyzer.swift */; };
-		4515CF7025788EEE009F448F /* LottieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4515CF6F25788EED009F448F /* LottieViewController.swift */; };
 		4543739324E5637A00107A49 /* EntameNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739224E5637A00107A49 /* EntameNewsTableViewController.swift */; };
 		4543739524E5675400107A49 /* SuportsNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739424E5675400107A49 /* SuportsNewsTableViewController.swift */; };
 		4543739724E5677600107A49 /* BusinessNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543739624E5677600107A49 /* BusinessNewsTableViewController.swift */; };
@@ -16,14 +14,16 @@
 		457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */; };
 		457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */; };
 		4576898425453E5900D7E630 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4576898325453E5900D7E630 /* Translation.swift */; };
+		458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580174F2588B74C004A8176 /* UIColor+Colors.swift */; };
 		4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4586DD502585B0CE00FAB922 /* Assets.xcassets */; };
+		459E8680258CC5EF00A214B2 /* UIImage+convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E867F258CC5EF00A214B2 /* UIImage+convenience.swift */; };
+		45B16C74258CA1E800BED60E /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B16C73258CA1E800BED60E /* UIImage+resize.swift */; };
 		45B8239025739340005F435B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45B8238F25739340005F435B /* GoogleService-Info.plist */; };
 		45BCEE7424E4DF7A0023D738 /* TopNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7324E4DF7A0023D738 /* TopNewsTableViewController.swift */; };
 		45BCEE7624E4F1970023D738 /* NewsItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7524E4F1970023D738 /* NewsItemsModel.swift */; };
 		45BCEE7824E545570023D738 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7724E545570023D738 /* WebViewController.swift */; };
 		45BE9B412526C7BB0013F34C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE9B402526C7BB0013F34C /* TabBarController.swift */; };
 		45BE9B452526D2120013F34C /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE9B442526D2120013F34C /* AccountViewController.swift */; };
-		45BE9B4825271EE40013F34C /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE9B4725271EE40013F34C /* WeatherViewController.swift */; };
 		45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865724E4C0F000B32D02 /* AppDelegate.swift */; };
 		45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865924E4C0F000B32D02 /* SceneDelegate.swift */; };
 		45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* NewsViewController.swift */; };
@@ -35,8 +35,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4502CFF225456A8600554F78 /* Analyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analyzer.swift; sourceTree = "<group>"; };
-		4515CF6F25788EED009F448F /* LottieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieViewController.swift; sourceTree = "<group>"; };
 		452877452575417200A344E3 /* HappyNews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HappyNews.entitlements; sourceTree = "<group>"; };
 		4543739224E5637A00107A49 /* EntameNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntameNewsTableViewController.swift; sourceTree = "<group>"; };
 		4543739424E5675400107A49 /* SuportsNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuportsNewsTableViewController.swift; sourceTree = "<group>"; };
@@ -45,7 +43,10 @@
 		457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTranslatorModel.swift; sourceTree = "<group>"; };
 		457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerModel.swift; sourceTree = "<group>"; };
 		4576898325453E5900D7E630 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		4580174F2588B74C004A8176 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		4586DD502585B0CE00FAB922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		459E867F258CC5EF00A214B2 /* UIImage+convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+convenience.swift"; sourceTree = "<group>"; };
+		45B16C73258CA1E800BED60E /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		45B8238C25739103005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		45B8238D25739104005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		45B8238F25739340005F435B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		45BCEE7724E545570023D738 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		45BE9B402526C7BB0013F34C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		45BE9B442526D2120013F34C /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		45BE9B4725271EE40013F34C /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		45D8865424E4C0F000B32D02 /* HappyNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D8865724E4C0F000B32D02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45D8865924E4C0F000B32D02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,12 +82,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4515CF6E25788EED009F448F /* LoadingGroup */ = {
+		458017412588ADB4004A8176 /* ExtensionsGroup */ = {
 			isa = PBXGroup;
 			children = (
-				4515CF6F25788EED009F448F /* LottieViewController.swift */,
+				45B16CAD258CC3F100BED60E /* UIColor */,
+				45B16CAC258CC3E700BED60E /* UIImage */,
 			);
-			path = LoadingGroup;
+			path = ExtensionsGroup;
+			sourceTree = "<group>";
+		};
+		45B16CAC258CC3E700BED60E /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				459E867F258CC5EF00A214B2 /* UIImage+convenience.swift */,
+				45B16C73258CA1E800BED60E /* UIImage+resize.swift */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		45B16CAD258CC3F100BED60E /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				4580174F2588B74C004A8176 /* UIColor+Colors.swift */,
+			);
+			path = UIColor;
 			sourceTree = "<group>";
 		};
 		45BE9B4B252801AE0013F34C /* NewsGroup */ = {
@@ -102,14 +120,6 @@
 				45BCEE7724E545570023D738 /* WebViewController.swift */,
 			);
 			path = NewsGroup;
-			sourceTree = "<group>";
-		};
-		45BE9B4E252801D30013F34C /* WheatherGroup */ = {
-			isa = PBXGroup;
-			children = (
-				45BE9B4725271EE40013F34C /* WeatherViewController.swift */,
-			);
-			path = WheatherGroup;
 			sourceTree = "<group>";
 		};
 		45BE9B4F252801FF0013F34C /* AccountGroup */ = {
@@ -163,10 +173,9 @@
 		45D8866B24E4C10800B32D02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4515CF6E25788EED009F448F /* LoadingGroup */,
+				458017412588ADB4004A8176 /* ExtensionsGroup */,
 				45BE9B50252802130013F34C /* TabBarGroup */,
 				45BE9B4F252801FF0013F34C /* AccountGroup */,
-				45BE9B4E252801D30013F34C /* WheatherGroup */,
 				45BE9B4B252801AE0013F34C /* NewsGroup */,
 				45D8865724E4C0F000B32D02 /* AppDelegate.swift */,
 				45D8865924E4C0F000B32D02 /* SceneDelegate.swift */,
@@ -191,7 +200,6 @@
 				457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */,
 				457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */,
 				4576898325453E5900D7E630 /* Translation.swift */,
-				4502CFF225456A8600554F78 /* Analyzer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,7 +342,6 @@
 				457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */,
 				45BCEE7424E4DF7A0023D738 /* TopNewsTableViewController.swift in Sources */,
 				45BCEE7824E545570023D738 /* WebViewController.swift in Sources */,
-				4502CFF325456A8600554F78 /* Analyzer.swift in Sources */,
 				45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */,
 				4576898425453E5900D7E630 /* Translation.swift in Sources */,
 				45BE9B412526C7BB0013F34C /* TabBarController.swift in Sources */,
@@ -344,12 +351,13 @@
 				4543739524E5675400107A49 /* SuportsNewsTableViewController.swift in Sources */,
 				45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */,
 				457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */,
+				459E8680258CC5EF00A214B2 /* UIImage+convenience.swift in Sources */,
+				458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */,
 				45BE9B452526D2120013F34C /* AccountViewController.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItemsModel.swift in Sources */,
 				4543739724E5677600107A49 /* BusinessNewsTableViewController.swift in Sources */,
 				4543739324E5637A00107A49 /* EntameNewsTableViewController.swift in Sources */,
-				45BE9B4825271EE40013F34C /* WeatherViewController.swift in Sources */,
-				4515CF7025788EEE009F448F /* LottieViewController.swift in Sources */,
+				45B16C74258CA1E800BED60E /* UIImage+resize.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
