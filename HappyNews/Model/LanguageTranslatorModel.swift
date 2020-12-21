@@ -9,14 +9,15 @@
 import Foundation
 import LanguageTranslator
 import SwiftyJSON
+import PKHUD
 
 protocol DoneCatchTranslationProtocol {
-
+    
     func catchTranslation(arrayTranslationData: Array<String>, resultCount: Int)
 }
 
 class LanguageTranslatorModel {
-
+    
     //Controllerから渡ってくる値
     var languageTranslatorAccessKey     : String?
     var languageTranslatorAccessversion : String?
@@ -26,7 +27,7 @@ class LanguageTranslatorModel {
     
     //Controllerに値を返すときに使用
     var doneCatchTranslationProtocol: DoneCatchTranslationProtocol?
-
+    
     //JSON解析で使用
     var count     = 0
     var textCount = 50
@@ -85,46 +86,47 @@ class LanguageTranslatorModel {
     var sortNum3  = "Avoiding Nil $3"
     var sortNum2  = "Avoiding Nil $2"
     var sortNum1  = "Avoiding Nil $1"
-
+    
     //NewsTableViewから値を受け取る
     init(languageTranslatorApiKey: String, languageTranslatorVersion: String, languageTranslatorURL: String, newsTextArray: [Any]) {
-
+        
         languageTranslatorAccessKey     = languageTranslatorApiKey
         languageTranslatorAccessversion = languageTranslatorVersion
         languageTranslatorAccessURL     = languageTranslatorURL
         translationTextArray            = newsTextArray
     }
-
+    
     //翻訳開始
     func setLanguageTranslator() {
-
+        
         //API認証子
         let languageTranslatorKey = WatsonIAMAuthenticator(apiKey: languageTranslatorAccessKey!)
         let languageTranslator    = LanguageTranslator(version: languageTranslatorAccessversion!, authenticator: languageTranslatorKey)
-            languageTranslator.serviceURL = languageTranslatorAccessURL
+        languageTranslator.serviceURL = languageTranslatorAccessURL
         
         for i in 0..<self.textCount {
-        
+            
             self.translationText = translationTextArray[i] as? String
-
+            
             //リクエスト送信
             languageTranslator.translate(text: [self.translationText!], modelID: "ja-en") {
                 response, error in
-
+                
                 //エラー処理
                 if let error = error {
                     switch error {
                     case let .http(statusCode, message, metadata):
                         switch statusCode {
-                        case .some(404):
-                            // Handle Not Found (404) exception
-                            print("Not found")
-                        case .some(413):
-                            // Handle Request Too Large (413) exception
-                            print("Payload too large")
                         default:
                             if let statusCode = statusCode {
                                 print("Error - code: \(statusCode), \(message ?? "")")
+                                //感情分析が失敗したことをユーザーに伝える
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    HUD.show(.label("分析失敗"))
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                        HUD.hide(animated: true)
+                                    }
+                                }
                             }
                         }
                     default:
@@ -137,7 +139,7 @@ class LanguageTranslatorModel {
                     print(error?.localizedDescription ?? "unknown error")
                     return
                 }
-              
+                
                 //レスポンスのステータスコードで条件分岐
                 let statusCode = response?.statusCode
                 switch statusCode == Optional(200) {

@@ -12,6 +12,7 @@ class NewsItemsModel {
     var title       :String?
     var url         :String?
     var pubDate     :String?
+    var image       :String?
     var description :String?
     var category    :String?
 }

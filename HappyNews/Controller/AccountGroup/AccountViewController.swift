@@ -21,6 +21,9 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //ダークモード適用を回避
+        self.overrideUserInterfaceStyle = .light
+        
         //UIviewのインスタンス作成(view)
         view = UIView()
 
@@ -52,7 +55,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19, weight: .semibold)]
         
         //NavigationBarの色
-        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "89609E")
+        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "00AECC")
         
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false

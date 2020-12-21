@@ -9,20 +9,7 @@
 import UIKit
 import SegementSlide
 
-//16進数color 機能拡張
-extension UIColor {
-    convenience init(hex: String, alpha: CGFloat = 1.0) {
-        let v = Int("000000" + hex, radix: 16) ?? 0
-        let r = CGFloat(v / Int(powf(256, 2)) % 256) / 255
-        let g = CGFloat(v / Int(powf(256, 1)) % 256) / 255
-        let b = CGFloat(v / Int(powf(256, 0)) % 256) / 255
-        self.init(red: r, green: g, blue: b, alpha: min(max(alpha, 0), 1))
-    }
-}
-
 class NewsViewController: SegementSlideDefaultViewController {
-    
-    //テスト
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,13 +62,13 @@ class NewsViewController: SegementSlideDefaultViewController {
         case 0:
             return TopNewsTableViewController()
         case 1:
-            return SuportsNewsTableViewController()
+            return nil//SuportsNewsTableViewController()
         case 2:
-            return EntameNewsTableViewController()
+            return nil//EntameNewsTableViewController()
         case 3:
-            return BusinessNewsTableViewController()
+            return nil//BusinessNewsTableViewController()
         case 4:
-            return TechnologyNewsTableViewController()
+            return nil//TechnologyNewsTableViewController()
         default:
             return TopNewsTableViewController()
         }

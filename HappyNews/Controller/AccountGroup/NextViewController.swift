@@ -33,6 +33,9 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //ダークモード適用を回避
+        self.overrideUserInterfaceStyle = .light
+        
         //NavigationBarの呼び出し
         setAccountNavigationBar()
     }
@@ -46,7 +49,7 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .semibold)]
         
         //NavigationBarの色
-        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "ffa500")
+        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "00AECC")
         
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false
@@ -161,9 +164,8 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             //"設定セクションの場合"
             switch indexPath.row {
-            
-            //通知機能
             case 0:
+                //通知機能
                 print("通知設定")
             default:
                 break
@@ -173,53 +175,18 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             //"このアプリについて"セクションの場合
             switch indexPath.row {
-            
-            //シェア機能
             case 0:
-                //シェア用テキスト
-                let shareText = "『話題のAIを使ったニュース?!』 \n いますぐ'HappyNews'をダウンロードしよう! \n AppStoreURL"
-                
-                //URLクエリ内で使用できる文字列に変換
-                guard let encodedText = shareText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-                guard let tweetURL = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") else { return }
-                
-                //URLに載せてシェア画面を起動
-                UIApplication.shared.open(tweetURL, options: [:], completionHandler: nil)
-                
-            //レビュー機能
+                //シェア機能
+                shareFunction()
             case 1:
-                //レビューを要求
-                SKStoreReviewController.requestReview()
-                
-            //お問い合わせ機能
+                //レビュー機能
+                reviewFunction()
             case 2:
-                //メールを送信できるかの確認
-                if !MFMailComposeViewController.canSendMail() {
-                    print("Mail services are not available")
-                    return
-                }
-                
-                //インスタンスの作成と委託
-                let mailViewController = MFMailComposeViewController()
-                    mailViewController.mailComposeDelegate = self
-                
-                //宛先の設定
-                let toRecipients = ["nkeiisasa222@gmail.com"]
-                
-                //件名と宛先の表示
-                mailViewController.setSubject("'HappyNews'へのご意見・ご要望")
-                mailViewController.setToRecipients(toRecipients)
-                mailViewController.setMessageBody("▼アプリの不具合などの連絡はこちら \n \n \n \n ▼機能追加依頼はこちら \n \n \n \n ▼その他ご要望はこちら", isHTML: false)
-                
-                self.present(mailViewController, animated: true, completion: nil)
-                
-            //Twitter紹介機能
+                //お問い合わせ機能
+                mailFunction()
             case 3:
-                //TwitterのURLを定義して遷移
-                let twitterURL = NSURL(string: "https://twitter.com/ken_sasaki2")
-                if UIApplication.shared.canOpenURL(twitterURL! as URL) {
-                    UIApplication.shared.open(twitterURL! as URL, options: [:], completionHandler: nil)
-                }
+                //Twitter紹介機能
+                twitterFunction()
             default:
                 break
             }
@@ -228,21 +195,60 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             //"アカウント"セクションの場合
             switch indexPath.row {
-            
-            //ログアウト機能
             case 0:
-                let firebaseAuth = Auth.auth()
-                do {
-                    try firebaseAuth.signOut()
-                } catch let signOutError as NSError {
-                    print ("Error signing out: %@", signOutError)
-                }
-                //サインアウトすると元の画面へ遷移
-                self.navigationController?.popViewController(animated: true)
+                //ログアウト機能
+                logoutAlert()
             default:
                 break
             }
         }
+    }
+    
+    // MARK: - Share
+    //シェア機能
+    func shareFunction() {
+        
+        //シェア用テキスト
+        let shareText = "『話題のAIを使ったニュース?!』 \n いますぐ'HappyNews'をダウンロードしよう! \n AppStoreURL"
+        
+        //URLクエリ内で使用できる文字列に変換
+        guard let encodedText = shareText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        guard let tweetURL = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") else { return }
+        
+        //URLに載せてシェア画面を起動
+        UIApplication.shared.open(tweetURL, options: [:], completionHandler: nil)
+    }
+    
+    // MARK: - Review
+    //レビュー機能
+    func reviewFunction() {
+        //レビューを要求
+        SKStoreReviewController.requestReview()
+    }
+    
+    // MARK: - Mail
+    //ご意見・ご要望機能
+    func mailFunction() {
+        
+        //メールを送信できるかの確認
+        if !MFMailComposeViewController.canSendMail() {
+            print("Mail services are not available")
+            return
+        }
+        
+        //インスタンスの作成と委託
+        let mailViewController = MFMailComposeViewController()
+            mailViewController.mailComposeDelegate = self
+        
+        //宛先の設定
+        let toRecipients = ["nkeiisasa222@gmail.com"]
+        
+        //件名と宛先の表示
+        mailViewController.setSubject("'HappyNews'へのご意見・ご要望")
+        mailViewController.setToRecipients(toRecipients)
+        mailViewController.setMessageBody("▼アプリの不具合などの連絡はこちら \n \n \n \n ▼機能追加依頼はこちら \n \n \n \n ▼その他ご要望はこちら", isHTML: false)
+        
+        self.present(mailViewController, animated: true, completion: nil)
     }
     
     //メール機能終了処理
@@ -267,5 +273,43 @@ class NextViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         //メールを閉じる
         controller.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Twitter
+    //Twitter紹介機能
+    func twitterFunction() {
+        
+        //TwitterのURLを定義して遷移
+        let twitterURL = NSURL(string: "https://twitter.com/ken_sasaki2")
+        if UIApplication.shared.canOpenURL(twitterURL! as URL) {
+            UIApplication.shared.open(twitterURL! as URL, options: [:], completionHandler: nil)
+        }
+    }
+    
+    // MARK: - Logout
+    //ログアウト機能
+    func logoutAlert() {
+        
+        //アラートの作成
+        let alert = UIAlertController(title: "ログアウトしますか？", message: "ログアウトすると通知の設定がリセットされます。", preferredStyle: .alert)
+        
+        //アラートのボタン
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .default))
+        alert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
+            action in
+            
+            //ログアウト機能
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+            //サインアウトすると元の画面へ遷移
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        //アラートの表示
+        present(alert, animated: true, completion: nil)
     }
 }
