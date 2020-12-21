@@ -30,7 +30,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsTextArray:[Any] = []
     
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "7NPTIvhRUuXIEegfJ8yd_Y3byKPM-EXIX5lm2uAyZwgO"
+    var languageTranslatorApiKey  = "uVcFLUixZ86NVIMDQ5TV6nRWPr5tJT96hosfdoMTURCn"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
@@ -191,133 +191,116 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         print("joyCountArray.count: \(joyCountArray.count)")
         print("joyCountArray: \(joyCountArray.debugDescription)")
         
-        //containsプロパティを用いて配列の検索をおこなう為String型配列に変換
-        joyStringArray = joyCountArray.map { String($0) }
-        print("joyStringArray: \(joyStringArray.debugDescription)")
-        
-        //直列処理で使用するインスタンス
-        let dispatchGroup = DispatchGroup()
-        let dispatchQueue = DispatchQueue(label: "queue")
-        
-        for i in 0...joyStringArray.count-1 {
-            
-            //直列処理開始
-            dispatchGroup.enter()
-            dispatchQueue.async(group: dispatchGroup) {
+        for i in 0...joyCountArray.count - 1 {
                 
-                switch self.joyStringArray.count == self.joyCountArray.count {
-                case self.joyStringArray[i].contains("0"):
+                switch self.joyCountArray != nil {
+                case self.joyCountArray[i] == 0:
                     self.joySelectionArray.append(self.newsItems[0])
-                case self.joyStringArray[i].contains("1"):
+                case self.joyCountArray[i] == 1:
                     self.joySelectionArray.append(self.newsItems[1])
-                case self.joyStringArray[i].contains("2"):
+                case self.joyCountArray[i] == 2:
                     self.joySelectionArray.append(self.newsItems[2])
-                case self.joyStringArray[i].contains("3"):
+                case self.joyCountArray[i] == 3:
                     self.joySelectionArray.append(self.newsItems[3])
-                case self.joyStringArray[i].contains("4"):
+                case self.joyCountArray[i] == 4:
                     self.joySelectionArray.append(self.newsItems[4])
-                case self.joyStringArray[i].contains("5"):
+                case self.joyCountArray[i] == 5:
                     self.joySelectionArray.append(self.newsItems[5])
-                case self.joyStringArray[i].contains("6"):
+                case self.joyCountArray[i] == 6:
                     self.joySelectionArray.append(self.newsItems[6])
-                case self.joyStringArray[i].contains("7"):
+                case self.joyCountArray[i] == 7:
                     self.joySelectionArray.append(self.newsItems[7])
-                case self.joyStringArray[i].contains("8"):
+                case self.joyCountArray[i] == 8:
                     self.joySelectionArray.append(self.newsItems[8])
-                case self.joyStringArray[i].contains("9"):
+                case self.joyCountArray[i] == 9:
                     self.joySelectionArray.append(self.newsItems[9])
-                case self.joyStringArray[i].contains("10"):
+                case self.joyCountArray[i] == 10:
                     self.joySelectionArray.append(self.newsItems[10])
-                case self.joyStringArray[i].contains("11"):
+                case self.joyCountArray[i] == 11:
                     self.joySelectionArray.append(self.newsItems[11])
-                case self.joyStringArray[i].contains("12"):
+                case self.joyCountArray[i] == 12:
                     self.joySelectionArray.append(self.newsItems[12])
-                case self.joyStringArray[i].contains("13"):
+                case self.joyCountArray[i] == 13:
                     self.joySelectionArray.append(self.newsItems[13])
-                case self.joyStringArray[i].contains("14"):
+                case self.joyCountArray[i] == 14:
                     self.joySelectionArray.append(self.newsItems[14])
-                case self.joyStringArray[i].contains("15"):
+                case self.joyCountArray[i] == 15:
                     self.joySelectionArray.append(self.newsItems[15])
-                case self.joyStringArray[i].contains("16"):
+                case self.joyCountArray[i] == 16:
                     self.joySelectionArray.append(self.newsItems[16])
-                case self.joyStringArray[i].contains("17"):
+                case self.joyCountArray[i] == 17:
                     self.joySelectionArray.append(self.newsItems[17])
-                case self.joyStringArray[i].contains("18"):
+                case self.joyCountArray[i] == 18:
                     self.joySelectionArray.append(self.newsItems[18])
-                case self.joyStringArray[i].contains("19"):
+                case self.joyCountArray[i] == 19:
                     self.joySelectionArray.append(self.newsItems[19])
-                case self.joyStringArray[i].contains("20"):
+                case self.joyCountArray[i] == 20:
                     self.joySelectionArray.append(self.newsItems[20])
-                case self.joyStringArray[i].contains("21"):
+                case self.joyCountArray[i] == 21:
                     self.joySelectionArray.append(self.newsItems[21])
-                case self.joyStringArray[i].contains("22"):
+                case self.joyCountArray[i] == 22:
                     self.joySelectionArray.append(self.newsItems[22])
-                case self.joyStringArray[i].contains("23"):
+                case self.joyCountArray[i] == 23:
                     self.joySelectionArray.append(self.newsItems[23])
-                case self.joyStringArray[i].contains("24"):
+                case self.joyCountArray[i] == 24:
                     self.joySelectionArray.append(self.newsItems[24])
-                case self.joyStringArray[i].contains("25"):
+                case self.joyCountArray[i] == 25:
                     self.joySelectionArray.append(self.newsItems[25])
-                case self.joyStringArray[i].contains("26"):
+                case self.joyCountArray[i] == 26:
                     self.joySelectionArray.append(self.newsItems[26])
-                case self.joyStringArray[i].contains("27"):
+                case self.joyCountArray[i] == 27:
                     self.joySelectionArray.append(self.newsItems[27])
-                case self.joyStringArray[i].contains("28"):
+                case self.joyCountArray[i] == 28:
                     self.joySelectionArray.append(self.newsItems[28])
-                case self.joyStringArray[i].contains("29"):
+                case self.joyCountArray[i] == 29:
                     self.joySelectionArray.append(self.newsItems[29])
-                case self.joyStringArray[i].contains("30"):
+                case self.joyCountArray[i] == 30:
                     self.joySelectionArray.append(self.newsItems[30])
-                case self.joyStringArray[i].contains("31"):
+                case self.joyCountArray[i] == 31:
                     self.joySelectionArray.append(self.newsItems[31])
-                case self.joyStringArray[i].contains("32"):
+                case self.joyCountArray[i] == 32:
                     self.joySelectionArray.append(self.newsItems[32])
-                case self.joyStringArray[i].contains("33"):
+                case self.joyCountArray[i] == 33:
                     self.joySelectionArray.append(self.newsItems[33])
-                case self.joyStringArray[i].contains("34"):
+                case self.joyCountArray[i] == 34:
                     self.joySelectionArray.append(self.newsItems[34])
-                case self.joyStringArray[i].contains("35"):
+                case self.joyCountArray[i] == 35:
                     self.joySelectionArray.append(self.newsItems[35])
-                case self.joyStringArray[i].contains("36"):
+                case self.joyCountArray[i] == 36:
                     self.joySelectionArray.append(self.newsItems[36])
-                case self.joyStringArray[i].contains("37"):
+                case self.joyCountArray[i] == 37:
                     self.joySelectionArray.append(self.newsItems[37])
-                case self.joyStringArray[i].contains("38"):
+                case self.joyCountArray[i] == 38:
                     self.joySelectionArray.append(self.newsItems[38])
-                case self.joyStringArray[i].contains("39"):
+                case self.joyCountArray[i] == 39:
                     self.joySelectionArray.append(self.newsItems[39])
-                case self.joyStringArray[i].contains("40"):
+                case self.joyCountArray[i] == 40:
                     self.joySelectionArray.append(self.newsItems[40])
-                case self.joyStringArray[i].contains("41"):
+                case self.joyCountArray[i] == 41:
                     self.joySelectionArray.append(self.newsItems[41])
-                case self.joyStringArray[i].contains("42"):
+                case self.joyCountArray[i] == 42:
                     self.joySelectionArray.append(self.newsItems[42])
-                case self.joyStringArray[i].contains("43"):
+                case self.joyCountArray[i] == 43:
                     self.joySelectionArray.append(self.newsItems[43])
-                case self.joyStringArray[i].contains("44"):
+                case self.joyCountArray[i] == 44:
                     self.joySelectionArray.append(self.newsItems[44])
-                case self.joyStringArray[i].contains("45"):
+                case self.joyCountArray[i] == 45:
                     self.joySelectionArray.append(self.newsItems[45])
-                case self.joyStringArray[i].contains("46"):
+                case self.joyCountArray[i] == 46:
                     self.joySelectionArray.append(self.newsItems[46])
-                case self.joyStringArray[i].contains("47"):
+                case self.joyCountArray[i] == 47:
                     self.joySelectionArray.append(self.newsItems[47])
-                case self.joyStringArray[i].contains("48"):
+                case self.joyCountArray[i] == 48:
                     self.joySelectionArray.append(self.newsItems[48])
-                case self.joyStringArray[i].contains("49"):
+                case self.joyCountArray[i] == 49:
                     self.joySelectionArray.append(self.newsItems[49])
                 default:
-                    break
+                    print("Unable to detect joy.")
                 }
-                //直列処理完了
-                dispatchGroup.leave()
-            }
+                print("配列の中身: \(self.joySelectionArray[i].title.debugDescription)")
         }
         
-        print("joySelectionArray: \(self.joySelectionArray.description)")
-        print("joySelectionArray.count: \(self.joySelectionArray.count)")
-        
-        if joySelectionArray.count == joyStringArray.count {
+        if joySelectionArray.count == joyCountArray.count {
             
             //メインスレッドでUIの更新
             DispatchQueue.main.async {
