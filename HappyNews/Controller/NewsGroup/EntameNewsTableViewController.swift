@@ -11,7 +11,6 @@ import ToneAnalyzer
 import LanguageTranslator
 import SwiftyJSON
 import PKHUD
-import Kingfisher
 
 class EntameNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     

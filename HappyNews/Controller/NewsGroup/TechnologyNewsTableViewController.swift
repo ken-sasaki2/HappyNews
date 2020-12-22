@@ -12,7 +12,6 @@ import ToneAnalyzer
 import LanguageTranslator
 import SwiftyJSON
 import PKHUD
-import Kingfisher
 
 class TechnologyNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
