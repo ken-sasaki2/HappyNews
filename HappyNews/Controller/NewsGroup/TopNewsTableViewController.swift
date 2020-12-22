@@ -16,8 +16,10 @@ import Kingfisher
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
-    //インスタンスを作成
+    //XMLParserのインスタンスを作成
     var parser    = XMLParser()
+    
+    //NewsItemsモデルのインスタンス作成
     var newsItems = [NewsItemsModel]()
     
     //RSSのパース内の現在の要素名を取得する変数
@@ -30,7 +32,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsTextArray:[Any] = []
     
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "uVcFLUixZ86NVIMDQ5TV6nRWPr5tJT96hosfdoMTURCn"
+    var languageTranslatorApiKey  = "uC4-nkGE01Mnn0NjymvcFS8v_96PT_U9NonJorY9naor"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
@@ -46,9 +48,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //ToneAnalyzerModelから渡ってくる値
     var joyCountArray = [Int]()
     
-    //joyCountArrayの変換先
-    var joyStringArray = [String]()
-    
     //joyの要素と認定されたニュースの配列
     var joySelectionArray = [NewsItemsModel]()
     
@@ -63,7 +62,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlArray = "https://news.yahoo.co.jp/rss/media/entame/all.xml"
+        let xmlArray = "https://news.yahoo.co.jp/rss/media/tvtnews/all.xml"
         
         //for i in 0...1 {
         
@@ -297,7 +296,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 default:
                     print("Unable to detect joy.")
                 }
-                print("配列の中身: \(self.joySelectionArray[i].title.debugDescription)")
+                print("joySelectionArray\([i]): \(self.joySelectionArray[i].title.debugDescription)")
         }
         
         if joySelectionArray.count == joyCountArray.count {
@@ -348,8 +347,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //セルのスタイルを設定
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
         
-        //サムネイルの設定
-        cell.imageView?.image = UIImage(url: "https://amd-pctr.c.yimg.jp/r/iwiz-amd/20201218-00008485-entame-000-1-view.jpg?w=450&h=300&q=90&exp=10800&pri=l")
+        for i in 0...joySelectionArray.count - 1 {
+            //サムネイルの設定
+            cell.imageView?.image = UIImage(url: "https://amd-pctr.c.yimg.jp/r/iwiz-amd/20201213-00008363-entame-000-1-view.jpg?w=450&h=300&q=90&exp=10800&pri=l")
+        }
+        
         cell.imageView?.image = cell.imageView?.image?.resize(_size: CGSize(width: 120, height: 100))
     
         //セルを化粧
@@ -358,6 +360,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
         cell.textLabel?.textColor = UIColor(hex: "333")
         cell.textLabel?.numberOfLines = 2
+        
+        //空のセルを削除
+        tableView.tableFooterView = UIView(frame: .zero)
         
         //インスタンス作成
         let dateFormatter = DateFormatter()
