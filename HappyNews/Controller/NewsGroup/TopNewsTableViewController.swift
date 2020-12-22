@@ -12,7 +12,8 @@ import ToneAnalyzer
 import LanguageTranslator
 import SwiftyJSON
 import PKHUD
-import Kingfisher
+import SDWebImage
+
 
 class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
@@ -352,6 +353,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             cell.imageView?.image = UIImage(url: "https://amd-pctr.c.yimg.jp/r/iwiz-amd/20201213-00008363-entame-000-1-view.jpg?w=450&h=300&q=90&exp=10800&pri=l")
         }
         
+        //サムネイルのサイズを統一
         cell.imageView?.image = cell.imageView?.image?.resize(_size: CGSize(width: 120, height: 100))
     
         //セルを化粧
