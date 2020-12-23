@@ -19,6 +19,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //XMLParserのインスタンスを作成
     var parser    = XMLParser()
+    var parser = XMLParser()
     
     //NewsItemsモデルのインスタンス作成
     var newsItems = [NewsItemsModel]()
