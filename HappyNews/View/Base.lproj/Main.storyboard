@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Account View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="fLW-KH-G3S">
             <objects>
-                <viewController id="how-Ta-Bn6" customClass="AccountViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="how-Ta-Bn6" customClass="LoginViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" tag="2" contentMode="scaleToFill" id="y5U-vf-76w">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="4293" y="27"/>
         </scene>
-        <!--Next View Controller-->
+        <!--Account View Controller-->
         <scene sceneID="QZO-ZM-o7N">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Ixc-sC-zeo" customClass="NextViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="Ixc-sC-zeo" customClass="AccountViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RrF-Eb-VwL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
