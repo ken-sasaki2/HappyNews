@@ -6,7 +6,6 @@ target 'HappyNews' do
   use_frameworks!
 
   # Pods for HappyNews
-
   pod 'SegementSlide'
   pod 'IBMWatsonToneAnalyzerV3', '~> 3.6.0'
   pod 'IBMWatsonLanguageTranslatorV3', '~> 3.6.0'
@@ -15,5 +14,5 @@ target 'HappyNews' do
   pod 'Firebase/Auth'
   pod 'PKHUD', '~> 5.0'
   pod 'FirebaseMessaging'
-  pod 'SDWebImage', '~> 5.0'
+  pod 'SDWebImage'
 end
