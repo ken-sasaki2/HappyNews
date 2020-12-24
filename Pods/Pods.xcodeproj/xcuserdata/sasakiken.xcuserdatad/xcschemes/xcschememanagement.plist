@@ -144,6 +144,11 @@
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
 		<key>SegementSlide.xcscheme</key>
 		<dict>
 			<key>isShown</key>

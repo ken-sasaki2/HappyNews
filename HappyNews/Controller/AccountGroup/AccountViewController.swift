@@ -1,49 +1,43 @@
 //
-//  SearchViewController.swift
+//  AccountViewController.swift
 //  HappyNews
 //
-//  Created by 佐々木　謙 on 2020/10/02.
+//  Created by 佐々木　謙 on 2020/11/30.
 //  Copyright © 2020 佐々木　謙. All rights reserved.
 //
 
 import UIKit
-import AuthenticationServices
-import CryptoKit
 import Firebase
-import PKHUD
 import FirebaseAuth
+import StoreKit
+import MessageUI
 
-class AccountViewController: UIViewController, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+class AccountViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
-    //認証リクエスト時に必要
-    var currentNonce: String?
-
+    //インスタンス作成
+    @IBOutlet var table: UITableView!
+    
+    //セクションのタイトル
+    let sectionTitleArray: [String] = ["設定", "このアプリについて", "アカウント"]
+    
+    //セクション毎のアイコンの配列
+    let settingSectionIconArray: [String] = ["notification"]
+    let appSectionIconArray    : [String] = ["share", "review", "mail", "twitter", "version"]
+    let accountSectionIconArray: [String] = ["logout"]
+    
+    //セクション毎のセルのラベル
+    let settingCellLabelArray : [String] = ["通知の設定"]
+    let appCellLabelArray     : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者（Twitter）", "HappyNews ver. 1.0"]
+    let accountCellLabelArray : [String] = ["ログアウト"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
         
-        //UIviewのインスタンス作成(view)
-        view = UIView()
-
-        //viewの背景を設定
-        view.backgroundColor = UIColor(hex: "ffffff")
-        
-        //通知を管理するオブジェクト
-        let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOption) { (_, _) in
-            print("success: Push notification OK")
-        }
-
         //NavigationBarの呼び出し
         setAccountNavigationBar()
-        
-        //ログイン案内テキストの表示
-        signInGuideText()
-        
-        //Sign In With Appleの呼び出し
-        createSignInWithApple()
     }
     
     // MARK: - Navigation
@@ -52,7 +46,7 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         
         //NavigationBarのtitleとその色とフォント
         navigationItem.title = "アカウント"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19, weight: .semibold)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .semibold)]
         
         //NavigationBarの色
         self.navigationController?.navigationBar.barTintColor = UIColor(hex: "00AECC")
@@ -62,191 +56,260 @@ class AccountViewController: UIViewController, ASAuthorizationControllerDelegate
         
         //NavigationBarの下線を消す
         navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        
+        //ログイン後の'back'ボタンを削除
+        self.navigationItem.hidesBackButton = true
     }
     
-    // MARK: - SignInGuideText
-    //'Sign In With Apple'上のテキスト
-    func signInGuideText() {
-        
-        let signInGuide = UITextField()
-        
-        //'Autosizing'を'AutoLayout' に変換
-        signInGuide.translatesAutoresizingMaskIntoConstraints = false
-        
-        //テキストの内容とフォントと色を設定し、中央揃えにしてviewに反映
-        signInGuide.text = "ログインして通知設定を保存しましょう。"
-        signInGuide.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        signInGuide.textColor = UIColor(hex: "333333")
-        signInGuide.backgroundColor = UIColor.clear
-        signInGuide.textAlignment = NSTextAlignment.center
-        view.addSubview(signInGuide)
-        	
-        //signInGuideのY軸のAutoLayoutを設定
-        let signInGuideTopConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 27)
-        
-        //signInGuideのX軸のAutoLayoutを設定
-        let signInGuideLeadingConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1.0, constant: self.view.frame.maxX/2)
-        
-        //signInGuideの幅を設定
-        let signInGuideWidthConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1.0, constant: 0)
-        
-        //AutoLayoutを反映
-        self.view.addConstraint(signInGuideTopConstraint)
-        self.view.addConstraint(signInGuideLeadingConstraint)
-        self.view.addConstraint(signInGuideWidthConstraint)
+    // MARK: - TableView
+    //セクションの数を決める
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionTitleArray.count
     }
     
-    // MARK: - SignInWithApple
-    func createSignInWithApple() {
-        
-        //ボタンのタイプとデザインを設定
-        let appleButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
-        
-        //'Autosizing'を'AutoLayout' に変換
-        appleButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        //ボタンがタップされた時の挙動を記述してviewに反映
-        appleButton.addTarget(self, action: #selector(tap), for: .touchUpInside)
-        view.addSubview(appleButton)
-        
-        //appleButtonのY軸のAutoLayoutを設定
-        let appleButtonTopConstraint = NSLayoutConstraint(item: appleButton, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 67)
-        
-        //appleButtonのX軸のAutoLayoutを設定
-        NSLayoutConstraint.activate([appleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
-        
-        //appleButtonの高さを設定
-        appleButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        
-        //appleButtonの幅を設定
-        let appleButtonWidthConstraint = NSLayoutConstraint(item: appleButton, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 0.8, constant: 0)
-        
-        //AutoLayoutを反映
-        self.view.addConstraint(appleButtonTopConstraint)
-        self.view.addConstraint(appleButtonWidthConstraint)
+    //セクションのヘッダーのタイトルを決める
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitleArray[section]
     }
     
-    //'Sign In With Apple'をタップすると呼ばれる
-    @objc func tap() {
-        
-        //nonce = リプレイ攻撃を防ぐ変数
-        let nonce = randomNonceString()
-        
-        //currentNonce = 現在のnonce
-        currentNonce = nonce
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-            request.nonce = sha256(nonce)
-        
-        //Appleが認証済みかどうかのリクエストを投げる
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        
-        //delegateを委託
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        
-        //ここでリクエストを投げる
-        controller.performRequests()
+    //セクションヘッダーの高さを決める
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
     }
     
-    //appleIDCredential, credentials, nonce, appleIDToken, idTokenString
-    //以上5点が存在するかどうかの確認をおこなう
-    private func randomNonceString(length: Int = 32) -> String {
-        precondition(length > 0)
-        let charset: Array<Character> =
-            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-        var result = ""
-        var remainingLength = length
+    //セルの数を決める
+    func tableView(_ table: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        while remainingLength > 0 {
-            let randoms: [UInt8] = (0 ..< 16).map { _ in
-                var random: UInt8 = 0
-                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-                if errorCode != errSecSuccess {
-                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-                }
-                return random
+        if section == 0 {
+            return settingSectionIconArray.count
+        } else if section == 1 {
+            return appSectionIconArray.count
+        } else if section == 2 {
+            return accountSectionIconArray.count
+        } else{
+            return 0
+        }
+    }
+    
+    //セルの高さを設定
+    func tableView(_ table: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65.0
+    }
+    
+    //セルを構築
+    func tableView(_ table: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //tableCellのIDでUITableViewCellのインスタンスを生成
+        let cell = table.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
+        
+        if indexPath.section == 0 {
+            
+            //"設定"セクションのアイコン処理
+            let settingSectionIcon = UIImage(named: settingSectionIconArray[indexPath.row])
+            let settingIcon = cell.viewWithTag(1) as! UIImageView
+                settingIcon.image = settingSectionIcon
+            
+            //設定セクションのラベル処理
+            let settingLabel = cell.viewWithTag(2) as! UILabel
+                settingLabel.text = settingCellLabelArray[indexPath.row]
+                settingLabel.textColor = UIColor(hex: "333333")
+            
+        } else if indexPath.section == 1 {
+            
+            //"このアプリについて"セクションのアイコン処理
+            let appSectionIcon = UIImage(named: appSectionIconArray[indexPath.row])
+            let appIcon = cell.viewWithTag(1) as! UIImageView
+                appIcon.image = appSectionIcon
+            
+            //"このアプリについて"セクションのラベル処理
+            let appLabel = cell.viewWithTag(2) as! UILabel
+                appLabel.text = appCellLabelArray[indexPath.row]
+                appLabel.textColor = UIColor(hex: "333333")
+            
+        } else if indexPath.section == 2 {
+            
+            //"アカウント"セクションのアイコン処理
+            let accountSectionIcon = UIImage(named: accountSectionIconArray[indexPath.row])
+            let accountIcon = cell.viewWithTag(1) as! UIImageView
+                accountIcon.image = accountSectionIcon
+            
+            //"アカウント"セクションのラベル処理
+            let accountLabel = cell.viewWithTag(2) as! UILabel
+                accountLabel.text = accountCellLabelArray[indexPath.row]
+                accountLabel.textColor = UIColor.red
+        }
+        
+        //セルを化粧
+        cell.backgroundColor = UIColor.white
+        
+        //空のセルを削除
+        table.tableFooterView = UIView(frame: .zero)
+        
+        //バージョンを表示するセルのタップを無効
+        if appCellLabelArray[indexPath.row] == "HappyNews ver. 1.0" {
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        }
+        
+        return cell
+    }
+    
+    //セルをタップすると呼ばれる
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //タップ時の選択色の常灯を消す
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        //セクション毎のタップアクションを分岐
+        if indexPath.section == 0 {
+            
+            //"設定セクションの場合"
+            switch indexPath.row {
+            case 0:
+                //通知機能
+                print("通知設定")
+            default:
+                break
             }
             
-            randoms.forEach { random in
-                if remainingLength == 0 {
-                    return
-                }
-                
-                if random < charset.count {
-                    result.append(charset[Int(random)])
-                    remainingLength -= 1
-                }
+        } else if indexPath.section == 1 {
+            
+            //"このアプリについて"セクションの場合
+            switch indexPath.row {
+            case 0:
+                //シェア機能
+                shareFunction()
+            case 1:
+                //レビュー機能
+                reviewFunction()
+            case 2:
+                //お問い合わせ機能
+                mailFunction()
+            case 3:
+                //Twitter紹介機能
+                twitterFunction()
+            default:
+                break
+            }
+            
+        } else if indexPath.section == 2 {
+            
+            //"アカウント"セクションの場合
+            switch indexPath.row {
+            case 0:
+                //ログアウト機能
+                logoutAlert()
+            default:
+                break
             }
         }
-        return result
-    }
-
-    //リプレイ攻撃(サイバーテロ？)防止②
-    private func sha256(_ input: String) -> String {
-        let inputData = Data(input.utf8)
-        let hashedData = SHA256.hash(data: inputData)
-        let hashString = hashedData.compactMap {
-            return String(format: "%02x", $0)
-        }.joined()
-        return hashString
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    // MARK: - Share
+    //シェア機能
+    func shareFunction() {
         
-        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+        //シェア用テキスト
+        let shareText = "『話題のAIを使ったニュース?!』 \n いますぐ'HappyNews'をダウンロードしよう! \n AppStoreURL"
+        
+        //URLクエリ内で使用できる文字列に変換
+        guard let encodedText = shareText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        guard let tweetURL = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") else { return }
+        
+        //URLに載せてシェア画面を起動
+        UIApplication.shared.open(tweetURL, options: [:], completionHandler: nil)
+    }
+    
+    // MARK: - Review
+    //レビュー機能
+    func reviewFunction() {
+        //レビューを要求
+        SKStoreReviewController.requestReview()
+    }
+    
+    // MARK: - Mail
+    //ご意見・ご要望機能
+    func mailFunction() {
+        
+        //メールを送信できるかの確認
+        if !MFMailComposeViewController.canSendMail() {
+            print("Mail services are not available")
             return
         }
         
-        switch authorization.credential {
-        case let credentials as ASAuthorizationAppleIDCredential:
+        //インスタンスの作成と委託
+        let mailViewController = MFMailComposeViewController()
+            mailViewController.mailComposeDelegate = self
+        
+        //宛先の設定
+        let toRecipients = ["nkeiisasa222@gmail.com"]
+        
+        //件名と宛先の表示
+        mailViewController.setSubject("'HappyNews'へのご意見・ご要望")
+        mailViewController.setToRecipients(toRecipients)
+        mailViewController.setMessageBody("▼アプリの不具合などの連絡はこちら \n \n \n \n ▼機能追加依頼はこちら \n \n \n \n ▼その他ご要望はこちら", isHTML: false)
+        
+        self.present(mailViewController, animated: true, completion: nil)
+    }
+    
+    //メール機能終了処理
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        //メールの結果で条件分岐
+        switch result {
+        case .cancelled:
+            print("Email Send Cancelled")
+            break
+        case .saved:
+            print("Email Saved as a Draft")
+            break
+        case .sent:
+            print("Email Sent Successfully")
+            break
+        case .failed:
+            print("Email Send Failed")
             break
         default:
             break
         }
+        //メールを閉じる
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Twitter
+    //Twitter紹介機能
+    func twitterFunction() {
         
-        guard let nonce = currentNonce else {
-            fatalError("Invalid state: A login callback was received, but no login request was sent.")
+        //TwitterのURLを定義して遷移
+        let twitterURL = NSURL(string: "https://twitter.com/ken_sasaki2")
+        if UIApplication.shared.canOpenURL(twitterURL! as URL) {
+            UIApplication.shared.open(twitterURL! as URL, options: [:], completionHandler: nil)
         }
+    }
+    
+    // MARK: - Logout
+    //ログアウト機能
+    func logoutAlert() {
         
-        guard let appleIDToken = appleIDCredential.identityToken else {
-            print("Unable to fetch identity token")
-            return
-        }
+        //アラートの作成
+        let alert = UIAlertController(title: "ログアウトしますか？", message: "ログアウトすると通知の設定がリセットされます。", preferredStyle: .alert)
         
-        guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-            print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
-            return
-        }
-        
-        //credential = （ ）内の値を元にサインインがおこなわれる
-        let credential = OAuthProvider.credential(withProviderID: "apple.com",
-                                                  idToken: idTokenString,
-                                                  rawNonce: nonce)
-        
-        //Firebaseへのログインを
-        Auth.auth().signIn(with: credential) { (authResult, error) in
+        //アラートのボタン
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .default))
+        alert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
+            action in
             
-            //エラー処理
-            if let error = error {
-                print(error)
-                HUD.flash(.labeledError(title: "予期せぬエラーが発生", subtitle: "もう一度お試しください。"), delay: 0)
-                return
+            //ログアウト機能
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
             }
-            if let authResult = authResult {
-                
-                HUD.flash(.labeledSuccess(title: "ログイン完了", subtitle: nil), onView: self.view, delay: 0) { _ in
-                    
-                    self.performSegue(withIdentifier: "next", sender: nil)
-                }
-            }
-        }
-    }
-    
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("error",error)
-    }
-    
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return view.window!
+            //サインアウトすると元の画面へ遷移
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        //アラートの表示
+        present(alert, animated: true, completion: nil)
     }
 }
