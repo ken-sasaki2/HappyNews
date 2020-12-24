@@ -345,11 +345,11 @@ class BusinessNewsTableViewController: UITableViewController,SegementSlideConten
         
         //セルのスタイルを設定
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
-        
-        for i in 0...joySelectionArray.count - 1 {
-            //サムネイルの設定
-            cell.imageView?.image = UIImage(url: "https://amd-pctr.c.yimg.jp/r/iwiz-amd/20201213-00008363-entame-000-1-view.jpg?w=450&h=300&q=90&exp=10800&pri=l")
-        }
+//        
+//        for i in 0...joySelectionArray.count - 1 {
+//            //サムネイルの設定
+//            //cell.imageView?.image = UIImage(url: "https://amd-pctr.c.yimg.jp/r/iwiz-amd/20201213-00008363-entame-000-1-view.jpg?w=450&h=300&q=90&exp=10800&pri=l")
+//        }
         
         cell.imageView?.image = cell.imageView?.image?.resize(_size: CGSize(width: 120, height: 100))
     
