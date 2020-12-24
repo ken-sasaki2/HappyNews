@@ -32,7 +32,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsTextArray:[Any] = []
     
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "L4ZOpPsTeV1in4nJX1N-7_HhYKbMgjj8L8nPnU9JTH8T"
+    var languageTranslatorApiKey  = "VRVJx4tSNUZGQfag54Q5JaFs-kRxbeC23njWJ8gwzlp6"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
@@ -358,10 +358,13 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //セルのスタイルを設定
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
         
-        //サムネイルの用意
+        //サムネイルのインスタンス(画像URL, 待機画像, 画像キャッシュ）
         let thumbnailURL = URL(string: joySelectionArray[indexPath.row].image!.description)
         let placeholder  = UIImage(named: "placeholder")
-        cell.imageView?.kf.setImage(with: thumbnailURL, placeholder: placeholder)
+        let imageCache   = ImageCache.default
+        
+        //サムネイルの反映
+        cell.imageView?.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
         
         //サムネイルのサイズを統一（黄金比）
         cell.imageView?.image = cell.imageView?.image?.resize(_size: CGSize(width: 130, height: 80))
