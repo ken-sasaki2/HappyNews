@@ -32,7 +32,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsTextArray:[Any] = []
     
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "VRVJx4tSNUZGQfag54Q5JaFs-kRxbeC23njWJ8gwzlp6"
+    var languageTranslatorApiKey  = "GFG00gr8opfxvShNCxrtNLDIYIg5crJpnBXsDMOSLbKF"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
@@ -318,9 +318,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 self.tableView.reloadData()
                 
                 //感情分析が終了したことをユーザーに伝える
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     HUD.show(.label("分析が終了しました"))
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         HUD.hide(animated: true)
                     }
                 }
@@ -410,8 +410,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //WebViewControllerのインスタンス作成
         let webViewController = WebViewController()
         
-        //モーダルで画面遷移
-        webViewController.modalTransitionStyle = .coverVertical
+        //WebViewのNavigationControllerを定義
+        let webViewNavigation = UINavigationController(rootViewController: webViewController)
+        
+        //WebViewをフルスクリーンに
+        webViewNavigation.modalPresentationStyle = .fullScreen
         
         //タップしたセルを検知
         let tapCell = joySelectionArray[indexPath.row]
@@ -419,7 +422,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //検知したセルのurlを取得
         UserDefaults.standard.set(tapCell.url, forKey: "url")
         
-        //webViewControllerで取り出す
-        present(webViewController, animated: true, completion: nil)
+        //webViewControllerへ遷移
+        present(webViewNavigation, animated: true)
     }
 }
