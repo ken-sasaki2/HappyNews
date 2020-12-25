@@ -16,7 +16,6 @@
 		4576898425453E5900D7E630 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4576898325453E5900D7E630 /* Translation.swift */; };
 		458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580174F2588B74C004A8176 /* UIColor+Colors.swift */; };
 		4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4586DD502585B0CE00FAB922 /* Assets.xcassets */; };
-		459E8680258CC5EF00A214B2 /* UIImage+convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E867F258CC5EF00A214B2 /* UIImage+convenience.swift */; };
 		45B16C74258CA1E800BED60E /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B16C73258CA1E800BED60E /* UIImage+resize.swift */; };
 		45B8239025739340005F435B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45B8238F25739340005F435B /* GoogleService-Info.plist */; };
 		45BCEE7424E4DF7A0023D738 /* TopNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7324E4DF7A0023D738 /* TopNewsTableViewController.swift */; };
@@ -45,8 +44,8 @@
 		4576898325453E5900D7E630 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		4580174F2588B74C004A8176 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		4586DD502585B0CE00FAB922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		459E867F258CC5EF00A214B2 /* UIImage+convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+convenience.swift"; sourceTree = "<group>"; };
 		45B16C73258CA1E800BED60E /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
+		45B633BF2592A4E400AF6D89 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B8238C25739103005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		45B8238D25739104005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		45B8238F25739340005F435B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -94,7 +93,6 @@
 		45B16CAC258CC3E700BED60E /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
-				459E867F258CC5EF00A214B2 /* UIImage+convenience.swift */,
 				45B16C73258CA1E800BED60E /* UIImage+resize.swift */,
 			);
 			path = UIImage;
@@ -216,6 +214,7 @@
 		E769ABD22E3A12EB1260365E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45B633BF2592A4E400AF6D89 /* SDWebImage.framework */,
 				45F5C5E8258488030082119F /* MessageUI.framework */,
 				E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */,
 			);
@@ -233,7 +232,7 @@
 				45D8865024E4C0F000B32D02 /* Sources */,
 				45D8865124E4C0F000B32D02 /* Frameworks */,
 				45D8865224E4C0F000B32D02 /* Resources */,
-				51405F37FDE0AB3AED91D7E6 /* [CP] Embed Pods Frameworks */,
+				5D39CAB659E4542987EE4F15 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -293,7 +292,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		51405F37FDE0AB3AED91D7E6 /* [CP] Embed Pods Frameworks */ = {
+		5D39CAB659E4542987EE4F15 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -351,7 +350,6 @@
 				4543739524E5675400107A49 /* SuportsNewsTableViewController.swift in Sources */,
 				45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */,
 				457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */,
-				459E8680258CC5EF00A214B2 /* UIImage+convenience.swift in Sources */,
 				458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */,
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItemsModel.swift in Sources */,
