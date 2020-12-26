@@ -166,7 +166,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             switch indexPath.row {
             case 0:
                 //通知機能
-                print("通知設定")
+                transitionSettingPage()
             default:
                 break
             }
@@ -202,6 +202,13 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 break
             }
         }
+    }
+    
+    // MARK: - Notification
+    //通知設定機能
+    func transitionSettingPage() {
+        let url = URL(string: "app-settings:root=General&path=com.ken.HappyNews")
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
     // MARK: - Share
