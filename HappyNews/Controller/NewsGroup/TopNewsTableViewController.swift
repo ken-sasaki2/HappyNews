@@ -364,15 +364,16 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //セルのスタイルを設定
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
         
-        //サムネイルのインスタンス(画像URL, 待機画像, 画像キャッシュ）
+        //サムネイルのインスタンス(画像URL, 待機画像, 角丸）
         let thumbnailURL = URL(string: joySelectionArray[indexPath.row].image!.description)
         let placeholder  = UIImage(named: "placeholder")
+        let cornerRadius = RoundCornerImageProcessor(cornerRadius: 20)
         
         //サムネイルの反映
-        cell.imageView?.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
+        cell.imageView?.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.processor(cornerRadius), .transition(.fade(0.2))])
         
         //サムネイルのサイズを統一（黄金比）
-        cell.imageView?.image = cell.imageView?.image?.resize(_size: CGSize(width: 130, height: 80))
+        cell.imageView?.image = cell.imageView?.image?.resize(_size: CGSize(width: 135, height: 85))
         
         //セルを化粧
         cell.backgroundColor = UIColor.white
