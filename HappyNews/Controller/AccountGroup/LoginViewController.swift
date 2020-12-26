@@ -68,7 +68,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     //'Sign In With Apple'上のテキスト
     func signInGuideText() {
         
-        let signInGuide = UITextField()
+        let signInGuide = UILabel()
         
         //'Autosizing'を'AutoLayout' に変換
         signInGuide.translatesAutoresizingMaskIntoConstraints = false
