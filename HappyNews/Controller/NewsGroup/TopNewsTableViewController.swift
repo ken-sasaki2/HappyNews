@@ -32,7 +32,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var newsTextArray:[Any] = []
     
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "GFG00gr8opfxvShNCxrtNLDIYIg5crJpnBXsDMOSLbKF"
+    var languageTranslatorApiKey  = "J4LQkEl7BWhZL2QaeLzRIRSwlg4sna1J7-09opB-9Gqf"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
@@ -50,6 +50,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //joyの要素と認定されたニュースの配列
     var joySelectionArray = [NewsItemsModel]()
+    
+    //RSSから取得するURLのパラメータを排除したURLを保存する値
+    var imageParameter: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,8 +123,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             case "description":
                 lastItem.description = string
             case "image":
+                //パラメータを排除して取得する
                 if lastItem.image == nil {
-                    lastItem.image = string
+                    imageParameter = string
+                    let imageURL = imageParameter!.components(separatedBy: "?")
+                    lastItem.image = imageURL[0]
                 } else {
                     break
                 }
@@ -361,14 +367,13 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //サムネイルのインスタンス(画像URL, 待機画像, 画像キャッシュ）
         let thumbnailURL = URL(string: joySelectionArray[indexPath.row].image!.description)
         let placeholder  = UIImage(named: "placeholder")
-        let imageCache   = ImageCache.default
         
         //サムネイルの反映
         cell.imageView?.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
         
         //サムネイルのサイズを統一（黄金比）
         cell.imageView?.image = cell.imageView?.image?.resize(_size: CGSize(width: 130, height: 80))
-    
+        
         //セルを化粧
         cell.backgroundColor = UIColor.white
         cell.textLabel?.text = newsItem.title
