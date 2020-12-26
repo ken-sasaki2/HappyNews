@@ -22,18 +22,4 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return resizedImage ?? self;
     }
-    //比率を無視してリサイズ
-    func reSizeImage(reSize:CGSize)->UIImage {
-        UIGraphicsBeginImageContextWithOptions(reSize,false,UIScreen.main.scale);
-        self.draw(in: CGRect(x: 0, y: 0, width: reSize.width, height: reSize.height));
-        let reSizeImage:UIImage! = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        return reSizeImage;
-    }
-    //トリミング
-    func trim(trimmingArea: CGRect) -> UIImage {
-        let imgRef = self.cgImage?.cropping(to: trimmingArea)
-        let trimImage = UIImage(cgImage: imgRef!, scale: self.scale, orientation: self.imageOrientation)
-        return trimImage
-    }
 }
