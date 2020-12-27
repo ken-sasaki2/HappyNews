@@ -10,29 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
-        <scene sceneID="fLW-KH-G3S">
-            <objects>
-                <viewController id="how-Ta-Bn6" customClass="LoginViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" tag="2" contentMode="scaleToFill" id="y5U-vf-76w">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="RBF-Jv-GXi"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="G89-MG-jlv"/>
-                    <connections>
-                        <segue destination="Ixc-sC-zeo" kind="show" identifier="next" id="dzd-FM-jly"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3wd-dd-c4U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4293" y="27"/>
-        </scene>
         <!--Account View Controller-->
         <scene sceneID="QZO-ZM-o7N">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Ixc-sC-zeo" customClass="AccountViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountVC" modalPresentationStyle="fullScreen" id="Ixc-sC-zeo" customClass="AccountViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RrF-Eb-VwL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CkB-kR-f4b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5065" y="27"/>
+            <point key="canvasLocation" x="4293" y="27"/>
         </scene>
         <!--News View Controller-->
         <scene sceneID="pHn-pO-UNk">
@@ -153,8 +134,9 @@
         <!--アカウント-->
         <scene sceneID="q7X-D9-K3y">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PI6-km-G9h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VdI-9B-FfR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="2" title="アカウント" id="fM2-Pg-nnj">
+                    <tabBarItem key="tabBarItem" tag="1" title="アカウント" id="fM2-Pg-nnj">
                         <imageReference key="image" image="person" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -168,10 +150,9 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="how-Ta-Bn6" kind="relationship" relationship="rootViewController" id="H1g-mN-wpH"/>
+                        <segue destination="Ixc-sC-zeo" kind="relationship" relationship="rootViewController" id="9ii-Tx-l5z"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PI6-km-G9h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3545" y="28"/>
         </scene>

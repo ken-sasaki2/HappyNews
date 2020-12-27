@@ -236,7 +236,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
                 
                 HUD.flash(.labeledSuccess(title: "ログイン完了", subtitle: nil), onView: self.view, delay: 0) { _ in
                     
-                    self.performSegue(withIdentifier: "next", sender: nil)
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
         }

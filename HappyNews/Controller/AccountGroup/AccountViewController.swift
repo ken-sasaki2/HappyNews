@@ -312,8 +312,14 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             } catch let signOutError as NSError {
                 print ("Error signing out: %@", signOutError)
             }
-            //サインアウトすると元の画面へ遷移
-            self.navigationController?.popViewController(animated: true)
+
+            //ログインページのインスタンスを作成しNavigationを継承
+            let loginView = LoginViewController()
+            let loginViewController = UINavigationController(rootViewController: loginView)
+            
+            //モーダル画面をフルスクリーンに設定し遷移
+            loginViewController.modalPresentationStyle = .fullScreen
+            self.present(loginViewController, animated: true, completion: nil)
         }))
         
         //アラートの表示
