@@ -44,6 +44,9 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         
         //Sign In With Appleの呼び出し
         createSignInWithApple()
+        
+        //キャンセルボタンの呼び出し
+        createLoginCancelButton()
     }
     
     // MARK: - Navigation
@@ -51,7 +54,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     func setAccountNavigationBar() {
         
         //NavigationBarのtitleとその色とフォント
-        navigationItem.title = "アカウント"
+        navigationItem.title = "ログインページ"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19, weight: .semibold)]
         
         //NavigationBarの色
@@ -97,6 +100,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     }
     
     // MARK: - SignInWithApple
+    //'Sign In With Apple' ボタンの作成
     func createSignInWithApple() {
         
         //ボタンのタイプとデザインを設定
@@ -105,8 +109,11 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         //'Autosizing'を'AutoLayout' に変換
         appleButton.translatesAutoresizingMaskIntoConstraints = false
         
+        //appleButtonの角丸
+        appleButton.cornerRadius = 6.0
+        
         //ボタンがタップされた時の挙動を記述してviewに反映
-        appleButton.addTarget(self, action: #selector(tap), for: .touchUpInside)
+        appleButton.addTarget(self, action: #selector(loginTap), for: .touchUpInside)
         view.addSubview(appleButton)
         
         //appleButtonのY軸のAutoLayoutを設定
@@ -126,8 +133,49 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         self.view.addConstraint(appleButtonWidthConstraint)
     }
     
+    //ログインキャンセルボタンの作成
+    func createLoginCancelButton() {
+        
+        //インスタンス作成
+        let cancelButton = UIButton()
+        
+        //'Autosizing'を'AutoLayout' に変換
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        //cancelButtonのテキストとサイズ
+        cancelButton.setTitle("キャンセル", for: UIControl.State.normal)
+        cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        
+        //cancelButtonの文字色と枠色
+        cancelButton.setTitleColor(UIColor.white, for: .normal)
+        cancelButton.backgroundColor = UIColor.gray
+        
+        //cancelButtonの角丸
+        cancelButton.layer.cornerRadius = 6.0
+        
+        //cancelButtonのアクションとviewに反映
+        cancelButton.addTarget(self, action: #selector(cancelTap), for: .touchUpInside)
+        view.addSubview(cancelButton)
+
+        //cancelButtonのy軸（縦）のAutoLayoutを設定
+        let cancelButtonTopConstraint = NSLayoutConstraint(item: cancelButton, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 127)
+
+        //cancelButtonのx軸（横）のAutoLayoutを設定
+        NSLayoutConstraint.activate([cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+
+        //cancelButtonの高さを設定
+        cancelButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+
+        //cancelButtonの幅を設定
+        let cancelButtonWidthConstraint = NSLayoutConstraint(item: cancelButton, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 0.8, constant: 0)
+
+        //AutoLayoutを反映
+        self.view.addConstraint(cancelButtonTopConstraint)
+        self.view.addConstraint(cancelButtonWidthConstraint)
+    }
+    
     //'Sign In With Apple'をタップすると呼ばれる
-    @objc func tap() {
+    @objc func loginTap() {
         
         //nonce = リプレイ攻撃を防ぐ変数
         let nonce = randomNonceString()
@@ -146,6 +194,11 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         
         //ここでリクエストを投げる
         controller.performRequests()
+    }
+    
+    //キャンセルボタンをタップすると呼ばれる
+    @objc func cancelTap() {
+        print("キャンセルをタップ")
     }
     
     //appleIDCredential, credentials, nonce, appleIDToken, idTokenString
