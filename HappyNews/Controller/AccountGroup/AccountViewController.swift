@@ -54,9 +54,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false
         
-        //NavigationBarの下線を消す
-        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        
         //ログイン後の'back'ボタンを削除
         self.navigationItem.hidesBackButton = true
     }

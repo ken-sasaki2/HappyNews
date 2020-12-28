@@ -35,9 +35,6 @@ class NewsViewController: SegementSlideDefaultViewController {
         
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false
-        
-        //NavigationBarの下線を消す
-        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
     }
     
     //スクロールでナビゲーションバーを隠す

@@ -62,9 +62,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false
-        
-        //NavigationBarの下線を消す
-        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
     }
     
     // MARK: - SignInGuideText
@@ -198,7 +195,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     
     //キャンセルボタンをタップすると呼ばれる
     @objc func cancelTap() {
-        print("キャンセルをタップ")
+        //キャンセルボタンをタプするとモーダルを閉じてニュースページへ戻る
+        self.dismiss(animated: true, completion: nil)
     }
     
     //appleIDCredential, credentials, nonce, appleIDToken, idTokenString
