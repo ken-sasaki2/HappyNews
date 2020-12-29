@@ -195,8 +195,17 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     
     //キャンセルボタンをタップすると呼ばれる
     @objc func cancelTap() {
-        //キャンセルボタンをタプするとモーダルを閉じてニュースページへ戻る
-        self.dismiss(animated: true, completion: nil)
+        
+        //タブバーのインスタンスを取得
+        if let tabBarController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
+            
+            //ニュースタブを選択状態にする（0が一番左）
+            DispatchQueue.main.async {
+                tabBarController.selectedIndex = 0
+            }
+        }
+        //モーダル画面を閉じる
+        dismiss(animated: true, completion: nil)
     }
     
     //appleIDCredential, credentials, nonce, appleIDToken, idTokenString

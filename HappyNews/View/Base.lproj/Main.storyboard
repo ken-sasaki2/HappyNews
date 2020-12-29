@@ -13,7 +13,7 @@
         <!--Account View Controller-->
         <scene sceneID="QZO-ZM-o7N">
             <objects>
-                <viewController storyboardIdentifier="AccountVC" modalPresentationStyle="fullScreen" id="Ixc-sC-zeo" customClass="AccountViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="Ixc-sC-zeo" customClass="AccountViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RrF-Eb-VwL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,7 +90,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="oef-3q-T1I">
             <objects>
-                <tabBarController storyboardIdentifier="TabBar" modalPresentationStyle="fullScreen" id="GKE-uc-7Bx" customClass="TabBarController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="fullScreen" id="GKE-uc-7Bx" customClass="TabBarController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="iYv-v7-B5M"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zfp-wr-nqD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
