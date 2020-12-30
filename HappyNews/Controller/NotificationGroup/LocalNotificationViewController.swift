@@ -19,23 +19,6 @@ class LocalNotificationViewController: UIViewController {
         print(Auth.auth().currentUser?.uid)
         print(Auth.auth().currentUser?.displayName)
         
-        //UIviewのインスタンス作成(view)
-        view = UIView()
-
-        //viewの背景を設定
-        view.backgroundColor = UIColor.white
-        
-        let sampleButton = UIButton()
-        
-        sampleButton.backgroundColor = UIColor.red
-        sampleButton.setTitle("ローカル通知発火", for: UIControl.State.normal)
-        sampleButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
-        
-        sampleButton.frame.size = CGSize(width: 200, height: 100)
-        
-        sampleButton.addTarget(self, action: #selector(morningLocalNotification), for: .touchUpInside)
-        view.addSubview(sampleButton)
-        
         //ローカルPush通知の呼び出し
         morningLocalNotification()
         afternoonLocalNotification()
@@ -43,7 +26,7 @@ class LocalNotificationViewController: UIViewController {
     }
     
     //朝のローカルPush通知の作成
-    @objc func morningLocalNotification() {
+    func morningLocalNotification() {
         
         //ローカルPush通知のインスタンス作成
         let morningContent = UNMutableNotificationContent()

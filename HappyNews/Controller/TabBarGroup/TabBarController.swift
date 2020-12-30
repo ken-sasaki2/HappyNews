@@ -29,10 +29,6 @@ class TabBarController: UITabBarController {
         switch item.title {
         case "ニュース":
             tabBar.tintColor = UIColor(hex: "00AECC")
-            
-            let notification = LocalNotificationViewController()
-            
-            present(notification, animated: true, completion: nil)
         case "アカウント":
             tabBar.tintColor = UIColor(hex: "00AECC")
         
