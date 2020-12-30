@@ -33,23 +33,81 @@ class LocalNotificationViewController: UIViewController {
         
         sampleButton.frame.size = CGSize(width: 200, height: 100)
         
-        sampleButton.addTarget(self, action: #selector(localNotification), for: .touchUpInside)
+        sampleButton.addTarget(self, action: #selector(morningLocalNotification), for: .touchUpInside)
         view.addSubview(sampleButton)
+        
+        //ローカルPush通知の呼び出し
+        morningLocalNotification()
+        afternoonLocalNotification()
+        eveningLocalNotification()
     }
     
-    //ローカルPush通知の作成
-    @objc func localNotification() {
+    //朝のローカルPush通知の作成
+    @objc func morningLocalNotification() {
         
         //ローカルPush通知のインスタンス作成
-        let content = UNMutableNotificationContent()
+        let morningContent = UNMutableNotificationContent()
+        var morningNotificationTime = DateComponents()
+        let morningTrigger: UNNotificationTrigger
         
         //通知内容の設定
-        content.title    = "【お知らせ】HappyNews更新"
-        content.subtitle = "新たなニュースを取得できます"
-        content.sound    = .default
+        morningContent.title    = "【お知らせ】朝のHappyNews更新"
+        morningContent.subtitle = "新たなニュースを取得できます"
+        morningContent.sound    = .default
+        
+        //通知時間の設定
+        morningNotificationTime.hour = 7
+        morningNotificationTime.minute = 0
+        morningTrigger = UNCalendarNotificationTrigger(dateMatching: morningNotificationTime, repeats: false)
         
         //通知の表示
-        let request = UNNotificationRequest(identifier: "LocalNotification", content: content, trigger: nil)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        let morningRequest = UNNotificationRequest(identifier: "LocalNotification", content: morningContent, trigger: morningTrigger)
+        UNUserNotificationCenter.current().add(morningRequest, withCompletionHandler: nil)
+    }
+    
+    //昼のローカルPush通知の作成
+    @objc func afternoonLocalNotification() {
+        
+        //ローカルPush通知のインスタンス作成
+        let afternoonContent = UNMutableNotificationContent()
+        var afternoonNotificationTime = DateComponents()
+        let afternoonTrigger: UNNotificationTrigger
+        
+        //通知内容の設定
+        afternoonContent.title    = "【お知らせ】昼のHappyNews更新"
+        afternoonContent.subtitle = "新たなニュースを取得できます"
+        afternoonContent.sound    = .default
+        
+        //通知時間の設定
+        afternoonNotificationTime.hour = 12
+        afternoonNotificationTime.minute = 0
+        afternoonTrigger = UNCalendarNotificationTrigger(dateMatching: afternoonNotificationTime, repeats: false)
+        
+        //通知の表示
+        let afternoonRequest = UNNotificationRequest(identifier: "LocalNotification", content: afternoonContent, trigger: afternoonTrigger)
+        UNUserNotificationCenter.current().add(afternoonRequest, withCompletionHandler: nil)
+    }
+    
+    //夕方のローカルPush通知の作成
+    @objc func eveningLocalNotification() {
+        
+        //ローカルPush通知のインスタンス作成
+        let eveningContent = UNMutableNotificationContent()
+        var eveningNotificationTime = DateComponents()
+        let eveningTrigger: UNNotificationTrigger
+        
+        //通知内容の設定
+        eveningContent.title    = "【お知らせ】夕方のHappyNews更新"
+        eveningContent.subtitle = "新たなニュースを取得できます"
+        eveningContent.sound    = .default
+        
+        //通知時間の設定
+        eveningNotificationTime.hour = 17
+        eveningNotificationTime.minute = 0
+        eveningTrigger = UNCalendarNotificationTrigger(dateMatching: eveningNotificationTime, repeats: false)
+        
+        //通知の表示
+        let eveningRequest = UNNotificationRequest(identifier: "LocalNotification", content: eveningContent, trigger: eveningTrigger)
+        UNUserNotificationCenter.current().add(eveningRequest, withCompletionHandler: nil)
     }
 }
