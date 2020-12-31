@@ -34,7 +34,7 @@ class LocalNotificationViewController: UIViewController {
         let morningTrigger: UNNotificationTrigger
         
         //通知内容の設定
-        morningContent.title    = "【お知らせ】朝のHappyNews更新"
+        morningContent.title    = "【お知らせ】朝のHappyNewsを更新"
         morningContent.subtitle = "新たなニュースを取得できます"
         morningContent.sound    = .default
         
@@ -57,7 +57,7 @@ class LocalNotificationViewController: UIViewController {
         let afternoonTrigger: UNNotificationTrigger
         
         //通知内容の設定
-        afternoonContent.title    = "【お知らせ】昼のHappyNews更新"
+        afternoonContent.title    = "【お知らせ】お昼のHappyNewsを更新"
         afternoonContent.subtitle = "新たなニュースを取得できます"
         afternoonContent.sound    = .default
         
@@ -80,7 +80,7 @@ class LocalNotificationViewController: UIViewController {
         let eveningTrigger: UNNotificationTrigger
         
         //通知内容の設定
-        eveningContent.title    = "【お知らせ】夕方のHappyNews更新"
+        eveningContent.title    = "【お知らせ】夕方のHappyNewsを更新"
         eveningContent.subtitle = "新たなニュースを取得できます"
         eveningContent.sound    = .default
         
