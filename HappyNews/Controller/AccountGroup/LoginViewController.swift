@@ -143,7 +143,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         cancelButton.setTitle("キャンセル", for: UIControl.State.normal)
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         
-        //cancelButtonの文字色と枠色
+        //cancelButtonの文字色と背景色
         cancelButton.setTitleColor(UIColor.white, for: .normal)
         cancelButton.backgroundColor = UIColor.gray
         
