@@ -67,8 +67,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //XMLファイルを特定
         let xmlArray = "https://news.yahoo.co.jp/rss/media/tvtnews/all.xml"
         
-        //for i in 0...1 {
-        
         let xmlString = xmlArray
         
         //XMLファイルをURL型のurlに変換
@@ -82,10 +80,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //parseの開始
         parser.parse()
-        //}
-        
-        //翻訳機能の呼び出し
-        startTranslation()
+    
+
+        timeComparison()
     }
     
     // MARK: - XML Parser
@@ -147,6 +144,87 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //XML解析でエラーが発生した場合に呼ばれるメソッド
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         print("error:" + parseError.localizedDescription)
+    }
+    
+    //時間の比較とそれに合った処理をおこなう
+    func timeComparison() {
+        
+        //やりたいこと
+        //'07:00', '11:00', '17:00' 以降にアプリを起動するとAPI（News）を更新する
+        //その時間間隔の中での更新は一度だけで、次の更新は特定の時刻が来るまでしない
+        //なので、特定の時間間隔内で更新した情報はキャッシュに保存して表示しておく
+        
+        //実装手順(イメージの言語化)
+        //アプリ起動時刻と前回起動時刻を比較して時間を超えているかどうかで処理をおこなう
+        //条件に一致していればAPIを更新、また、更新した証をローカルに保存しておく？
+        //そうでなければキャッシュを表示
+        
+        //現在時刻の取得
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        
+        //日時のフォーマットと地域を指定
+        dateFormatter.dateFormat = "HH:mm:ss"
+        dateFormatter.timeZone   = TimeZone(identifier: "Asia/Tokyo")
+        
+        //アプリ起動時刻を定義
+        let currentTime = dateFormatter.string(from: date)
+        print("現在時刻: \(currentTime)")
+        print(type(of: currentTime))
+        
+        //アプリ起動時刻の保存
+        UserDefaults.standard.set(currentTime, forKey: "lastActivation")
+        
+        //定時時刻の設定
+        let morningPoint     = dateFormatter.date(from: "07:00:00")
+        let afternoonPoint   = dateFormatter.date(from: "11:00:00")
+        let eveningPoint     = dateFormatter.date(from: "17:00:00")
+        let nightPoint       = dateFormatter.date(from: "23:59:59")
+        let lateAtNightPoint = dateFormatter.date(from: "00:00:00")
+        
+        //定時時刻の変換
+        let morningTime     = dateFormatter.string(from: morningPoint!)
+        let afternoonTime   = dateFormatter.string(from: afternoonPoint!)
+        let eveningTime     = dateFormatter.string(from: eveningPoint!)
+        let nightTime       = dateFormatter.string(from: nightPoint!)
+        let lateAtNightTime = dateFormatter.string(from: lateAtNightPoint!)
+        
+        
+        print("morningTime    : \(morningTime)")
+        print("afternoonTime  : \(afternoonTime)")
+        print("eveningTime    : \(eveningTime)")
+        print("nightTime      : \(nightTime)")
+        print("lateAtNightTime: \(lateAtNightTime)")
+        
+        //前回起動時刻の取り出し
+        let lastActivation = UserDefaults.standard.string(forKey: "lastActivation")
+        print("lastActivation: \(lastActivation)")
+        print(type(of: lastActivation))
+        
+        //前回起動時刻と定時時刻の間隔を比較（日付を無くして全て時間指定）
+        //07:00以降11:00以前の場合
+        if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
+            print("朝のAPI更新")
+        }
+        
+        //11:00以降17:00以前の場合
+        else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
+            print("昼のAPI更新")
+        }
+
+        //17:00以降23:59:59以前の場合（1日の最後）
+        else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
+            print("夕方のAPIの更新（日付変更以前）")
+        }
+        
+        //00:00以降07:00以前の場合
+        else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
+            print("夕方のAPIの更新（日付変更以降）")
+        }
+        
+        else {
+            print("キャッシュを表示しておく")
+        }
     }
     
     // MARK: - LanguageTranslator
