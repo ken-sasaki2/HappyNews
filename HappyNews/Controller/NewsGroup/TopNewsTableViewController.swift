@@ -54,6 +54,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //RSSから取得するURLのパラメータを排除したURLを保存する値
     var imageParameter: String?
     
+    //APIの更新がおこなわれたかを判断する変数
+    var morningUpdate        : String?
+    var afternoonUpdate      : String?
+    var eveningUpdate        : String?
+    var lateAtNightTimeUpdate: String?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -170,7 +176,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //アプリ起動時刻を定義
         let currentTime = dateFormatter.string(from: date)
         print("現在時刻: \(currentTime)")
-        print(type(of: currentTime))
         
         //アプリ起動時刻の保存
         UserDefaults.standard.set(currentTime, forKey: "lastActivation")
@@ -199,29 +204,65 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //前回起動時刻の取り出し
         let lastActivation = UserDefaults.standard.string(forKey: "lastActivation")
         print("lastActivation: \(lastActivation)")
-        print(type(of: lastActivation))
         
-        //前回起動時刻と定時時刻の間隔を比較（日付を無くして全て時間指定）
+        //前回起動時刻と定時時刻の間隔で時間割（日付を無くして全て時間指定）
         //07:00以降11:00以前の場合
         if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
-            print("朝のAPI更新")
+            
+            //morningUpdateがnilならAPIを更新、nilでなければキャッシュの表示
+            if morningUpdate == nil {
+                print("朝のAPI更新")
+                
+                morningUpdate         = "morningUpdate"
+                lateAtNightTimeUpdate = nil
+            } else {
+                print("キャッシュの表示")
+            }
         }
         
         //11:00以降17:00以前の場合
         else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
-            print("昼のAPI更新")
+            
+            //afternoonUpdateがnilならAPIを更新、nilでなければキャッシュの表示
+            if afternoonUpdate == nil {
+                print("昼のAPI更新")
+                
+                afternoonUpdate = "afternoonUpdate"
+                morningUpdate   = nil
+            } else {
+                print("キャッシュの表示")
+            }
         }
-
+        
         //17:00以降23:59:59以前の場合（1日の最後）
         else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
-            print("夕方のAPIの更新（日付変更以前）")
+            
+            //eveningUpdateがnilならAPIを更新、nilでなければキャッシュの表示
+            if eveningUpdate == nil {
+                print("夕方のAPIの更新（日付変更以前）")
+                
+                eveningUpdate   = "eveningUpdate"
+                afternoonUpdate = nil
+            } else {
+                print("キャッシュの表示")
+            }
         }
         
-        //00:00以降07:00以前の場合
+        //00:00以降07:00以前の場合（日を跨いで初めて起動）
         else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
-            print("夕方のAPIの更新（日付変更以降）")
+            
+            //lateAtNightTimeUpdateがnilならAPIを更新、nilでなければキャッシュの表示
+            if lateAtNightTimeUpdate == nil {
+                print("夕方のAPIの更新（日付変更以降）")
+                
+                lateAtNightTimeUpdate = "lateAtNightTimeUpdate"
+                eveningUpdate         = nil
+            } else {
+                print("キャッシュの表示")
+            }
         }
         
+        //どの時間割にも当てはまらない場合
         else {
             print("キャッシュを表示しておく")
         }
