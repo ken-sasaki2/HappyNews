@@ -87,7 +87,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //parseの開始
         parser.parse()
     
-
+        //時間割の呼び出し
         timeComparison()
     }
     
@@ -152,6 +152,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         print("error:" + parseError.localizedDescription)
     }
     
+    // MARK: - TimeComparison
     //時間の比較とそれに合った処理をおこなう
     func timeComparison() {
         
@@ -212,6 +213,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             //morningUpdateがnilならAPIを更新、nilでなければキャッシュの表示
             if morningUpdate == nil {
                 print("朝のAPI更新")
+                //startTranslation()
                 
                 morningUpdate         = "morningUpdate"
                 lateAtNightTimeUpdate = nil
@@ -226,6 +228,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             //afternoonUpdateがnilならAPIを更新、nilでなければキャッシュの表示
             if afternoonUpdate == nil {
                 print("昼のAPI更新")
+                //startTranslation()
                 
                 afternoonUpdate = "afternoonUpdate"
                 morningUpdate   = nil
@@ -240,6 +243,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             //eveningUpdateがnilならAPIを更新、nilでなければキャッシュの表示
             if eveningUpdate == nil {
                 print("夕方のAPIの更新（日付変更以前）")
+                //startTranslation()
                 
                 eveningUpdate   = "eveningUpdate"
                 afternoonUpdate = nil
@@ -254,6 +258,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             //lateAtNightTimeUpdateがnilならAPIを更新、nilでなければキャッシュの表示
             if lateAtNightTimeUpdate == nil {
                 print("夕方のAPIの更新（日付変更以降）")
+                //startTranslation()
                 
                 lateAtNightTimeUpdate = "lateAtNightTimeUpdate"
                 eveningUpdate         = nil
