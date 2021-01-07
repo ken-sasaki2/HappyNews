@@ -63,6 +63,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //前回起動時刻の保管場所
     var lastActivation: String?
         
+    //感情分析結果をローカル(Library/Caches)に保存＆取得で使用する値
+    var fileManager = FileManager.default
+    var cachesFile: URL?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -156,131 +161,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //XML解析でエラーが発生した場合に呼ばれるメソッド
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         print("error:" + parseError.localizedDescription)
-    }
-    
-    // MARK: - TimeComparison
-    //時間の比較とそれに合った処理をおこなう
-    func timeComparison() {
-        
-        //やりたいこと
-        //'07:00', '11:00', '17:00' 以降にアプリを起動するとAPI（News）を更新する
-        //その時間間隔の中での更新は一度だけで、次の更新は特定の時刻が来るまでしない
-        //なので、特定の時間間隔内で更新した情報はキャッシュに保存して表示しておく
-        
-        //実装手順(イメージの言語化)
-        //アプリ起動時刻と前回起動時刻を比較して時間を超えているかどうかで処理をおこなう
-        //条件に一致していればAPIを更新、また、更新した証をローカルに保存しておく？
-        //そうでなければキャッシュを表示
-        
-        //現在時刻の取得
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        
-        //日時のフォーマットと地域を指定
-        dateFormatter.dateFormat = "HH:mm:ss"
-        dateFormatter.timeZone   = TimeZone(identifier: "Asia/Tokyo")
-        
-        //アプリ起動時刻を定義
-        let currentTime = dateFormatter.string(from: date)
-        print("現在時刻: \(currentTime)")
-        
-        //アプリ起動時刻の保存
-        UserDefaults.standard.set(currentTime, forKey: "lastActivation")
-        
-        //定時時刻の設定
-        let morningPoint     = dateFormatter.date(from: "07:00:00")
-        let afternoonPoint   = dateFormatter.date(from: "11:00:00")
-        let eveningPoint     = dateFormatter.date(from: "17:00:00")
-        let nightPoint       = dateFormatter.date(from: "23:59:59")
-        let lateAtNightPoint = dateFormatter.date(from: "00:00:00")
-        
-        //定時時刻の変換
-        let morningTime     = dateFormatter.string(from: morningPoint!)
-        let afternoonTime   = dateFormatter.string(from: afternoonPoint!)
-        let eveningTime     = dateFormatter.string(from: eveningPoint!)
-        let nightTime       = dateFormatter.string(from: nightPoint!)
-        let lateAtNightTime = dateFormatter.string(from: lateAtNightPoint!)
-        
-        
-        print("morningTime    : \(morningTime)")
-        print("afternoonTime  : \(afternoonTime)")
-        print("eveningTime    : \(eveningTime)")
-        print("nightTime      : \(nightTime)")
-        print("lateAtNightTime: \(lateAtNightTime)")
-        
-        //前回起動時刻の取り出し
-        lastActivation = UserDefaults.standard.string(forKey: "lastActivation")
-        print("lastActivation（起動時刻更新）: \(lastActivation)")
-        
-        //前回起動時刻と定時時刻の間隔で時間割（日付を無くして全て時間指定）
-        //07:00以降11:00以前の場合
-        if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
-            
-            //morningUpdateがnilならAPIを更新、nilでなければキャッシュの表示
-            if morningUpdate == nil {
-                print("朝のAPI更新")
-                //朝のAPI更新
-                //startTranslation()
-                
-                morningUpdate         = "morningUpdate"
-                lateAtNightTimeUpdate = nil
-            } else {
-                print("キャッシュの表示")
-            }
-        }
-        
-        //11:00以降17:00以前の場合
-        else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
-            
-            //afternoonUpdateがnilならAPIを更新、nilでなければキャッシュの表示
-            if afternoonUpdate == nil {
-                print("昼のAPI更新")
-                //昼のAPI更新
-                //startTranslation()
-                
-                afternoonUpdate = "afternoonUpdate"
-                morningUpdate   = nil
-            } else {
-                print("キャッシュの表示")
-            }
-        }
-        
-        //17:00以降23:59:59以前の場合（1日の最後）
-        else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
-            
-            //eveningUpdateがnilならAPIを更新、nilでなければキャッシュの表示
-            if eveningUpdate == nil {
-                print("夕方のAPIの更新（日付変更以前）")
-                //夕方のAPIの更新（日付変更以前）
-                //startTranslation()
-                
-                eveningUpdate   = "eveningUpdate"
-                afternoonUpdate = nil
-            } else {
-                print("キャッシュの表示")
-            }
-        }
-        
-        //00:00以降07:00以前の場合（日を跨いで初めて起動）
-        else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
-            
-            //lateAtNightTimeUpdateがnilならAPIを更新、nilでなければキャッシュの表示
-            if lateAtNightTimeUpdate == nil {
-                print("夕方のAPIの更新（日付変更以降）")
-                //夕方のAPIの更新（日付変更以降）
-                //startTranslation()
-                
-                lateAtNightTimeUpdate = "lateAtNightTimeUpdate"
-                eveningUpdate         = nil
-            } else {
-                print("キャッシュの表示")
-            }
-        }
-        
-        //どの時間割にも当てはまらない場合
-        else {
-            print("キャッシュを表示しておく")
-        }
     }
     
     // MARK: - LanguageTranslator
@@ -452,6 +332,35 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         if joySelectionArray.count == joyCountArray.count {
             
+            do {
+                //保存先URLの作成
+                //SearchPathDirectory = ディレクトリの種類。検索する一番下位
+                //.cachesDirectory    = （Library/Caches）
+                //.userDomainMask     =  現在の使用ユーザーのホームディレクトリ
+                //appropriateFor      = 一時ディレクトリの場所を特定するために与えるファイルURL
+                //create              = 宛先URLが存在しない場合、新たに作るか
+                let cachesURL = try? fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("joySelectionArray.title")
+                
+                print("cachesURL（保存場所）: \(cachesURL)")
+                
+                //キャッシュに保存する変数
+                let cachesData = joySelectionArray[0].title!.data(using: .utf8)
+                
+                //保存先への書き込み
+                fileManager.createFile(atPath: cachesURL!.path, contents: cachesData, attributes: nil)
+                
+                //保存先のパスを指定して取得
+                cachesFile = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("joySelectionArray.title")
+                
+                let readData = try Data(contentsOf: cachesFile!)
+                let readTitle = String(data: readData, encoding: .utf8)
+                
+                print("readData: \(readTitle)")
+                
+            } catch {
+                print("Error occurred when saving cache: \(error)")
+            }
+            
             //メインスレッドでUIの更新
             DispatchQueue.main.async {
                 //tableViewの更新
@@ -465,6 +374,120 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                     }
                 }
             }
+        }
+    }
+    
+    // MARK: - TimeComparison
+    //時間の比較とそれに合った処理をおこなう
+    func timeComparison() {
+        
+        //現在時刻の取得
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        
+        //日時のフォーマットと地域を指定
+        dateFormatter.dateFormat = "HH:mm:ss"
+        dateFormatter.timeZone   = TimeZone(identifier: "Asia/Tokyo")
+        
+        //アプリ起動時刻を定義
+        let currentTime = dateFormatter.string(from: date)
+        print("現在時刻: \(currentTime)")
+        
+        //アプリ起動時刻の保存
+        UserDefaults.standard.set(currentTime, forKey: "lastActivation")
+        
+        //定時時刻の設定
+        let morningPoint     = dateFormatter.date(from: "07:00:00")
+        let afternoonPoint   = dateFormatter.date(from: "11:00:00")
+        let eveningPoint     = dateFormatter.date(from: "17:00:00")
+        let nightPoint       = dateFormatter.date(from: "23:59:59")
+        let lateAtNightPoint = dateFormatter.date(from: "00:00:00")
+        
+        //定時時刻の変換
+        let morningTime     = dateFormatter.string(from: morningPoint!)
+        let afternoonTime   = dateFormatter.string(from: afternoonPoint!)
+        let eveningTime     = dateFormatter.string(from: eveningPoint!)
+        let nightTime       = dateFormatter.string(from: nightPoint!)
+        let lateAtNightTime = dateFormatter.string(from: lateAtNightPoint!)
+        
+        print("morningTime    : \(morningTime)")
+        print("afternoonTime  : \(afternoonTime)")
+        print("eveningTime    : \(eveningTime)")
+        print("nightTime      : \(nightTime)")
+        print("lateAtNightTime: \(lateAtNightTime)")
+        
+        //前回起動時刻の取り出し
+        lastActivation = UserDefaults.standard.string(forKey: "lastActivation")
+        print("lastActivation（起動時刻更新）: \(lastActivation)")
+        
+        //前回起動時刻と定時時刻の間隔で時間割（日付を無くして全て時間指定）
+        //07:00以降11:00以前の場合
+        if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
+            
+            //morningUpdateがnilならAPIを更新、nilでなければキャッシュの表示
+            if morningUpdate == nil {
+                print("朝のAPI更新")
+                //朝のAPI更新
+                //startTranslation()
+                
+                morningUpdate         = "morningUpdate"
+                lateAtNightTimeUpdate = nil
+            } else {
+                print("キャッシュの表示")
+            }
+        }
+        
+        //11:00以降17:00以前の場合
+        else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
+            
+            //afternoonUpdateがnilならAPIを更新、nilでなければキャッシュの表示
+            if afternoonUpdate == nil {
+                print("昼のAPI更新")
+                //昼のAPI更新
+                //startTranslation()
+                
+                afternoonUpdate = "afternoonUpdate"
+                morningUpdate   = nil
+            } else {
+                print("キャッシュの表示")
+            }
+        }
+        
+        //17:00以降23:59:59以前の場合（1日の最後）
+        else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
+            
+            //eveningUpdateがnilならAPIを更新、nilでなければキャッシュの表示
+            if eveningUpdate == nil {
+                print("夕方のAPIの更新（日付変更以前）")
+                //夕方のAPIの更新（日付変更以前）
+                startTranslation()
+                
+                eveningUpdate   = "eveningUpdate"
+                afternoonUpdate = nil
+            } else {
+                print("キャッシュの表示")
+            }
+        }
+        
+        //00:00以降07:00以前の場合（日を跨いで初めて起動）
+        else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
+            
+            //lateAtNightTimeUpdateがnilならAPIを更新、nilでなければキャッシュの表示
+            if lateAtNightTimeUpdate == nil {
+                print("夕方のAPIの更新（日付変更以降）")
+                //夕方のAPIの更新（日付変更以降）
+                //startTranslation()
+                
+                lateAtNightTimeUpdate = "lateAtNightTimeUpdate"
+                eveningUpdate         = nil
+            } else {
+                print("キャッシュの表示")
+            }
+        }
+        
+        //どの時間割にも当てはまらない場合
+        else {
+            print("キャッシュを表示しておく")
         }
     }
     
