@@ -54,8 +54,17 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //RSSから取得するURLのパラメータを排除したURLを保存する値
     var imageParameter: String?
     
+    //前回起動時刻の保管場所
+    var lastActivation: String?
+    
+    //UserDefaults.standardのインスタン作成
+    var userDefaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        lastActivation = userDefaults.string(forKey: "lastActivation")
+        print("lastActivation（前回起動時刻）: \(lastActivation)")
         
         //ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
@@ -66,8 +75,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //XMLParseの処理
         //XMLファイルを特定
         let xmlArray = "https://news.yahoo.co.jp/rss/media/tvtnews/all.xml"
-        
-        //for i in 0...1 {
         
         let xmlString = xmlArray
         
@@ -82,10 +89,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //parseの開始
         parser.parse()
-        //}
-        
-        //翻訳機能の呼び出し
-        startTranslation()
+    
+        //時間割の呼び出し
+        timeComparison()
     }
     
     // MARK: - XML Parser
@@ -201,9 +207,22 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //ToneAnalyzerModelから返ってきた値の受け取り
     func catchAnalyzer(arrayAnalyzerData: Array<Int>) {
         
-        joyCountArray = arrayAnalyzerData
-        print("joyCountArray.count: \(joyCountArray.count)")
-        print("joyCountArray: \(joyCountArray.debugDescription)")
+        //感情分析結果の確認
+        print("arrayAnalyzerData.count: \(arrayAnalyzerData.count)")
+        print("arrayAnalyzerData: \(arrayAnalyzerData.debugDescription)")
+        
+        //感情分析結果の保存
+        userDefaults.set(arrayAnalyzerData, forKey: "joyCountArray")
+        
+        //UIの更新を行うメソッドの呼び出し
+        reloadData()
+    }
+
+    //感情分析を終えてUIの更新を行う
+    func reloadData() {
+        
+        //感情分析結果の取り出し
+        joyCountArray = userDefaults.array(forKey: "joyCountArray") as! [Int]
         
         //joyCountArrayの中身を検索し、一致 = 意図するニュースを代入
         for i in 0...joyCountArray.count - 1 {
@@ -334,6 +353,137 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         }
     }
     
+    // MARK: - TimeComparison
+    //時間の比較とそれに合った処理をおこなう
+    func timeComparison() {
+        
+        //現在時刻の取得
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        
+        //日時のフォーマットと地域を指定
+        dateFormatter.dateFormat = "HH:mm:ss"
+        dateFormatter.timeZone   = TimeZone(identifier: "Asia/Tokyo")
+        
+        //アプリ起動時刻を定義
+        let currentTime = dateFormatter.string(from: date)
+        print("現在時刻: \(currentTime)")
+        
+        //アプリ起動時刻の保存
+        userDefaults.set(currentTime, forKey: "lastActivation")
+        
+        //定時時刻の設定
+        let morningPoint     = dateFormatter.date(from: "07:00:00")
+        let afternoonPoint   = dateFormatter.date(from: "11:00:00")
+        let eveningPoint     = dateFormatter.date(from: "17:00:00")
+        let nightPoint       = dateFormatter.date(from: "23:59:59")
+        let lateAtNightPoint = dateFormatter.date(from: "00:00:00")
+        
+        //定時時刻の変換
+        let morningTime     = dateFormatter.string(from: morningPoint!)
+        let afternoonTime   = dateFormatter.string(from: afternoonPoint!)
+        let eveningTime     = dateFormatter.string(from: eveningPoint!)
+        let nightTime       = dateFormatter.string(from: nightPoint!)
+        let lateAtNightTime = dateFormatter.string(from: lateAtNightPoint!)
+        
+        print("morningTime    : \(morningTime)")
+        print("afternoonTime  : \(afternoonTime)")
+        print("eveningTime    : \(eveningTime)")
+        print("nightTime      : \(nightTime)")
+        print("lateAtNightTime: \(lateAtNightTime)")
+        
+        //前回起動時刻の取り出し
+        lastActivation = userDefaults.string(forKey: "lastActivation")
+        print("lastActivation（起動時刻更新）: \(lastActivation)")
+        
+        //前回起動時刻と定時時刻の間隔で時間割（日付を無くして全て時間指定）
+        //07:00以降11:00以前の場合
+        if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
+            
+            //UserDefaultsに'朝の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "morningUpdate") == nil {
+                print("朝のAPI更新")
+                //朝のAPI更新
+                startTranslation()
+                
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("朝のAPI更新完了", forKey: "morningUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した夕方（日付変更以降）の値を削除
+                userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
+            } else {
+                print("キャッシュの表示")
+                reloadData()
+            }
+        }
+        
+        //11:00以降17:00以前の場合
+        else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
+            
+            //UserDefaultsに'昼の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "afternoonUpdate") == nil {
+                print("昼のAPI更新")
+                //昼のAPI更新
+                startTranslation()
+                
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("昼のAPI更新完了", forKey: "afternoonUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した朝の値を削除
+                userDefaults.removeObject(forKey: "morningUpdate")
+            } else {
+                print("キャッシュの表示")
+                reloadData()
+            }
+        }
+        
+        //17:00以降23:59:59以前の場合（1日の最後）
+        else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
+            
+            //UserDefaultsに'夕方のAPI更新完了（日付変更以前）'の値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "eveningUpdate") == nil {
+                print("夕方のAPI更新（日付変更以前）")
+                //夕方のAPI更新（日付変更以前）
+                startTranslation()
+                
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("夕方のAPI更新完了（日付変更以前）", forKey: "eveningUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した昼の値を削除
+                userDefaults.removeObject(forKey: "afternoonUpdate")
+            } else {
+                print("キャッシュの表示")
+                reloadData()
+            }
+        }
+        
+        //00:00以降07:00以前の場合（日を跨いで初めて起動）
+        else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
+            
+            //UserDefaultsに'夕方のAPI更新完了（日付変更以降）'値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "lateAtNightTimeUpdate") == nil {
+                print("夕方のAPI更新（日付変更以降）")
+                //夕方のAPI更新（日付変更以降）
+                startTranslation()
+                
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("夕方のAPI更新完了（日付変更以降）", forKey: "lateAtNightTimeUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した夕方（日付変更以前）の値を削除
+                userDefaults.removeObject(forKey: "eveningUpdate")
+            } else {
+                print("キャッシュの表示")
+                reloadData()
+            }
+        }
+        
+        //どの時間割にも当てはまらない場合
+        else {
+            print("キャッシュの表示")
+            reloadData()
+        }
+    }
+    
     // MARK: - Table view data source
     //tableViewを返すメソッド
     @objc var scrollView: UIScrollView {
@@ -426,7 +576,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         let tapCell = joySelectionArray[indexPath.row]
         
         //検知したセルのurlを取得
-        UserDefaults.standard.set(tapCell.url, forKey: "url")
+        userDefaults.set(tapCell.url, forKey: "url")
         
         //webViewControllerへ遷移
         present(webViewNavigation, animated: true)
