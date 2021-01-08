@@ -12,11 +12,12 @@ import ToneAnalyzer
 import LanguageTranslator
 import SwiftyJSON
 import PKHUD
+import Kingfisher
 
 class TechnologyNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
     //XMLParserのインスタンスを作成
-    var parser    = XMLParser()
+    var parser = XMLParser()
     
     //NewsItemsモデルのインスタンス作成
     var newsItems = [NewsItemsModel]()
@@ -31,7 +32,7 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
     var newsTextArray:[Any] = []
     
     //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey  = "4P6g4OrgJTj9GjpqoAZa0an1l00sA82KvXBC8al71ZS1"
+    var languageTranslatorApiKey  = "J4LQkEl7BWhZL2QaeLzRIRSwlg4sna1J7-09opB-9Gqf"
     var languageTranslatorVersion = "2018-05-01"
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
@@ -50,8 +51,20 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
     //joyの要素と認定されたニュースの配列
     var joySelectionArray = [NewsItemsModel]()
     
+    //RSSから取得するURLのパラメータを排除したURLを保存する値
+    var imageParameter: String?
+    
+    //前回起動時刻の保管場所
+    var lastActivation: String?
+    
+    //UserDefaults.standardのインスタン作成
+    var userDefaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        lastActivation = userDefaults.string(forKey: "lastActivation")
+        print("lastActivation（前回起動時刻）: \(lastActivation)")
         
         //ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
@@ -61,9 +74,7 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
         
         //XMLParseの処理
         //XMLファイルを特定
-        let xmlArray = "https://news.yahoo.co.jp/rss/media/techcrj/all.xml"
-        
-        //for i in 0...1 {
+        let xmlArray = "https://news.yahoo.co.jp/rss/media/tvtnews/all.xml"
         
         let xmlString = xmlArray
         
@@ -78,10 +89,9 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
         
         //parseの開始
         parser.parse()
-        //}
-        
-        //翻訳機能の呼び出し
-        startTranslation()
+    
+        //時間割の呼び出し
+        timeComparison()
     }
     
     // MARK: - XML Parser
@@ -103,18 +113,30 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
         if newsItems.count > 0 {
             
             //配列の番号を合わせる
+            //'link'と'image'はstringに分割で値が入るので初めて代入する値以外は取得しない
             let lastItem = newsItems[newsItems.count - 1]
             switch currentElementName {
             case "title":
                 lastItem.title       = string
             case "link":
-                lastItem.url         = string
+                if lastItem.url == nil {
+                    lastItem.url     = string
+                } else {
+                    break
+                }
             case "pubDate":
                 lastItem.pubDate     = string
             case "description":
                 lastItem.description = string
             case "image":
-                lastItem.image       = string
+                //パラメータを排除して取得する
+                if lastItem.image == nil {
+                    imageParameter = string
+                    let imageURL = imageParameter!.components(separatedBy: "?")
+                    lastItem.image = imageURL[0]
+                } else {
+                    break
+                }
             default:
                 break
             }
@@ -144,7 +166,7 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
             newsTextArray.append(newsItems[newsItems.count - i].title!.description + "$\(i)")
         }
         
-        print(newsTextArray)
+        print("newsTextArray: \(newsTextArray.debugDescription)")
         
         //LanguageTranslatorModelへ通信
         let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
@@ -160,7 +182,7 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
         translationArray      = arrayTranslationData
         translationArrayCount = resultCount
         
-        print(translationArray)
+        print("translationArray: \(translationArray.debugDescription)")
         
         //配列内の要素を確認するとToneAnalyzerを呼び出す
         if translationArray != nil {
@@ -185,117 +207,132 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
     //ToneAnalyzerModelから返ってきた値の受け取り
     func catchAnalyzer(arrayAnalyzerData: Array<Int>) {
         
-        joyCountArray = arrayAnalyzerData
-        print("joyCountArray.count: \(joyCountArray.count)")
-        print("joyCountArray: \(joyCountArray.debugDescription)")
+        //感情分析結果の確認
+        print("arrayAnalyzerData.count: \(arrayAnalyzerData.count)")
+        print("arrayAnalyzerData: \(arrayAnalyzerData.debugDescription)")
         
+        //感情分析結果の保存
+        userDefaults.set(arrayAnalyzerData, forKey: "joyCountArray")
+        
+        //UIの更新を行うメソッドの呼び出し
+        reloadData()
+    }
+
+    //感情分析を終えてUIの更新を行う
+    func reloadData() {
+        
+        //感情分析結果の取り出し
+        joyCountArray = userDefaults.array(forKey: "joyCountArray") as! [Int]
+        
+        //joyCountArrayの中身を検索し、一致 = 意図するニュースを代入
         for i in 0...joyCountArray.count - 1 {
-                
-                switch self.joyCountArray != nil {
-                case self.joyCountArray[i] == 0:
-                    self.joySelectionArray.append(self.newsItems[0])
-                case self.joyCountArray[i] == 1:
-                    self.joySelectionArray.append(self.newsItems[1])
-                case self.joyCountArray[i] == 2:
-                    self.joySelectionArray.append(self.newsItems[2])
-                case self.joyCountArray[i] == 3:
-                    self.joySelectionArray.append(self.newsItems[3])
-                case self.joyCountArray[i] == 4:
-                    self.joySelectionArray.append(self.newsItems[4])
-                case self.joyCountArray[i] == 5:
-                    self.joySelectionArray.append(self.newsItems[5])
-                case self.joyCountArray[i] == 6:
-                    self.joySelectionArray.append(self.newsItems[6])
-                case self.joyCountArray[i] == 7:
-                    self.joySelectionArray.append(self.newsItems[7])
-                case self.joyCountArray[i] == 8:
-                    self.joySelectionArray.append(self.newsItems[8])
-                case self.joyCountArray[i] == 9:
-                    self.joySelectionArray.append(self.newsItems[9])
-                case self.joyCountArray[i] == 10:
-                    self.joySelectionArray.append(self.newsItems[10])
-                case self.joyCountArray[i] == 11:
-                    self.joySelectionArray.append(self.newsItems[11])
-                case self.joyCountArray[i] == 12:
-                    self.joySelectionArray.append(self.newsItems[12])
-                case self.joyCountArray[i] == 13:
-                    self.joySelectionArray.append(self.newsItems[13])
-                case self.joyCountArray[i] == 14:
-                    self.joySelectionArray.append(self.newsItems[14])
-                case self.joyCountArray[i] == 15:
-                    self.joySelectionArray.append(self.newsItems[15])
-                case self.joyCountArray[i] == 16:
-                    self.joySelectionArray.append(self.newsItems[16])
-                case self.joyCountArray[i] == 17:
-                    self.joySelectionArray.append(self.newsItems[17])
-                case self.joyCountArray[i] == 18:
-                    self.joySelectionArray.append(self.newsItems[18])
-                case self.joyCountArray[i] == 19:
-                    self.joySelectionArray.append(self.newsItems[19])
-                case self.joyCountArray[i] == 20:
-                    self.joySelectionArray.append(self.newsItems[20])
-                case self.joyCountArray[i] == 21:
-                    self.joySelectionArray.append(self.newsItems[21])
-                case self.joyCountArray[i] == 22:
-                    self.joySelectionArray.append(self.newsItems[22])
-                case self.joyCountArray[i] == 23:
-                    self.joySelectionArray.append(self.newsItems[23])
-                case self.joyCountArray[i] == 24:
-                    self.joySelectionArray.append(self.newsItems[24])
-                case self.joyCountArray[i] == 25:
-                    self.joySelectionArray.append(self.newsItems[25])
-                case self.joyCountArray[i] == 26:
-                    self.joySelectionArray.append(self.newsItems[26])
-                case self.joyCountArray[i] == 27:
-                    self.joySelectionArray.append(self.newsItems[27])
-                case self.joyCountArray[i] == 28:
-                    self.joySelectionArray.append(self.newsItems[28])
-                case self.joyCountArray[i] == 29:
-                    self.joySelectionArray.append(self.newsItems[29])
-                case self.joyCountArray[i] == 30:
-                    self.joySelectionArray.append(self.newsItems[30])
-                case self.joyCountArray[i] == 31:
-                    self.joySelectionArray.append(self.newsItems[31])
-                case self.joyCountArray[i] == 32:
-                    self.joySelectionArray.append(self.newsItems[32])
-                case self.joyCountArray[i] == 33:
-                    self.joySelectionArray.append(self.newsItems[33])
-                case self.joyCountArray[i] == 34:
-                    self.joySelectionArray.append(self.newsItems[34])
-                case self.joyCountArray[i] == 35:
-                    self.joySelectionArray.append(self.newsItems[35])
-                case self.joyCountArray[i] == 36:
-                    self.joySelectionArray.append(self.newsItems[36])
-                case self.joyCountArray[i] == 37:
-                    self.joySelectionArray.append(self.newsItems[37])
-                case self.joyCountArray[i] == 38:
-                    self.joySelectionArray.append(self.newsItems[38])
-                case self.joyCountArray[i] == 39:
-                    self.joySelectionArray.append(self.newsItems[39])
-                case self.joyCountArray[i] == 40:
-                    self.joySelectionArray.append(self.newsItems[40])
-                case self.joyCountArray[i] == 41:
-                    self.joySelectionArray.append(self.newsItems[41])
-                case self.joyCountArray[i] == 42:
-                    self.joySelectionArray.append(self.newsItems[42])
-                case self.joyCountArray[i] == 43:
-                    self.joySelectionArray.append(self.newsItems[43])
-                case self.joyCountArray[i] == 44:
-                    self.joySelectionArray.append(self.newsItems[44])
-                case self.joyCountArray[i] == 45:
-                    self.joySelectionArray.append(self.newsItems[45])
-                case self.joyCountArray[i] == 46:
-                    self.joySelectionArray.append(self.newsItems[46])
-                case self.joyCountArray[i] == 47:
-                    self.joySelectionArray.append(self.newsItems[47])
-                case self.joyCountArray[i] == 48:
-                    self.joySelectionArray.append(self.newsItems[48])
-                case self.joyCountArray[i] == 49:
-                    self.joySelectionArray.append(self.newsItems[49])
-                default:
-                    print("Unable to detect joy.")
-                }
-                print("joySelectionArray\([i]): \(self.joySelectionArray[i].title.debugDescription)")
+            
+            //'i' を使用したいが使用することで意図するニュースに相違が発生するのであえて冗長に
+            switch self.joyCountArray != nil {
+            case self.joyCountArray[i] == 0:
+                self.joySelectionArray.append(self.newsItems[0])
+            case self.joyCountArray[i] == 1:
+                self.joySelectionArray.append(self.newsItems[1])
+            case self.joyCountArray[i] == 2:
+                self.joySelectionArray.append(self.newsItems[2])
+            case self.joyCountArray[i] == 3:
+                self.joySelectionArray.append(self.newsItems[3])
+            case self.joyCountArray[i] == 4:
+                self.joySelectionArray.append(self.newsItems[4])
+            case self.joyCountArray[i] == 5:
+                self.joySelectionArray.append(self.newsItems[5])
+            case self.joyCountArray[i] == 6:
+                self.joySelectionArray.append(self.newsItems[6])
+            case self.joyCountArray[i] == 7:
+                self.joySelectionArray.append(self.newsItems[7])
+            case self.joyCountArray[i] == 8:
+                self.joySelectionArray.append(self.newsItems[8])
+            case self.joyCountArray[i] == 9:
+                self.joySelectionArray.append(self.newsItems[9])
+            case self.joyCountArray[i] == 10:
+                self.joySelectionArray.append(self.newsItems[10])
+            case self.joyCountArray[i] == 11:
+                self.joySelectionArray.append(self.newsItems[11])
+            case self.joyCountArray[i] == 12:
+                self.joySelectionArray.append(self.newsItems[12])
+            case self.joyCountArray[i] == 13:
+                self.joySelectionArray.append(self.newsItems[13])
+            case self.joyCountArray[i] == 14:
+                self.joySelectionArray.append(self.newsItems[14])
+            case self.joyCountArray[i] == 15:
+                self.joySelectionArray.append(self.newsItems[15])
+            case self.joyCountArray[i] == 16:
+                self.joySelectionArray.append(self.newsItems[16])
+            case self.joyCountArray[i] == 17:
+                self.joySelectionArray.append(self.newsItems[17])
+            case self.joyCountArray[i] == 18:
+                self.joySelectionArray.append(self.newsItems[18])
+            case self.joyCountArray[i] == 19:
+                self.joySelectionArray.append(self.newsItems[19])
+            case self.joyCountArray[i] == 20:
+                self.joySelectionArray.append(self.newsItems[20])
+            case self.joyCountArray[i] == 21:
+                self.joySelectionArray.append(self.newsItems[21])
+            case self.joyCountArray[i] == 22:
+                self.joySelectionArray.append(self.newsItems[22])
+            case self.joyCountArray[i] == 23:
+                self.joySelectionArray.append(self.newsItems[23])
+            case self.joyCountArray[i] == 24:
+                self.joySelectionArray.append(self.newsItems[24])
+            case self.joyCountArray[i] == 25:
+                self.joySelectionArray.append(self.newsItems[25])
+            case self.joyCountArray[i] == 26:
+                self.joySelectionArray.append(self.newsItems[26])
+            case self.joyCountArray[i] == 27:
+                self.joySelectionArray.append(self.newsItems[27])
+            case self.joyCountArray[i] == 28:
+                self.joySelectionArray.append(self.newsItems[28])
+            case self.joyCountArray[i] == 29:
+                self.joySelectionArray.append(self.newsItems[29])
+            case self.joyCountArray[i] == 30:
+                self.joySelectionArray.append(self.newsItems[30])
+            case self.joyCountArray[i] == 31:
+                self.joySelectionArray.append(self.newsItems[31])
+            case self.joyCountArray[i] == 32:
+                self.joySelectionArray.append(self.newsItems[32])
+            case self.joyCountArray[i] == 33:
+                self.joySelectionArray.append(self.newsItems[33])
+            case self.joyCountArray[i] == 34:
+                self.joySelectionArray.append(self.newsItems[34])
+            case self.joyCountArray[i] == 35:
+                self.joySelectionArray.append(self.newsItems[35])
+            case self.joyCountArray[i] == 36:
+                self.joySelectionArray.append(self.newsItems[36])
+            case self.joyCountArray[i] == 37:
+                self.joySelectionArray.append(self.newsItems[37])
+            case self.joyCountArray[i] == 38:
+                self.joySelectionArray.append(self.newsItems[38])
+            case self.joyCountArray[i] == 39:
+                self.joySelectionArray.append(self.newsItems[39])
+            case self.joyCountArray[i] == 40:
+                self.joySelectionArray.append(self.newsItems[40])
+            case self.joyCountArray[i] == 41:
+                self.joySelectionArray.append(self.newsItems[41])
+            case self.joyCountArray[i] == 42:
+                self.joySelectionArray.append(self.newsItems[42])
+            case self.joyCountArray[i] == 43:
+                self.joySelectionArray.append(self.newsItems[43])
+            case self.joyCountArray[i] == 44:
+                self.joySelectionArray.append(self.newsItems[44])
+            case self.joyCountArray[i] == 45:
+                self.joySelectionArray.append(self.newsItems[45])
+            case self.joyCountArray[i] == 46:
+                self.joySelectionArray.append(self.newsItems[46])
+            case self.joyCountArray[i] == 47:
+                self.joySelectionArray.append(self.newsItems[47])
+            case self.joyCountArray[i] == 48:
+                self.joySelectionArray.append(self.newsItems[48])
+            case self.joyCountArray[i] == 49:
+                self.joySelectionArray.append(self.newsItems[49])
+            default:
+                print("Unable to detect joy.")
+            }
+            print("joySelectionArray\([i]): \(self.joySelectionArray[i].title.debugDescription)")
         }
         
         if joySelectionArray.count == joyCountArray.count {
@@ -306,13 +343,144 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
                 self.tableView.reloadData()
                 
                 //感情分析が終了したことをユーザーに伝える
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     HUD.show(.label("分析が終了しました"))
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         HUD.hide(animated: true)
                     }
                 }
             }
+        }
+    }
+    
+    // MARK: - TimeComparison
+    //時間の比較とそれに合った処理をおこなう
+    func timeComparison() {
+        
+        //現在時刻の取得
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        
+        //日時のフォーマットと地域を指定
+        dateFormatter.dateFormat = "HH:mm:ss"
+        dateFormatter.timeZone   = TimeZone(identifier: "Asia/Tokyo")
+        
+        //アプリ起動時刻を定義
+        let currentTime = dateFormatter.string(from: date)
+        print("現在時刻: \(currentTime)")
+        
+        //アプリ起動時刻の保存
+        userDefaults.set(currentTime, forKey: "lastActivation")
+        
+        //定時時刻の設定
+        let morningPoint     = dateFormatter.date(from: "07:00:00")
+        let afternoonPoint   = dateFormatter.date(from: "11:00:00")
+        let eveningPoint     = dateFormatter.date(from: "17:00:00")
+        let nightPoint       = dateFormatter.date(from: "23:59:59")
+        let lateAtNightPoint = dateFormatter.date(from: "00:00:00")
+        
+        //定時時刻の変換
+        let morningTime     = dateFormatter.string(from: morningPoint!)
+        let afternoonTime   = dateFormatter.string(from: afternoonPoint!)
+        let eveningTime     = dateFormatter.string(from: eveningPoint!)
+        let nightTime       = dateFormatter.string(from: nightPoint!)
+        let lateAtNightTime = dateFormatter.string(from: lateAtNightPoint!)
+        
+        print("morningTime    : \(morningTime)")
+        print("afternoonTime  : \(afternoonTime)")
+        print("eveningTime    : \(eveningTime)")
+        print("nightTime      : \(nightTime)")
+        print("lateAtNightTime: \(lateAtNightTime)")
+        
+        //前回起動時刻の取り出し
+        lastActivation = userDefaults.string(forKey: "lastActivation")
+        print("lastActivation（起動時刻更新）: \(lastActivation)")
+        
+        //前回起動時刻と定時時刻の間隔で時間割（日付を無くして全て時間指定）
+        //07:00以降11:00以前の場合
+        if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
+            
+            //UserDefaultsに'朝の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "morningUpdate") == nil {
+                print("朝のAPI更新")
+                //朝のAPI更新
+                startTranslation()
+                
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("朝のAPI更新完了", forKey: "morningUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した夕方（日付変更以降）の値を削除
+                userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
+            } else {
+                print("キャッシュの表示")
+                reloadData()
+            }
+        }
+        
+        //11:00以降17:00以前の場合
+        else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
+            
+            //UserDefaultsに'昼の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "afternoonUpdate") == nil {
+                print("昼のAPI更新")
+                //昼のAPI更新
+                startTranslation()
+                
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("昼のAPI更新完了", forKey: "afternoonUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した朝の値を削除
+                userDefaults.removeObject(forKey: "morningUpdate")
+            } else {
+                print("キャッシュの表示")
+                reloadData()
+            }
+        }
+        
+        //17:00以降23:59:59以前の場合（1日の最後）
+        else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
+            
+            //UserDefaultsに'夕方のAPI更新完了（日付変更以前）'の値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "eveningUpdate") == nil {
+                print("夕方のAPI更新（日付変更以前）")
+                //夕方のAPI更新（日付変更以前）
+                startTranslation()
+                
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("夕方のAPI更新完了（日付変更以前）", forKey: "eveningUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した昼の値を削除
+                userDefaults.removeObject(forKey: "afternoonUpdate")
+            } else {
+                print("キャッシュの表示")
+                reloadData()
+            }
+        }
+        
+        //00:00以降07:00以前の場合（日を跨いで初めて起動）
+        else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
+            
+            //UserDefaultsに'夕方のAPI更新完了（日付変更以降）'値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "lateAtNightTimeUpdate") == nil {
+                print("夕方のAPI更新（日付変更以降）")
+                //夕方のAPI更新（日付変更以降）
+                startTranslation()
+                
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("夕方のAPI更新完了（日付変更以降）", forKey: "lateAtNightTimeUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した夕方（日付変更以前）の値を削除
+                userDefaults.removeObject(forKey: "eveningUpdate")
+            } else {
+                print("キャッシュの表示")
+                reloadData()
+            }
+        }
+        
+        //どの時間割にも当てはまらない場合
+        else {
+            print("キャッシュの表示")
+            reloadData()
         }
     }
     
@@ -346,23 +514,26 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
         //セルのスタイルを設定
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell" )
         
-//        for i in 0...joySelectionArray.count - 1 {
-//            //サムネイルの設定
-//            //cell.imageView?.image = UIImage(url: "https://amd-pctr.c.yimg.jp/r/iwiz-amd/20201213-00008363-entame-000-1-view.jpg?w=450&h=300&q=90&exp=10800&pri=l")
-//        }
+        //サムネイルのインスタンス(画像URL, 待機画像, 角丸）
+        let thumbnailURL = URL(string: joySelectionArray[indexPath.row].image!.description)
+        let placeholder  = UIImage(named: "placeholder")
+        let cornerRadius = RoundCornerImageProcessor(cornerRadius: 20)
         
-        cell.imageView?.image = cell.imageView?.image?.resize(_size: CGSize(width: 120, height: 100))
-    
+        //サムネイルの反映
+        cell.imageView?.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.processor(cornerRadius), .transition(.fade(0.2))])
+        
+        //サムネイルのサイズを統一（黄金比）
+        cell.imageView?.image = cell.imageView?.image?.resize(_size: CGSize(width: 135, height: 85))
+        
         //セルを化粧
         cell.backgroundColor = UIColor.white
         cell.textLabel?.text = newsItem.title
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
         cell.textLabel?.textColor = UIColor(hex: "333")
+        cell.textLabel?.numberOfLines = 2
         
         //空のセルを削除
         tableView.tableFooterView = UIView(frame: .zero)
-        
-        cell.textLabel?.numberOfLines = 2
         
         //インスタンス作成
         let dateFormatter = DateFormatter()
@@ -395,16 +566,19 @@ class TechnologyNewsTableViewController: UITableViewController,SegementSlideCont
         //WebViewControllerのインスタンス作成
         let webViewController = WebViewController()
         
-        //モーダルで画面遷移
-        webViewController.modalTransitionStyle = .coverVertical
+        //WebViewのNavigationControllerを定義
+        let webViewNavigation = UINavigationController(rootViewController: webViewController)
+        
+        //WebViewをフルスクリーンに
+        webViewNavigation.modalPresentationStyle = .fullScreen
         
         //タップしたセルを検知
-        let tapCell = newsItems[indexPath.row]
+        let tapCell = joySelectionArray[indexPath.row]
         
         //検知したセルのurlを取得
-        UserDefaults.standard.set(tapCell.url, forKey: "url")
+        userDefaults.set(tapCell.url, forKey: "url")
         
-        //webViewControllerで取り出す
-        present(webViewController, animated: true, completion: nil)
+        //webViewControllerへ遷移
+        present(webViewNavigation, animated: true)
     }
 }
