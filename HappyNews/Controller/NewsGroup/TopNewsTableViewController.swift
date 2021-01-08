@@ -413,7 +413,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 lateAtNightTimeUpdate = nil
             } else {
                 print("キャッシュの表示")
-                self.tableView.reloadData()
+                reloadData()
             }
         }
         
@@ -430,7 +430,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 morningUpdate   = nil
             } else {
                 print("キャッシュの表示")
-                self.tableView.reloadData()
+                reloadData()
             }
         }
         
@@ -447,7 +447,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 afternoonUpdate = nil
             } else {
                 print("キャッシュの表示")
-                self.tableView.reloadData()
+                reloadData()
             }
         }
         
@@ -464,7 +464,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 eveningUpdate         = nil
             } else {
                 print("キャッシュの表示")
-                self.tableView.reloadData()
+                reloadData()
             }
         }
         
