@@ -54,19 +54,16 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //RSSから取得するURLのパラメータを排除したURLを保存する値
     var imageParameter: String?
     
-    //APIの更新がおこなわれたかを判断する変数
-    var morningUpdate        : String?
-    var afternoonUpdate      : String?
-    var eveningUpdate        : String?
-    var lateAtNightTimeUpdate: String?
-    
     //前回起動時刻の保管場所
     var lastActivation: String?
+    
+    //UserDefaults.standardのインスタン作成
+    var userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        lastActivation = UserDefaults.standard.string(forKey: "lastActivation")
+        lastActivation = userDefaults.string(forKey: "lastActivation")
         print("lastActivation（前回起動時刻）: \(lastActivation)")
         
         //ダークモード適用を回避
@@ -215,7 +212,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         print("arrayAnalyzerData: \(arrayAnalyzerData.debugDescription)")
         
         //感情分析結果の保存
-        UserDefaults.standard.set(arrayAnalyzerData, forKey: "joyCountArray")
+        userDefaults.set(arrayAnalyzerData, forKey: "joyCountArray")
         
         //UIの更新を行うメソッドの呼び出し
         reloadData()
@@ -225,7 +222,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     func reloadData() {
         
         //感情分析結果の取り出し
-        joyCountArray = UserDefaults.standard.array(forKey: "joyCountArray") as! [Int]
+        joyCountArray = userDefaults.array(forKey: "joyCountArray") as! [Int]
         
         //joyCountArrayの中身を検索し、一致 = 意図するニュースを代入
         for i in 0...joyCountArray.count - 1 {
@@ -373,7 +370,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         print("現在時刻: \(currentTime)")
         
         //アプリ起動時刻の保存
-        UserDefaults.standard.set(currentTime, forKey: "lastActivation")
+        userDefaults.set(currentTime, forKey: "lastActivation")
         
         //定時時刻の設定
         let morningPoint     = dateFormatter.date(from: "07:00:00")
@@ -396,21 +393,24 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         print("lateAtNightTime: \(lateAtNightTime)")
         
         //前回起動時刻の取り出し
-        lastActivation = UserDefaults.standard.string(forKey: "lastActivation")
+        lastActivation = userDefaults.string(forKey: "lastActivation")
         print("lastActivation（起動時刻更新）: \(lastActivation)")
         
         //前回起動時刻と定時時刻の間隔で時間割（日付を無くして全て時間指定）
         //07:00以降11:00以前の場合
         if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
             
-            //morningUpdateがnilならAPIを更新、nilでなければキャッシュの表示
-            if morningUpdate == nil {
+            //UserDefaultsに'朝の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "morningUpdate") == nil {
                 print("朝のAPI更新")
                 //朝のAPI更新
                 startTranslation()
                 
-                morningUpdate         = "morningUpdate"
-                lateAtNightTimeUpdate = nil
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("朝のAPI更新完了", forKey: "morningUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した夕方（日付変更以降）の値を削除
+                userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
             } else {
                 print("キャッシュの表示")
                 reloadData()
@@ -420,14 +420,17 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //11:00以降17:00以前の場合
         else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
             
-            //afternoonUpdateがnilならAPIを更新、nilでなければキャッシュの表示
-            if afternoonUpdate == nil {
+            //UserDefaultsに'昼の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "afternoonUpdate") == nil {
                 print("昼のAPI更新")
                 //昼のAPI更新
                 startTranslation()
                 
-                afternoonUpdate = "afternoonUpdate"
-                morningUpdate   = nil
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("昼のAPI更新完了", forKey: "afternoonUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した朝の値を削除
+                userDefaults.removeObject(forKey: "morningUpdate")
             } else {
                 print("キャッシュの表示")
                 reloadData()
@@ -437,14 +440,17 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //17:00以降23:59:59以前の場合（1日の最後）
         else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
             
-            //eveningUpdateがnilならAPIを更新、nilでなければキャッシュの表示
-            if eveningUpdate == nil {
-                print("夕方のAPIの更新（日付変更以前）")
-                //夕方のAPIの更新（日付変更以前）
+            //UserDefaultsに'夕方のAPI更新完了（日付変更以前）'の値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "eveningUpdate") == nil {
+                print("夕方のAPI更新（日付変更以前）")
+                //夕方のAPI更新（日付変更以前）
                 startTranslation()
                 
-                eveningUpdate   = "eveningUpdate"
-                afternoonUpdate = nil
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("夕方のAPI更新完了（日付変更以前）", forKey: "eveningUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した昼の値を削除
+                userDefaults.removeObject(forKey: "afternoonUpdate")
             } else {
                 print("キャッシュの表示")
                 reloadData()
@@ -454,14 +460,17 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //00:00以降07:00以前の場合（日を跨いで初めて起動）
         else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
             
-            //lateAtNightTimeUpdateがnilならAPIを更新、nilでなければキャッシュの表示
-            if lateAtNightTimeUpdate == nil {
-                print("夕方のAPIの更新（日付変更以降）")
-                //夕方のAPIの更新（日付変更以降）
+            //UserDefaultsに'夕方のAPI更新完了（日付変更以降）'値が無ければAPIと通信、あればキャッシュでUI更新
+            if userDefaults.string(forKey: "lateAtNightTimeUpdate") == nil {
+                print("夕方のAPI更新（日付変更以降）")
+                //夕方のAPI更新（日付変更以降）
                 startTranslation()
                 
-                lateAtNightTimeUpdate = "lateAtNightTimeUpdate"
-                eveningUpdate         = nil
+                //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
+                userDefaults.set("夕方のAPI更新完了（日付変更以降）", forKey: "lateAtNightTimeUpdate")
+                
+                //次回時間割に備えてUserDefaultsに保存した夕方（日付変更以前）の値を削除
+                userDefaults.removeObject(forKey: "eveningUpdate")
             } else {
                 print("キャッシュの表示")
                 reloadData()
@@ -470,7 +479,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //どの時間割にも当てはまらない場合
         else {
-            print("キャッシュを表示しておく")
+            print("キャッシュの表示")
             reloadData()
         }
     }
@@ -567,7 +576,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         let tapCell = joySelectionArray[indexPath.row]
         
         //検知したセルのurlを取得
-        UserDefaults.standard.set(tapCell.url, forKey: "url")
+        userDefaults.set(tapCell.url, forKey: "url")
         
         //webViewControllerへ遷移
         present(webViewNavigation, animated: true)
