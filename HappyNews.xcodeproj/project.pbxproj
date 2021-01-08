@@ -83,6 +83,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		453B79D625A5ABD600ED1F25 /* NewsGroup */ = {
+			isa = PBXGroup;
+			children = (
+				45BCEE7524E4F1970023D738 /* NewsItemsModel.swift */,
+			);
+			path = NewsGroup;
+			sourceTree = "<group>";
+		};
+		453B79D725A5ABEB00ED1F25 /* MachineLearningGroup */ = {
+			isa = PBXGroup;
+			children = (
+				457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */,
+				457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */,
+				4576898325453E5900D7E630 /* Translation.swift */,
+			);
+			path = MachineLearningGroup;
+			sourceTree = "<group>";
+		};
 		454A30F0259C8B2F008B1067 /* NotificationGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,10 +223,8 @@
 		45D8866D24E4C11900B32D02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				45BCEE7524E4F1970023D738 /* NewsItemsModel.swift */,
-				457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */,
-				457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */,
-				4576898325453E5900D7E630 /* Translation.swift */,
+				453B79D725A5ABEB00ED1F25 /* MachineLearningGroup */,
+				453B79D625A5ABD600ED1F25 /* NewsGroup */,
 			);
 			path = Model;
 			sourceTree = "<group>";
