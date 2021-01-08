@@ -62,11 +62,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //前回起動時刻の保管場所
     var lastActivation: String?
-        
-    //感情分析結果をローカル(Library/Caches)に保存＆取得で使用する値
-    var fileManager = FileManager.default
-    var cachesFile: URL?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -215,9 +210,22 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //ToneAnalyzerModelから返ってきた値の受け取り
     func catchAnalyzer(arrayAnalyzerData: Array<Int>) {
         
-        joyCountArray = arrayAnalyzerData
-        print("joyCountArray.count: \(joyCountArray.count)")
-        print("joyCountArray: \(joyCountArray.debugDescription)")
+        //感情分析結果の確認
+        print("arrayAnalyzerData.count: \(arrayAnalyzerData.count)")
+        print("arrayAnalyzerData: \(arrayAnalyzerData.debugDescription)")
+        
+        //感情分析結果の保存
+        UserDefaults.standard.set(arrayAnalyzerData, forKey: "joyCountArray")
+        
+        //UIの更新を行うメソッドの呼び出し
+        reloadData()
+    }
+
+    //感情分析を終えてUIの更新を行う
+    func reloadData() {
+        
+        //感情分析結果の取り出し
+        joyCountArray = UserDefaults.standard.array(forKey: "joyCountArray") as! [Int]
         
         //joyCountArrayの中身を検索し、一致 = 意図するニュースを代入
         for i in 0...joyCountArray.count - 1 {
@@ -332,35 +340,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         if joySelectionArray.count == joyCountArray.count {
             
-            do {
-                //保存先URLの作成
-                //SearchPathDirectory = ディレクトリの種類。検索する一番下位
-                //.cachesDirectory    = （Library/Caches）
-                //.userDomainMask     =  現在の使用ユーザーのホームディレクトリ
-                //appropriateFor      = 一時ディレクトリの場所を特定するために与えるファイルURL
-                //create              = 宛先URLが存在しない場合、新たに作るか
-                let cachesURL = try? fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("joySelectionArray.title")
-                
-                print("cachesURL（保存場所）: \(cachesURL)")
-                
-                //キャッシュに保存する変数
-                let cachesData = joySelectionArray[0].title!.data(using: .utf8)
-                
-                //保存先への書き込み
-                fileManager.createFile(atPath: cachesURL!.path, contents: cachesData, attributes: nil)
-                
-                //保存先のパスを指定して取得
-                cachesFile = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("joySelectionArray.title")
-                
-                let readData = try Data(contentsOf: cachesFile!)
-                let readTitle = String(data: readData, encoding: .utf8)
-                
-                print("readData: \(readTitle)")
-                
-            } catch {
-                print("Error occurred when saving cache: \(error)")
-            }
-            
             //メインスレッドでUIの更新
             DispatchQueue.main.async {
                 //tableViewの更新
@@ -428,12 +407,13 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             if morningUpdate == nil {
                 print("朝のAPI更新")
                 //朝のAPI更新
-                //startTranslation()
+                startTranslation()
                 
                 morningUpdate         = "morningUpdate"
                 lateAtNightTimeUpdate = nil
             } else {
                 print("キャッシュの表示")
+                self.tableView.reloadData()
             }
         }
         
@@ -444,12 +424,13 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             if afternoonUpdate == nil {
                 print("昼のAPI更新")
                 //昼のAPI更新
-                //startTranslation()
+                startTranslation()
                 
                 afternoonUpdate = "afternoonUpdate"
                 morningUpdate   = nil
             } else {
                 print("キャッシュの表示")
+                self.tableView.reloadData()
             }
         }
         
@@ -466,6 +447,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 afternoonUpdate = nil
             } else {
                 print("キャッシュの表示")
+                self.tableView.reloadData()
             }
         }
         
@@ -476,18 +458,20 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             if lateAtNightTimeUpdate == nil {
                 print("夕方のAPIの更新（日付変更以降）")
                 //夕方のAPIの更新（日付変更以降）
-                //startTranslation()
+                startTranslation()
                 
                 lateAtNightTimeUpdate = "lateAtNightTimeUpdate"
                 eveningUpdate         = nil
             } else {
                 print("キャッシュの表示")
+                self.tableView.reloadData()
             }
         }
         
         //どの時間割にも当てはまらない場合
         else {
             print("キャッシュを表示しておく")
+            reloadData()
         }
     }
     
