@@ -60,6 +60,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //UserDefaults.standardのインスタン作成
     var userDefaults = UserDefaults.standard
     
+    var newsCount = 50
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -223,118 +225,24 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //感情分析結果の取り出し
         joyCountArray = userDefaults.array(forKey: "joyCountArray") as! [Int]
+        print("joyCountArray: \(joyCountArray)")
         
         //joyCountArrayの中身を検索し、一致 = 意図するニュースを代入
         for i in 0...joyCountArray.count - 1 {
             
-            //'i' を使用したいが使用することで意図するニュースに相違が発生するのであえて冗長に
-            switch self.joyCountArray != nil {
-            case self.joyCountArray[i] == 0:
-                self.joySelectionArray.append(self.newsItems[0])
-            case self.joyCountArray[i] == 1:
-                self.joySelectionArray.append(self.newsItems[1])
-            case self.joyCountArray[i] == 2:
-                self.joySelectionArray.append(self.newsItems[2])
-            case self.joyCountArray[i] == 3:
-                self.joySelectionArray.append(self.newsItems[3])
-            case self.joyCountArray[i] == 4:
-                self.joySelectionArray.append(self.newsItems[4])
-            case self.joyCountArray[i] == 5:
-                self.joySelectionArray.append(self.newsItems[5])
-            case self.joyCountArray[i] == 6:
-                self.joySelectionArray.append(self.newsItems[6])
-            case self.joyCountArray[i] == 7:
-                self.joySelectionArray.append(self.newsItems[7])
-            case self.joyCountArray[i] == 8:
-                self.joySelectionArray.append(self.newsItems[8])
-            case self.joyCountArray[i] == 9:
-                self.joySelectionArray.append(self.newsItems[9])
-            case self.joyCountArray[i] == 10:
-                self.joySelectionArray.append(self.newsItems[10])
-            case self.joyCountArray[i] == 11:
-                self.joySelectionArray.append(self.newsItems[11])
-            case self.joyCountArray[i] == 12:
-                self.joySelectionArray.append(self.newsItems[12])
-            case self.joyCountArray[i] == 13:
-                self.joySelectionArray.append(self.newsItems[13])
-            case self.joyCountArray[i] == 14:
-                self.joySelectionArray.append(self.newsItems[14])
-            case self.joyCountArray[i] == 15:
-                self.joySelectionArray.append(self.newsItems[15])
-            case self.joyCountArray[i] == 16:
-                self.joySelectionArray.append(self.newsItems[16])
-            case self.joyCountArray[i] == 17:
-                self.joySelectionArray.append(self.newsItems[17])
-            case self.joyCountArray[i] == 18:
-                self.joySelectionArray.append(self.newsItems[18])
-            case self.joyCountArray[i] == 19:
-                self.joySelectionArray.append(self.newsItems[19])
-            case self.joyCountArray[i] == 20:
-                self.joySelectionArray.append(self.newsItems[20])
-            case self.joyCountArray[i] == 21:
-                self.joySelectionArray.append(self.newsItems[21])
-            case self.joyCountArray[i] == 22:
-                self.joySelectionArray.append(self.newsItems[22])
-            case self.joyCountArray[i] == 23:
-                self.joySelectionArray.append(self.newsItems[23])
-            case self.joyCountArray[i] == 24:
-                self.joySelectionArray.append(self.newsItems[24])
-            case self.joyCountArray[i] == 25:
-                self.joySelectionArray.append(self.newsItems[25])
-            case self.joyCountArray[i] == 26:
-                self.joySelectionArray.append(self.newsItems[26])
-            case self.joyCountArray[i] == 27:
-                self.joySelectionArray.append(self.newsItems[27])
-            case self.joyCountArray[i] == 28:
-                self.joySelectionArray.append(self.newsItems[28])
-            case self.joyCountArray[i] == 29:
-                self.joySelectionArray.append(self.newsItems[29])
-            case self.joyCountArray[i] == 30:
-                self.joySelectionArray.append(self.newsItems[30])
-            case self.joyCountArray[i] == 31:
-                self.joySelectionArray.append(self.newsItems[31])
-            case self.joyCountArray[i] == 32:
-                self.joySelectionArray.append(self.newsItems[32])
-            case self.joyCountArray[i] == 33:
-                self.joySelectionArray.append(self.newsItems[33])
-            case self.joyCountArray[i] == 34:
-                self.joySelectionArray.append(self.newsItems[34])
-            case self.joyCountArray[i] == 35:
-                self.joySelectionArray.append(self.newsItems[35])
-            case self.joyCountArray[i] == 36:
-                self.joySelectionArray.append(self.newsItems[36])
-            case self.joyCountArray[i] == 37:
-                self.joySelectionArray.append(self.newsItems[37])
-            case self.joyCountArray[i] == 38:
-                self.joySelectionArray.append(self.newsItems[38])
-            case self.joyCountArray[i] == 39:
-                self.joySelectionArray.append(self.newsItems[39])
-            case self.joyCountArray[i] == 40:
-                self.joySelectionArray.append(self.newsItems[40])
-            case self.joyCountArray[i] == 41:
-                self.joySelectionArray.append(self.newsItems[41])
-            case self.joyCountArray[i] == 42:
-                self.joySelectionArray.append(self.newsItems[42])
-            case self.joyCountArray[i] == 43:
-                self.joySelectionArray.append(self.newsItems[43])
-            case self.joyCountArray[i] == 44:
-                self.joySelectionArray.append(self.newsItems[44])
-            case self.joyCountArray[i] == 45:
-                self.joySelectionArray.append(self.newsItems[45])
-            case self.joyCountArray[i] == 46:
-                self.joySelectionArray.append(self.newsItems[46])
-            case self.joyCountArray[i] == 47:
-                self.joySelectionArray.append(self.newsItems[47])
-            case self.joyCountArray[i] == 48:
-                self.joySelectionArray.append(self.newsItems[48])
-            case self.joyCountArray[i] == 49:
-                self.joySelectionArray.append(self.newsItems[49])
-            default:
-                print("Unable to detect joy.")
+            //'i'固定、その間に'y'を加算
+            for y in 0...newsCount - 1 {
+                
+                switch self.joyCountArray != nil {
+                case self.joyCountArray[i] == y:
+                    self.joySelectionArray.append(self.newsItems[y])
+                default:
+                    break
+                }
             }
             print("joySelectionArray\([i]): \(self.joySelectionArray[i].title.debugDescription)")
         }
-        
+   
         if joySelectionArray.count == joyCountArray.count {
             
             //メインスレッドでUIの更新
@@ -421,20 +329,20 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
             
             //UserDefaultsに'昼の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
-            if userDefaults.string(forKey: "afternoonUpdate") == nil {
+//            if userDefaults.string(forKey: "afternoonUpdate") == nil {
                 print("昼のAPI更新")
                 //昼のAPI更新
                 startTranslation()
                 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("昼のAPI更新完了", forKey: "afternoonUpdate")
-                
-                //次回時間割に備えてUserDefaultsに保存した朝の値を削除
-                userDefaults.removeObject(forKey: "morningUpdate")
-            } else {
-                print("キャッシュの表示")
-                reloadData()
-            }
+//                userDefaults.set("昼のAPI更新完了", forKey: "afternoonUpdate")
+//
+//                //次回時間割に備えてUserDefaultsに保存した朝の値を削除
+//                userDefaults.removeObject(forKey: "morningUpdate")
+//            } else {
+//                print("キャッシュの表示")
+//                reloadData()
+//            }
         }
         
         //17:00以降23:59:59以前の場合（1日の最後）
