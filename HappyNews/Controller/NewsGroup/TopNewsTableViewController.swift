@@ -318,8 +318,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
                 userDefaults.set("朝のAPI更新完了", forKey: "morningUpdate")
                 
-                //次回時間割に備えてUserDefaultsに保存した夕方（日付変更以降）の値を削除
+                //次回時間割に備えてUserDefaultsに保存した値を削除
                 userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
+                userDefaults.removeObject(forKey: "afternoonUpdate")
+                userDefaults.removeObject(forKey: "eveningUpdate")
             } else {
                 print("キャッシュの表示")
                 reloadNewsData()
@@ -338,8 +340,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
                 userDefaults.set("昼のAPI更新完了", forKey: "afternoonUpdate")
 
-                //次回時間割に備えてUserDefaultsに保存した朝の値を削除
+                //次回時間割に備えてUserDefaultsに保存した値を削除
                 userDefaults.removeObject(forKey: "morningUpdate")
+                userDefaults.removeObject(forKey: "eveningUpdate")
+                userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
             } else {
                 print("キャッシュの表示")
                 reloadNewsData()
@@ -360,6 +364,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 
                 //次回時間割に備えてUserDefaultsに保存した昼の値を削除
                 userDefaults.removeObject(forKey: "afternoonUpdate")
+                userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
+                userDefaults.removeObject(forKey: "morningUpdate")
             } else {
                 print("キャッシュの表示")
                 reloadNewsData()
@@ -378,8 +384,10 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
                 userDefaults.set("夕方のAPI更新完了（日付変更以降）", forKey: "lateAtNightTimeUpdate")
                 
-                //次回時間割に備えてUserDefaultsに保存した夕方（日付変更以前）の値を削除
+                //次回時間割に備えてUserDefaultsに保存した値を削除
                 userDefaults.removeObject(forKey: "eveningUpdate")
+                userDefaults.removeObject(forKey: "morningUpdate")
+                userDefaults.removeObject(forKey: "afternoonUpdate")
             } else {
                 print("キャッシュの表示")
                 reloadNewsData()
