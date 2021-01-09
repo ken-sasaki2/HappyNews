@@ -64,20 +64,25 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        lastActivation = userDefaults.string(forKey: "lastActivation")
-        print("lastActivation（前回起動時刻）: \(lastActivation)")
+        //前回起動時刻の確認
+        print("前回起動時刻: \(userDefaults.string(forKey: "lastActivation"))")
         
         //ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
+      
+        //XMLパースの呼び出し
+        settingXML()
+    
+        //時間割の呼び出し
+        timeComparison()
+    }
+    
+    // MARK: - XML Parser
+    //XMLファイルを特定してパースを開始する
+    func settingXML(){
         
-        //tableaviewの背景
-        tableView.backgroundColor = UIColor.white
-        
-        //XMLParseの処理
-        //XMLファイルを特定
-        let xmlArray = "https://news.yahoo.co.jp/rss/media/tvtnews/all.xml"
-        
-        let xmlString = xmlArray
+        //扱うNewsを決める
+        let xmlString = "https://news.yahoo.co.jp/rss/media/tvtnews/all.xml"
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString)!
@@ -90,12 +95,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //parseの開始
         parser.parse()
-    
-        //時間割の呼び出し
-        timeComparison()
     }
     
-    // MARK: - XML Parser
     //XML解析を開始する場合(parser.parse())に呼ばれるメソッド
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         
@@ -302,7 +303,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //前回起動時刻の取り出し
         lastActivation = userDefaults.string(forKey: "lastActivation")
-        print("lastActivation（起動時刻更新）: \(lastActivation)")
+        print("起動時刻更新: \(lastActivation)")
         
         //前回起動時刻と定時時刻の間隔で時間割（日付を無くして全て時間指定）
         //07:00以降11:00以前の場合
@@ -442,6 +443,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         
         //空のセルを削除
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        //tableaviewの背景
+        tableView.backgroundColor = UIColor.white
         
         //インスタンス作成
         let dateFormatter = DateFormatter()
