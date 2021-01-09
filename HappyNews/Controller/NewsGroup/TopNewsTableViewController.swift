@@ -447,23 +447,8 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         //tableaviewの背景
         tableView.backgroundColor = UIColor.white
         
-        //インスタンス作成
-        let dateFormatter = DateFormatter()
-        
-        //フォーマット設定
-        dateFormatter.dateFormat = "yyyy'年'M'月'd'日('EEEEE') 'H'時'm'分's'秒'"
-
-        //ロケール設定（日本語・日本国固定）
-        dateFormatter.locale = Locale(identifier: "ja_JP")
-
-        //タイムゾーン設定（日本標準時固定）
-        dateFormatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
-        
-        //Date型 → string型
-        let pubDateString = dateFormatter.string(from: Date())
-        
         //セルのサブタイトル
-        cell.detailTextLabel?.text = pubDateString
+        cell.detailTextLabel?.text = joySelectionArray[indexPath.row].pubDate
         cell.detailTextLabel?.textColor = UIColor.gray
         
         return cell
