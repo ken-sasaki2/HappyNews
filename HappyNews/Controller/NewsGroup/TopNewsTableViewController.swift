@@ -295,12 +295,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         let nightTime       = dateFormatter.string(from: nightPoint!)
         let lateAtNightTime = dateFormatter.string(from: lateAtNightPoint!)
         
-        print("morningTime    : \(morningTime)")
-        print("afternoonTime  : \(afternoonTime)")
-        print("eveningTime    : \(eveningTime)")
-        print("nightTime      : \(nightTime)")
-        print("lateAtNightTime: \(lateAtNightTime)")
-        
         //前回起動時刻の取り出し
         lastActivation = userDefaults.string(forKey: "lastActivation")
         print("起動時刻更新: \(lastActivation)")
@@ -311,12 +305,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             
             //UserDefaultsに'朝の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
             if userDefaults.string(forKey: "morningUpdate") == nil {
-                print("朝のAPI更新")
+                print("朝のAPI通信")
                 //朝のAPI更新
                 startTranslation()
                 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("朝のAPI更新完了", forKey: "morningUpdate")
+                userDefaults.set("朝のAPI通信完了", forKey: "morningUpdate")
                 
                 //次回時間割に備えてUserDefaultsに保存した値を削除
                 userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
@@ -333,12 +327,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             
             //UserDefaultsに'昼の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
             if userDefaults.string(forKey: "afternoonUpdate") == nil {
-                print("昼のAPI更新")
+                print("昼のAPI通信")
                 //昼のAPI更新
                 startTranslation()
                 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("昼のAPI更新完了", forKey: "afternoonUpdate")
+                userDefaults.set("昼のAPI通信完了", forKey: "afternoonUpdate")
 
                 //次回時間割に備えてUserDefaultsに保存した値を削除
                 userDefaults.removeObject(forKey: "morningUpdate")
@@ -355,12 +349,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             
             //UserDefaultsに'夕方のAPI更新完了（日付変更以前）'の値が無ければAPIと通信、あればキャッシュでUI更新
             if userDefaults.string(forKey: "eveningUpdate") == nil {
-                print("夕方のAPI更新（日付変更以前）")
+                print("夕方のAPI通信（日付変更以前）")
                 //夕方のAPI更新（日付変更以前）
                 startTranslation()
                 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("夕方のAPI更新完了（日付変更以前）", forKey: "eveningUpdate")
+                userDefaults.set("夕方のAPI通信完了（日付変更以前）", forKey: "eveningUpdate")
                 
                 //次回時間割に備えてUserDefaultsに保存した昼の値を削除
                 userDefaults.removeObject(forKey: "afternoonUpdate")
@@ -377,12 +371,12 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             
             //UserDefaultsに'夕方のAPI更新完了（日付変更以降）'値が無ければAPIと通信、あればキャッシュでUI更新
             if userDefaults.string(forKey: "lateAtNightTimeUpdate") == nil {
-                print("夕方のAPI更新（日付変更以降）")
+                print("夕方のAPI通信（日付変更以降）")
                 //夕方のAPI更新（日付変更以降）
                 startTranslation()
                 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("夕方のAPI更新完了（日付変更以降）", forKey: "lateAtNightTimeUpdate")
+                userDefaults.set("夕方のAPI通信完了（日付変更以降）", forKey: "lateAtNightTimeUpdate")
                 
                 //次回時間割に備えてUserDefaultsに保存した値を削除
                 userDefaults.removeObject(forKey: "eveningUpdate")
