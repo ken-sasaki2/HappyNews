@@ -26,9 +26,9 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     let accountSectionIconArray: [String] = ["logout"]
     
     //セクション毎のセルのラベル
-    let settingCellLabelArray : [String] = ["通知の設定"]
-    let appCellLabelArray     : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者（Twitter）", "HappyNews ver. 1.0"]
-    let accountCellLabelArray : [String] = ["ログアウト"]
+    let settingCellLabelArray: [String] = ["通知の設定"]
+    let appCellLabelArray    : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者（Twitter）", "HappyNews ver. 1.0"]
+    let accountCellLabelArray: [String] = ["ログアウト"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

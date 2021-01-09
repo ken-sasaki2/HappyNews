@@ -19,11 +19,11 @@ protocol DoneCatchTranslationProtocol {
 class LanguageTranslatorModel {
     
     //Controllerから渡ってくる値
-    var languageTranslatorAccessKey     : String?
-    var languageTranslatorAccessversion : String?
-    var languageTranslatorAccessURL     : String?
-    var translationTextArray            : [Any] = []
-    var translationText                 : String?
+    var languageTranslatorAccessKey    : String?
+    var languageTranslatorAccessversion: String?
+    var languageTranslatorAccessURL    : String?
+    var translationTextArray           : [Any] = []
+    var translationText                : String?
     
     //Controllerに値を返すときに使用
     var doneCatchTranslationProtocol: DoneCatchTranslationProtocol?
@@ -33,7 +33,7 @@ class LanguageTranslatorModel {
     var textCount = 50
     
     //感情分析結果の中継保管場所
-    var containsArray : [String] = []
+    var containsArray: [String] = []
     
     //配列の生合成を合わせる変数(初期値は翻訳失敗を回避するため)
     var sortNum50 = "Avoiding Nil $50"

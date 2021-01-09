@@ -29,7 +29,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var xmlString: String?
     
     //RSSのnewsを補完する配列
-    var newsTextArray:[Any] = []
+    var newsTextArray: [Any] = []
     
     //LanguageTranslatorの認証キー
     var languageTranslatorApiKey  = "J4LQkEl7BWhZL2QaeLzRIRSwlg4sna1J7-09opB-9Gqf"
@@ -48,8 +48,9 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //ToneAnalyzerModelから渡ってくる値
     var joyCountArray = [Int]()
     
-    //joyの要素と認定されたニュースの配列
+    //joyの要素と認定されたニュースの配列と検索する際のカウント
     var joySelectionArray = [NewsItemsModel]()
+    var newsCount         = 50
     
     //RSSから取得するURLのパラメータを排除したURLを保存する値
     var imageParameter: String?
@@ -59,8 +60,6 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     
     //UserDefaults.standardのインスタン作成
     var userDefaults = UserDefaults.standard
-    
-    var newsCount = 50
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -217,11 +216,11 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         userDefaults.set(arrayAnalyzerData, forKey: "joyCountArray")
         
         //UIの更新を行うメソッドの呼び出し
-        reloadData()
+        reloadNewsData()
     }
 
     //感情分析結果を用いて新たにNewsの配列を作成し、UIの更新を行う
-    func reloadData() {
+    func reloadNewsData() {
         
         //感情分析結果の取り出し
         joyCountArray = userDefaults.array(forKey: "joyCountArray") as! [Int]
@@ -322,7 +321,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
             } else {
                 print("キャッシュの表示")
-                reloadData()
+                reloadNewsData()
             }
         }
         
@@ -342,7 +341,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 userDefaults.removeObject(forKey: "morningUpdate")
             } else {
                 print("キャッシュの表示")
-                reloadData()
+                reloadNewsData()
             }
         }
         
@@ -362,7 +361,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 userDefaults.removeObject(forKey: "afternoonUpdate")
             } else {
                 print("キャッシュの表示")
-                reloadData()
+                reloadNewsData()
             }
         }
         
@@ -382,14 +381,14 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
                 userDefaults.removeObject(forKey: "eveningUpdate")
             } else {
                 print("キャッシュの表示")
-                reloadData()
+                reloadNewsData()
             }
         }
         
         //どの時間割にも当てはまらない場合
         else {
             print("キャッシュの表示")
-            reloadData()
+            reloadNewsData()
         }
     }
     

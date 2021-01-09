@@ -15,10 +15,6 @@ class LocalNotificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //ユーザー情報の確認
-        print(Auth.auth().currentUser?.uid)
-        print(Auth.auth().currentUser?.displayName)
-        
         //ローカルPush通知の呼び出し
         morningLocalNotification()
         afternoonLocalNotification()
