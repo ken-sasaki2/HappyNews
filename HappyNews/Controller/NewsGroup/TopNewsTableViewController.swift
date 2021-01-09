@@ -220,7 +220,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         reloadData()
     }
 
-    //感情分析を終えてUIの更新を行う
+    //感情分析結果を用いて新たにNewsの配列を作成し、UIの更新を行う
     func reloadData() {
         
         //感情分析結果の取り出し
@@ -243,6 +243,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
             print("joySelectionArray\([i]): \(self.joySelectionArray[i].title.debugDescription)")
         }
    
+        //感情分析結果と新たに作成した配列の比較
         if joySelectionArray.count == joyCountArray.count {
             
             //メインスレッドでUIの更新
@@ -329,20 +330,20 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
         else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
             
             //UserDefaultsに'昼の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
-//            if userDefaults.string(forKey: "afternoonUpdate") == nil {
+            if userDefaults.string(forKey: "afternoonUpdate") == nil {
                 print("昼のAPI更新")
                 //昼のAPI更新
                 startTranslation()
                 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-//                userDefaults.set("昼のAPI更新完了", forKey: "afternoonUpdate")
-//
-//                //次回時間割に備えてUserDefaultsに保存した朝の値を削除
-//                userDefaults.removeObject(forKey: "morningUpdate")
-//            } else {
-//                print("キャッシュの表示")
-//                reloadData()
-//            }
+                userDefaults.set("昼のAPI更新完了", forKey: "afternoonUpdate")
+
+                //次回時間割に備えてUserDefaultsに保存した朝の値を削除
+                userDefaults.removeObject(forKey: "morningUpdate")
+            } else {
+                print("キャッシュの表示")
+                reloadData()
+            }
         }
         
         //17:00以降23:59:59以前の場合（1日の最後）
