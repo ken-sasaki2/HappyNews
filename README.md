@@ -57,7 +57,8 @@ pod 'Kingfisher'
 ＃随時更新
 
 ## 開発者の連絡先
-HappyNewsに関するご連絡は[Twitter](https://twitter.com/ken_sasaki2)もしくは、アプリ内の**ご意見・ご要望**からご連絡下さい。  
+HappyNewsに関するご連絡はアカウントをフォローしていただき[Twitter](https://twitter.com/ken_sasaki2)のダイレクトメッセージにて連絡。  
+もしくは、アプリ内の**ご意見・ご要望**からご連絡下さい。  
 プルリクエストも大歓迎です。
 
 ▼その他連絡先  
