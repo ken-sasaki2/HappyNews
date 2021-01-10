@@ -14,7 +14,7 @@ import SwiftyJSON
 import PKHUD
 import Kingfisher
 
-class TopNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
+class BaseNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
     //XMLParserのインスタンスを作成
     var parser = XMLParser()
@@ -37,7 +37,7 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "nKytQRfDwDRxdfoDeWT8J5b6WSVHc-mBENfjuITXnYji"
+    var toneAnalyzerApiKey  = "-dDJbUnTpXCNO9WRybJBMf12jyhCCf47D3s5hoTIWRw0"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -61,6 +61,21 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //UserDefaults.standardのインスタン作成
     var userDefaults = UserDefaults.standard
     
+    //
+    var indexNum: Int?
+    
+    //NewsViewControllerと通信をおこなう初期値
+    init(indexNumber: Int) {
+        
+        super.init(nibName: nil, bundle: nil)
+        indexNum = indexNumber
+    }
+    
+    //イニシャライザエラー処理
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,11 +96,28 @@ class TopNewsTableViewController: UITableViewController,SegementSlideContentScro
     //XMLファイルを特定してパースを開始する
     func settingXML(){
         
-        //扱うNewsを決める
-        let xmlString = "https://news.yahoo.co.jp/rss/media/tvtnews/all.xml"
+        switch indexNum {
+        case 0:
+            //'社会'カテゴリのニュース（ニッポン放送）
+            xmlString = "https://news.yahoo.co.jp/rss/media/nshaberu/all.xml"
+        case 1:
+            //'スポーツ'カテゴリーのニュース（日刊スポーツ）
+            xmlString = "https://news.yahoo.co.jp/rss/media/nksports/all.xml"
+        case 2:
+            //'エンタメ'カテゴリのニュース（ザ・テレビジョン）
+            xmlString = "https://news.yahoo.co.jp/rss/media/the_tv/all.xml"
+        case 3:
+            //'ビジネス'カテゴリのニュース（東洋経済オンライン）
+            xmlString = "https://news.yahoo.co.jp/rss/media/toyo/all.xml"
+        case 4:
+            //'IT'カテゴリーのニュース（Tech Chrunch）
+            xmlString = "https://news.yahoo.co.jp/rss/media/techcrj/all.xml"
+        default:
+            break
+        }
         
         //XMLファイルをURL型のurlに変換
-        let url:URL = URL(string: xmlString)!
+        let url:URL = URL(string: xmlString!)!
         
         //parserにurlを代入
         parser = XMLParser(contentsOf: url)!
