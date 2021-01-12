@@ -57,9 +57,17 @@ class NewsViewController: SegementSlideDefaultViewController {
 
         switch index {
         case 0:
-            return BaseNewsTableViewController(indexNumber: index)
+            return SocialNewsTableViewController()
+        case 1:
+            return SportsNewsTableTableViewController()
+        case 2:
+            return EntertainmentTableViewController()
+        case 3:
+            return BusinessTableViewController()
+        case 4:
+            return TechnologyTableViewController()
         default:
-            return BaseNewsTableViewController(indexNumber: index)
+            return SocialNewsTableViewController()
         }
     }
 }

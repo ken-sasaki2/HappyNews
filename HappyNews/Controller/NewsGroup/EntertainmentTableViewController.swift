@@ -1,9 +1,9 @@
 //
-//  TopNewsTableViewController.swift
+//  EntertainmentTableViewController.swift
 //  HappyNews
 //
-//  Created by 佐々木　謙 on 2020/08/13.
-//  Copyright © 2020 佐々木　謙. All rights reserved.
+//  Created by 佐々木　謙 on 2021/01/12.
+//  Copyright © 2021 佐々木　謙. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ import SwiftyJSON
 import PKHUD
 import Kingfisher
 
-class BaseNewsTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
+class EntertainmentTableViewController: UITableViewController,SegementSlideContentScrollViewDelegate, XMLParserDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
     //XMLParserのインスタンスを作成
     var parser = XMLParser()
@@ -37,7 +37,7 @@ class BaseNewsTableViewController: UITableViewController,SegementSlideContentScr
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "-dDJbUnTpXCNO9WRybJBMf12jyhCCf47D3s5hoTIWRw0"
+    var toneAnalyzerApiKey  = "CWbuJenI9nKP5HmLXcI8wB0BuSr0jdfFM-1JfUxk--36"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -57,27 +57,40 @@ class BaseNewsTableViewController: UITableViewController,SegementSlideContentScr
     
     //前回起動時刻の保管場所
     var lastActivation: String?
-    
+
     //UserDefaults.standardのインスタン作成
     var userDefaults = UserDefaults.standard
     
-    //
+    //NewsViewControllerから渡ってくる値を保管する変数
     var indexNum: Int?
     
     //NewsViewControllerと通信をおこなう初期値
-    init(indexNumber: Int) {
-        
-        super.init(nibName: nil, bundle: nil)
-        indexNum = indexNumber
-    }
+//    init(indexNumber: Int) {
+//        
+//        super.init(nibName: nil, bundle: nil)
+//        indexNum = indexNumber
+//    }
+//    
+//    //イニシャライザエラー処理
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
-    //イニシャライザエラー処理
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    //リファクタリング後に発生した不具合
+    //①Controllerが呼ばれるタイミングでの不具合
+      //segementSlideでカテゴリー先に遷移してからでないとローディングされない
+    
+    //②前回起動時刻との時間比較での不具合
+      //ひとつ目のControllerが呼ばれた際に時間が更新されているので、以降のControllerはキャッシュ対応になる。
+      //そもそもキャッシュの呼ばれ方もどうやらおかしい
+    
+    //③API通信量の不具合
+      //通信量が多いので正確に読み込んでいない説？
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //②Controllerが呼ばれるとまずここが呼ばれる
         
         //前回起動時刻の確認
         print("前回起動時刻: \(userDefaults.string(forKey: "lastActivation"))")
@@ -96,25 +109,8 @@ class BaseNewsTableViewController: UITableViewController,SegementSlideContentScr
     //XMLファイルを特定してパースを開始する
     func settingXML(){
         
-        switch indexNum {
-        case 0:
-            //'社会'カテゴリのニュース（ニッポン放送）
-            xmlString = "https://news.yahoo.co.jp/rss/media/nshaberu/all.xml"
-        case 1:
-            //'スポーツ'カテゴリーのニュース（日刊スポーツ）
-            xmlString = "https://news.yahoo.co.jp/rss/media/nksports/all.xml"
-        case 2:
-            //'エンタメ'カテゴリのニュース（ザ・テレビジョン）
-            xmlString = "https://news.yahoo.co.jp/rss/media/the_tv/all.xml"
-        case 3:
-            //'ビジネス'カテゴリのニュース（東洋経済オンライン）
-            xmlString = "https://news.yahoo.co.jp/rss/media/toyo/all.xml"
-        case 4:
-            //'IT'カテゴリーのニュース（Tech Chrunch）
-            xmlString = "https://news.yahoo.co.jp/rss/media/techcrj/all.xml"
-        default:
-            break
-        }
+        //'エンタメ'カテゴリのニュース（ザ・テレビジョン）
+        xmlString = "https://news.yahoo.co.jp/rss/media/the_tv/all.xml"
         
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString!)!
@@ -298,6 +294,8 @@ class BaseNewsTableViewController: UITableViewController,SegementSlideContentScr
     //時間の比較とそれに合った処理をおこなう
     func timeComparison() {
         
+        //④XMLパースが呼ばれた後に時間割による処理の分岐が呼ばれる
+        
         //現在時刻の取得
         let date = Date()
         let dateFormatter = DateFormatter()
@@ -388,7 +386,7 @@ class BaseNewsTableViewController: UITableViewController,SegementSlideContentScr
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
                 userDefaults.set("夕方のAPI通信完了（日付変更以前）", forKey: "eveningUpdate")
                 
-                //次回時間割に備えてUserDefaultsに保存した昼の値を削除
+                //次回時間割に備えてUserDefaultsに保存した値を削除
                 userDefaults.removeObject(forKey: "afternoonUpdate")
                 userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
                 userDefaults.removeObject(forKey: "morningUpdate")
