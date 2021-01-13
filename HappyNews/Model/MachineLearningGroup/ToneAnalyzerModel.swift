@@ -33,6 +33,9 @@ class ToneAnalyzerModel {
     var errorResponse: String?
     var errorResult = JSON()
     
+    //UserDefaults.standardのインスタン作成
+    var userDefaults = UserDefaults.standard
+    
     //プロトコルのインスタンス
     var doneCatchAnalyzerProtocol: DoneCatchAnalyzerProtocol?
     
@@ -78,12 +81,30 @@ class ToneAnalyzerModel {
                                 print(self.errorResponse)
                                 self.errorResult = JSON(self.errorResponse)
                                 self.toneAnalysisArray.append(self.errorResult)
+                                
+                                //429エラーが多発してカウント50に達した場合
+                                if self.toneAnalysisArray.count == 50 {
+                                    
+                                    //429エラーが多発したという履歴をUserDefaultsに保存
+                                    self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "Multiple 429 errors")
+                                    
+                                    //感情分析が失敗したことをユーザーに伝える
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                        HUD.show(.label("予期せぬエラー発生"))
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                            HUD.hide(animated: true)
+                                        }
+                                    }
+                                }
                             default:
                                 if let statusCode = statusCode {
                                     print("Error - code: \(statusCode), \(message ?? "")")
+                                    
+                                    self.userDefaults.set("ToneAnalyzer: 予期せぬエラーの発生", forKey: " ToneAnalyzer: Unexpected errors occur.")
+                                    
                                     //感情分析が失敗したことをユーザーに伝える
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                        HUD.show(.label("分析失敗"))
+                                        HUD.show(.label("予期せぬエラー発生"))
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                             HUD.hide(animated: true)
                                         }
