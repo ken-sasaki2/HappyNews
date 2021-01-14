@@ -37,7 +37,7 @@ class SocialNewsTableViewController: UITableViewController,SegementSlideContentS
     var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
     
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "CWbuJenI9nKP5HmLXcI8wB0BuSr0jdfFM-1JfUxk--36"
+    var toneAnalyzerApiKey  = "9HLMaO_Rg7t9PC7D91M0otaiGfU31y09-DxiumDnZ2SR"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -76,18 +76,8 @@ class SocialNewsTableViewController: UITableViewController,SegementSlideContentS
 //        fatalError("init(coder:) has not been implemented")
 //    }
     
-    //リファクタリング後に発生した不具合
-    //①Controllerが呼ばれるタイミングでの不具合
-      //segementSlideでカテゴリー先に遷移してからでないとローディングされない
-    
-    //②前回起動時刻との時間比較での不具合
-      //ひとつ目のControllerが呼ばれた際に時間が更新されているので、以降のControllerはキャッシュ対応になる。
-      //そもそもキャッシュの呼ばれ方もどうやらおかしい
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //②Controllerが呼ばれるとまずここが呼ばれる
         
         //前回起動時刻の確認
         print("前回起動時刻: \(userDefaults.string(forKey: "lastActivation"))")
@@ -291,8 +281,6 @@ class SocialNewsTableViewController: UITableViewController,SegementSlideContentS
     //時間の比較とそれに合った処理をおこなう
     func timeComparison() {
         
-        //④XMLパースが呼ばれた後に時間割による処理の分岐が呼ばれる
-        
         //現在時刻の取得
         let date = Date()
         let dateFormatter = DateFormatter()
@@ -331,21 +319,29 @@ class SocialNewsTableViewController: UITableViewController,SegementSlideContentS
         if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
             
             //UserDefaultsに'朝の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
-            if userDefaults.string(forKey: "morningUpdate") == nil {
+            if userDefaults.string(forKey: "SocialNews Morning Update") == nil {
                 print("朝のAPI通信")
                 //朝のAPI更新
                 startTranslation()
                 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("朝のAPI通信完了", forKey: "morningUpdate")
+                userDefaults.set("【朝】社会のニュース更新完了", forKey: "SocialNews Morning Update")
                 
                 //次回時間割に備えてUserDefaultsに保存した値を削除
-                userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
-                userDefaults.removeObject(forKey: "afternoonUpdate")
-                userDefaults.removeObject(forKey: "eveningUpdate")
+                userDefaults.removeObject(forKey: "SocialNews lateAtNight Update")
+                userDefaults.removeObject(forKey: "SocialNews Afternoon Update")
+                userDefaults.removeObject(forKey: "SocialNews Evening Update")
             } else {
-                print("キャッシュの表示")
-                reloadNewsData()
+                
+                //429エラーが多発して解析を中断した後に起動した際の処理
+                if userDefaults.object(forKey: "Multiple 429 errors") != nil || userDefaults.object(forKey: "ToneAnalyzer: Unexpected errors occur.") != nil || userDefaults.object(forKey: "LanguageTranslator: Unexpected errors occur.") != nil {
+                    
+                    //改めて感情分析をおこなう
+                    startTranslation()
+                } else {
+                    print("キャッシュの表示")
+                    reloadNewsData()
+                }
             }
         }
         
@@ -353,18 +349,18 @@ class SocialNewsTableViewController: UITableViewController,SegementSlideContentS
         else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
             
             //UserDefaultsに'昼の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
-            if userDefaults.string(forKey: "afternoonUpdate") == nil {
+            if userDefaults.string(forKey: "SocialNews Afternoon Update") == nil {
                 print("昼のAPI通信")
                 //昼のAPI更新
                 startTranslation()
                 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("昼のAPI通信完了", forKey: "afternoonUpdate")
+                userDefaults.set("【昼】社会のニュース更新完了", forKey: "SocialNews Afternoon Update")
 
                 //次回時間割に備えてUserDefaultsに保存した値を削除
-                userDefaults.removeObject(forKey: "morningUpdate")
-                userDefaults.removeObject(forKey: "eveningUpdate")
-                userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
+                userDefaults.removeObject(forKey: "SocialNews Morning Update")
+                userDefaults.removeObject(forKey: "SocialNews Evening Update")
+                userDefaults.removeObject(forKey: "SocialNews lateAtNight Update")
             } else {
                 print("キャッシュの表示")
                 reloadNewsData()
@@ -375,18 +371,18 @@ class SocialNewsTableViewController: UITableViewController,SegementSlideContentS
         else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
             
             //UserDefaultsに'夕方のAPI更新完了（日付変更以前）'の値が無ければAPIと通信、あればキャッシュでUI更新
-            if userDefaults.string(forKey: "eveningUpdate") == nil {
+            if userDefaults.string(forKey: "SocialNews Evening Update") == nil {
                 print("夕方のAPI通信（日付変更以前）")
                 //夕方のAPI更新（日付変更以前）
                 startTranslation()
                 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("夕方のAPI通信完了（日付変更以前）", forKey: "eveningUpdate")
+                userDefaults.set("【夕方】社会のニュース更新完了", forKey: "SocialNews Evening Update")
                 
                 //次回時間割に備えてUserDefaultsに保存した値を削除
-                userDefaults.removeObject(forKey: "afternoonUpdate")
-                userDefaults.removeObject(forKey: "lateAtNightTimeUpdate")
-                userDefaults.removeObject(forKey: "morningUpdate")
+                userDefaults.removeObject(forKey: "SocialNews Afternoon Update")
+                userDefaults.removeObject(forKey: "SocialNews lateAtNight Update")
+                userDefaults.removeObject(forKey: "SocialNews Morning Update")
             } else {
                 print("キャッシュの表示")
                 reloadNewsData()
@@ -397,18 +393,18 @@ class SocialNewsTableViewController: UITableViewController,SegementSlideContentS
         else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
             
             //UserDefaultsに'夕方のAPI更新完了（日付変更以降）'値が無ければAPIと通信、あればキャッシュでUI更新
-            if userDefaults.string(forKey: "lateAtNightTimeUpdate") == nil {
+            if userDefaults.string(forKey: "SocialNews lateAtNight Update") == nil {
                 print("夕方のAPI通信（日付変更以降）")
                 //夕方のAPI更新（日付変更以降）
                 startTranslation()
                 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("夕方のAPI通信完了（日付変更以降）", forKey: "lateAtNightTimeUpdate")
+                userDefaults.set("【深夜】社会のニュース更新完了", forKey: "SocialNews lateAtNight Update")
                 
                 //次回時間割に備えてUserDefaultsに保存した値を削除
-                userDefaults.removeObject(forKey: "eveningUpdate")
-                userDefaults.removeObject(forKey: "morningUpdate")
-                userDefaults.removeObject(forKey: "afternoonUpdate")
+                userDefaults.removeObject(forKey: "SocialNews Evening Update")
+                userDefaults.removeObject(forKey: "SocialNews Morning Update")
+                userDefaults.removeObject(forKey: "SocialNews Afternoon Update")
             } else {
                 print("キャッシュの表示")
                 reloadNewsData()
