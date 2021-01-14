@@ -46,29 +46,29 @@ class NewsViewController: SegementSlideDefaultViewController {
         }
     }
     
-    //ニュースタブのコード
-    override var titlesInSwitcher: [String] {
-        
-        return ["社会","スポーツ","エンタメ","ビジネス・経済","IT・化学"]
-    }
-
-    //コントローラーを返すメソッド
-    override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-
-        switch index {
-        case 0:
-            return SocialNewsTableViewController()
-        case 1:
-            return SportsNewsTableTableViewController()
-        case 2:
-            return EntertainmentTableViewController()
-        case 3:
-            return BusinessTableViewController()
-        case 4:
-            return TechnologyTableViewController()
-        default:
-            return SocialNewsTableViewController()
-        }
-    }
+//    //ニュースタブのコード
+//    override var titlesInSwitcher: [String] {
+//
+//        return ["社会","スポーツ","エンタメ","ビジネス・経済","IT・化学"]
+//    }
+//
+//    //コントローラーを返すメソッド
+//    override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+//
+//        switch index {
+//        case 0:
+//            return SocialNewsTableViewController()
+//        case 1:
+//            return SportsNewsTableTableViewController()
+//        case 2:
+//            return EntertainmentTableViewController()
+//        case 3:
+//            return BusinessTableViewController()
+//        case 4:
+//            return TechnologyTableViewController()
+//        default:
+//            return SocialNewsTableViewController()
+//        }
+//    }
 }
 
