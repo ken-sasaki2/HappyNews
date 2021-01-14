@@ -9,7 +9,7 @@
 import UIKit
 import SegementSlide
 
-class NewsViewController: UIViewController, XMLParserDelegate {
+class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate {
     
     //NewsTableViewのインスタンス
     @IBOutlet var newsTable: UITableView!
@@ -29,8 +29,14 @@ class NewsViewController: UIViewController, XMLParserDelegate {
     //RSSから取得するURLのパラメータを排除したURLを保存する値
     var imageParameter: String?
     
+    //UserDefaultsのインスタンス
+    var userDefaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //ダークモード適用を回避
+        self.overrideUserInterfaceStyle = .light
         
         //NavigationBarの呼び出し
         setNewsNavigationBar()
@@ -132,6 +138,83 @@ class NewsViewController: UIViewController, XMLParserDelegate {
     //XML解析でエラーが発生した場合に呼ばれるメソッド
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         print("error:" + parseError.localizedDescription)
+    }
+    
+    // MARK: - Table view data source
+    //セルの数を設定
+    func tableView(_ newsTable: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return newsItems.count
+    }
+    
+    //セルの高さを設定
+    func tableView(_ newsTable: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+
+    //セルを構築
+    func tableView(_ newsTable: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //XML解析から取得したニュースの値が入る
+        let newsItem = newsItems[indexPath.row]
+        
+        //tableCellのIDでUITableViewCellのインスタンスを生成
+        let cell = newsTable.dequeueReusableCell(withIdentifier: "newsTable", for: indexPath)
+        
+        //Tag番号(1)でサムネイルのインスタンス作成
+        let thumbnail = cell.viewWithTag(1) as! UIImageView
+        
+        //サムネイルを化粧
+        let placeholder  = UIImage(named: "placeholder")
+        thumbnail.image = placeholder
+        thumbnail.contentMode = .scaleAspectFill
+        
+        //Tag番号(2)でニュースタイトルのインスタンス作成
+        let newsTitle = cell.viewWithTag(2) as! UILabel
+        
+        //ニュースタイトルを化粧
+        newsTitle.text = newsItem.title
+        newsTitle.textColor = UIColor(hex: "333333")
+        newsTitle.numberOfLines = 3
+        
+        //Tag番号(3)でニュース発行時刻のインスタンスを作成
+        let subtitle = newsTable.viewWithTag(3) as! UILabel
+        
+        //サブタイトルを化粧
+        subtitle.text = newsItem.pubDate
+        subtitle.textColor = UIColor(hex: "cccccc")
+        
+        //空のセルを削除
+        newsTable.tableFooterView = UIView(frame: .zero)
+
+        //tableaviewの背景
+        cell.backgroundColor = UIColor.white
+        
+        return cell
+    }
+    
+    //セルをタップした時呼ばれるメソッド
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //タップ時の選択色の常灯を消す
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        //WebViewControllerのインスタンス作成
+        let webViewController = WebViewController()
+        
+        //WebViewのNavigationControllerを定義
+        let webViewNavigation = UINavigationController(rootViewController: webViewController)
+        
+        //WebViewをフルスクリーンに
+        webViewNavigation.modalPresentationStyle = .fullScreen
+        
+        //タップしたセルを検知
+        let tapCell = newsItems[indexPath.row]
+        
+        //検知したセルのurlを取得
+        userDefaults.set(tapCell.url, forKey: "url")
+        
+        //webViewControllerへ遷移
+        present(webViewNavigation, animated: true)
     }
 
     //スクロールでナビゲーションバーを隠す
