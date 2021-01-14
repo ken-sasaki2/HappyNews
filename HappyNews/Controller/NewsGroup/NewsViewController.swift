@@ -9,18 +9,19 @@
 import UIKit
 import SegementSlide
 
-class NewsViewController: SegementSlideDefaultViewController {
-
+class NewsViewController: UIViewController {
+    
+    //NewsTableViewのインスタンス
+    @IBOutlet var newsTable: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //NavigationBarの呼び出し
         setNewsNavigationBar()
-        scrollViewDidScroll(scrollView)
+        //scrollViewDidScroll(scrollView)
         
-        //SegementSlideDefaultViewControllerの初期設定
-        defaultSelectedIndex = 0
-        reloadData()
+        
     }
     
     //ニュースページのNavigationBar設定
@@ -37,37 +38,15 @@ class NewsViewController: SegementSlideDefaultViewController {
         self.navigationController?.navigationBar.isTranslucent = false
     }
     
-    //スクロールでナビゲーションバーを隠す
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-        } else {
-            navigationController?.setNavigationBarHidden(false, animated: true)
-        }
-    }
     
-//    //ニュースタブのコード
-//    override var titlesInSwitcher: [String] {
-//
-//        return ["社会","スポーツ","エンタメ","ビジネス・経済","IT・化学"]
-//    }
-//
-//    //コントローラーを返すメソッド
-//    override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-//
-//        switch index {
-//        case 0:
-//            return SocialNewsTableViewController()
-//        case 1:
-//            return SportsNewsTableTableViewController()
-//        case 2:
-//            return EntertainmentTableViewController()
-//        case 3:
-//            return BusinessTableViewController()
-//        case 4:
-//            return TechnologyTableViewController()
-//        default:
-//            return SocialNewsTableViewController()
+    
+    
+    //スクロールでナビゲーションバーを隠す
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+//            navigationController?.setNavigationBarHidden(true, animated: true)
+//        } else {
+//            navigationController?.setNavigationBarHidden(false, animated: true)
 //        }
 //    }
 }
