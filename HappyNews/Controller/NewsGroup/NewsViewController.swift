@@ -8,6 +8,11 @@
 
 import UIKit
 import SegementSlide
+import ToneAnalyzer
+import LanguageTranslator
+import SwiftyJSON
+import PKHUD
+import Kingfisher
 
 class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate {
     
@@ -163,8 +168,15 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //Tag番号(1)でサムネイルのインスタンス作成
         let thumbnail = cell.viewWithTag(1) as! UIImageView
         
-        //サムネイルを化粧
+        //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像, 角丸）
+        let thumbnailURL = URL(string: newsItem.image!.description)
         let placeholder  = UIImage(named: "placeholder")
+        let cornerRadius = RoundCornerImageProcessor(cornerRadius: 12.0)
+        
+        //サムネイルの設定
+        thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.processor(cornerRadius), .transition(.fade(0.2))])
+        
+        //サムネイルを化粧
         thumbnail.image = placeholder
         thumbnail.contentMode = .scaleAspectFill
         
