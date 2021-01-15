@@ -14,8 +14,9 @@ import SwiftyJSON
 import PKHUD
 import Kingfisher
 
-class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate {
+class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
     
+    // MARK: - XML Property
     //NewsTableViewのインスタンス
     @IBOutlet var newsTable: UITableView!
     
@@ -25,18 +26,50 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     //XMLParserのインスタンスを作成
     var parser = XMLParser()
     
-    //RSSのパース内の現在の要素名を取得する変数
+    //XMLパース内の現在の要素名を取得する変数
     var currentElementName: String?
 
     //NewsItemsモデルのインスタンス作成
     var newsItems = [NewsItemsModel]()
     
-    //RSSから取得するURLのパラメータを排除したURLを保存する値
+    //XMLから取得するURLのパラメータを排除したURLを保存する値
     var imageParameter: String?
     
+    
+    // MARK: - LanguageTranslator Property
+    //XMLファイルのニュースを補完する配列
+    var newsTextArray: [Any] = []
+    
+    //LanguageTranslatorの認証キー
+    var languageTranslatorApiKey  = "J4LQkEl7BWhZL2QaeLzRIRSwlg4sna1J7-09opB-9Gqf"
+    var languageTranslatorVersion = "2018-05-01"
+    var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
+    
+    //LanguageTranslationModelから渡ってくる値
+    var translationArray      = [String]()
+    var translationArrayCount = Int()
+    
+    
+    // MARK: - ToneAnalyzer Property
+    //ToneAnalyzerの認証キー
+    var toneAnalyzerApiKey  = "XqwOumFa5toxqrmFULLwyPVMfIHbj8Ex1Q0kL-KtRTcw"
+    var toneAnalyzerVersion = "2017-09-21"
+    var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
+    
+    //ToneAnalyzerModelから渡ってくる値
+    var joyCountArray = [Int]()
+    
+    //joyの要素と認定されたニュースの配列と検索する際のカウント
+    var joySelectionArray = [NewsItemsModel]()
+    var newsCount         = 50
+    
+    
+    // MARK: - Other Property
     //UserDefaultsのインスタンス
     var userDefaults = UserDefaults.standard
     
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +84,8 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         settingXML()
     }
     
+    
+    // MARK: - Navigation
     //ニュースページのNavigationBar設定
     func setNewsNavigationBar() {
         
@@ -64,6 +99,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false
     }
+    
     
     // MARK: - XML Parser
     //XMLファイルを特定してパースを開始する
@@ -83,6 +119,8 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
 
         //parseの開始
         parser.parse()
+        
+        startTranslation()
     }
     
     //XML解析を開始する場合(parser.parse())に呼ばれるメソッド
@@ -108,7 +146,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             switch currentElementName {
             case "title":
                 lastItem.title       = string
-                print(lastItem.title)
             case "link":
                 if lastItem.url == nil {
                     lastItem.url     = string
@@ -134,7 +171,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         }
     }
     
-    //RSS内のXMLファイルの各値の</item>に呼ばれるメソッド（要素の解析終了）
+    //XMLファイルの各値の</item>に呼ばれるメソッド（要素の解析終了）
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         //新しい箱を準備
         self.currentElementName = nil
@@ -145,10 +182,118 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         print("error:" + parseError.localizedDescription)
     }
     
+    
+    // MARK: - LanguageTranslator
+    func startTranslation() {
+        
+        //感情分析中であることをユーザーに伝える
+        HUD.show(.labeledProgress(title: "Happyを分析中...", subtitle: nil))
+        
+        //XMLのニュースの順番と整合性を合わせるためreversedを使用。$iは合わせた番号の可視化（50 = first, 1 = last）
+        for i in (1...50).reversed() {
+            newsTextArray.append(newsItems[newsItems.count - i].title!.description + "$\(i)")
+        }
+        
+        print("newsTextArray: \(newsTextArray.debugDescription)")
+        
+        //LanguageTranslatorModelへ通信
+        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
+        
+        //LanguageTranslatorModelの委託とJSON解析をセット
+        languageTranslatorModel.doneCatchTranslationProtocol = self
+        languageTranslatorModel.setLanguageTranslator()
+    }
+    
+    //LanguageTranslatorModelから返ってきた値の受け取り
+    func catchTranslation(arrayTranslationData: Array<String>, resultCount: Int) {
+        
+        translationArray      = arrayTranslationData
+        translationArrayCount = resultCount
+        
+        print("translationArray: \(translationArray.debugDescription)")
+        
+        //配列内の要素を確認するとToneAnalyzerを呼び出す
+        if translationArray != nil {
+            
+            //ToneAnalyzerの呼び出し
+            startToneAnalyzer()
+        } else {
+            print("Failed because the value is nil.")
+        }
+    }
+
+    
+    // MARK: - ToneAnalyzer
+    func startToneAnalyzer() {
+        //translationArrayとAPIToneAnalyzerの認証コードで通信
+        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
+        
+        //ToneAnalyzerModelの委託とJSON解析をセット
+        toneAnalyzerModel.doneCatchAnalyzerProtocol = self
+        toneAnalyzerModel.setToneAnalyzer()
+    }
+    
+    //ToneAnalyzerModelから返ってきた値の受け取り
+    func catchAnalyzer(arrayAnalyzerData: Array<Int>) {
+        
+        //感情分析結果の確認
+        print("arrayAnalyzerData.count: \(arrayAnalyzerData.count)")
+        print("arrayAnalyzerData: \(arrayAnalyzerData.debugDescription)")
+        
+        //感情分析結果の保存
+        userDefaults.set(arrayAnalyzerData, forKey: "joyCountArray")
+        
+        //UIの更新を行うメソッドの呼び出し
+        reloadNewsData()
+    }
+
+    //感情分析結果を用いて新たにNewsの配列を作成し、UIの更新を行う
+    func reloadNewsData() {
+        
+        //感情分析結果の取り出し
+        joyCountArray = userDefaults.array(forKey: "joyCountArray") as! [Int]
+        print("joyCountArray: \(joyCountArray)")
+        
+        //joyCountArrayの中身を検索し、一致 = 意図するニュースを代入
+        for i in 0...joyCountArray.count - 1 {
+            
+            //'i'固定、その間に'y'を加算
+            for y in 0...newsCount - 1 {
+                
+                switch self.joyCountArray != nil {
+                case self.joyCountArray[i] == y:
+                    self.joySelectionArray.append(self.newsItems[y])
+                default:
+                    break
+                }
+            }
+            print("joySelectionArray\([i]): \(self.joySelectionArray[i].title.debugDescription)")
+        }
+   
+        //感情分析結果と新たに作成した配列の比較
+        if joySelectionArray.count == joyCountArray.count {
+            
+            //メインスレッドでUIの更新
+            DispatchQueue.main.async {
+                //tableViewの更新
+                self.newsTable.reloadData()
+                
+                //感情分析が終了したことをユーザーに伝える
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    HUD.show(.label("分析が終了しました"))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        HUD.hide(animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    
     // MARK: - Table view data source
     //セルの数を設定
     func tableView(_ newsTable: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsItems.count
+        return joySelectionArray.count
     }
     
     //セルの高さを設定
@@ -160,7 +305,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     func tableView(_ newsTable: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //XML解析から取得したニュースの値が入る
-        let newsItem = newsItems[indexPath.row]
+        let joyNewsItem = joySelectionArray[indexPath.row]
         
         //tableCellのIDでUITableViewCellのインスタンスを生成
         let cell = newsTable.dequeueReusableCell(withIdentifier: "newsTable", for: indexPath)
@@ -169,7 +314,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         let thumbnail = cell.viewWithTag(1) as! UIImageView
         
         //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像, 角丸）
-        let thumbnailURL = URL(string: newsItem.image!.description)
+        let thumbnailURL = URL(string: joyNewsItem.image!.description)
         let placeholder  = UIImage(named: "placeholder")
         let cornerRadius = RoundCornerImageProcessor(cornerRadius: 12.0)
         
@@ -184,7 +329,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         let newsTitle = cell.viewWithTag(2) as! UILabel
         
         //ニュースタイトルを化粧
-        newsTitle.text = newsItem.title
+        newsTitle.text = joyNewsItem.title
         newsTitle.textColor = UIColor(hex: "333333")
         newsTitle.numberOfLines = 3
         
@@ -192,7 +337,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         let subtitle = newsTable.viewWithTag(3) as! UILabel
         
         //サブタイトルを化粧
-        subtitle.text = newsItem.pubDate
+        subtitle.text = joyNewsItem.pubDate
         subtitle.textColor = UIColor(hex: "cccccc")
         
         //空のセルを削除
@@ -220,7 +365,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         webViewNavigation.modalPresentationStyle = .fullScreen
         
         //タップしたセルを検知
-        let tapCell = newsItems[indexPath.row]
+        let tapCell = joySelectionArray[indexPath.row]
         
         //検知したセルのurlを取得
         userDefaults.set(tapCell.url, forKey: "url")
