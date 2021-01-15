@@ -79,9 +79,13 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if section == 0 {
             return settingSectionIconArray.count
-        } else if section == 1 {
+        }
+        
+        else if section == 1 {
             return appSectionIconArray.count
-        } else if section == 2 {
+        }
+        
+        else if section == 2 {
             return accountSectionIconArray.count
         } else{
             return 0
@@ -111,7 +115,9 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 settingLabel.text = settingCellLabelArray[indexPath.row]
                 settingLabel.textColor = UIColor(hex: "333333")
             
-        } else if indexPath.section == 1 {
+        }
+        
+        else if indexPath.section == 1 {
             
             //"このアプリについて"セクションのアイコン処理
             let appSectionIcon = UIImage(named: appSectionIconArray[indexPath.row])
@@ -123,7 +129,9 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 appLabel.text = appCellLabelArray[indexPath.row]
                 appLabel.textColor = UIColor(hex: "333333")
             
-        } else if indexPath.section == 2 {
+        }
+        
+        else if indexPath.section == 2 {
             
             //"アカウント"セクションのアイコン処理
             let accountSectionIcon = UIImage(named: accountSectionIconArray[indexPath.row])
@@ -168,7 +176,9 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 break
             }
             
-        } else if indexPath.section == 1 {
+        }
+        
+        else if indexPath.section == 1 {
             
             //"このアプリについて"セクションの場合
             switch indexPath.row {
@@ -188,7 +198,9 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 break
             }
             
-        } else if indexPath.section == 2 {
+        }
+        
+        else if indexPath.section == 2 {
             
             //"アカウント"セクションの場合
             switch indexPath.row {
