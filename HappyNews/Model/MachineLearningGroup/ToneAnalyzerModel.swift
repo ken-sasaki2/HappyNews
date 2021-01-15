@@ -100,8 +100,6 @@ class ToneAnalyzerModel {
                                 if let statusCode = statusCode {
                                     print("Error - code: \(statusCode), \(message ?? "")")
                                     
-                                    self.userDefaults.set("ToneAnalyzer: 予期せぬエラーの発生", forKey: " ToneAnalyzer: Unexpected errors occur.")
-                                    
                                     //感情分析が失敗したことをユーザーに伝える
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                         HUD.show(.label("予期せぬエラー発生"))

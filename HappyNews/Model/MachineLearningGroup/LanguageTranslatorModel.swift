@@ -120,9 +120,9 @@ class LanguageTranslatorModel {
                         default:
                             if let statusCode = statusCode {
                                 print("Error - code: \(statusCode), \(message ?? "")")
+                                
                                 //感情分析が失敗したことをユーザーに伝える
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                    
                                     HUD.show(.label("予期せぬエラー発生"))
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                         HUD.hide(animated: true)
