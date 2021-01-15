@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NewsViewController.swift
 //  HappyNews
 //
 //  Created by 佐々木　謙 on 2020/08/13.
@@ -76,6 +76,9 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
         
+        //前回起動時刻の確認
+        print("前回起動時刻: \(userDefaults.string(forKey: "lastActivation"))")
+        
         //NavigationBarの呼び出し
         setNewsNavigationBar()
         //scrollViewDidScroll(scrollView)
@@ -120,7 +123,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //parseの開始
         parser.parse()
         
-        startTranslation()
+        startTimeSchedule()
     }
     
     //XML解析を開始する場合(parser.parse())に呼ばれるメソッド
@@ -182,8 +185,22 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         print("error:" + parseError.localizedDescription)
     }
     
+    // MARK: - TimeSchedule
+    //TimeScheduleModelと通信をおこない、API通信orキャッシュ利用かどうかを決める
+    func startTimeSchedule() {
+        
+        //現在時刻の取得
+        let dateTime = Date()
+        let dateTimeFormat = DateFormatter()
+        
+        //TimeScheduleModelと通信
+        let timeScheduleModel = TimeScheduleModel(dateTime: dateTime, dateTimeFormat: dateTimeFormat)
+            timeScheduleModel.setTimeSchedule()
+    }
+    
     
     // MARK: - LanguageTranslator
+    //LanguageTranslator Modelと通信をおこない、翻訳結果を感情分析に投げる
     func startTranslation() {
         
         //感情分析中であることをユーザーに伝える
@@ -196,7 +213,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         print("newsTextArray: \(newsTextArray.debugDescription)")
         
-        //LanguageTranslatorModelへ通信
+        //LanguageTranslatorModelと通信
         let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
         
         //LanguageTranslatorModelの委託とJSON解析をセット
@@ -224,6 +241,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
 
     
     // MARK: - ToneAnalyzer
+    //ToneAnalyzerModelと通信をおこない、感情分析結果を保存する
     func startToneAnalyzer() {
         //translationArrayとAPIToneAnalyzerの認証コードで通信
         let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
