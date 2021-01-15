@@ -16,7 +16,7 @@ import Kingfisher
 
 class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol, DoneCatchTimeScheduleProtocol {
     
-    
+
     // MARK: - XML Property
     //NewsTableViewのインスタンス
     @IBOutlet var newsTable: UITableView!
@@ -53,7 +53,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // MARK: - ToneAnalyzer Property
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "XqwOumFa5toxqrmFULLwyPVMfIHbj8Ex1Q0kL-KtRTcw"
+    var toneAnalyzerApiKey  = "C2JH_u0GbxbXLNbirshYgvRJB_u2vJ432BPGu-0D1MME"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -84,8 +84,8 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         setNewsNavigationBar()
         //scrollViewDidScroll(scrollView)
         
-        //XML解析を開始する
-        settingXML()
+        //時間割を確認
+        startTimeSchedule()
     }
     
     
@@ -125,9 +125,16 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         if updateOrCache == true {
             print("API通信開始")
             
+            //XMLパースを開始してAPI通信を開始
+            settingXML()
+            startTranslation()
+            
         } else {
             print("キャッシュでUI更新")
             
+            //XMLパースを開始してキャッシュでリロード
+            settingXML()
+            reloadNewsData()
         }
     }
     
@@ -150,8 +157,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
 
         //parseの開始
         parser.parse()
-        
-        startTimeSchedule()
     }
     
     //XML解析を開始する場合(parser.parse())に呼ばれるメソッド
