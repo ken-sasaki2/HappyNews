@@ -8,6 +8,11 @@
 
 import Foundation
 
+//NewsViewControllerへ値を返す
+protocol DoneCatchTimeScheduleProtocol {
+    func catchTimeSchedule(updateOrCache: Bool)
+}
+
 class TimeScheduleModel {
     
     //前回起動時刻の保管場所
@@ -15,6 +20,9 @@ class TimeScheduleModel {
 
     //UserDefaults.standardのインスタン作成
     var userDefaults = UserDefaults.standard
+    
+    //プロトコルのインスタンス
+    var doneCatchTimeScheduleProtocol: DoneCatchTimeScheduleProtocol?
     
     //NewsViewControllerから渡ってくる値
     var date         : Date?
@@ -63,9 +71,9 @@ class TimeScheduleModel {
         //07:00以降11:00以前の場合
         if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
 
-            //UserDefaultsに'朝の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
+            //UserDefaultsに 'morningUpdate' が無ければtureをあればfalseを返す
             if userDefaults.string(forKey: "morningUpdate") == nil {
-                print("朝のAPI通信")
+                print("朝のニュース 'true' を返す")
 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
                 userDefaults.set("morningUpdate", forKey: "morningUpdate")
@@ -75,19 +83,22 @@ class TimeScheduleModel {
                 userDefaults.removeObject(forKey: "eveningUpdate")
                 userDefaults.removeObject(forKey: "nightUpdate")
                 
-                //NewsViewControllerへ値を返す
-                
+                //NewsViewControllerへAPI通信をおこなう値を返す
+                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
-                    print("キャッシュの表示")
-                }
+                print("朝のニュース 'false' を返す")
+                
+                //NewsViewControllerへキャッシュ通信の値を返す
+                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
             }
+        }
 
         //11:00以降17:00以前の場合
         else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
 
-            //UserDefaultsに'昼の更新完了'の値が無ければAPIと通信、あればキャッシュでUI更新
+            //UserDefaultsに 'afternoonUpdate' が無ければtureをあればfalseを返す
             if userDefaults.string(forKey: "afternoonUpdate") == nil {
-                print("昼のAPI通信")
+                print("昼のニュース 'true' を返す")
 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
                 userDefaults.set("afternoonUpdate", forKey: "afternoonUpdate")
@@ -97,20 +108,22 @@ class TimeScheduleModel {
                 userDefaults.removeObject(forKey: "eveningUpdate")
                 userDefaults.removeObject(forKey: "nightUpdate")
                 
-                //NewsViewControllerへ値を返す
-                
+                //NewsViewControllerへAPI通信をおこなう値を返す
+                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
-                print("キャッシュの表示")
-                //reloadNewsData()
+                print("昼のニュース 'false' を返す")
+                
+                //NewsViewControllerへキャッシュ通信の値を返す
+                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
             }
         }
 
         //17:00以降23:59:59以前の場合（1日の最後）
         else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
 
-            //UserDefaultsに'夕方のAPI更新完了（日付変更以前）'の値が無ければAPIと通信、あればキャッシュでUI更新
+            //UserDefaultsに 'eveningUpdate' が無ければtureをあればfalseを返す
             if userDefaults.string(forKey: "eveningUpdate") == nil {
-                print("夕方のAPI通信（日付変更以前）")
+                print("夕方のニュース 'true' を返す")
 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
                 userDefaults.set("eveningUpdate", forKey: "eveningUpdate")
@@ -120,19 +133,22 @@ class TimeScheduleModel {
                 userDefaults.removeObject(forKey: "afternoonUpdate")
                 userDefaults.removeObject(forKey: "nightUpdate")
                 
-                //NewsViewControllerへ値を返す
+                //NewsViewControllerへAPI通信をおこなう値を返す
+                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
-                print("キャッシュの表示")
-                //reloadNewsData()
+                print("夕方のニュース 'false' を返す")
+                
+                //NewsViewControllerへキャッシュ通信の値を返す
+                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
             }
         }
 
         //00:00以降07:00以前の場合（日を跨いで初めて起動）
         else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
 
-            //UserDefaultsに'夕方のAPI更新完了（日付変更以降）'値が無ければAPIと通信、あればキャッシュでUI更新
+            //UserDefaultsに 'nightUpdate' が無ければtureをあればfalseを返す
             if userDefaults.string(forKey: "nightUpdate") == nil {
-                print("夕方のAPI通信（日付変更以降）")
+                print("夜のニュース 'true' を返す")
 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
                 userDefaults.set("nightUpdate", forKey: "nightUpdate")
@@ -142,17 +158,22 @@ class TimeScheduleModel {
                 userDefaults.removeObject(forKey: "afternoonUpdate")
                 userDefaults.removeObject(forKey: "eveningUpdate")
                 
-                //NewsViewControllerへ値を返す
+                //NewsViewControllerへAPI通信をおこなう値を返す
+                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
-                print("キャッシュの表示")
-                //reloadNewsData()
+                print("夜のニュース 'false' を返す")
+                
+                //NewsViewControllerへキャッシュ通信の値を返す
+                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
             }
         }
 
         //どの時間割にも当てはまらない場合
         else {
-            print("キャッシュの表示")
-            //reloadNewsData()
+            print("'false'を返す")
+            
+            //NewsViewControllerへキャッシュ通信の値を返す
+            doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
         }
     }
 }

@@ -14,7 +14,8 @@ import SwiftyJSON
 import PKHUD
 import Kingfisher
 
-class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol {
+class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol, DoneCatchTimeScheduleProtocol {
+    
     
     // MARK: - XML Property
     //NewsTableViewのインスタンス
@@ -104,6 +105,33 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     }
     
     
+    // MARK: - TimeSchedule
+    //TimeScheduleModelと通信をおこない、API通信orキャッシュ利用かどうかを決める
+    func startTimeSchedule() {
+        
+        //現在時刻の取得
+        let dateTime = Date()
+        let dateTimeFormat = DateFormatter()
+        
+        //TimeScheduleModelと通信をおこないプロトコルを委託
+        let timeScheduleModel = TimeScheduleModel(dateTime: dateTime, dateTimeFormat: dateTimeFormat)
+            timeScheduleModel.doneCatchTimeScheduleProtocol = self
+            timeScheduleModel.setTimeSchedule()
+    }
+    
+    //TimeScheduleModelから返ってきた値の受け取り
+    func catchTimeSchedule(updateOrCache: Bool) {
+        
+        if updateOrCache == true {
+            print("API通信開始")
+            
+        } else {
+            print("キャッシュでUI更新")
+            
+        }
+    }
+    
+    
     // MARK: - XML Parser
     //XMLファイルを特定してパースを開始する
     func settingXML(){
@@ -185,22 +213,9 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         print("error:" + parseError.localizedDescription)
     }
     
-    // MARK: - TimeSchedule
-    //TimeScheduleModelと通信をおこない、API通信orキャッシュ利用かどうかを決める
-    func startTimeSchedule() {
-        
-        //現在時刻の取得
-        let dateTime = Date()
-        let dateTimeFormat = DateFormatter()
-        
-        //TimeScheduleModelと通信
-        let timeScheduleModel = TimeScheduleModel(dateTime: dateTime, dateTimeFormat: dateTimeFormat)
-            timeScheduleModel.setTimeSchedule()
-    }
-    
     
     // MARK: - LanguageTranslator
-    //LanguageTranslator Modelと通信をおこない、翻訳結果を感情分析に投げる
+    //LanguageTranslatorModelと通信をおこない、翻訳結果を感情分析に投げる
     func startTranslation() {
         
         //感情分析中であることをユーザーに伝える
