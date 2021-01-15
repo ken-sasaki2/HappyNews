@@ -53,7 +53,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // MARK: - ToneAnalyzer Property
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "_s9hg9koLcC6bcs3J1JS2-JkA2CDnOxddVONCAFOqEFB"
+    var toneAnalyzerApiKey  = "hv3WgcrmRrqxAqP15l1zg8rnC64EXbuJnHxoyRRI8phU"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -82,13 +82,12 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         //NavigationBarの呼び出し
         setNewsNavigationBar()
-        //scrollViewDidScroll(scrollView)
         
         //時間割を確認
         startTimeSchedule()
         
-//        settingXML()
-//        startTranslation()
+        //settingXML()
+        //startTranslation()
     }
     
     
@@ -105,6 +104,15 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false
+    }
+    
+    //スクロールでナビゲーションバーを隠す
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        } else {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
     }
     
     
@@ -370,13 +378,12 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //Tag番号(1)でサムネイルのインスタンス作成
         let thumbnail = cell.viewWithTag(1) as! UIImageView
         
-        //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像, 角丸）
+        //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像）
         let thumbnailURL = URL(string: joyNewsItem.image!.description)
         let placeholder  = UIImage(named: "placeholder")
-        let cornerRadius = RoundCornerImageProcessor(cornerRadius: 12.0)
         
         //サムネイルの設定
-        thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.processor(cornerRadius), .transition(.fade(0.2))])
+        thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
         
         //サムネイルを化粧
         thumbnail.image = placeholder
@@ -430,14 +437,5 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //webViewControllerへ遷移
         present(webViewNavigation, animated: true)
     }
-
-    //スクロールでナビゲーションバーを隠す
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-//            navigationController?.setNavigationBarHidden(true, animated: true)
-//        } else {
-//            navigationController?.setNavigationBarHidden(false, animated: true)
-//        }
-//    }
 }
 
