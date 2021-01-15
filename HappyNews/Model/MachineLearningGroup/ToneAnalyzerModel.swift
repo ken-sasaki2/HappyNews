@@ -86,7 +86,7 @@ class ToneAnalyzerModel {
                                 if self.toneAnalysisArray.count == 50 {
                                     
                                     //429エラーが多発したという履歴をUserDefaultsに保存
-                                    self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "Multiple 429 errors")
+                                    self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "Many 429 errors.")
                                     
                                     //感情分析が失敗したことをユーザーに伝える
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

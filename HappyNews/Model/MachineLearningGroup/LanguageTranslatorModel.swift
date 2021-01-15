@@ -35,9 +35,6 @@ class LanguageTranslatorModel {
     //感情分析結果の中継保管場所
     var containsArray: [String] = []
     
-    //UserDefaults.standardのインスタン作成
-    var userDefaults = UserDefaults.standard
-    
     //配列の生合成を合わせる変数(初期値は翻訳失敗を回避するため)
     var sortNum50 = "Avoiding Nil $50"
     var sortNum49 = "Avoiding Nil $49"
@@ -125,9 +122,6 @@ class LanguageTranslatorModel {
                                 print("Error - code: \(statusCode), \(message ?? "")")
                                 //感情分析が失敗したことをユーザーに伝える
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                    
-                                    //429エラーが多発したという履歴をUserDefaultsに保存
-                                    self.userDefaults.set("LanguageTranslator: 予期せぬエラーの発生", forKey: " LanguageTranslator: Unexpected errors occur.")
                                     
                                     HUD.show(.label("予期せぬエラー発生"))
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
