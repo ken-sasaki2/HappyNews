@@ -129,7 +129,7 @@ class LanguageTranslatorModel {
                                 
                                 //感情分析が失敗したことをユーザーに伝える
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                    HUD.show(.label("予期せぬエラー発生"))
+                                    HUD.show(.label("予期せぬエラー発生\nアプリを再起動してください"))
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                         HUD.hide(animated: true)
                                     }
