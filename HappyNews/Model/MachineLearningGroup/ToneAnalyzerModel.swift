@@ -85,8 +85,8 @@ class ToneAnalyzerModel {
                                 //429エラーが多発してカウント50に達した場合
                                 if self.toneAnalysisArray.count == 50 {
                                     
-                                    //429エラーが多発したという履歴をUserDefaultsに保存
-                                    self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "Many 429 errors.")
+                                    //API通信時のエラー結果を保存
+                                    self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "TA: many429Errors.")
                                     
                                     //感情分析が失敗したことをユーザーに伝える
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -99,6 +99,9 @@ class ToneAnalyzerModel {
                             default:
                                 if let statusCode = statusCode {
                                     print("Error - code: \(statusCode), \(message ?? "")")
+                                    
+                                    //API通信時のエラー結果を保存
+                                    self.userDefaults.set("予期せぬエラー発生", forKey: "TA: errorOccurred")
                                     
                                     //感情分析が失敗したことをユーザーに伝える
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

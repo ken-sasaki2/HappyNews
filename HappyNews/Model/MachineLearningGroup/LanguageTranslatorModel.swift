@@ -32,7 +32,7 @@ class LanguageTranslatorModel {
     var count     = 0
     var textCount = 50
     
-    //感情分析結果の中継保管場所
+    //LanguageTranslatorの中継保管場所
     var containsArray: [String] = []
     
     //配列の生合成を合わせる変数(初期値は翻訳失敗を回避するため)
@@ -87,6 +87,9 @@ class LanguageTranslatorModel {
     var sortNum2  = "Avoiding Nil $2"
     var sortNum1  = "Avoiding Nil $1"
     
+    //UserDefaultsのインスタンス
+    var userDefaults = UserDefaults.standard
+    
     //NewsTableViewから値を受け取る
     init(languageTranslatorApiKey: String, languageTranslatorVersion: String, languageTranslatorURL: String, newsTextArray: [Any]) {
         
@@ -120,6 +123,9 @@ class LanguageTranslatorModel {
                         default:
                             if let statusCode = statusCode {
                                 print("Error - code: \(statusCode), \(message ?? "")")
+                                
+                                //API通信時のエラー結果を保存
+                                self.userDefaults.set("予期せぬエラー発生", forKey: "LT: errorOccurred")
                                 
                                 //感情分析が失敗したことをユーザーに伝える
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

@@ -86,10 +86,25 @@ class TimeScheduleModel {
                 //NewsViewControllerへAPI通信をおこなう値を返す
                 doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
-                print("朝のニュース 'false' を返す")
                 
-                //NewsViewControllerへキャッシュ通信の値を返す
-                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
+                //前回API通信時にエラーが発生していた場合の処理
+                if userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                    
+                    print("朝のニュース 'true' を返す（前回エラー）")
+                    
+                    //NewsViewControllerへAPI通信をおこなう値を返す
+                    doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
+                    
+                    //UserDefaultsに保存した前回エラーの証を削除
+                    userDefaults.removeObject(forKey: "LT: errorOccurred")
+                    userDefaults.removeObject(forKey: "TA: many429Errors.")
+                    userDefaults.removeObject(forKey: "TA: errorOccurred")
+                } else {
+                    
+                    print("朝のニュース 'false' を返す")
+                    //NewsViewControllerへキャッシュ通信の値を返す
+                    doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
+                }
             }
         }
 
@@ -111,10 +126,25 @@ class TimeScheduleModel {
                 //NewsViewControllerへAPI通信をおこなう値を返す
                 doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
-                print("昼のニュース 'false' を返す")
                 
-                //NewsViewControllerへキャッシュ通信の値を返す
-                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
+                //前回API通信時にエラーが発生していた場合の処理
+                if userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                    
+                    print("昼のニュース 'true' を返す（前回エラー）")
+                    
+                    //NewsViewControllerへAPI通信をおこなう値を返す
+                    doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
+                    
+                    //UserDefaultsに保存した前回エラーの証を削除
+                    userDefaults.removeObject(forKey: "LT: errorOccurred")
+                    userDefaults.removeObject(forKey: "TA: many429Errors.")
+                    userDefaults.removeObject(forKey: "TA: errorOccurred")
+                } else {
+                    
+                    print("昼のニュース 'false' を返す")
+                    //NewsViewControllerへキャッシュ通信の値を返す
+                    doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
+                }
             }
         }
 
@@ -136,10 +166,25 @@ class TimeScheduleModel {
                 //NewsViewControllerへAPI通信をおこなう値を返す
                 doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
-                print("夕方のニュース 'false' を返す")
                 
-                //NewsViewControllerへキャッシュ通信の値を返す
-                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
+                //前回API通信時にエラーが発生していた場合の処理
+                if userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                    
+                    print("夕方のニュース 'true' を返す（前回エラー）")
+                    
+                    //NewsViewControllerへAPI通信をおこなう値を返す
+                    doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
+                    
+                    //UserDefaultsに保存した前回エラーの証を削除
+                    userDefaults.removeObject(forKey: "LT: errorOccurred")
+                    userDefaults.removeObject(forKey: "TA: many429Errors.")
+                    userDefaults.removeObject(forKey: "TA: errorOccurred")
+                } else {
+                    
+                    print("夕方のニュース 'false' を返す")
+                    //NewsViewControllerへキャッシュ通信の値を返す
+                    doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
+                }
             }
         }
 
@@ -161,16 +206,31 @@ class TimeScheduleModel {
                 //NewsViewControllerへAPI通信をおこなう値を返す
                 doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
-                print("夜のニュース 'false' を返す")
                 
-                //NewsViewControllerへキャッシュ通信の値を返す
-                doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
+                //前回API通信時にエラーが発生していた場合の処理
+                if userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                    
+                    print("夜のニュース 'true' を返す（前回エラー）")
+                    
+                    //NewsViewControllerへAPI通信をおこなう値を返す
+                    doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
+                    
+                    //UserDefaultsに保存した前回エラーの証を削除
+                    userDefaults.removeObject(forKey: "LT: errorOccurred")
+                    userDefaults.removeObject(forKey: "TA: many429Errors.")
+                    userDefaults.removeObject(forKey: "TA: errorOccurred")
+                } else {
+                    
+                    print("夜のニュース 'false' を返す")
+                    //NewsViewControllerへキャッシュ通信の値を返す
+                    doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
+                }
             }
         }
 
         //どの時間割にも当てはまらない場合
         else {
-            print("'false'を返す")
+            print("いずれも当てはまらないので 'false' を返す")
             
             //NewsViewControllerへキャッシュ通信の値を返す
             doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
