@@ -18,9 +18,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
 
     // MARK: - XML Property
-    //NewsTableViewのインスタンス
-    @IBOutlet var newsTable: UITableView!
-    
     //XMLファイルを保存するプロパティ
     var xmlString: String?
     
@@ -53,7 +50,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // MARK: - ToneAnalyzer Property
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "hv3WgcrmRrqxAqP15l1zg8rnC64EXbuJnHxoyRRI8phU"
+    var toneAnalyzerApiKey  = "waKBBZ_-Samj91nUYjNB_gF2lX2NYXdkx-q7paSSjB2d"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -63,6 +60,14 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     //joyの要素と認定されたニュースの配列と検索する際のカウント
     var joySelectionArray = [NewsItemsModel]()
     var newsCount         = 50
+    
+    
+    // MARK: - NewsTableView
+    //NewsTableViewのインスタンス
+    @IBOutlet var newsTable: UITableView!
+
+    //セクションのタイトル
+    let newsCategoryArray: [String] = ["社会", "スポーツ", "エンタメ", "ビジネス・経済", "IT・化学"]
     
     
     // MARK: - Other Property
@@ -107,13 +112,13 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     }
     
     //スクロールでナビゲーションバーを隠す
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-        } else {
-            navigationController?.setNavigationBarHidden(false, animated: true)
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+//            navigationController?.setNavigationBarHidden(true, animated: true)
+//        } else {
+//            navigationController?.setNavigationBarHidden(false, animated: true)
+//        }
+//    }
     
     
     // MARK: - TimeSchedule
@@ -356,6 +361,35 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     
     // MARK: - NewsTableView
+    //セクションの数を設定
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return newsCategoryArray.count
+    }
+    
+    //セクションのヘッダーのタイトルを設定
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return newsCategoryArray[section]
+    }
+    
+    //セクションヘッダーの高さを設定
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    //セクションのテキストを設定
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        //セクションのテキストのインスタンス
+        let categoryLabel = UILabel()
+        
+        //セクションのテキストを化粧
+        categoryLabel.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
+        categoryLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+        categoryLabel.textColor = UIColor(hex: "333333")
+
+        return categoryLabel
+    }
+    
     //セルの数を設定
     func tableView(_ newsTable: UITableView, numberOfRowsInSection section: Int) -> Int {
         return joySelectionArray.count
@@ -407,7 +441,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //空のセルを削除
         newsTable.tableFooterView = UIView(frame: .zero)
 
-        //tableaviewの背景
+        //tableviewの背景
         cell.backgroundColor = UIColor.white
         
         return cell
