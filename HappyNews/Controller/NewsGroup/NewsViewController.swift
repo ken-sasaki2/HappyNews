@@ -53,7 +53,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // MARK: - ToneAnalyzer Property
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "C2JH_u0GbxbXLNbirshYgvRJB_u2vJ432BPGu-0D1MME"
+    var toneAnalyzerApiKey  = "_s9hg9koLcC6bcs3J1JS2-JkA2CDnOxddVONCAFOqEFB"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -70,7 +70,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     var userDefaults = UserDefaults.standard
     
     
-    // MARK: - viewDidLoad
+    // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,6 +86,9 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         //時間割を確認
         startTimeSchedule()
+        
+//        settingXML()
+//        startTranslation()
     }
     
     
@@ -143,8 +146,24 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     //XMLファイルを特定してパースを開始する
     func settingXML(){
 
-        //'社会'カテゴリのニュース（ニッポン放送）
-        xmlString = "https://news.yahoo.co.jp/rss/media/nshaberu/all.xml"
+        //XML解析をおこなうニュースの配列
+        //ニッポン放送
+        //テレビ東京スポーツ
+        //ザ・テレビジョン
+        //東洋経済オンライン
+        //TechCrunch Japan
+        let xmlArray = ["https://news.yahoo.co.jp/rss/media/nshaberu/all.xml"]
+        
+        
+        //"https://news.yahoo.co.jp/rss/media/tvtokyos/all.xml",
+        //"https://news.yahoo.co.jp/rss/media/the_tv/all.xml",
+        //"https://news.yahoo.co.jp/rss/media/toyo/all.xml",
+        //"https://news.yahoo.co.jp/rss/media/techcrj/all.xml"
+        
+        //xmlArrayのニュースを取り出す
+        for i in 0...xmlArray.count - 1  {
+            xmlString = xmlArray[i]
+        }
 
         //XMLファイルをURL型のurlに変換
         let url:URL = URL(string: xmlString!)!
@@ -328,7 +347,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     }
     
     
-    // MARK: - Table view data source
+    // MARK: - NewsTableView
     //セルの数を設定
     func tableView(_ newsTable: UITableView, numberOfRowsInSection section: Int) -> Int {
         return joySelectionArray.count
@@ -376,7 +395,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         //サブタイトルを化粧
         subtitle.text = joyNewsItem.pubDate
-        subtitle.textColor = UIColor(hex: "cccccc")
+        subtitle.textColor = UIColor.gray
         
         //空のセルを削除
         newsTable.tableFooterView = UIView(frame: .zero)

@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+// MARK: - Protocol
 //NewsViewControllerへ値を返す
 protocol DoneCatchTimeScheduleProtocol {
     func catchTimeSchedule(updateOrCache: Bool)
@@ -15,6 +17,8 @@ protocol DoneCatchTimeScheduleProtocol {
 
 class TimeScheduleModel {
     
+    
+    // MARK: - Property
     //前回起動時刻の保管場所
     var lastActivation: String?
 
@@ -35,6 +39,8 @@ class TimeScheduleModel {
         dateFormatter = dateTimeFormat
     }
     
+    
+    // MARK: - SetTimeSchedule
     //時間の比較とそれに合った処理をおこなう
     func setTimeSchedule() {
         
@@ -67,6 +73,8 @@ class TimeScheduleModel {
         lastActivation = userDefaults.string(forKey: "lastActivation")
         print("起動時刻更新: \(lastActivation)")
         
+        
+        // MARK: - TimeSchedule 07:00 〜
         //前回起動時刻と定時時刻の間隔で時間割（日付を無くして全て時間指定）
         //07:00以降11:00以前の場合
         if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
@@ -108,6 +116,8 @@ class TimeScheduleModel {
             }
         }
 
+        
+        // MARK: - TimeSchedule 11:00 〜
         //11:00以降17:00以前の場合
         else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
 
@@ -148,6 +158,8 @@ class TimeScheduleModel {
             }
         }
 
+        
+        // MARK: - TimeSchedule 17:00 〜
         //17:00以降23:59:59以前の場合（1日の最後）
         else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
 
@@ -188,6 +200,8 @@ class TimeScheduleModel {
             }
         }
 
+        
+        // MARK: - TimeSchedule 00:00 〜
         //00:00以降07:00以前の場合（日を跨いで初めて起動）
         else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
 

@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class TabBarController: UITabBarController {
     
+    
+    // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +26,8 @@ class TabBarController: UITabBarController {
         UITabBar.appearance().backgroundImage = UIImage()
     }
     
+    
+    // MARK: - DidSelect
     //tabbarをタップした場合のアクション
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         switch item.title {

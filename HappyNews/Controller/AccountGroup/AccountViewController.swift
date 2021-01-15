@@ -14,6 +14,8 @@ import MessageUI
 
 class AccountViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
+    
+    //MARK: - Property
     //インスタンス作成
     @IBOutlet var table: UITableView!
     
@@ -30,6 +32,8 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     let appCellLabelArray    : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者（Twitter）", "HappyNews ver. 1.0"]
     let accountCellLabelArray: [String] = ["ログアウト"]
     
+    
+    //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +43,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         //NavigationBarの呼び出し
         setAccountNavigationBar()
     }
+    
     
     // MARK: - Navigation
     //アカウントページのNavigationBar設定
@@ -57,6 +62,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         //ログイン後の'back'ボタンを削除
         self.navigationItem.hidesBackButton = true
     }
+    
     
     // MARK: - TableView
     //セクションの数を決める
@@ -201,12 +207,14 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
+    
     // MARK: - Notification
     //通知設定機能
     func transitionSettingPage() {
         let url = URL(string: "app-settings:root=General&path=com.ken.HappyNews")
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
+    
     
     // MARK: - Share
     //シェア機能
@@ -223,12 +231,14 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         UIApplication.shared.open(tweetURL, options: [:], completionHandler: nil)
     }
     
+    
     // MARK: - Review
     //レビュー機能
     func reviewFunction() {
         //レビューを要求
         SKStoreReviewController.requestReview()
     }
+    
     
     // MARK: - Mail
     //ご意見・ご要望機能
@@ -279,6 +289,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         controller.dismiss(animated: true, completion: nil)
     }
     
+    
     // MARK: - Twitter
     //Twitter紹介機能
     func twitterFunction() {
@@ -289,6 +300,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             UIApplication.shared.open(twitterURL! as URL, options: [:], completionHandler: nil)
         }
     }
+    
     
     // MARK: - Logout
     //ログアウト機能

@@ -11,6 +11,8 @@ import WebKit
 
 class WebViewController: UIViewController,WKUIDelegate {
 
+    
+    // MARK: - Property
     //WKwebViewのインスタンス作成
     var webView = WKWebView()
     
@@ -18,6 +20,7 @@ class WebViewController: UIViewController,WKUIDelegate {
     var closeButton: UIBarButtonItem?
     
     
+    // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +39,9 @@ class WebViewController: UIViewController,WKUIDelegate {
         //スワイプで戻るを有効
         webView.allowsBackForwardNavigationGestures = true
     }
-
+    
+    
+    // MARK: - Navigation
     //WebViewのNavigationBar設定
     func webViewNavigationBar() {
         
@@ -53,6 +58,8 @@ class WebViewController: UIViewController,WKUIDelegate {
         self.navigationItem.rightBarButtonItem = closeButton
     }
     
+    
+    // MARK: - TapCloseButton
     //closeボタンをタップしたときのアクション
     @objc func tapCloseButton(_ sender: UIBarButtonItem) {
         
@@ -60,6 +67,8 @@ class WebViewController: UIViewController,WKUIDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    
+    // MARK: - OpenWebView
     func openWebView() {
         
         //TopNewsから受け取ったキー値urlで保存されている値をurlStringへ代入
