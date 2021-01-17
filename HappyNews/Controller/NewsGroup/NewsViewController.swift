@@ -36,7 +36,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // MARK: - LanguageTranslator Property
     //XMLファイルのニュースを補完する配列
-    var newsTextArray: [Any] = []
+    var newsTextArray: [String] = []
     
     //LanguageTranslatorの認証キー
     var languageTranslatorApiKey  = "J4LQkEl7BWhZL2QaeLzRIRSwlg4sna1J7-09opB-9Gqf"
@@ -50,7 +50,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // MARK: - ToneAnalyzer Property
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "waKBBZ_-Samj91nUYjNB_gF2lX2NYXdkx-q7paSSjB2d"
+    var toneAnalyzerApiKey  = "h007Yxy3chdnGZlwD88881shSzi09IPiZHJ2a2D5m2wt"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -74,6 +74,11 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     //UserDefaultsのインスタンス
     var userDefaults = UserDefaults.standard
     
+    //現在時刻の取得とそのフォーマット
+    var dateTime         = Date()
+    var dateTimeFormat   = DateFormatter()
+    var outputDateFormat = DateFormatter()
+    
     
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -90,9 +95,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         //時間割を確認
         startTimeSchedule()
-        
-        //settingXML()
-        //startTranslation()
     }
     
     
@@ -112,22 +114,18 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     }
     
     //スクロールでナビゲーションバーを隠す
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-//            navigationController?.setNavigationBarHidden(true, animated: true)
-//        } else {
-//            navigationController?.setNavigationBarHidden(false, animated: true)
-//        }
-//    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        } else {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
     
     
     // MARK: - TimeSchedule
     //TimeScheduleModelと通信をおこない、API通信orキャッシュ利用かどうかを決める
     func startTimeSchedule() {
-        
-        //現在時刻の取得
-        let dateTime = Date()
-        let dateTimeFormat = DateFormatter()
         
         //TimeScheduleModelと通信をおこないプロトコルを委託
         let timeScheduleModel = TimeScheduleModel(dateTime: dateTime, dateTimeFormat: dateTimeFormat)
@@ -151,6 +149,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             //XMLパースを開始してキャッシュでリロード
             settingXML()
             reloadNewsData()
+//            startTranslation()
         }
     }
     
@@ -165,7 +164,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //ザ・テレビジョン
         //東洋経済オンライン
         //TechCrunch Japan
-        let xmlArray = ["https://news.yahoo.co.jp/rss/media/nshaberu/all.xml"]
+        let xmlArray = "https://news.yahoo.co.jp/rss/media/entame/all.xml"
         
         
         //"https://news.yahoo.co.jp/rss/media/tvtokyos/all.xml",
@@ -174,21 +173,21 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //"https://news.yahoo.co.jp/rss/media/techcrj/all.xml"
         
         //xmlArrayのニュースを取り出す
-        for i in 0...xmlArray.count - 1  {
-            xmlString = xmlArray[i]
-        }
-
-        //XMLファイルをURL型のurlに変換
-        let url:URL = URL(string: xmlString!)!
-
-        //parserにurlを代入
-        parser = XMLParser(contentsOf: url)!
-
-        //XMLParserを委任
-        parser.delegate = self
-
-        //parseの開始
-        parser.parse()
+        //for i in 0...xmlArray.count - 1  {
+            xmlString = xmlArray
+            
+            //XMLファイルをURL型のurlに変換
+            let url:URL = URL(string: xmlString!)!
+            
+            //parserにurlを代入
+            parser = XMLParser(contentsOf: url)!
+            
+            //XMLParserを委任
+            parser.delegate = self
+            
+            //parseの開始
+            parser.parse()
+        //}
     }
     
     //XML解析を開始する場合(parser.parse())に呼ばれるメソッド
@@ -213,15 +212,25 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             let lastItem = newsItems[newsItems.count - 1]
             switch currentElementName {
             case "title":
-                lastItem.title       = string
+                lastItem.title      = string
             case "link":
                 if lastItem.url == nil {
-                    lastItem.url     = string
+                    lastItem.url    = string
                 } else {
                     break
                 }
             case "pubDate":
-                lastItem.pubDate     = string
+                //inputString = ニュース発行時刻(XML純正)
+                let inputString       = string
+                
+                //地域とフォーマットを指定してDate型に変換
+                dateTimeFormat.locale = Locale(identifier: "ja_JP")
+                dateTimeFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                let inputDate = dateTimeFormat.date(from: inputString)
+                
+                //lastItem.pubDate = inputDateのフォーマットを指定してString型で代入
+                outputDateFormat.dateFormat = "yyyy年M月d日(EEEEE) H時m分s秒"
+                lastItem.pubDate = outputDateFormat.string(from: inputDate!)
             case "description":
                 lastItem.description = string
             case "image":
@@ -345,6 +354,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             
             //メインスレッドでUIの更新
             DispatchQueue.main.async {
+                
                 //tableViewの更新
                 self.newsTable.reloadData()
                 
@@ -362,33 +372,33 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // MARK: - NewsTableView
     //セクションの数を設定
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return newsCategoryArray.count
-    }
-    
-    //セクションのヘッダーのタイトルを設定
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return newsCategoryArray[section]
-    }
-    
-    //セクションヘッダーの高さを設定
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
-    
-    //セクションのテキストを設定
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        //セクションのテキストのインスタンス
-        let categoryLabel = UILabel()
-        
-        //セクションのテキストを化粧
-        categoryLabel.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
-        categoryLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
-        categoryLabel.textColor = UIColor(hex: "333333")
-
-        return categoryLabel
-    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return newsCategoryArray.count
+//    }
+//
+//    //セクションのヘッダーのタイトルを設定
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return newsCategoryArray[section]
+//    }
+//
+//    //セクションヘッダーの高さを設定
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 40
+//    }
+//
+//    //セクションのテキストを設定
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//
+//        //セクションのテキストのインスタンス
+//        let categoryLabel = UILabel()
+//
+//        //セクションのテキストを化粧
+//        categoryLabel.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
+//        categoryLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+//        categoryLabel.textColor = UIColor(hex: "333333")
+//
+//        return categoryLabel
+//    }
     
     //セルの数を設定
     func tableView(_ newsTable: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -397,7 +407,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     //セルの高さを設定
     func tableView(_ newsTable: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 360
     }
 
     //セルを構築
@@ -409,34 +419,153 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //tableCellのIDでUITableViewCellのインスタンスを生成
         let cell = newsTable.dequeueReusableCell(withIdentifier: "newsTable", for: indexPath)
         
-        //Tag番号(1)でサムネイルのインスタンス作成
+        //Tag番号(1)〜(3)でインスタンス作成(サムネイル, タイトル, サブタイトル)
         let thumbnail = cell.viewWithTag(1) as! UIImageView
-        
-        //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像）
-        let thumbnailURL = URL(string: joyNewsItem.image!.description)
-        let placeholder  = UIImage(named: "placeholder")
-        
-        //サムネイルの設定
-        thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
-        
-        //サムネイルを化粧
-        thumbnail.image = placeholder
-        thumbnail.contentMode = .scaleAspectFill
-        
-        //Tag番号(2)でニュースタイトルのインスタンス作成
         let newsTitle = cell.viewWithTag(2) as! UILabel
-        
-        //ニュースタイトルを化粧
-        newsTitle.text = joyNewsItem.title
-        newsTitle.textColor = UIColor(hex: "333333")
-        newsTitle.numberOfLines = 3
-        
-        //Tag番号(3)でニュース発行時刻のインスタンスを作成
         let subtitle = newsTable.viewWithTag(3) as! UILabel
         
-        //サブタイトルを化粧
-        subtitle.text = joyNewsItem.pubDate
-        subtitle.textColor = UIColor.gray
+        //ニュース会社名を末尾指定で取得
+        //let suffix1 = joyNewsItem.title?.description.suffix(10)
+        
+        // MARK: - ニッポン放送
+        //取得したニュース会社名を検索し、含んでいる場合はセクション毎に振り分ける
+//        if suffix1!.contains("ニッポン放送") {
+//
+//            if indexPath.section == 0 {
+                
+                //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像）
+                let thumbnailURL = URL(string: joyNewsItem.image!.description)
+                let placeholder  = UIImage(named: "placeholder")
+                
+                //サムネイルの設定
+                thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
+                
+                //サムネイルを化粧
+                thumbnail.image = placeholder
+                thumbnail.contentMode = .scaleAspectFill
+                
+                //ニュースタイトルを化粧
+                newsTitle.text = joyNewsItem.title
+                newsTitle.textColor = UIColor(hex: "333333")
+                newsTitle.numberOfLines = 3
+        
+                //サブタイトルを化粧
+                subtitle.text = joyNewsItem.pubDate
+                subtitle.textColor = UIColor.gray
+//            }
+//        }
+        
+        
+        // MARK: - テレビ東京スポーツ
+//        else if suffix1!.contains("テレビ東京スポーツ") {
+//
+//            if indexPath.section == 1 {
+//
+//                //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像）
+//                let thumbnailURL = URL(string: joyNewsItem.image!.description)
+//                let placeholder  = UIImage(named: "placeholder")
+//
+//                //サムネイルの設定
+//                thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
+//
+//                //サムネイルを化粧
+//                thumbnail.image = placeholder
+//                thumbnail.contentMode = .scaleAspectFill
+//
+//                //ニュースタイトルを化粧
+//                newsTitle.text = joyNewsItem.title
+//                newsTitle.textColor = UIColor(hex: "333333")
+//                newsTitle.numberOfLines = 3
+//
+//                //サブタイトルを化粧
+//                subtitle.text = joyNewsItem.pubDate
+//                subtitle.textColor = UIColor.gray
+//            }
+//        }
+//
+//
+//        // MARK: - ザ・テレビジョン
+//        else if suffix1!.contains("ザ・テレビジョン") {
+//
+//            if indexPath.section == 2 {
+//
+//                //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像）
+//                let thumbnailURL = URL(string: joyNewsItem.image!.description)
+//                let placeholder  = UIImage(named: "placeholder")
+//
+//                //サムネイルの設定
+//                thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
+//
+//                //サムネイルを化粧
+//                thumbnail.image = placeholder
+//                thumbnail.contentMode = .scaleAspectFill
+//
+//                //ニュースタイトルを化粧
+//                newsTitle.text = joyNewsItem.title
+//                newsTitle.textColor = UIColor(hex: "333333")
+//                newsTitle.numberOfLines = 3
+//
+//                //サブタイトルを化粧
+//                subtitle.text = joyNewsItem.pubDate
+//                subtitle.textColor = UIColor.gray
+//            }
+//        }
+//
+//
+//        // MARK: - 東洋経済オンライン
+//        else if suffix1!.contains("東洋経済オンライン") {
+//
+//            if indexPath.section == 3 {
+//
+//                //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像）
+//                let thumbnailURL = URL(string: joyNewsItem.image!.description)
+//                let placeholder  = UIImage(named: "placeholder")
+//
+//                //サムネイルの設定
+//                thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
+//
+//                //サムネイルを化粧
+//                thumbnail.image = placeholder
+//                thumbnail.contentMode = .scaleAspectFill
+//
+//                //ニュースタイトルを化粧
+//                newsTitle.text = joyNewsItem.title
+//                newsTitle.textColor = UIColor(hex: "333333")
+//                newsTitle.numberOfLines = 3
+//
+//                //サブタイトルを化粧
+//                subtitle.text = joyNewsItem.pubDate
+//                subtitle.textColor = UIColor.gray
+//            }
+//        }
+//
+//
+//        // MARK: - TechCrunch Japan
+//        else if suffix1!.contains("TechCrunch Japan") {
+//
+//            if indexPath.section == 4 {
+//
+//                //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像）
+//                let thumbnailURL = URL(string: joyNewsItem.image!.description)
+//                let placeholder  = UIImage(named: "placeholder")
+//
+//                //サムネイルの設定
+//                thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
+//
+//                //サムネイルを化粧
+//                thumbnail.image = placeholder
+//                thumbnail.contentMode = .scaleAspectFill
+//
+//                //ニュースタイトルを化粧
+//                newsTitle.text = joyNewsItem.title
+//                newsTitle.textColor = UIColor(hex: "333333")
+//                newsTitle.numberOfLines = 3
+//
+//                //サブタイトルを化粧
+//                subtitle.text = joyNewsItem.pubDate
+//                subtitle.textColor = UIColor.gray
+//            }
+//        }
         
         //空のセルを削除
         newsTable.tableFooterView = UIView(frame: .zero)
