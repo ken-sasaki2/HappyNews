@@ -50,7 +50,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // MARK: - ToneAnalyzer Property
     //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey  = "h007Yxy3chdnGZlwD88881shSzi09IPiZHJ2a2D5m2wt"
+    var toneAnalyzerApiKey  = "3Js4t4WMZzeIR_vqmFSsHiaP7Hrq39fw-t4yc5WqDDau"
     var toneAnalyzerVersion = "2017-09-21"
     var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
     
@@ -429,29 +429,28 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         // MARK: - ニッポン放送
         //取得したニュース会社名を検索し、含んでいる場合はセクション毎に振り分ける
-//        if suffix1!.contains("ニッポン放送") {
-//
-//            if indexPath.section == 0 {
-                
-                //サムネイルの化粧で扱うインスタンス(画像URL, 待機画像）
-                let thumbnailURL = URL(string: joyNewsItem.image!.description)
-                let placeholder  = UIImage(named: "placeholder")
-                
-                //サムネイルの設定
-                thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
-                
-                //サムネイルを化粧
-                thumbnail.image = placeholder
-                thumbnail.contentMode = .scaleAspectFill
-                
-                //ニュースタイトルを化粧
-                newsTitle.text = joyNewsItem.title
-                newsTitle.textColor = UIColor(hex: "333333")
-                newsTitle.numberOfLines = 3
+        //        if suffix1!.contains("ニッポン放送") {
+        //
+        //            if indexPath.section == 0 {
         
-                //サブタイトルを化粧
-                subtitle.text = joyNewsItem.pubDate
-                subtitle.textColor = UIColor.gray
+        //サムネイルで扱うインスタンス(画像URL, 待機画像）
+        let thumbnailURL = URL(string: joyNewsItem.image!.description)
+        let placeholder  = UIImage(named: "placeholder")
+        
+        //サムネイルの設定
+        thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.7))], progressBlock: nil)
+        
+        //サムネイルのアスペクト比を設定
+        thumbnail.contentMode = .scaleAspectFill
+        
+        //ニュースタイトルを化粧
+        newsTitle.text = joyNewsItem.title
+        newsTitle.textColor = UIColor(hex: "333333")
+        newsTitle.numberOfLines = 3
+        
+        //サブタイトルを化粧
+        subtitle.text = joyNewsItem.pubDate
+        subtitle.textColor = UIColor.gray
 //            }
 //        }
         
@@ -469,7 +468,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
 //                thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
 //
 //                //サムネイルを化粧
-//                thumbnail.image = placeholder
 //                thumbnail.contentMode = .scaleAspectFill
 //
 //                //ニュースタイトルを化粧
@@ -497,7 +495,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
 //                thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
 //
 //                //サムネイルを化粧
-//                thumbnail.image = placeholder
 //                thumbnail.contentMode = .scaleAspectFill
 //
 //                //ニュースタイトルを化粧
@@ -525,7 +522,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
 //                thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
 //
 //                //サムネイルを化粧
-//                thumbnail.image = placeholder
 //                thumbnail.contentMode = .scaleAspectFill
 //
 //                //ニュースタイトルを化粧
@@ -553,7 +549,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
 //                thumbnail.kf.setImage(with: thumbnailURL, placeholder: placeholder, options: [.transition(.fade(0.2))])
 //
 //                //サムネイルを化粧
-//                thumbnail.image = placeholder
 //                thumbnail.contentMode = .scaleAspectFill
 //
 //                //ニュースタイトルを化粧
@@ -566,6 +561,11 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
 //                subtitle.textColor = UIColor.gray
 //            }
 //        }
+        
+        //セルの境目の線を削除
+        newsTable.separatorStyle = .none
+        
+        //newsTable.backgroundColor = UIColor.white
         
         //空のセルを削除
         newsTable.tableFooterView = UIView(frame: .zero)
