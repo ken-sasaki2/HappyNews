@@ -91,11 +91,11 @@ class LanguageTranslatorModel {
     var languageTranslatorAccessKey    : String?
     var languageTranslatorAccessversion: String?
     var languageTranslatorAccessURL    : String?
-    var translationTextArray           : [Any] = []
+    var translationTextArray           : [String] = []
     var translationText                : String?
     
     //NewsViewControllerから値を受け取る
-    init(languageTranslatorApiKey: String, languageTranslatorVersion: String, languageTranslatorURL: String, newsTextArray: [Any]) {
+    init(languageTranslatorApiKey: String, languageTranslatorVersion: String, languageTranslatorURL: String, newsTextArray: [String]) {
         
         languageTranslatorAccessKey     = languageTranslatorApiKey
         languageTranslatorAccessversion = languageTranslatorVersion
@@ -115,10 +115,8 @@ class LanguageTranslatorModel {
         
         for i in 0..<self.textCount {
             
-            self.translationText = translationTextArray[i] as? String
-            
             //リクエスト送信
-            languageTranslator.translate(text: [self.translationText!], modelID: "ja-en") {
+            languageTranslator.translate(text: [translationTextArray[i]], modelID: "ja-en") {
                 response, error in
                 
                 //エラー処理
