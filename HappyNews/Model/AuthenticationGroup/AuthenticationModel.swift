@@ -8,12 +8,14 @@
 
 import Foundation
 
+
 // MARK: - Protosol
 protocol DoneCatchAuthenticationItem {
     func catchAuthenticationItem(languageTranslatorItem: String, toneAnalyzerItem: String)
 }
 
 class AuthenticationModel {
+
 
     // MARK: - Property
     //NewsViewControllerから受け取る値
