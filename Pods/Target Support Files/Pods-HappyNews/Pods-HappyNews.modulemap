@@ -1,6 +1,0 @@
-framework module Pods_HappyNews {
-  umbrella header "Pods-HappyNews-umbrella.h"
-
-  export *
-  module * { export * }
-}

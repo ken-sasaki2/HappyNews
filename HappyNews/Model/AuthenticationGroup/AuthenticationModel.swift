@@ -35,6 +35,6 @@ class AuthenticationModel {
     
     func setAuthentication() {
         
-        doneCatchAuthenticationItem?.catchAuthenticationItem(languageTranslatorItem: "J4LQkEl7BWhZL2QaeLzRIRSwlg4sna1J7-09opB-9Gqf", toneAnalyzerItem: "")
+        doneCatchAuthenticationItem?.catchAuthenticationItem(languageTranslatorItem: "J4LQkEl7BWhZL2QaeLzRIRSwlg4sna1J7-09opB-9Gqf", toneAnalyzerItem: "zxsrTapH91XqPW0usWcg2-g0s1sQ6fIo9A1eiVZVRFU7")
     }
 }
