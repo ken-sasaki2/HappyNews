@@ -33,6 +33,6 @@ class AuthenticationModel {
     
     func setAuthentication() {
         
-        doneCatchAuthenticationItem?.catchAuthenticationItem(languageTranslatorItem: "J4LQkEl7BWhZL2QaeLzRIRSwlg4sna1J7-09opB-9Gqf", toneAnalyzerItem: "3Js4t4WMZzeIR_vqmFSsHiaP7Hrq39fw-t4yc5WqDDau")
+        doneCatchAuthenticationItem?.catchAuthenticationItem(languageTranslatorItem: "J4LQkEl7BWhZL2QaeLzRIRSwlg4sna1J7-09opB-9Gqf", toneAnalyzerItem: "")
     }
 }
