@@ -14,7 +14,7 @@ import SwiftyJSON
 import PKHUD
 import Kingfisher
 
-class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol, DoneCatchTimeScheduleProtocol, DoneCatchAuthenticationItem {
+class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol, DoneCatchTimeScheduleProtocol {
     
 
     // MARK: - XML Property
@@ -38,22 +38,12 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     //XMLファイルのニュースを補完する配列
     var newsTextArray: [String] = []
     
-    //LanguageTranslatorの認証キー
-    var languageTranslatorApiKey: String?
-    var languageTranslatorVersion = "2018-05-01"
-    var languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
-    
     //LanguageTranslationModelから渡ってくる値
     var translationArray      = [String]()
     var translationArrayCount = Int()
     
     
     // MARK: - ToneAnalyzer Property
-    //ToneAnalyzerの認証キー
-    var toneAnalyzerApiKey: String?
-    var toneAnalyzerVersion = "2017-09-21"
-    var toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
-    
     //ToneAnalyzerModelから渡ってくる値
     var joyCountArray = [Int]()
     
@@ -141,16 +131,13 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             
             //XMLパースを開始してAPI通信を開始
             settingXML()
-            requestAuthentication()
             startTranslation()
-            
         } else {
             print("キャッシュでUI更新")
             
             //XMLパースを開始してキャッシュでリロード
             settingXML()
             reloadNewsData()
-//            startTranslation()
         }
     }
     
@@ -261,23 +248,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     }
     
     
-    // MARK: - RequestAuthentication
-    //AuthenticationModelと通信をおこない、API認証に必要な値を受け取る
-    func requestAuthentication() {
-        
-        let authentication = AuthenticationModel(authenticationRequest: "Please authentication")
-            authentication.doneCatchAuthenticationItem = self
-            authentication.setAuthentication()
-    }
-    
-    //AuthenticationModelから返ってきた値の受け取り
-    func catchAuthenticationItem(languageTranslatorItem: String, toneAnalyzerItem: String) {
-        
-        languageTranslatorApiKey = languageTranslatorItem
-        toneAnalyzerApiKey       = toneAnalyzerItem
-    }
-    
-    
     // MARK: - LanguageTranslator
     //LanguageTranslatorModelと通信をおこない、翻訳結果を感情分析に投げる
     func startTranslation() {
@@ -292,8 +262,13 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         print("newsTextArray: \(newsTextArray.debugDescription)")
         
+        //LanguageTranslatorの認証アイテム
+        let languageTranslatorApiKey  = KeyManager().getValue(key: "languageTranslatorApiKey") as! String
+        let languageTranslatorVersion = "2018-05-01"
+        let languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
+        
         //LanguageTranslatorModelと通信
-        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey!, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
+        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
         
         //LanguageTranslatorModelの委託とJSON解析をセット
         languageTranslatorModel.doneCatchTranslationProtocol = self
@@ -322,8 +297,14 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     // MARK: - ToneAnalyzer
     //ToneAnalyzerModelと通信をおこない、感情分析結果を保存する
     func startToneAnalyzer() {
+        
+        //ToneAnalyzerの認証キー
+        let toneAnalyzerApiKey  = KeyManager().getValue(key: "toneAnalyzerApiKey") as! String
+        let toneAnalyzerVersion = "2017-09-21"
+        let toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
+        
         //translationArrayとAPIToneAnalyzerの認証コードで通信
-        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey!, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
+        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
         
         //ToneAnalyzerModelの委託とJSON解析をセット
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
