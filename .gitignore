@@ -23,4 +23,4 @@ Pods/*
 *.swp
 !.gitkeep
 .DS_Store
-CollectionView3/APIKey.plist
+HappyNews/apiKey.plist
