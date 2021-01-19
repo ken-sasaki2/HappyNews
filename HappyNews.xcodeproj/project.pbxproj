@@ -24,8 +24,8 @@
 		45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* NewsViewController.swift */; };
 		45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8865D24E4C0F000B32D02 /* Main.storyboard */; };
 		45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */; };
-		45E1F9E725B6D0A1004FA603 /* apiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45E1F9E625B6D0A1004FA603 /* apiKey.plist */; };
 		45E1F9EB25B6D370004FA603 /* KeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E1F9EA25B6D370004FA603 /* KeyManager.swift */; };
+		45E1FA0A25B71198004FA603 /* apiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45E1FA0925B71198004FA603 /* apiKey.plist */; };
 		45E80A5F25B52FF1001A25AF /* TimeScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */; };
 		45F5C5E9258488030082119F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F5C5E8258488030082119F /* MessageUI.framework */; };
 		45FB2820257479ED0054A9B8 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB281F257479ED0054A9B8 /* AccountViewController.swift */; };
@@ -56,8 +56,8 @@
 		45D8865E24E4C0F000B32D02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45D8866324E4C0F200B32D02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45D8866524E4C0F200B32D02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45E1F9E625B6D0A1004FA603 /* apiKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apiKey.plist; sourceTree = "<group>"; };
 		45E1F9EA25B6D370004FA603 /* KeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManager.swift; sourceTree = "<group>"; };
+		45E1FA0925B71198004FA603 /* apiKey.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = apiKey.plist; sourceTree = "<group>"; };
 		45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeScheduleModel.swift; sourceTree = "<group>"; };
 		45F5C5E8258488030082119F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		45FB281F257479ED0054A9B8 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -183,7 +183,7 @@
 				45D8866C24E4C11300B32D02 /* View */,
 				45D8866B24E4C10800B32D02 /* Controller */,
 				45D8866524E4C0F200B32D02 /* Info.plist */,
-				45E1F9E625B6D0A1004FA603 /* apiKey.plist */,
+				45E1FA0925B71198004FA603 /* apiKey.plist */,
 				45B8238F25739340005F435B /* GoogleService-Info.plist */,
 			);
 			path = HappyNews;
@@ -322,9 +322,9 @@
 			files = (
 				45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */,
 				45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */,
+				45E1FA0A25B71198004FA603 /* apiKey.plist in Resources */,
 				4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */,
 				45B8239025739340005F435B /* GoogleService-Info.plist in Resources */,
-				45E1F9E725B6D0A1004FA603 /* apiKey.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
