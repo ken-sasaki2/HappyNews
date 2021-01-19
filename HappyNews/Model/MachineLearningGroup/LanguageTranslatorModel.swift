@@ -11,32 +11,29 @@ import LanguageTranslator
 import SwiftyJSON
 import PKHUD
 
+
+// MARK: - Protocol
+//NewsViewControllerに値を返す
 protocol DoneCatchTranslationProtocol {
-    
     func catchTranslation(arrayTranslationData: Array<String>, resultCount: Int)
 }
 
 class LanguageTranslatorModel {
     
-    //Controllerから渡ってくる値
-    var languageTranslatorAccessKey    : String?
-    var languageTranslatorAccessversion: String?
-    var languageTranslatorAccessURL    : String?
-    var translationTextArray           : [Any] = []
-    var translationText                : String?
     
-    //Controllerに値を返すときに使用
+    // MARK: - Property
+    //NewsViewControllerに値を返すときに使用
     var doneCatchTranslationProtocol: DoneCatchTranslationProtocol?
+    
+    //UserDefaultsのインスタンス
+    var userDefaults = UserDefaults.standard
     
     //JSON解析で使用
     var count     = 0
     var textCount = 50
     
-    //感情分析結果の中継保管場所
+    //LanguageTranslatorの中継保管場所
     var containsArray: [String] = []
-    
-    //UserDefaults.standardのインスタン作成
-    var userDefaults = UserDefaults.standard
     
     //配列の生合成を合わせる変数(初期値は翻訳失敗を回避するため)
     var sortNum50 = "Avoiding Nil $50"
@@ -90,8 +87,15 @@ class LanguageTranslatorModel {
     var sortNum2  = "Avoiding Nil $2"
     var sortNum1  = "Avoiding Nil $1"
     
-    //NewsTableViewから値を受け取る
-    init(languageTranslatorApiKey: String, languageTranslatorVersion: String, languageTranslatorURL: String, newsTextArray: [Any]) {
+    //NewsViewControllerから渡ってくる値
+    var languageTranslatorAccessKey    : String?
+    var languageTranslatorAccessversion: String?
+    var languageTranslatorAccessURL    : String?
+    var translationTextArray           : [String] = []
+    var translationText                : String?
+    
+    //NewsViewControllerから値を受け取る
+    init(languageTranslatorApiKey: String, languageTranslatorVersion: String, languageTranslatorURL: String, newsTextArray: [String]) {
         
         languageTranslatorAccessKey     = languageTranslatorApiKey
         languageTranslatorAccessversion = languageTranslatorVersion
@@ -99,6 +103,8 @@ class LanguageTranslatorModel {
         translationTextArray            = newsTextArray
     }
     
+    
+    // MARK: - SetLanguageTranslator
     //翻訳開始
     func setLanguageTranslator() {
         
@@ -109,10 +115,8 @@ class LanguageTranslatorModel {
         
         for i in 0..<self.textCount {
             
-            self.translationText = translationTextArray[i] as? String
-            
             //リクエスト送信
-            languageTranslator.translate(text: [self.translationText!], modelID: "ja-en") {
+            languageTranslator.translate(text: [translationTextArray[i]], modelID: "ja-en") {
                 response, error in
                 
                 //エラー処理
@@ -123,13 +127,13 @@ class LanguageTranslatorModel {
                         default:
                             if let statusCode = statusCode {
                                 print("Error - code: \(statusCode), \(message ?? "")")
+                                
+                                //API通信時のエラー結果を保存
+                                self.userDefaults.set("予期せぬエラー発生", forKey: "LT: errorOccurred")
+                                
                                 //感情分析が失敗したことをユーザーに伝える
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                    
-                                    //429エラーが多発したという履歴をUserDefaultsに保存
-                                    self.userDefaults.set("LanguageTranslator: 予期せぬエラーの発生", forKey: " LanguageTranslator: Unexpected errors occur.")
-                                    
-                                    HUD.show(.label("予期せぬエラー発生"))
+                                    HUD.show(.label("予期せぬエラー発生\nアプリを再起動してください"))
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                         HUD.hide(animated: true)
                                     }
@@ -180,6 +184,8 @@ class LanguageTranslatorModel {
         }
     }
     
+    
+    // MARK: - SortTheTranslationResults
     //翻訳結果の並べ替えをおこなうメソッド
     func sortTheTranslationResults() {
         
@@ -295,10 +301,10 @@ class LanguageTranslatorModel {
         //翻訳前と翻訳後の配列の順番を合わせる
         let translationArray: [String] = [sortNum50, sortNum49, sortNum48, sortNum47, sortNum46, sortNum45, sortNum44, sortNum43, sortNum42, sortNum41, sortNum40, sortNum39, sortNum38, sortNum37, sortNum36, sortNum35, sortNum34, sortNum33, sortNum32, sortNum31, sortNum30, sortNum29, sortNum28, sortNum27, sortNum26, sortNum25, sortNum24, sortNum23, sortNum22, sortNum21, sortNum20, sortNum19, sortNum18, sortNum17, sortNum16, sortNum15, sortNum14, sortNum13, sortNum12, sortNum11, sortNum10, sortNum9, sortNum8, sortNum7, sortNum6, sortNum5, sortNum4, sortNum3, sortNum2, sortNum1]
         
-        //最後にappendされたtranslationArrayをControllerへ返す
+        //最後にappendされたtranslationArrayをNewsViewControllerへ返す
         if translationArray.count == textCount  {
             
-            //NewsTableViewControllerへ値を渡す
+            //NewsViewControllerへ値を返す
             self.doneCatchTranslationProtocol?.catchTranslation(arrayTranslationData: translationArray, resultCount: translationArray.count)
         } else {
             print("Not enough elements in the array")

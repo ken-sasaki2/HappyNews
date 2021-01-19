@@ -12,6 +12,8 @@ import FirebaseAuth
 
 class LocalNotificationViewController: UIViewController {
 
+    
+    // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,6 +23,8 @@ class LocalNotificationViewController: UIViewController {
         eveningLocalNotification()
     }
     
+    
+    // MARK: - MorningLocalNotification
     //朝のローカルPush通知の作成
     func morningLocalNotification() {
         
@@ -44,6 +48,8 @@ class LocalNotificationViewController: UIViewController {
         UNUserNotificationCenter.current().add(morningRequest, withCompletionHandler: nil)
     }
     
+    
+    // MARK: - AfternoonLocalNotification
     //昼のローカルPush通知の作成
     @objc func afternoonLocalNotification() {
         
@@ -67,6 +73,8 @@ class LocalNotificationViewController: UIViewController {
         UNUserNotificationCenter.current().add(afternoonRequest, withCompletionHandler: nil)
     }
     
+    
+    // MARK: - EveningLocalNotification
     //夕方のローカルPush通知の作成
     @objc func eveningLocalNotification() {
         

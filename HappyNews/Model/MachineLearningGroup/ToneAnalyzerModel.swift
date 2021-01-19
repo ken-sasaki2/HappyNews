@@ -10,19 +10,17 @@ import ToneAnalyzer
 import SwiftyJSON
 import PKHUD
 
-//Controllerに値を渡す
+
+// MARK: - Protocol
+//NewsViewControllerに値を返す
 protocol DoneCatchAnalyzerProtocol {
     func catchAnalyzer(arrayAnalyzerData: Array<Int>)
 }
 
 class ToneAnalyzerModel {
     
-    //Controllerから渡ってくる値
-    var toneAnalyzerAccessKey    : String?
-    var toneAnalyzerAccessVersion: String?
-    var toneAnalyzerAccessURL    : String?
-    var toneAnalyzerArray        : [String] = []
     
+    // MARK: - Property
     //JSON解析で使用
     var count      = 0
     var arrayCount = 50
@@ -39,7 +37,13 @@ class ToneAnalyzerModel {
     //プロトコルのインスタンス
     var doneCatchAnalyzerProtocol: DoneCatchAnalyzerProtocol?
     
-    //NewsTableViewから値を受け取る
+    //NewsViewControllerから渡ってくる値
+    var toneAnalyzerAccessKey    : String?
+    var toneAnalyzerAccessVersion: String?
+    var toneAnalyzerAccessURL    : String?
+    var toneAnalyzerArray        : [String] = []
+    
+    //NewsViewControllerから値を受け取る
     init(toneAnalyzerApiKey: String, toneAnalyzerVersion: String, toneAnalyzerURL: String, translationArray: [String]) {
         
         toneAnalyzerAccessKey     = toneAnalyzerApiKey
@@ -48,6 +52,8 @@ class ToneAnalyzerModel {
         toneAnalyzerArray         = translationArray
     }
     
+    
+    // MARK: - SetToneAnalyzer
     //感情分析開始
     func setToneAnalyzer() {
         
@@ -85,12 +91,12 @@ class ToneAnalyzerModel {
                                 //429エラーが多発してカウント50に達した場合
                                 if self.toneAnalysisArray.count == 50 {
                                     
-                                    //429エラーが多発したという履歴をUserDefaultsに保存
-                                    self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "Multiple 429 errors")
+                                    //API通信時のエラー結果を保存
+                                    self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "TA: many429Errors.")
                                     
                                     //感情分析が失敗したことをユーザーに伝える
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                        HUD.show(.label("予期せぬエラー発生"))
+                                        HUD.show(.label("予期せぬエラー発生\nアプリを再起動してください"))
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                             HUD.hide(animated: true)
                                         }
@@ -100,11 +106,12 @@ class ToneAnalyzerModel {
                                 if let statusCode = statusCode {
                                     print("Error - code: \(statusCode), \(message ?? "")")
                                     
-                                    self.userDefaults.set("ToneAnalyzer: 予期せぬエラーの発生", forKey: " ToneAnalyzer: Unexpected errors occur.")
+                                    //API通信時のエラー結果を保存
+                                    self.userDefaults.set("予期せぬエラー発生", forKey: "TA: errorOccurred")
                                     
                                     //感情分析が失敗したことをユーザーに伝える
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                        HUD.show(.label("予期せぬエラー発生"))
+                                        HUD.show(.label("予期せぬエラー発生\nアプリを再起動してください"))
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                             HUD.hide(animated: true)
                                         }
@@ -158,6 +165,8 @@ class ToneAnalyzerModel {
         }
     }
     
+    
+    // MARK: - JsonAnalysisOfToneAnalyzer
     //先にfor文を呼び出したいのでclass内でメソッドを分ける
     func jsonAnalysisOfToneAnalyzer() {
         
@@ -174,7 +183,7 @@ class ToneAnalyzerModel {
                 joyCountArray.append(toneAnalysisArray[0].count+i-1)
             }
         }
-        //最後にappendされた配列をControllerへ返す
+        //最後にappendされた配列をNewsViewControllerへ返す
         self.doneCatchAnalyzerProtocol?.catchAnalyzer(arrayAnalyzerData: joyCountArray)
     }
 }

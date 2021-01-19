@@ -15,9 +15,13 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
+    
+    //MARK: - Property
     //認証リクエスト時に必要
     var currentNonce: String?
 
+    
+    // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,6 +53,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         createLoginCancelButton()
     }
     
+    
     // MARK: - Navigation
     //アカウントページのNavigationBar設定
     func setAccountNavigationBar() {
@@ -63,6 +68,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false
     }
+    
     
     // MARK: - SignInGuideText
     //'Sign In With Apple'上のテキスト
@@ -96,7 +102,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         self.view.addConstraint(signInGuideWidthConstraint)
     }
     
-    // MARK: - SignInWithApple
+    
+    // MARK: - Sign In With Apple
     //'Sign In With Apple' ボタンの作成
     func createSignInWithApple() {
         
@@ -130,6 +137,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         self.view.addConstraint(appleButtonWidthConstraint)
     }
     
+    
+    // MARK: - CreateLoginCancelButton
     //ログインキャンセルボタンの作成
     func createLoginCancelButton() {
         
@@ -171,6 +180,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         self.view.addConstraint(cancelButtonWidthConstraint)
     }
     
+    
+    // MARK: - LoginTap
     //'Sign In With Apple'をタップすると呼ばれる
     @objc func loginTap() {
         
@@ -193,6 +204,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         controller.performRequests()
     }
     
+    
+    // MARK: - CancelTap
     //キャンセルボタンをタップすると呼ばれる
     @objc func cancelTap() {
         
@@ -208,6 +221,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         dismiss(animated: true, completion: nil)
     }
     
+    
+    // MARK: - Setting Sign In With Apple
     //appleIDCredential, credentials, nonce, appleIDToken, idTokenString
     //以上5点が存在するかどうかの確認をおこなう
     private func randomNonceString(length: Int = 32) -> String {
