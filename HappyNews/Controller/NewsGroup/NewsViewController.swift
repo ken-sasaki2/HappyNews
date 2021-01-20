@@ -561,13 +561,12 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //セルの境目の線を削除
         newsTable.separatorStyle = .none
         
-        //newsTable.backgroundColor = UIColor.white
+        //tableViewの背景色とセルの背景色
+        newsTable.backgroundColor = UIColor(hex: "f4f8fa")
+        cell.backgroundColor      = UIColor.white
         
         //空のセルを削除
         newsTable.tableFooterView = UIView(frame: .zero)
-
-        //tableviewの背景
-        cell.backgroundColor = UIColor.white
         
         return cell
     }
