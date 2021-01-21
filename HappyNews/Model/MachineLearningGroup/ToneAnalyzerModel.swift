@@ -66,7 +66,7 @@ class ToneAnalyzerModel {
         let dispatchGroup = DispatchGroup()
         let dispatchQueue = DispatchQueue(label: "queue")
         
-        for i in 0..<arrayCount {
+        for i in (0..<arrayCount).reversed() {
             
             //直列処理開始
             dispatchGroup.enter()
