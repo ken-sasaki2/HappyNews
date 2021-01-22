@@ -6,7 +6,6 @@ target 'HappyNews' do
   use_frameworks!
 
   # Pods for HappyNews
-  pod 'SegementSlide'
   pod 'IBMWatsonToneAnalyzerV3', '~> 3.6.0'
   pod 'IBMWatsonLanguageTranslatorV3', '~> 3.6.0'
   pod 'SwiftyJSON'

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SegementSlide
 import ToneAnalyzer
 import LanguageTranslator
 import SwiftyJSON

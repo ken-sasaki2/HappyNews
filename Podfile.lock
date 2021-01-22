@@ -92,7 +92,6 @@ PODS:
   - nanopb/encode (2.30906.0)
   - PKHUD (5.3.0)
   - PromisesObjC (1.2.11)
-  - SegementSlide (3.0.1)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
@@ -103,7 +102,6 @@ DEPENDENCIES:
   - IBMWatsonToneAnalyzerV3 (~> 3.6.0)
   - Kingfisher
   - PKHUD (~> 5.0)
-  - SegementSlide
   - SwiftyJSON
 
 SPEC REPOS:
@@ -127,7 +125,6 @@ SPEC REPOS:
     - nanopb
     - PKHUD
     - PromisesObjC
-    - SegementSlide
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -150,9 +147,8 @@ SPEC CHECKSUMS:
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
-  SegementSlide: 83b56ffb66b9c0edc4e4f2a74229309c62915db3
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 25232848a17919ea99220aeb85fef6ce87ebe83d
+PODFILE CHECKSUM: 3c3b46d0dbb3eecf2b511cc56cdacc3f1e81f50a
 
 COCOAPODS: 1.10.1

@@ -13,7 +13,6 @@
 		4576898425453E5900D7E630 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4576898325453E5900D7E630 /* Translation.swift */; };
 		458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580174F2588B74C004A8176 /* UIColor+Colors.swift */; };
 		4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4586DD502585B0CE00FAB922 /* Assets.xcassets */; };
-		45B16C74258CA1E800BED60E /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B16C73258CA1E800BED60E /* UIImage+resize.swift */; };
 		45B8239025739340005F435B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45B8238F25739340005F435B /* GoogleService-Info.plist */; };
 		45BCEE7624E4F1970023D738 /* NewsItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7524E4F1970023D738 /* NewsItemsModel.swift */; };
 		45BCEE7824E545570023D738 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7724E545570023D738 /* WebViewController.swift */; };
@@ -40,7 +39,6 @@
 		4576898325453E5900D7E630 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		4580174F2588B74C004A8176 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
 		4586DD502585B0CE00FAB922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		45B16C73258CA1E800BED60E /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		45B8238C25739103005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		45B8238D25739104005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		45B8238F25739340005F435B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -107,17 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				45B16CAD258CC3F100BED60E /* UIColor */,
-				45B16CAC258CC3E700BED60E /* UIImage */,
 			);
 			path = ExtensionsGroup;
-			sourceTree = "<group>";
-		};
-		45B16CAC258CC3E700BED60E /* UIImage */ = {
-			isa = PBXGroup;
-			children = (
-				45B16C73258CA1E800BED60E /* UIImage+resize.swift */,
-			);
-			path = UIImage;
 			sourceTree = "<group>";
 		};
 		45B16CAD258CC3F100BED60E /* UIColor */ = {
@@ -388,7 +377,6 @@
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
 				45E1F9EB25B6D370004FA603 /* ApiKey.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItemsModel.swift in Sources */,
-				45B16C74258CA1E800BED60E /* UIImage+resize.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
