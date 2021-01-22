@@ -263,7 +263,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         print("newsTextArray: \(newsTextArray.debugDescription)")
         
         //LanguageTranslatorの認証アイテム
-        let languageTranslatorApiKey  = KeyManager().getValue(key: "languageTranslatorApiKey") as! String
         let languageTranslatorVersion = "2018-05-01"
         let languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
         
@@ -299,7 +298,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     func startToneAnalyzer() {
         
         //ToneAnalyzerの認証キー
-        let toneAnalyzerApiKey  = KeyManager().getValue(key: "toneAnalyzerApiKey") as! String
         let toneAnalyzerVersion = "2017-09-21"
         let toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
         
