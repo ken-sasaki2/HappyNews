@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45166C3C25BAAD580026045F /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166C3B25BAAD580026045F /* ApiKey.swift */; };
 		454A30F2259C8B48008B1067 /* LocalNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A30F1259C8B48008B1067 /* LocalNotificationViewController.swift */; };
 		457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */; };
 		457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */; };
@@ -23,7 +24,6 @@
 		45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* NewsViewController.swift */; };
 		45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8865D24E4C0F000B32D02 /* Main.storyboard */; };
 		45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */; };
-		45E1F9EB25B6D370004FA603 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E1F9EA25B6D370004FA603 /* ApiKey.swift */; };
 		45E80A5F25B52FF1001A25AF /* TimeScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */; };
 		45F5C5E9258488030082119F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F5C5E8258488030082119F /* MessageUI.framework */; };
 		45FB2820257479ED0054A9B8 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB281F257479ED0054A9B8 /* AccountViewController.swift */; };
@@ -31,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45166C3B25BAAD580026045F /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		452877452575417200A344E3 /* HappyNews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HappyNews.entitlements; sourceTree = "<group>"; };
 		454A30F1259C8B48008B1067 /* LocalNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationViewController.swift; sourceTree = "<group>"; };
 		4573208E25A9E1E800F34C60 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		45D8865E24E4C0F000B32D02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45D8866324E4C0F200B32D02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45D8866524E4C0F200B32D02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45E1F9EA25B6D370004FA603 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeScheduleModel.swift; sourceTree = "<group>"; };
 		45F5C5E8258488030082119F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		45FB281F257479ED0054A9B8 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45166C3A25BAAD440026045F /* AuthenticationGroup */ = {
+			isa = PBXGroup;
+			children = (
+				45166C3B25BAAD580026045F /* ApiKey.swift */,
+			);
+			path = AuthenticationGroup;
+			sourceTree = "<group>";
+		};
 		453B79D625A5ABD600ED1F25 /* NewsGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,7 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				45E80A5D25B52FF1001A25AF /* TimeScheduleGroup */,
-				45E80A6125B5301C001A25AF /* AuthenticationGroup */,
+				45166C3A25BAAD440026045F /* AuthenticationGroup */,
 				453B79D725A5ABEB00ED1F25 /* MachineLearningGroup */,
 				453B79D625A5ABD600ED1F25 /* NewsGroup */,
 			);
@@ -217,15 +225,6 @@
 			);
 			path = TimeScheduleGroup;
 			sourceTree = "<group>";
-		};
-		45E80A6125B5301C001A25AF /* AuthenticationGroup */ = {
-			isa = PBXGroup;
-			children = (
-				45E1F9EA25B6D370004FA603 /* ApiKey.swift */,
-			);
-			name = AuthenticationGroup;
-			path = HappyNews/Model/AuthenticationGroup;
-			sourceTree = SOURCE_ROOT;
 		};
 		5974165321498545AB7A1196 /* Pods */ = {
 			isa = PBXGroup;
@@ -372,10 +371,10 @@
 				45E80A5F25B52FF1001A25AF /* TimeScheduleModel.swift in Sources */,
 				45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */,
 				457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */,
+				45166C3C25BAAD580026045F /* ApiKey.swift in Sources */,
 				454A30F2259C8B48008B1067 /* LocalNotificationViewController.swift in Sources */,
 				458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */,
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
-				45E1F9EB25B6D370004FA603 /* ApiKey.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItemsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
