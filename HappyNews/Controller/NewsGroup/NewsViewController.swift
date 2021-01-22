@@ -101,6 +101,9 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         //一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
         self.navigationController?.navigationBar.isTranslucent = false
+        
+        //NavigationBarの下線を削除
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     //スクロールでナビゲーションバーを隠す
