@@ -23,5 +23,4 @@ Pods/*
 *.swp
 !.gitkeep
 .DS_Store
-HappyNews/apiKey.plist
 HappyNews/Model/AuthenticationGroup/ApiKey.swift
