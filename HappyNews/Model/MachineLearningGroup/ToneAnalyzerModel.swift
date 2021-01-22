@@ -174,7 +174,7 @@ class ToneAnalyzerModel {
         print("toneAnalysisArray: \(toneAnalysisArray.debugDescription)")
         print("toneAnalysisArray.count: \(toneAnalysisArray.count)")
         
-        for i in 0...arrayCount-1 {
+        for i in 0..<arrayCount {
             
             //感情分析結果が"Joy" && score0.5以上の要素を検索(document_toneのみ取得した場合)
             if toneAnalysisArray[i]["tones"][count]["score"] > 0.5 && toneAnalysisArray[i]["tones"][count]["tone_name"] == "Joy" || toneAnalysisArray[i]["tones"][count]["tone_id"] == "joy" {

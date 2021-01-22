@@ -331,10 +331,10 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         print("joyCountArray: \(joyCountArray)")
         
         //joyCountArrayの中身を検索し、一致 = 意図するニュースを代入
-        for i in 0...joyCountArray.count - 1 {
+        for i in 0..<joyCountArray.count {
             
             //'i'固定、その間に'y'を加算
-            for y in 0...newsCount - 1 {
+            for y in 0..<newsCount {
                 
                 switch self.joyCountArray != nil {
                 case self.joyCountArray[i] == y:
