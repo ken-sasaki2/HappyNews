@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		391DD9AF32CDA1740F0250EF /* Pods_HappyNews_HappyNewsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD3F0F684D41B10E9EA27CB /* Pods_HappyNews_HappyNewsTests.framework */; };
 		45166C3C25BAAD580026045F /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166C3B25BAAD580026045F /* ApiKey.swift */; };
+		45166CDE25BAD4A40026045F /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* NewsViewController.swift */; };
+		45166CE825BAD4E30026045F /* LoginViewController+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166C6A25BAB8810026045F /* LoginViewController+Tests.swift */; };
 		454A30F2259C8B48008B1067 /* LocalNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A30F1259C8B48008B1067 /* LocalNotificationViewController.swift */; };
 		457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */; };
 		457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */; };
@@ -21,7 +24,6 @@
 		45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE9B442526D2120013F34C /* LoginViewController.swift */; };
 		45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865724E4C0F000B32D02 /* AppDelegate.swift */; };
 		45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865924E4C0F000B32D02 /* SceneDelegate.swift */; };
-		45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* NewsViewController.swift */; };
 		45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8865D24E4C0F000B32D02 /* Main.storyboard */; };
 		45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */; };
 		45E80A5F25B52FF1001A25AF /* TimeScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */; };
@@ -30,8 +32,22 @@
 		CCDCCAE33D0F59D6087F56F9 /* Pods_HappyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		45166C4825BAB4750026045F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45D8864C24E4C0F000B32D02 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45D8865324E4C0F000B32D02;
+			remoteInfo = HappyNews;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		45166C3B25BAAD580026045F /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
+		45166C4325BAB4750026045F /* HappyNewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyNewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		45166C4725BAB4750026045F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45166C6925BAB8810026045F /* HappyNewsTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HappyNewsTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		45166C6A25BAB8810026045F /* LoginViewController+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+Tests.swift"; sourceTree = "<group>"; };
 		452877452575417200A344E3 /* HappyNews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HappyNews.entitlements; sourceTree = "<group>"; };
 		454A30F1259C8B48008B1067 /* LocalNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationViewController.swift; sourceTree = "<group>"; };
 		4573208E25A9E1E800F34C60 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -57,12 +73,23 @@
 		45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeScheduleModel.swift; sourceTree = "<group>"; };
 		45F5C5E8258488030082119F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		45FB281F257479ED0054A9B8 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		4AD3F0F684D41B10E9EA27CB /* Pods_HappyNews_HappyNewsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyNews_HappyNewsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		938B26930D2F350E6FA7D3BE /* Pods-HappyNews-HappyNewsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyNews-HappyNewsTests.release.xcconfig"; path = "Target Support Files/Pods-HappyNews-HappyNewsTests/Pods-HappyNews-HappyNewsTests.release.xcconfig"; sourceTree = "<group>"; };
+		96B9A54C220CD10C2FDBC962 /* Pods-HappyNews-HappyNewsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyNews-HappyNewsTests.debug.xcconfig"; path = "Target Support Files/Pods-HappyNews-HappyNewsTests/Pods-HappyNews-HappyNewsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A94EF47B29A9CEAAB707D9D7 /* Pods-HappyNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyNews.release.xcconfig"; path = "Target Support Files/Pods-HappyNews/Pods-HappyNews.release.xcconfig"; sourceTree = "<group>"; };
 		E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F96A87FECA201A625A6FABAE /* Pods-HappyNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyNews.debug.xcconfig"; path = "Target Support Files/Pods-HappyNews/Pods-HappyNews.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		45166C4025BAB4750026045F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				391DD9AF32CDA1740F0250EF /* Pods_HappyNews_HappyNewsTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45D8865124E4C0F000B32D02 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -81,6 +108,16 @@
 				45166C3B25BAAD580026045F /* ApiKey.swift */,
 			);
 			path = AuthenticationGroup;
+			sourceTree = "<group>";
+		};
+		45166C4425BAB4750026045F /* HappyNewsTests */ = {
+			isa = PBXGroup;
+			children = (
+				45166C4725BAB4750026045F /* Info.plist */,
+				45166C6A25BAB8810026045F /* LoginViewController+Tests.swift */,
+				45166C6925BAB8810026045F /* HappyNewsTests-Bridging-Header.h */,
+			);
+			path = HappyNewsTests;
 			sourceTree = "<group>";
 		};
 		453B79D625A5ABD600ED1F25 /* NewsGroup */ = {
@@ -156,6 +193,7 @@
 			children = (
 				4573208E25A9E1E800F34C60 /* README.md */,
 				45D8865624E4C0F000B32D02 /* HappyNews */,
+				45166C4425BAB4750026045F /* HappyNewsTests */,
 				45D8865524E4C0F000B32D02 /* Products */,
 				5974165321498545AB7A1196 /* Pods */,
 				E769ABD22E3A12EB1260365E /* Frameworks */,
@@ -166,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				45D8865424E4C0F000B32D02 /* HappyNews.app */,
+				45166C4325BAB4750026045F /* HappyNewsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,6 +270,8 @@
 			children = (
 				F96A87FECA201A625A6FABAE /* Pods-HappyNews.debug.xcconfig */,
 				A94EF47B29A9CEAAB707D9D7 /* Pods-HappyNews.release.xcconfig */,
+				96B9A54C220CD10C2FDBC962 /* Pods-HappyNews-HappyNewsTests.debug.xcconfig */,
+				938B26930D2F350E6FA7D3BE /* Pods-HappyNews-HappyNewsTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -240,6 +281,7 @@
 			children = (
 				45F5C5E8258488030082119F /* MessageUI.framework */,
 				E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */,
+				4AD3F0F684D41B10E9EA27CB /* Pods_HappyNews_HappyNewsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -247,6 +289,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		45166C4225BAB4750026045F /* HappyNewsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45166C4A25BAB4750026045F /* Build configuration list for PBXNativeTarget "HappyNewsTests" */;
+			buildPhases = (
+				7C2814CEB430EF0F6E495FB9 /* [CP] Check Pods Manifest.lock */,
+				45166C3F25BAB4750026045F /* Sources */,
+				45166C4025BAB4750026045F /* Frameworks */,
+				45166C4125BAB4750026045F /* Resources */,
+				52495685C0879C0B632F3C9E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45166C4925BAB4750026045F /* PBXTargetDependency */,
+			);
+			name = HappyNewsTests;
+			productName = HappyNewsTests;
+			productReference = 45166C4325BAB4750026045F /* HappyNewsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		45D8865324E4C0F000B32D02 /* HappyNews */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 45D8866824E4C0F200B32D02 /* Build configuration list for PBXNativeTarget "HappyNews" */;
@@ -272,10 +334,15 @@
 		45D8864C24E4C0F000B32D02 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1160;
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = "佐々木　謙";
 				TargetAttributes = {
+					45166C4225BAB4750026045F = {
+						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
+						TestTargetID = 45D8865324E4C0F000B32D02;
+					};
 					45D8865324E4C0F000B32D02 = {
 						CreatedOnToolsVersion = 11.6;
 					};
@@ -296,11 +363,19 @@
 			projectRoot = "";
 			targets = (
 				45D8865324E4C0F000B32D02 /* HappyNews */,
+				45166C4225BAB4750026045F /* HappyNewsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		45166C4125BAB4750026045F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45D8865224E4C0F000B32D02 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -315,6 +390,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		52495685C0879C0B632F3C9E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyNews-HappyNewsTests/Pods-HappyNews-HappyNewsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyNews-HappyNewsTests/Pods-HappyNews-HappyNewsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HappyNews-HappyNewsTests/Pods-HappyNews-HappyNewsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C2814CEB430EF0F6E495FB9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HappyNews-HappyNewsTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B73D3272207D625A0E901639 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -357,14 +471,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		45166C3F25BAB4750026045F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45166CE825BAD4E30026045F /* LoginViewController+Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45D8865024E4C0F000B32D02 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */,
 				45BCEE7824E545570023D738 /* WebViewController.swift in Sources */,
-				45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */,
 				4576898425453E5900D7E630 /* Translation.swift in Sources */,
+				45166CDE25BAD4A40026045F /* NewsViewController.swift in Sources */,
 				45BE9B412526C7BB0013F34C /* TabBarController.swift in Sources */,
 				45FB2820257479ED0054A9B8 /* AccountViewController.swift in Sources */,
 				45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */,
@@ -380,6 +502,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		45166C4925BAB4750026045F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45D8865324E4C0F000B32D02 /* HappyNews */;
+			targetProxy = 45166C4825BAB4750026045F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		45D8865D24E4C0F000B32D02 /* Main.storyboard */ = {
@@ -403,6 +533,53 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		45166C4B25BAB4750026045F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96B9A54C220CD10C2FDBC962 /* Pods-HappyNews-HappyNewsTests.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZXZ96723Y7;
+				INFOPLIST_FILE = HappyNewsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ken.HappyNewsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HappyNewsTests/HappyNewsTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HappyNews.app/HappyNews";
+			};
+			name = Debug;
+		};
+		45166C4C25BAB4750026045F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 938B26930D2F350E6FA7D3BE /* Pods-HappyNews-HappyNewsTests.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZXZ96723Y7;
+				INFOPLIST_FILE = HappyNewsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ken.HappyNewsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HappyNewsTests/HappyNewsTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HappyNews.app/HappyNews";
+			};
+			name = Release;
+		};
 		45D8866624E4C0F200B32D02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -438,6 +615,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = NO;
+				DONT_GENERATE_INFOPLIST_FILE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -499,6 +678,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = NO;
+				DONT_GENERATE_INFOPLIST_FILE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -570,6 +751,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		45166C4A25BAB4750026045F /* Build configuration list for PBXNativeTarget "HappyNewsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45166C4B25BAB4750026045F /* Debug */,
+				45166C4C25BAB4750026045F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		45D8864F24E4C0F000B32D02 /* Build configuration list for PBXProject "HappyNews" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
