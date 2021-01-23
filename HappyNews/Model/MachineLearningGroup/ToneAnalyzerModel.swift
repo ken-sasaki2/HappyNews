@@ -89,7 +89,7 @@ class ToneAnalyzerModel {
                                 self.toneAnalysisArray.append(self.errorResult)
                                 
                                 //429エラーが多発してカウント50に達した場合
-                                if self.toneAnalysisArray.count == 50 {
+                                if self.toneAnalysisArray.count == arrayCount {
                                     
                                     //API通信時のエラー結果を保存
                                     self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "TA: many429Errors.")
