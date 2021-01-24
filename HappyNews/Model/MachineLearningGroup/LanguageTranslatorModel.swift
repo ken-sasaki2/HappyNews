@@ -32,6 +32,10 @@ class LanguageTranslatorModel {
     var count     = 0
     var textCount = 50
     
+    //429エラーが発生した場合に使用
+    var errorResponseLT: String?
+    var errorResultLT = JSON()
+    
     //LanguageTranslatorの中継保管場所
     var containsArray: [String] = []
     
@@ -75,6 +79,26 @@ class LanguageTranslatorModel {
                     switch error {
                     case let .http(statusCode, message, metadata):
                         switch statusCode {
+                        case .some(429):
+                            //429エラーが発生すると意図する値を作成してappend
+                            self.errorResponseLT =  "LT: errorResponse 429 error occurred"
+                            print(self.errorResponseLT)
+                            self.containsArray.append(self.errorResponseLT!)
+                            
+                            //429エラーが多発してtextCountに達した場合
+                            if self.containsArray.count == self.textCount {
+                                
+                                //API通信時のエラー結果を保存
+                                self.userDefaults.set("LanguageTranslator: 429エラー多発", forKey: "LT: many429Errors.")
+                                
+                                //感情分析が失敗したことをユーザーに伝える
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    HUD.show(.label("予期せぬエラー発生\nアプリを再起動してください"))
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                        HUD.hide(animated: true)
+                                    }
+                                }
+                            }
                         default:
                             if let statusCode = statusCode {
                                 print("Error - code: \(statusCode), \(message ?? "")")

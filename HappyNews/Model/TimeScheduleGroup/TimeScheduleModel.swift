@@ -96,7 +96,7 @@ class TimeScheduleModel {
             } else {
                 
                 //前回API通信時にエラーが発生していた場合の処理
-                if userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                if userDefaults.object(forKey: "LT: many429Errors.") != nil || userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
                     
                     print("朝のニュース 'true' を返す（前回エラー）")
                     
@@ -138,7 +138,7 @@ class TimeScheduleModel {
             } else {
                 
                 //前回API通信時にエラーが発生していた場合の処理
-                if userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                if userDefaults.object(forKey: "LT: many429Errors.") != nil || userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
                     
                     print("昼のニュース 'true' を返す（前回エラー）")
                     
@@ -180,7 +180,7 @@ class TimeScheduleModel {
             } else {
                 
                 //前回API通信時にエラーが発生していた場合の処理
-                if userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                if userDefaults.object(forKey: "LT: many429Errors.") != nil || userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
                     
                     print("夕方のニュース 'true' を返す（前回エラー）")
                     
@@ -222,7 +222,7 @@ class TimeScheduleModel {
             } else {
                 
                 //前回API通信時にエラーが発生していた場合の処理
-                if userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                if userDefaults.object(forKey: "LT: many429Errors.") != nil || userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
                     
                     print("夜のニュース 'true' を返す（前回エラー）")
                     

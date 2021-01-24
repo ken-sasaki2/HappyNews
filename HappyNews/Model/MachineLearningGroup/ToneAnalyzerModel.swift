@@ -28,8 +28,8 @@ class ToneAnalyzerModel {
     var joyCountArray    : [Int]  = []
     
     //429エラーが発生した場合に使用
-    var errorResponse: String?
-    var errorResult = JSON()
+    var errorResponseTA: String?
+    var errorResultTA = JSON()
     
     //UserDefaults.standardのインスタン作成
     var userDefaults = UserDefaults.standard
@@ -83,13 +83,13 @@ class ToneAnalyzerModel {
                             switch statusCode {
                             case .some(429):
                                 //429エラーが発生すると意図する値を作成してappend
-                                self.errorResponse = "errorResponse 429 error occurred"
-                                print(self.errorResponse)
-                                self.errorResult = JSON(self.errorResponse)
-                                self.toneAnalysisArray.append(self.errorResult)
+                                self.errorResponseTA = "TA: errorResponse 429 error occurred"
+                                print(self.errorResponseTA)
+                                self.errorResultTA = JSON(self.errorResponseTA)
+                                self.toneAnalysisArray.append(self.errorResultTA)
                                 
-                                //429エラーが多発してカウント50に達した場合
-                                if self.toneAnalysisArray.count == arrayCount {
+                                //429エラーが多発してarrayCountに達した場合
+                                if self.toneAnalysisArray.count == self.arrayCount {
                                     
                                     //API通信時のエラー結果を保存
                                     self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "TA: many429Errors.")
