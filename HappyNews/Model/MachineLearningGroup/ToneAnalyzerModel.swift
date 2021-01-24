@@ -22,8 +22,6 @@ class ToneAnalyzerModel {
     
     // MARK: - Property
     //JSON解析で使用
-    var count      = 0
-    var arrayCount = 50
     var toneAnalysisArray: [JSON] = []
     var joyCountArray    : [Int]  = []
     
@@ -66,7 +64,7 @@ class ToneAnalyzerModel {
         let dispatchGroup = DispatchGroup()
         let dispatchQueue = DispatchQueue(label: "queue")
         
-        for i in (0..<arrayCount).reversed() {
+        for i in (0..<NewsCount.itemCount).reversed() {
             
             //直列処理開始
             dispatchGroup.enter()
@@ -89,7 +87,7 @@ class ToneAnalyzerModel {
                                 self.toneAnalysisArray.append(self.errorResultTA)
                                 
                                 //429エラーが多発してarrayCountに達した場合
-                                if self.toneAnalysisArray.count == self.arrayCount {
+                                if self.toneAnalysisArray.count == NewsCount.itemCount {
                                     
                                     //API通信時のエラー結果を保存
                                     self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "TA: many429Errors.")
@@ -148,7 +146,7 @@ class ToneAnalyzerModel {
                         self.toneAnalysisArray.append(toneAnalysisValue)
                         
                         //全ての直列処理完了後に発火
-                        if self.toneAnalysisArray.count == self.arrayCount {
+                        if self.toneAnalysisArray.count == NewsCount.itemCount {
                             print("All Process Done!")
                             //jsonAnalysisOfToneAnalyzerの呼び出し
                             self.jsonAnalysisOfToneAnalyzer()
@@ -174,10 +172,10 @@ class ToneAnalyzerModel {
         print("toneAnalysisArray: \(toneAnalysisArray.debugDescription)")
         print("toneAnalysisArray.count: \(toneAnalysisArray.count)")
         
-        for i in 0..<arrayCount {
+        for i in 0..<NewsCount.itemCount {
             
             //感情分析結果が"Joy" && score0.5以上の要素を検索(document_toneのみ取得した場合)
-            if toneAnalysisArray[i]["tones"][count]["score"] > 0.5 && toneAnalysisArray[i]["tones"][count]["tone_name"] == "Joy" || toneAnalysisArray[i]["tones"][count]["tone_id"] == "joy" {
+            if toneAnalysisArray[i]["tones"][NewsCount.zeroCount]["score"] > 0.5 && toneAnalysisArray[i]["tones"][NewsCount.zeroCount]["tone_name"] == "Joy" || toneAnalysisArray[i]["tones"][NewsCount.zeroCount]["tone_id"] == "joy" {
                 
                 //条件を満たした要素のindex番号の取得（-1で整合性）
                 joyCountArray.append(toneAnalysisArray[0].count+i-1)

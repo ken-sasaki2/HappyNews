@@ -13,6 +13,8 @@
 		457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */; };
 		4576898425453E5900D7E630 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4576898325453E5900D7E630 /* Translation.swift */; };
 		458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580174F2588B74C004A8176 /* UIColor+Colors.swift */; };
+		458084BA25BD672400C96472 /* NewsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458084B925BD672400C96472 /* NewsCount.swift */; };
+		458084BE25BD701900C96472 /* DateItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458084BD25BD701900C96472 /* DateItems.swift */; };
 		4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4586DD502585B0CE00FAB922 /* Assets.xcassets */; };
 		45B8239025739340005F435B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45B8238F25739340005F435B /* GoogleService-Info.plist */; };
 		45BCEE7624E4F1970023D738 /* NewsItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7524E4F1970023D738 /* NewsItemsModel.swift */; };
@@ -39,6 +41,8 @@
 		457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerModel.swift; sourceTree = "<group>"; };
 		4576898325453E5900D7E630 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		4580174F2588B74C004A8176 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
+		458084B925BD672400C96472 /* NewsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCount.swift; sourceTree = "<group>"; };
+		458084BD25BD701900C96472 /* DateItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItems.swift; sourceTree = "<group>"; };
 		4586DD502585B0CE00FAB922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45B8238C25739103005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		45B8238D25739104005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -115,6 +119,15 @@
 				45B16CAD258CC3F100BED60E /* UIColor */,
 			);
 			path = ExtensionsGroup;
+			sourceTree = "<group>";
+		};
+		458084B825BD66F300C96472 /* VariableGroup */ = {
+			isa = PBXGroup;
+			children = (
+				458084B925BD672400C96472 /* NewsCount.swift */,
+				458084BD25BD701900C96472 /* DateItems.swift */,
+			);
+			path = VariableGroup;
 			sourceTree = "<group>";
 		};
 		45B16CAD258CC3F100BED60E /* UIColor */ = {
@@ -214,6 +227,7 @@
 				45166C3A25BAAD440026045F /* AuthenticationGroup */,
 				453B79D725A5ABEB00ED1F25 /* MachineLearningGroup */,
 				453B79D625A5ABD600ED1F25 /* NewsGroup */,
+				458084B825BD66F300C96472 /* VariableGroup */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -376,6 +390,8 @@
 				458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */,
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItemsModel.swift in Sources */,
+				458084BE25BD701900C96472 /* DateItems.swift in Sources */,
+				458084BA25BD672400C96472 /* NewsCount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

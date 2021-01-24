@@ -48,7 +48,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     //joyの要素と認定されたニュースの配列と検索する際のカウント
     var joySelectionArray = [NewsItemsModel]()
-    var newsCount         = 50
     
     
     // MARK: - NewsTableView
@@ -239,7 +238,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         HUD.show(.labeledProgress(title: "Happyを分析中...", subtitle: nil))
         
         //XMLのニュースの順番と整合性を合わせるためreversedを使用。$iは合わせた番号の可視化（50 = first, 1 = last）
-        for i in (1...newsCount).reversed() {
+        for i in (1...NewsCount.itemCount).reversed() {
             newsTextArray.append(newsItems[newsItems.count - i].title!.description + "$\(i)")
         }
         
@@ -317,7 +316,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         for i in 0..<joyCountArray.count {
             
             //'i'固定、その間に'y'を加算
-            for y in 0..<newsCount {
+            for y in 0..<NewsCount.itemCount {
                 
                 switch self.joyCountArray != nil {
                 case self.joyCountArray[i] == y:

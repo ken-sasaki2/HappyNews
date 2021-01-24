@@ -28,10 +28,6 @@ class LanguageTranslatorModel {
     //UserDefaultsのインスタンス
     var userDefaults = UserDefaults.standard
     
-    //JSON解析で使用
-    var count     = 0
-    var textCount = 50
-    
     //429エラーが発生した場合に使用
     var errorResponseLT: String?
     var errorResultLT = JSON()
@@ -68,7 +64,7 @@ class LanguageTranslatorModel {
         let languageTranslator    = LanguageTranslator(version: languageTranslatorAccessversion!, authenticator: languageTranslatorKey)
         languageTranslator.serviceURL = languageTranslatorAccessURL
         
-        for i in 0..<self.textCount {
+        for i in 0..<NewsCount.itemCount {
             
             //リクエスト送信
             languageTranslator.translate(text: [translationTextArray[i]], modelID: "ja-en") {
@@ -86,7 +82,7 @@ class LanguageTranslatorModel {
                             self.containsArray.append(self.errorResponseLT!)
                             
                             //429エラーが多発してtextCountに達した場合
-                            if self.containsArray.count == self.textCount {
+                            if self.containsArray.count == NewsCount.itemCount {
                                 
                                 //API通信時のエラー結果を保存
                                 self.userDefaults.set("LanguageTranslator: 429エラー多発", forKey: "LT: many429Errors.")
@@ -141,13 +137,13 @@ class LanguageTranslatorModel {
                     let translationValue: JSON = JSON(translationJSON)
                     
                     //translation = 翻訳結果（JSON解析結果）
-                    let translation = Translation(translation: translationValue["translations"][self.count]["translation"].string!)
+                    let translation = Translation(translation: translationValue["translations"][NewsCount.zeroCount]["translation"].string!)
                     
                     //中継保管場所として翻訳結果を配列に保管
                     self.containsArray.append(translation.translation!)
                     
                     //配列のcountが真ならばメソッドを呼び出す
-                    if self.containsArray.count == self.textCount {
+                    if self.containsArray.count == NewsCount.itemCount {
                         self.sortTheTranslationResults()
                     }
                     
@@ -165,13 +161,13 @@ class LanguageTranslatorModel {
     func sortTheTranslationResults() {
         
         //"$i"の検索をおこない意図した変数へ代入
-        for i in 0..<textCount {
+        for i in 0..<NewsCount.itemCount {
             
             //'i'固定、その間に'y'を加算
-            for y in (0..<textCount).reversed() {
+            for y in (0..<NewsCount.itemCount).reversed() {
                 
                 //'y+1'は特定の文字列検索の生合成を合わせるため
-                switch self.containsArray.count == self.textCount {
+                switch self.containsArray.count == NewsCount.itemCount {
                 case self.containsArray[i].contains("$\(y+1)"):
                     self.translationArray[y] = self.containsArray[i].description
                     break
@@ -182,7 +178,7 @@ class LanguageTranslatorModel {
         }
         
         //最後にappendされたtranslationArrayをNewsViewControllerへ返す
-        if translationArray.count == textCount  {
+        if translationArray.count == NewsCount.itemCount  {
             
             //NewsViewControllerへ値を返す
             self.doneCatchTranslationProtocol?.catchTranslation(arrayTranslationData: translationArray, resultCount: translationArray.count)
