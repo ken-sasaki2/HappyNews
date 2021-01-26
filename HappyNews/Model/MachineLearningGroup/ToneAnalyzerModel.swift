@@ -29,9 +29,6 @@ class ToneAnalyzerModel {
     var errorResponseTA: String?
     var errorResultTA = JSON()
     
-    //UserDefaults.standardのインスタン作成
-    var userDefaults = UserDefaults.standard
-    
     //プロトコルのインスタンス
     var doneCatchAnalyzerProtocol: DoneCatchAnalyzerProtocol?
     
@@ -90,7 +87,7 @@ class ToneAnalyzerModel {
                                 if self.toneAnalysisArray.count == NewsCount.itemCount {
                                     
                                     //API通信時のエラー結果を保存
-                                    self.userDefaults.set("ToneAnalyzer: 429エラー多発", forKey: "TA: many429Errors.")
+                                    UserDefault.standard.set("TA: 429エラー多発", forKey: "TA: many429Errors.")
                                     
                                     //感情分析が失敗したことをユーザーに伝える
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -105,7 +102,7 @@ class ToneAnalyzerModel {
                                     print("Error - code: \(statusCode), \(message ?? "")")
                                     
                                     //API通信時のエラー結果を保存
-                                    self.userDefaults.set("予期せぬエラー発生", forKey: "TA: errorOccurred")
+                                    UserDefault.standard.set("予期せぬエラー発生", forKey: "TA: errorOccurred")
                                     
                                     //感情分析が失敗したことをユーザーに伝える
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

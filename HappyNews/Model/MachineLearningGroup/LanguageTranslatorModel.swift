@@ -25,9 +25,6 @@ class LanguageTranslatorModel {
     //NewsViewControllerに値を返すときに使用
     var doneCatchTranslationProtocol: DoneCatchTranslationProtocol?
     
-    //UserDefaultsのインスタンス
-    var userDefaults = UserDefaults.standard
-    
     //429エラーが発生した場合に使用
     var errorResponseLT: String?
     var errorResultLT = JSON()
@@ -85,7 +82,7 @@ class LanguageTranslatorModel {
                             if self.containsArray.count == NewsCount.itemCount {
                                 
                                 //API通信時のエラー結果を保存
-                                self.userDefaults.set("LanguageTranslator: 429エラー多発", forKey: "LT: many429Errors.")
+                                UserDefault.standard.set("LT: 429エラー多発", forKey: "LT: many429Errors.")
                                 
                                 //感情分析が失敗したことをユーザーに伝える
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -100,7 +97,7 @@ class LanguageTranslatorModel {
                                 print("Error - code: \(statusCode), \(message ?? "")")
                                 
                                 //API通信時のエラー結果を保存
-                                self.userDefaults.set("予期せぬエラー発生", forKey: "LT: errorOccurred")
+                                UserDefault.standard.set("予期せぬエラー発生", forKey: "LT: errorOccurred")
                                 
                                 //感情分析が失敗したことをユーザーに伝える
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

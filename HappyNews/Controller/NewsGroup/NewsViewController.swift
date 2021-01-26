@@ -56,13 +56,10 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     
     // MARK: - Other Property
-    //UserDefaultsのインスタンス
-    var userDefaults = UserDefaults.standard
-    
     //現在時刻の取得とそのフォーマット
-    var dateTime         = Date()
-    var dateTimeFormat   = DateFormatter()
-    var outputDateFormat = DateFormatter()
+//    var dateTime         = Date()
+//    var dateTimeFormat   = DateFormatter()
+//    var outputDateFormat = DateFormatter()
     
     
     // MARK: - ViewDidLoad
@@ -73,7 +70,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         self.overrideUserInterfaceStyle = .light
         
         //前回起動時刻の確認
-        print("前回起動時刻: \(userDefaults.string(forKey: "lastActivation"))")
+        print("前回起動時刻: \(UserDefault.lastActivation)")
         
         //NavigationBarの呼び出し
         setNewsNavigationBar()
@@ -116,7 +113,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     func startTimeSchedule() {
         
         //TimeScheduleModelと通信をおこないプロトコルを委託
-        let timeScheduleModel = TimeScheduleModel(dateTime: dateTime, dateTimeFormat: dateTimeFormat)
+        let timeScheduleModel = TimeScheduleModel(date: DateItems.date)
             timeScheduleModel.doneCatchTimeScheduleProtocol = self
             timeScheduleModel.setTimeSchedule()
     }
@@ -194,15 +191,13 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
                 let inputString       = string
                 
                 //地域とフォーマットを指定してDate型に変換
-                dateTimeFormat.locale = Locale(identifier: "ja_JP")
-                dateTimeFormat.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                let inputDate = dateTimeFormat.date(from: inputString)
+                DateItems.dateFormatter.locale = Locale(identifier: "ja_JP")
+                DateItems.dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                let inputDate = DateItems.dateFormatter.date(from: inputString)
                 
                 //lastItem.pubDate = inputDateのフォーマットを指定してString型で代入
-                outputDateFormat.dateFormat = "yyyy年M月d日(EEEEE) H時m分s秒"
-                lastItem.pubDate = outputDateFormat.string(from: inputDate!)
-            case "description":
-                lastItem.description = string
+                DateItems.outputDateFormatter.dateFormat = "yyyy年M月d日(EEEEE) H時m分s秒"
+                lastItem.pubDate = DateItems.outputDateFormatter.string(from: inputDate!)
             case "image":
                 //パラメータを排除して取得する
                 if lastItem.image == nil {
@@ -299,7 +294,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         print("arrayAnalyzerData: \(arrayAnalyzerData.debugDescription)")
         
         //感情分析結果の保存
-        userDefaults.set(arrayAnalyzerData, forKey: "joyCountArray")
+        UserDefault.standard.set(arrayAnalyzerData, forKey: "joyCountArray")
         
         //UIの更新を行うメソッドの呼び出し
         reloadNewsData()
@@ -309,7 +304,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     func reloadNewsData() {
         
         //感情分析結果の取り出し
-        joyCountArray = userDefaults.array(forKey: "joyCountArray") as! [Int]
+        joyCountArray = UserDefault.joyCountArray
         print("joyCountArray: \(joyCountArray)")
         
         //joyCountArrayの中身を検索し、一致 = 意図するニュースを代入
@@ -458,7 +453,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         let tapCell = joySelectionArray[indexPath.row]
         
         //検知したセルのurlを取得
-        userDefaults.set(tapCell.url, forKey: "url")
+        UserDefault.standard.set(tapCell.url, forKey: "url")
         
         //webViewControllerへ遷移
         present(webViewNavigation, animated: true)

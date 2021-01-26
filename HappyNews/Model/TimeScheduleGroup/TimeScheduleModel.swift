@@ -19,24 +19,18 @@ class TimeScheduleModel {
     
     
     // MARK: - Property
-    //前回起動時刻の保管場所
-    var lastActivation: String?
-
-    //UserDefaults.standardのインスタン作成
-    var userDefaults = UserDefaults.standard
-    
     //プロトコルのインスタンス
     var doneCatchTimeScheduleProtocol: DoneCatchTimeScheduleProtocol?
     
-    //NewsViewControllerから渡ってくる値
-    var date         : Date?
-    var dateFormatter: DateFormatter?
+    //フォーマットを整形した現在時刻を保存
+    var currentTime: String?
+    
+    //NewsViewControllerから渡ってきた値を受け取る
+    var dateTime: Date?
     
     //現在時刻を受け取る
-    init(dateTime: Date, dateTimeFormat: DateFormatter) {
-        
-        date          = dateTime
-        dateFormatter = dateTimeFormat
+    init(date: Date) {
+        dateTime = date
     }
     
     
@@ -45,68 +39,46 @@ class TimeScheduleModel {
     func setTimeSchedule() {
         
         //日時のフォーマットと地域を指定
-        dateFormatter!.dateFormat = "HH:mm:ss"
-        dateFormatter!.timeZone   = TimeZone(identifier: "Asia/Tokyo")
+        DateItems.dateFormatter.dateFormat = "HH:mm:ss"
+        DateItems.dateFormatter.timeZone   = TimeZone(identifier: "Asia/Tokyo")
         
         //アプリ起動時刻を定義
-        let currentTime = dateFormatter!.string(from: date!)
+        let currentTime = DateItems.dateFormatter.string(from: dateTime!)
         print("現在時刻: \(currentTime)")
         
         //アプリ起動時刻の保存
-        userDefaults.set(currentTime, forKey: "lastActivation")
-        
-        //定時時刻の設定
-        let morningPoint     = dateFormatter!.date(from: "07:00:00")
-        let afternoonPoint   = dateFormatter!.date(from: "11:00:00")
-        let eveningPoint     = dateFormatter!.date(from: "17:00:00")
-        let nightPoint       = dateFormatter!.date(from: "23:59:59")
-        let lateAtNightPoint = dateFormatter!.date(from: "00:00:00")
-        
-        //定時時刻の変換
-        let morningTime     = dateFormatter!.string(from: morningPoint!)
-        let afternoonTime   = dateFormatter!.string(from: afternoonPoint!)
-        let eveningTime     = dateFormatter!.string(from: eveningPoint!)
-        let nightTime       = dateFormatter!.string(from: nightPoint!)
-        let lateAtNightTime = dateFormatter!.string(from: lateAtNightPoint!)
-        
-        //前回起動時刻の取り出し
-        lastActivation = userDefaults.string(forKey: "lastActivation")
-        print("起動時刻更新: \(lastActivation)")
+        UserDefault.standard.set(currentTime, forKey: "lastActivation")
         
         
         // MARK: - TimeSchedule 07:00 〜
-        //前回起動時刻と定時時刻の間隔で時間割（日付を無くして全て時間指定）
+        //現在時刻と定時時刻の間隔で時間割（日付を無くして全て時間指定）
         //07:00以降11:00以前の場合
-        if lastActivation!.compare(morningTime) == .orderedDescending && lastActivation!.compare(afternoonTime) == .orderedAscending {
+        if currentTime > UpdateTimes.morningTime && currentTime < UpdateTimes.afternoonTime {
 
-            //UserDefaultsに 'morningUpdate' が無ければtureをあればfalseを返す
-            if userDefaults.string(forKey: "morningUpdate") == nil {
+            //UserDefaultsに 'morningUpdate' が無ければtureをあれば更に分岐
+            if UserDefault.outputmorningUpdate == nil {
                 print("朝のニュース 'true' を返す")
 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("morningUpdate", forKey: "morningUpdate")
+                UserDefault.standard.set("morningUpdate", forKey: "morningUpdate")
 
-                //次回時間割に備えてUserDefaultsに保存した値を削除
-                userDefaults.removeObject(forKey: "afternoonUpdate")
-                userDefaults.removeObject(forKey: "eveningUpdate")
-                userDefaults.removeObject(forKey: "nightUpdate")
+                //次回API通信の時刻に備えてUserDefaultsに保存した値を削除
+                UserDefault.removeExceptionMorning()
                 
                 //NewsViewControllerへAPI通信をおこなう値を返す
                 doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
                 
                 //前回API通信時にエラーが発生していた場合の処理
-                if userDefaults.object(forKey: "LT: many429Errors.") != nil || userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                if UserDefault.ErrorHistory429LT != nil || UserDefault.ErrorHistoryLT != nil ||  UserDefault.ErrorHistory429TA != nil || UserDefault.ErrorHistoryTA != nil {
                     
                     print("朝のニュース 'true' を返す（前回エラー）")
                     
                     //NewsViewControllerへAPI通信をおこなう値を返す
                     doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
                     
-                    //UserDefaultsに保存した前回エラーの証を削除
-                    userDefaults.removeObject(forKey: "LT: errorOccurred")
-                    userDefaults.removeObject(forKey: "TA: many429Errors.")
-                    userDefaults.removeObject(forKey: "TA: errorOccurred")
+                    //UserDefaultsに保存した前回エラーの履歴を削除
+                    UserDefault.removeErrorObject()
                 } else {
                     
                     print("朝のニュース 'false' を返す")
@@ -119,36 +91,32 @@ class TimeScheduleModel {
         
         // MARK: - TimeSchedule 11:00 〜
         //11:00以降17:00以前の場合
-        else if lastActivation!.compare(afternoonTime) == .orderedDescending && lastActivation!.compare(eveningTime) == .orderedAscending {
+        else if currentTime > UpdateTimes.afternoonTime && currentTime < UpdateTimes.eveningTime {
 
-            //UserDefaultsに 'afternoonUpdate' が無ければtureをあればfalseを返す
-            if userDefaults.string(forKey: "afternoonUpdate") == nil {
+            //UserDefaultsに 'afternoonUpdate' が無ければtureをあれば更に分岐
+            if UserDefault.outputAfternoonUpdate == nil {
                 print("昼のニュース 'true' を返す")
 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("afternoonUpdate", forKey: "afternoonUpdate")
+                UserDefault.standard.set("afternoonUpdate", forKey: "afternoonUpdate")
 
-                //次回時間割に備えてUserDefaultsに保存した値を削除
-                userDefaults.removeObject(forKey: "morningUpdate")
-                userDefaults.removeObject(forKey: "eveningUpdate")
-                userDefaults.removeObject(forKey: "nightUpdate")
+                //次回API通信の時刻に備えてUserDefaultsに保存した値を削除
+                UserDefault.removeExceptionAfternoon()
                 
                 //NewsViewControllerへAPI通信をおこなう値を返す
                 doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
                 
                 //前回API通信時にエラーが発生していた場合の処理
-                if userDefaults.object(forKey: "LT: many429Errors.") != nil || userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                if UserDefault.ErrorHistory429LT != nil || UserDefault.ErrorHistoryLT != nil ||  UserDefault.ErrorHistory429TA != nil || UserDefault.ErrorHistoryTA != nil {
                     
                     print("昼のニュース 'true' を返す（前回エラー）")
                     
                     //NewsViewControllerへAPI通信をおこなう値を返す
                     doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
                     
-                    //UserDefaultsに保存した前回エラーの証を削除
-                    userDefaults.removeObject(forKey: "LT: errorOccurred")
-                    userDefaults.removeObject(forKey: "TA: many429Errors.")
-                    userDefaults.removeObject(forKey: "TA: errorOccurred")
+                    //UserDefaultsに保存した前回エラーの履歴を削除
+                    UserDefault.removeErrorObject()
                 } else {
                     
                     print("昼のニュース 'false' を返す")
@@ -161,36 +129,32 @@ class TimeScheduleModel {
         
         // MARK: - TimeSchedule 17:00 〜
         //17:00以降23:59:59以前の場合（1日の最後）
-        else if lastActivation!.compare(eveningTime) == .orderedDescending && lastActivation!.compare(nightTime) == .orderedAscending {
+        else if currentTime > UpdateTimes.eveningTime && currentTime < UpdateTimes.nightTime {
 
-            //UserDefaultsに 'eveningUpdate' が無ければtureをあればfalseを返す
-            if userDefaults.string(forKey: "eveningUpdate") == nil {
+            //UserDefaultsに 'eveningUpdate' が無ければtureをあれば更に分岐
+            if UserDefault.outputEveningUpdate == nil {
                 print("夕方のニュース 'true' を返す")
 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("eveningUpdate", forKey: "eveningUpdate")
+                UserDefault.standard.set("eveningUpdate", forKey: "eveningUpdate")
 
                 //次回時間割に備えてUserDefaultsに保存した値を削除
-                userDefaults.removeObject(forKey: "morningUpdate")
-                userDefaults.removeObject(forKey: "afternoonUpdate")
-                userDefaults.removeObject(forKey: "nightUpdate")
+                UserDefault.removeExceptionEvening()
                 
                 //NewsViewControllerへAPI通信をおこなう値を返す
                 doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
                 
                 //前回API通信時にエラーが発生していた場合の処理
-                if userDefaults.object(forKey: "LT: many429Errors.") != nil || userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                if UserDefault.ErrorHistory429LT != nil || UserDefault.ErrorHistoryLT != nil ||  UserDefault.ErrorHistory429TA != nil || UserDefault.ErrorHistoryTA != nil {
                     
                     print("夕方のニュース 'true' を返す（前回エラー）")
                     
                     //NewsViewControllerへAPI通信をおこなう値を返す
                     doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
                     
-                    //UserDefaultsに保存した前回エラーの証を削除
-                    userDefaults.removeObject(forKey: "LT: errorOccurred")
-                    userDefaults.removeObject(forKey: "TA: many429Errors.")
-                    userDefaults.removeObject(forKey: "TA: errorOccurred")
+                    //UserDefaultsに保存した前回エラーの履歴を削除
+                    UserDefault.removeErrorObject()
                 } else {
                     
                     print("夕方のニュース 'false' を返す")
@@ -203,36 +167,32 @@ class TimeScheduleModel {
         
         // MARK: - TimeSchedule 00:00 〜
         //00:00以降07:00以前の場合（日を跨いで初めて起動）
-        else if lastActivation!.compare(lateAtNightTime) == .orderedDescending && lastActivation!.compare(morningTime) == .orderedAscending  {
+        else if currentTime > UpdateTimes.lateAtNightTime && currentTime < UpdateTimes.morningTime {
 
-            //UserDefaultsに 'nightUpdate' が無ければtureをあればfalseを返す
-            if userDefaults.string(forKey: "nightUpdate") == nil {
+            //UserDefaultsに 'nightUpdate' が無ければtureをあれば更に分岐
+            if UserDefault.outputNightUpdate == nil {
                 print("夜のニュース 'true' を返す")
 
                 //UserDefaultsで値を保存して次回起動時キャッシュ表示に備える
-                userDefaults.set("nightUpdate", forKey: "nightUpdate")
-
+                UserDefault.standard.set("nightUpdate", forKey: "nightUpdate")
+                
                 //次回時間割に備えてUserDefaultsに保存した値を削除
-                userDefaults.removeObject(forKey: "morningUpdate")
-                userDefaults.removeObject(forKey: "afternoonUpdate")
-                userDefaults.removeObject(forKey: "eveningUpdate")
+                UserDefault.removeExceptionLateAtNight()
                 
                 //NewsViewControllerへAPI通信をおこなう値を返す
                 doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
             } else {
                 
                 //前回API通信時にエラーが発生していた場合の処理
-                if userDefaults.object(forKey: "LT: many429Errors.") != nil || userDefaults.object(forKey: "LT: errorOccurred") != nil || userDefaults.object(forKey: "TA: many429Errors.") != nil || userDefaults.object(forKey: "TA: errorOccurred") != nil {
+                if UserDefault.ErrorHistory429LT != nil || UserDefault.ErrorHistoryLT != nil ||  UserDefault.ErrorHistory429TA != nil || UserDefault.ErrorHistoryTA != nil {
                     
                     print("夜のニュース 'true' を返す（前回エラー）")
                     
                     //NewsViewControllerへAPI通信をおこなう値を返す
                     doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: true)
                     
-                    //UserDefaultsに保存した前回エラーの証を削除
-                    userDefaults.removeObject(forKey: "LT: errorOccurred")
-                    userDefaults.removeObject(forKey: "TA: many429Errors.")
-                    userDefaults.removeObject(forKey: "TA: errorOccurred")
+                    //UserDefaultsに保存した前回エラーの履歴を削除
+                    UserDefault.removeErrorObject()
                 } else {
                     
                     print("夜のニュース 'false' を返す")
@@ -244,8 +204,8 @@ class TimeScheduleModel {
 
         //どの時間割にも当てはまらない場合
         else {
-            print("いずれも当てはまらないので 'false' を返す")
             
+            print("いずれも当てはまらないので 'false' を返す")
             //NewsViewControllerへキャッシュ通信の値を返す
             doneCatchTimeScheduleProtocol?.catchTimeSchedule(updateOrCache: false)
         }

@@ -16,8 +16,8 @@
 		458084BA25BD672400C96472 /* NewsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458084B925BD672400C96472 /* NewsCount.swift */; };
 		458084BE25BD701900C96472 /* DateItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458084BD25BD701900C96472 /* DateItems.swift */; };
 		458084C125BD87A100C96472 /* TimePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458084C025BD87A100C96472 /* TimePoints.swift */; };
-		458084C425BD915000C96472 /* EveryTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458084C325BD915000C96472 /* EveryTime.swift */; };
-		458084C825BD9DBD00C96472 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458084C725BD9DBD00C96472 /* UserDefaults.swift */; };
+		458084C425BD915000C96472 /* UpdateTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458084C325BD915000C96472 /* UpdateTimes.swift */; };
+		458084C825BD9DBD00C96472 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458084C725BD9DBD00C96472 /* UserDefault.swift */; };
 		4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4586DD502585B0CE00FAB922 /* Assets.xcassets */; };
 		45B8239025739340005F435B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45B8238F25739340005F435B /* GoogleService-Info.plist */; };
 		45BCEE7624E4F1970023D738 /* NewsItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7524E4F1970023D738 /* NewsItemsModel.swift */; };
@@ -47,8 +47,8 @@
 		458084B925BD672400C96472 /* NewsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCount.swift; sourceTree = "<group>"; };
 		458084BD25BD701900C96472 /* DateItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItems.swift; sourceTree = "<group>"; };
 		458084C025BD87A100C96472 /* TimePoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePoints.swift; sourceTree = "<group>"; };
-		458084C325BD915000C96472 /* EveryTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryTime.swift; sourceTree = "<group>"; };
-		458084C725BD9DBD00C96472 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		458084C325BD915000C96472 /* UpdateTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTimes.swift; sourceTree = "<group>"; };
+		458084C725BD9DBD00C96472 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		4586DD502585B0CE00FAB922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45B8238C25739103005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		45B8238D25739104005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 		458084C625BD9D4B00C96472 /* UserDefaultsGroup */ = {
 			isa = PBXGroup;
 			children = (
-				458084C725BD9DBD00C96472 /* UserDefaults.swift */,
+				458084C725BD9DBD00C96472 /* UserDefault.swift */,
 			);
 			path = UserDefaultsGroup;
 			sourceTree = "<group>";
@@ -244,7 +244,7 @@
 				45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */,
 				458084BD25BD701900C96472 /* DateItems.swift */,
 				458084C025BD87A100C96472 /* TimePoints.swift */,
-				458084C325BD915000C96472 /* EveryTime.swift */,
+				458084C325BD915000C96472 /* UpdateTimes.swift */,
 			);
 			path = TimeScheduleGroup;
 			sourceTree = "<group>";
@@ -399,8 +399,8 @@
 				454A30F2259C8B48008B1067 /* LocalNotificationViewController.swift in Sources */,
 				458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */,
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
-				458084C425BD915000C96472 /* EveryTime.swift in Sources */,
-				458084C825BD9DBD00C96472 /* UserDefaults.swift in Sources */,
+				458084C425BD915000C96472 /* UpdateTimes.swift in Sources */,
+				458084C825BD9DBD00C96472 /* UserDefault.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItemsModel.swift in Sources */,
 				458084BE25BD701900C96472 /* DateItems.swift in Sources */,
 				458084BA25BD672400C96472 /* NewsCount.swift in Sources */,
