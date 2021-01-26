@@ -20,7 +20,7 @@ class TabBarController: UITabBarController {
         UITabBar.appearance().tintColor = UIColor(hex: "00AECC")
         
         //tabbarの色を変更
-        tabBar.barTintColor = UIColor(hex: "ffffff")
+        tabBar.backgroundColor = UIColor(hex: "f4f8fa")
         
         //tabbar背景の透過
         UITabBar.appearance().backgroundImage = UIImage()

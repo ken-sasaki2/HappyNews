@@ -32,7 +32,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         view = UIView()
 
         //viewの背景を設定
-        view.backgroundColor = UIColor(hex: "ffffff")
+        view.backgroundColor = UIColor(hex: "f4f8fa")
         
         //通知を管理するオブジェクト
         let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -214,7 +214,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         
         //タブバーのインスタンスを取得
         if let tabBarController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
-            
+
             //ニュースタブを選択状態にする（0が一番左）
             DispatchQueue.main.async {
                 tabBarController.selectedIndex = 0

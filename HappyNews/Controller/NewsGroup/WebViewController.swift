@@ -49,7 +49,7 @@ class WebViewController: UIViewController,WKUIDelegate {
         self.navigationController?.navigationBar.isTranslucent = false
         
         //NavigationBarの色
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "f4f8fa")
             
         //NavigationBarのボタン設定
         closeButton = UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(tapCloseButton(_:)))

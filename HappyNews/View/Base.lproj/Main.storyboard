@@ -20,7 +20,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="45" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="QMd-AH-zBC">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" rowHeight="65" id="gZL-R9-Ch6">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="65"/>
@@ -78,7 +78,6 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zfp-wr-nqD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="tnJ-dH-bjW" kind="relationship" relationship="viewControllers" id="LBJ-ha-g6F"/>
@@ -172,7 +171,14 @@
                         <viewLayoutGuide key="safeArea" id="TyU-cw-Wnq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="wAa-68-yOj"/>
+                    <navigationItem key="navigationItem" id="wAa-68-yOj">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="bookmarks" id="hpa-La-lQn">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="riw-uk-grg" kind="modal" id="Ych-eh-nDp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="newsTable" destination="J3m-na-Q71" id="xtm-1o-Stg"/>
                     </connections>
@@ -180,6 +186,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKw-n2-8sG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4292.753623188406" y="-616.07142857142856"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="mZF-uH-nKf">
+            <objects>
+                <viewController id="riw-uk-grg" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fpm-St-NKB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="rZA-Ym-diJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B8g-1I-snu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5014" y="-616"/>
         </scene>
         <!--アカウント-->
         <scene sceneID="q7X-D9-K3y">

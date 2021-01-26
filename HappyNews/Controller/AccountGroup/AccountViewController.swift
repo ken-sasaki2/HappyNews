@@ -153,8 +153,9 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 accountLabel.textColor = UIColor.red
         }
         
-        //セルを化粧
-        cell.backgroundColor = UIColor.white
+        //セルとTableViewの背景色の設定
+        cell.backgroundColor  = UIColor(hex: "f4f8fa")
+        table.backgroundColor = UIColor(hex: "f4f8fa")
         
         //空のセルを削除
         table.tableFooterView = UIView(frame: .zero)
