@@ -8,12 +8,11 @@
 
 import Foundation
 
+//XMLファイルの情報を取得するためにタグを定義
 class NewsItemsModel {
     var title       :String?
     var url         :String?
     var pubDate     :String?
     var image       :String?
-    var description :String?
-    var category    :String?
 }
 

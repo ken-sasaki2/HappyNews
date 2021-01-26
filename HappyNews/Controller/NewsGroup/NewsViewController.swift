@@ -55,13 +55,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     @IBOutlet var newsTable: UITableView!
     
     
-    // MARK: - Other Property
-    //現在時刻の取得とそのフォーマット
-//    var dateTime         = Date()
-//    var dateTimeFormat   = DateFormatter()
-//    var outputDateFormat = DateFormatter()
-    
-    
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,21 +167,27 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
 
         if newsItems.count > 0 {
 
-            //配列の番号を合わせる
-            //'link'と'image'はstringに分割で値が入るので初めて代入する値以外は取得しない
+            //XMLファイルに特定のタグが存在する場合の処理
+            //'link'と'image'はstringに分割されて値が入るので初めて代入する値以外は取得しない
             let lastItem = newsItems[newsItems.count - 1]
             switch currentElementName {
+            
+            //<title>が存在した場合
             case "title":
-                lastItem.title      = string
+                lastItem.title = string
+                
+            //<link>が存在した場合
             case "link":
                 if lastItem.url == nil {
-                    lastItem.url    = string
+                    lastItem.url = string
                 } else {
                     break
                 }
+                
+            //<pubDate>が存在した場合
             case "pubDate":
                 //inputString = ニュース発行時刻(XML純正)
-                let inputString       = string
+                let inputString = string
                 
                 //地域とフォーマットを指定してDate型に変換
                 DateItems.dateFormatter.locale = Locale(identifier: "ja_JP")
@@ -198,6 +197,8 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
                 //lastItem.pubDate = inputDateのフォーマットを指定してString型で代入
                 DateItems.outputDateFormatter.dateFormat = "yyyy年M月d日(EEEEE) H時m分s秒"
                 lastItem.pubDate = DateItems.outputDateFormatter.string(from: inputDate!)
+                
+            //<image>が存在した場合
             case "image":
                 //パラメータを排除して取得する
                 if lastItem.image == nil {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-//ニュースの数で処理を行う場合に扱うクラス
+//ニュースのitem数で処理を行う場合に扱うクラス
 class NewsCount {
     static var itemCount = 50
     static var zeroCount = 0
