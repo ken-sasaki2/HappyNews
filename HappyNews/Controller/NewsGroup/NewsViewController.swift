@@ -27,7 +27,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     var currentElementName: String?
 
     //NewsItemsモデルのインスタンス作成
-    var newsItems = [NewsItemsModel]()
+    var newsItems = [NewsItems]()
     
     //XMLから取得するURLのパラメータを排除したURLを保存する値
     var imageParameter: String?
@@ -47,7 +47,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     var joyCountArray = [Int]()
     
     //joyの要素と認定されたニュースの配列と検索する際のカウント
-    var joySelectionArray = [NewsItemsModel]()
+    var joySelectionArray = [NewsItems]()
     
     
     // MARK: - NewsTableView
@@ -156,7 +156,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         currentElementName = nil
 
         if elementName == "item" {
-            newsItems.append(NewsItemsModel())
+            newsItems.append(NewsItems())
         } else {
             currentElementName = elementName
         }
@@ -245,7 +245,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         let languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
         
         //LanguageTranslatorModelと通信
-        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: languageTranslatorApiKey, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
+        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: LANGUAGE_TRANSLATOR_APIKEY, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
         
         //LanguageTranslatorModelの委託とJSON解析をセット
         languageTranslatorModel.doneCatchTranslationProtocol = self
@@ -280,7 +280,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         let toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
         
         //translationArrayとAPIToneAnalyzerの認証コードで通信
-        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: toneAnalyzerApiKey, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
+        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: TONE_ANALYZER_APIKEY, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
         
         //ToneAnalyzerModelの委託とJSON解析をセット
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
