@@ -8,7 +8,13 @@
 
 import Foundation
 
-//現在時刻の取得や表示形式の変換で扱うクラス
+// ▼関係するclass
+// TimeScheduleModel
+// NewsViewControler
+// TimePoints
+// UpdateTimes
+
+// 上記classで現在時刻の取得やフォーマットの変換時に共通で扱う
 class DateItems {
     static var date                = Date()
     static var dateFormatter       = DateFormatter()

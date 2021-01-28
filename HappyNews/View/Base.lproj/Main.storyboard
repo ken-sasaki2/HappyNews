@@ -171,14 +171,7 @@
                         <viewLayoutGuide key="safeArea" id="TyU-cw-Wnq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="wAa-68-yOj">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="bookmarks" id="hpa-La-lQn">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <segue destination="riw-uk-grg" kind="modal" id="Ych-eh-nDp"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="wAa-68-yOj"/>
                     <connections>
                         <outlet property="newsTable" destination="J3m-na-Q71" id="xtm-1o-Stg"/>
                     </connections>
@@ -186,21 +179,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKw-n2-8sG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4292.753623188406" y="-616.07142857142856"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="mZF-uH-nKf">
-            <objects>
-                <viewController id="riw-uk-grg" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Fpm-St-NKB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="rZA-Ym-diJ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B8g-1I-snu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5014" y="-616"/>
         </scene>
         <!--アカウント-->
         <scene sceneID="q7X-D9-K3y">

@@ -9,14 +9,15 @@
 import UIKit
 import WebKit
 
-class WebViewController: UIViewController,WKUIDelegate {
+// タップしたニュースのURLを取得してWebViewを表示する
+class WebViewController: UIViewController, WKUIDelegate {
 
     
     // MARK: - Property
-    //WKwebViewのインスタンス作成
+    // WKwebViewのインスタンス作成
     var webView = WKWebView()
     
-    //NavigatonBarのボタンのインスタンス
+    // NavigatonBarのボタンのインスタンス
     var closeButton: UIBarButtonItem?
     
     
@@ -24,46 +25,44 @@ class WebViewController: UIViewController,WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //NavigationBarの呼び出し
+        // NavigationBarの呼び出し
         webViewNavigationBar()
         
-        //webViewのサイズ設定
+        // WebViewのサイズを設定しviewに反映
         webView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
-        
-        //viewに反映
         view.addSubview(webView)
         
-        //webViewの表示
+        // openWebViewの呼び出し
         openWebView()
         
-        //スワイプで戻るを有効
+        // スワイプで戻るを有効
         webView.allowsBackForwardNavigationGestures = true
     }
     
     
     // MARK: - Navigation
-    //WebViewのNavigationBar設定
+    // WebViewのNavigationBarの設定
     func webViewNavigationBar() {
         
-        //NavigationBarの下からViewが始まる
+        // NavigationBarの下からViewが始まる
         self.navigationController?.navigationBar.isTranslucent = false
         
-        //NavigationBarの色
+        // NavigationBarの色
         self.navigationController?.navigationBar.barTintColor = UIColor(hex: "f4f8fa")
             
-        //NavigationBarのボタン設定
+        // NavigationBarのボタン設定
         closeButton = UIBarButtonItem(title: "閉じる", style: .plain, target: self, action: #selector(tapCloseButton(_:)))
         
-        //ボタン反映（右）
+        // ボタン反映（右）
         self.navigationItem.rightBarButtonItem = closeButton
     }
     
     
     // MARK: - TapCloseButton
-    //closeボタンをタップしたときのアクション
+    // closeButtonをタップしたときのアクション
     @objc func tapCloseButton(_ sender: UIBarButtonItem) {
         
-        //WebViewを閉じる
+        // WebViewを閉じる
         dismiss(animated: true, completion: nil)
     }
     
@@ -71,16 +70,16 @@ class WebViewController: UIViewController,WKUIDelegate {
     // MARK: - OpenWebView
     func openWebView() {
         
-        //TopNewsから受け取ったキー値urlで保存されている値をurlStringへ代入
-        let urlString = UserDefaults.standard.object(forKey: "url")
+        //  newsString = ニュースをタップしたときに保存したURL
+        let newsString = UserDefault.newsString
         
-        //TopNewsから受け取った文字列url(urlString)をURL型にキャッシュしてurlに代入
-        let url = URL(string: urlString as! String)
+        // newsStringをURL型に変換
+        let newsURL = URL(string: newsString as! String)
         
-        //TopNewsから受け取ったurlをURLRequest型にしてrequestに代入
-        let request = URLRequest(url: url!)
+        // newsURLをURLRequest型に変換
+        let tapCellRequest = URLRequest(url: newsURL!)
         
-        //webViewをロード（開く）
-        webView.load(request)
+        //WebViewをロード（開く）
+        webView.load(tapCellRequest)
     }
 }

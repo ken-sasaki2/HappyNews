@@ -8,9 +8,14 @@
 
 import Foundation
 
-//ニュース更新の分岐時間を定義するクラス
+// ▼関係するclass
+// DateItems
+// UpdateTimes
+
+// API通信をおこなう分岐時間を定義
 class TimePoints {
     
+    // DateItems.dateFormatter =  class DateItems参照
     static var morningPoint     = DateItems.dateFormatter.date(from: "07:00:00")
     static var afternoonPoint   = DateItems.dateFormatter.date(from: "11:00:00")
     static var eveningPoint     = DateItems.dateFormatter.date(from: "17:00:00")

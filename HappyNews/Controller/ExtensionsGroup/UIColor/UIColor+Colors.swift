@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-//16進数color 機能拡張
+// 16進数color機能拡張
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         let v = Int("000000" + hex, radix: 16) ?? 0

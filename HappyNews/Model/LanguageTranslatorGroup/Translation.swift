@@ -8,11 +8,14 @@
 
 import Foundation
 
-struct Translation {
+// ▼関係するclass
+// LanguageTranslatorModel
+
+// JSON解析で扱う
+class Translation {
     
     var translation: String?
     
-    //構造体の初期化
     init(translation: String) {
         self.translation = translation
     }

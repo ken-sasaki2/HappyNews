@@ -8,7 +8,10 @@
 
 import Foundation
 
-//XMLファイルの情報を取得するためにタグを定義
+// ▼関係するclass
+// NewsViewController
+
+// XMLファイルのタグ名を定義し、XML解析で扱う
 class NewsItems {
     var title       :String?
     var url         :String?

@@ -8,7 +8,12 @@
 
 import Foundation
 
-//ニュースのitem数で処理を行う場合に扱うクラス
+// ▼関係するclass
+// LanguageTranslatorModel
+// ToneAnalyzerModel
+// NewsViewController
+
+// 上記classにてfor文やJSON解析で共通の値として扱う
 class NewsCount {
     static var itemCount = 50
     static var zeroCount = 0
