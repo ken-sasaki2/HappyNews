@@ -22,6 +22,7 @@ import Kingfisher
 // LanguageTranslatorModel
 // ToneAnalyzerModel
 // WebViewController
+// LocalNotificationModel
 
 // XML解析をおこないニュースを取得、感情分析結果を受け取り、明るいニュースだけでUIを更新する主要クラス
 class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol, DoneCatchTimeScheduleProtocol {
@@ -75,6 +76,11 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         // 前回起動時刻の確認
         print("前回起動時刻: \(UserDefault.lastActivation)")
+        
+        // ローカルpush通知の呼び出し
+        LocalNotificationModel().morningNotification()
+        LocalNotificationModel().afternoonNotification()
+        LocalNotificationModel().eveningNotification()
         
         // NavigationBarの呼び出し
         setNewsNavigationBar()

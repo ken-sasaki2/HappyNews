@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		45166C3C25BAAD580026045F /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166C3B25BAAD580026045F /* ApiKey.swift */; };
-		454A30F2259C8B48008B1067 /* LocalNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A30F1259C8B48008B1067 /* LocalNotificationViewController.swift */; };
 		457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */; };
 		457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */; };
 		4576898425453E5900D7E630 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4576898325453E5900D7E630 /* Translation.swift */; };
@@ -19,6 +18,7 @@
 		459DB74525C17D02009822AD /* DateItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB74425C17D02009822AD /* DateItems.swift */; };
 		459DB74825C17D08009822AD /* TimePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB74725C17D08009822AD /* TimePoints.swift */; };
 		459DB74B25C17D13009822AD /* UpdateTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB74A25C17D13009822AD /* UpdateTimes.swift */; };
+		459DB76C25C3B83F009822AD /* LocalNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB76B25C3B83F009822AD /* LocalNotificationModel.swift */; };
 		45B8239025739340005F435B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45B8238F25739340005F435B /* GoogleService-Info.plist */; };
 		45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7524E4F1970023D738 /* NewsItems.swift */; };
 		45BCEE7824E545570023D738 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7724E545570023D738 /* WebViewController.swift */; };
@@ -38,7 +38,6 @@
 /* Begin PBXFileReference section */
 		45166C3B25BAAD580026045F /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		452877452575417200A344E3 /* HappyNews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HappyNews.entitlements; sourceTree = "<group>"; };
-		454A30F1259C8B48008B1067 /* LocalNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationViewController.swift; sourceTree = "<group>"; };
 		4573208E25A9E1E800F34C60 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTranslatorModel.swift; sourceTree = "<group>"; };
 		457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerModel.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		459DB74425C17D02009822AD /* DateItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateItems.swift; sourceTree = "<group>"; };
 		459DB74725C17D08009822AD /* TimePoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimePoints.swift; path = HappyNews/Model/TimeScheduleGroup/TimePoints.swift; sourceTree = SOURCE_ROOT; };
 		459DB74A25C17D13009822AD /* UpdateTimes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateTimes.swift; sourceTree = "<group>"; };
+		459DB76B25C3B83F009822AD /* LocalNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationModel.swift; sourceTree = "<group>"; };
 		45B8238C25739103005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		45B8238D25739104005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		45B8238F25739340005F435B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		454A30F0259C8B2F008B1067 /* NotificationGroup */ = {
 			isa = PBXGroup;
 			children = (
-				454A30F1259C8B48008B1067 /* LocalNotificationViewController.swift */,
+				459DB76B25C3B83F009822AD /* LocalNotificationModel.swift */,
 			);
 			path = NotificationGroup;
 			sourceTree = "<group>";
@@ -212,7 +212,6 @@
 		45D8866B24E4C10800B32D02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				454A30F0259C8B2F008B1067 /* NotificationGroup */,
 				458017412588ADB4004A8176 /* ExtensionsGroup */,
 				45BE9B50252802130013F34C /* TabBarGroup */,
 				45BE9B4F252801FF0013F34C /* AccountGroup */,
@@ -242,6 +241,7 @@
 				459DB75025C25243009822AD /* ToneAnalyzerGroup */,
 				453B79D625A5ABD600ED1F25 /* NewsGroup */,
 				458084C625BD9D4B00C96472 /* UserDefaultsGroup */,
+				454A30F0259C8B2F008B1067 /* NotificationGroup */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -403,11 +403,11 @@
 				45BE9B412526C7BB0013F34C /* TabBarController.swift in Sources */,
 				45FB2820257479ED0054A9B8 /* AccountViewController.swift in Sources */,
 				45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */,
+				459DB76C25C3B83F009822AD /* LocalNotificationModel.swift in Sources */,
 				45E80A5F25B52FF1001A25AF /* TimeScheduleModel.swift in Sources */,
 				45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */,
 				457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */,
 				45166C3C25BAAD580026045F /* ApiKey.swift in Sources */,
-				454A30F2259C8B48008B1067 /* LocalNotificationViewController.swift in Sources */,
 				458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */,
 				459DB74B25C17D13009822AD /* UpdateTimes.swift in Sources */,
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
