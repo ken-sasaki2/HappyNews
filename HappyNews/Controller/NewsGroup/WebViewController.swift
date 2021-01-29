@@ -73,9 +73,9 @@ class WebViewController: UIViewController, WKUIDelegate {
     // MARK: - OpenWebView
     func openWebView() {
         
-        //  newsString = ニュースをタップしたときに保存したURL
-        let newsString = UserDefault.newsString
-        
+        // newsString = ニュースをタップしたときに保存したURL
+        let newsString = UserDefault.standard.object(forKey: "url")
+        		
         // newsStringをURL型に変換
         let newsURL = URL(string: newsString as! String)
         

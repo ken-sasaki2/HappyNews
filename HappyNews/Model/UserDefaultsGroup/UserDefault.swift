@@ -27,9 +27,6 @@ class UserDefault {
     // ToneAnalyzerModelから返ってきた感情分析結果の取り出しで扱う
     static var joyCountArray = UserDefaults.standard.array(forKey: "joyCountArray") as! [Int]
     
-    // タップしたニュースURLの取り出しで扱う
-    static var newsString = UserDefaults.standard.object(forKey: "url")
-    
     // TimeScheduleModelの時間割でAPI通信をおこなった履歴の取り出しで扱う
     static var outputMorningUpdate   = UserDefaults.standard.string(forKey: "morningUpdate")
     static var outputAfternoonUpdate = UserDefaults.standard.string(forKey: "afternoonUpdate")
