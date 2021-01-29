@@ -32,12 +32,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         // viewの背景を設定
         view = UIView()
         view.backgroundColor = UIColor(hex: "f4f8fa")
-        
-        // 通知を管理するオブジェクト
-        let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOption) { (_, _) in
-            print("success: Push notification OK")
-        }
 
         // NavigationBarの呼び出し
         setAccountNavigationBar()
@@ -212,7 +206,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         
         // タブバーのインスタンスを取得
         if let tabBarController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
-
+            
             // ニュースタブを選択状態にする（0が一番左）
             DispatchQueue.main.async {
                 tabBarController.selectedIndex = 0
