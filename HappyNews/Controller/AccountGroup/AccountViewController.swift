@@ -88,17 +88,17 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ table: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // 設定セクションの場合
-        if section == sectionTitleArray[0].count {
+        if section == sectionTitleArray.firstIndex(of: "設定") {
             return settingSectionIconArray.count
         }
         
         // このアプリについてセクションの場合
-        else if section == sectionTitleArray[1].count {
+        else if section == sectionTitleArray.firstIndex(of: "このアプリについて") {
             return appSectionIconArray.count
         }
         
         // アカウントセクションの場合
-        else if section == sectionTitleArray[2].count {
+        else if section == sectionTitleArray.firstIndex(of: "アカウント") {
             return accountSectionIconArray.count
         } else{
             return 0
@@ -117,7 +117,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         let cell = table.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
         
         // 設定セクションの場合
-        if indexPath.section == sectionTitleArray[0].count {
+        if indexPath.section == sectionTitleArray.firstIndex(of: "設定") {
             
             // アイコンの設定
             let settingSectionIcon = UIImage(named: settingSectionIconArray[indexPath.row])
@@ -132,7 +132,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         // このアプリについてセクションの場合
-        else if indexPath.section == sectionTitleArray[1].count {
+        else if indexPath.section == sectionTitleArray.firstIndex(of: "このアプリについて") {
             
             // アイコンの設定
             let appSectionIcon = UIImage(named: appSectionIconArray[indexPath.row])
@@ -147,7 +147,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         // アカウントセクションの場合
-        else if indexPath.section == sectionTitleArray[2].count {
+        else if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント") {
             
             // アイコンの設定
             let accountSectionIcon = UIImage(named: accountSectionIconArray[indexPath.row])
@@ -183,11 +183,11 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // セクション毎のタップアクションを分岐
         // "設定"セクションの場合
-        if indexPath.section == sectionTitleArray[0].count {
+        if indexPath.section == sectionTitleArray.firstIndex(of: "設定") {
 
             switch indexPath.row {
             // "通知の設定"セルをタップした場合
-            case settingCellLabelArray[0].count:
+            case settingCellLabelArray.firstIndex(of: "通知の設定"):
                 transitionSettingPage()
             default:
                 break
@@ -195,24 +195,24 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             
         }
         
-        // "このアプリ"についてセクションの場合
-        else if indexPath.section == sectionTitleArray[1].count {
+        // "このアプリについて"セクションの場合
+        else if indexPath.section == sectionTitleArray.firstIndex(of: "このアプリについて") {
             
             switch indexPath.row {
             // "シェア"セルをタップした場合
-            case appCellLabelArray[0].count:
+            case appCellLabelArray.firstIndex(of: "シェア"):
                 shareFunction()
                 
             // "レビュー"セルをタップした場合
-            case appCellLabelArray[1].count:
+            case appCellLabelArray.firstIndex(of: "レビュー"):
                 reviewFunction()
                 
             // "ご意見・ご要望"セルをタップした場合
-            case appCellLabelArray[2].count:
+            case appCellLabelArray.firstIndex(of: "ご意見・ご要望"):
                 mailFunction()
                 
             // "開発者（Twitter）"セルをタップした場合
-            case appCellLabelArray[3].count:
+            case appCellLabelArray.firstIndex(of: "開発者（Twitter）"):
                 twitterFunction()
             default:
                 break
@@ -221,11 +221,11 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         // "アカウント"セクションの場合
-        else if indexPath.section == sectionTitleArray[1].count {
+        else if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント") {
             
             switch indexPath.row {
             // "ログアウト"セルをタップした場合
-            case accountCellLabelArray[0].count:
+            case accountCellLabelArray.firstIndex(of: "ログアウト"):
                 logoutAlert()
             default:
                 break
