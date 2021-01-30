@@ -408,8 +408,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             joySelectionArray[indexPath.row].title?.contains("不倫") == true ||
             joySelectionArray[indexPath.row].title?.contains("死亡") == true ||
             joySelectionArray[indexPath.row].title?.contains("事故") == true {
-            print("除外記事: \(joySelectionArray[indexPath.row].title?.debugDescription)")
-
+            
             // 文字列検索で該当すれば'return 0.1'を設定することで事実上UIからセルを削除
             return 0.1
         } else {
