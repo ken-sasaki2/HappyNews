@@ -401,7 +401,20 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // セルの高さを設定
     func tableView(_ newsTable: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 360
+        
+        // 除外ワードを設定して感情分析の誤評価をフォロー
+        if joySelectionArray[indexPath.row].title?.contains("コロナ") == true || joySelectionArray[indexPath.row].title?.contains("重症者") == true || joySelectionArray[indexPath.row].title?.contains("感染") == true || joySelectionArray[indexPath.row].title?.contains("遺体") == true || joySelectionArray[indexPath.row].title?.contains("逮捕") == true || joySelectionArray[indexPath.row].title?.contains("容疑者") == true ||
+            joySelectionArray[indexPath.row].title?.contains("重症者") == true ||
+            joySelectionArray[indexPath.row].title?.contains("不倫") == true ||
+            joySelectionArray[indexPath.row].title?.contains("死亡") == true ||
+            joySelectionArray[indexPath.row].title?.contains("事故") == true {
+            print("除外記事: \(joySelectionArray[indexPath.row].title?.debugDescription)")
+
+            // 文字列検索で該当すれば'return 0.1'を設定することで事実上UIからセルを削除
+            return 0.1
+        } else {
+            return 360
+        }
     }
 
     // セルを構築
@@ -416,7 +429,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         // Tag番号(1)〜(3)でインスタンス作成(サムネイル, タイトル, サブタイトル)
         let thumbnail = cell.viewWithTag(1) as! UIImageView
         let newsTitle = cell.viewWithTag(2) as! UILabel
-        let subtitle = newsTable.viewWithTag(3) as! UILabel
+        let subtitle  = newsTable.viewWithTag(3) as! UILabel
         
         // サムネイルで扱うインスタンス(画像URL, 待機画像）
         let thumbnailURL = URL(string: joyNewsItem.image!.description)
