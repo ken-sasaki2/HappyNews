@@ -236,12 +236,12 @@
 			isa = PBXGroup;
 			children = (
 				45E80A5D25B52FF1001A25AF /* TimeScheduleGroup */,
-				45166C3A25BAAD440026045F /* AuthenticationGroup */,
 				453B79D725A5ABEB00ED1F25 /* LanguageTranslatorGroup */,
 				459DB75025C25243009822AD /* ToneAnalyzerGroup */,
 				453B79D625A5ABD600ED1F25 /* NewsGroup */,
 				458084C625BD9D4B00C96472 /* UserDefaultsGroup */,
 				454A30F0259C8B2F008B1067 /* NotificationGroup */,
+				45166C3A25BAAD440026045F /* AuthenticationGroup */,
 			);
 			path = Model;
 			sourceTree = "<group>";
