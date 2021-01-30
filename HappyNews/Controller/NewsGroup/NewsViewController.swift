@@ -371,7 +371,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // セクションのヘッダーのタイトルを設定
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let sectionTitle = "分析結果: \(joyCountArray.count)件のニュース"
+        let sectionTitle = "ニュース提供: ABEMA TIMES"
         return sectionTitle
     }
     
