@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-import FirebaseMessaging
 import UserNotifications
 
 @available(iOS 14.0, *)

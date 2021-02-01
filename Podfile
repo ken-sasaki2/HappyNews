@@ -12,6 +12,5 @@ target 'HappyNews' do
   pod 'Firebase'
   pod 'Firebase/Auth'
   pod 'PKHUD', '~> 5.0'
-  pod 'FirebaseMessaging'
   pod 'Kingfisher'
 end
