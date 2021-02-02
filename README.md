@@ -14,8 +14,8 @@
 プログラミングを通じてこの問題を解決しようと考えたのがHappyNews開発の経緯です。
 
 ## 機能一覧
-・ニュース表示機能（感情分析機能）
-・Sign In With Appleを用いたログイン機能 ＆ ログアウト機能  
+・ニュース表示機能（感情分析機能）  
+・Sign In With Appleを用いたログイン機能＆ログアウト機能  
 ・通知機能  
 ・Twitterシェア機能  
 ・レビュー機能  
@@ -38,27 +38,38 @@ pod 'SwiftyJSON'
 pod 'Firebase'
 pod 'Firebase/Auth'
 pod 'PKHUD', '~> 5.0'
-pod 'FirebaseMessaging'
 pod 'Kingfisher'
 ```
 
 ```
-import UIKit
-import Foundation
+# API通信で使用
 import ToneAnalyzer
 import LanguageTranslator
 import SwiftyJSON
-import PKHUD
-import Kingfisher
-import WebKit
-import AuthenticationServices
-import CryptoKit
+
+# Sign In With Appleで使用
 import Firebase
 import FirebaseAuth
-import FirebaseMessaging
+import PKHUD
+import AuthenticationServices
+import CryptoKit
+
+# ニュースページサムネイルで使用
+import Kingfisher
+
+# WebViewで使用
+import WebKit
+
+# アカウントページで使用
 import StoreKit
 import MessageUI
+
+# 通知機能で使用
 import UserNotifications
+
+# その他
+import UIKit
+import Foundation
 ```
 
 ###  IBM Watson API
@@ -70,7 +81,8 @@ import UserNotifications
 
 ## 工夫したポイント
 #### ニュースの順番の整合性を合わせる
-XML解析をおこなった後に取得したニュースの順番と、API通信で返ってきたレスポンスの順番にずれが生じ、その状態でニュースを表示すると感情分析結果とは違ったニュースを表示してしまうといった問題が発生しました。
+XML解析をおこなった後に取得したニュースの順番と、API通信で返ってきたレスポンスの順番にずれが生じ、
+その状態でニュースを表示すると感情分析結果とは違ったニュースを表示してしまう問題が発生しました。
 その為、ニュースの順番を合わせるのに必要なアルゴリズムを開発者側で構築したのは工夫したポイントです。
 
 
@@ -79,9 +91,11 @@ XML解析をおこなった後に取得したニュースの順番と、API通�
 XCTestを用いてテストコードの記述を試みましたが、難易度が高く現在保留としております。
 次のアクションは、2つのパターンを検討しております。 
 
-① XCTestの基礎知識を『iOSアプリ開発自動テストの教科書〜』を使って身につける。その後、改めてHappyNewsのテストコードの実装に取り掛かるということ。
+① XCTestの基礎知識を『iOSアプリ開発自動テストの教科書〜』を使って身につける。
+その後、改めてHappyNewsのテストコードの実装に取り掛かるということ。
 
-② **MagicPod**という自動テストをAIでおこなうツールを用いてアプリのテストを実施するということ。MagicPodは、note株式会社様や株式会社Gunosy様でも実用した事例が存在するツールなので、そちらでのテストも検討中であります。
+② **MagicPod**という自動テストをAIでおこなうツールを用いてアプリのテストを実施するということ。
+MagicPodは、note株式会社様や株式会社Gunosy様でも実用した事例が存在するツールなので、そちらでのテストも検討中であります。
 
 ## 使い方
 ### 感情分析中画面
