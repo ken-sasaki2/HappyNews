@@ -38,6 +38,8 @@ class TabBarController: UITabBarController {
         switch item.title {
         case "ニュース":
             tabBar.tintColor = UIColor(hex: "00AECC")
+        case "トークルーム":
+            tabBar.tintColor = UIColor(hex: "00AECC")
         case "アカウント":
             tabBar.tintColor = UIColor(hex: "00AECC")
         
