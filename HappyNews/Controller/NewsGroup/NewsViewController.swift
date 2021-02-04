@@ -263,7 +263,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         let languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
         
         // LanguageTranslatorModelと通信
-        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: LANGUAGE_TRANSLATOR_CHARGEKEY, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
+        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: LANGUAGE_TRANSLATOR_APIKEY, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
         
         // LanguageTranslatorModelの委託とJSON解析をセット
         languageTranslatorModel.doneCatchTranslationProtocol = self
@@ -298,7 +298,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         let toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
         
         // translationArrayとAPIToneAnalyzerの認証コードで通信
-        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: TONE_ANALYZER_CHARGEKEY, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
+        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: TONE_ANALYZER_APIKEY, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
         
         // ToneAnalyzerModelの委託とJSON解析をセット
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self
@@ -407,7 +407,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             joySelectionArray[indexPath.row].title?.contains("重症者") == true ||
             joySelectionArray[indexPath.row].title?.contains("不倫") == true ||
             joySelectionArray[indexPath.row].title?.contains("死亡") == true ||
-            joySelectionArray[indexPath.row].title?.contains("事故") == true {
+            joySelectionArray[indexPath.row].title?.contains("事故") == true || joySelectionArray[indexPath.row].title?.contains("デモ") == true || joySelectionArray[indexPath.row].title?.contains("緊急事態宣言") == true || joySelectionArray[indexPath.row].title?.contains("火事") == true {
             
             // 文字列検索で該当すれば'return 0.1'を設定することで事実上UIからセルを削除
             return 0.1
