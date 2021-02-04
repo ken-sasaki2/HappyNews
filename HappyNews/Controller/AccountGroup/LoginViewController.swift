@@ -76,7 +76,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         signInGuide.translatesAutoresizingMaskIntoConstraints = false
         
         // テキストの内容とフォントと色を設定し、中央揃えにしてviewに反映
-        signInGuide.text = "ログインしてアカウントページへ"
+        signInGuide.text = "ログインしてチャットやアカウントページへ"
         signInGuide.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         signInGuide.textColor = UIColor(hex: "333333")
         signInGuide.backgroundColor = UIColor.clear
