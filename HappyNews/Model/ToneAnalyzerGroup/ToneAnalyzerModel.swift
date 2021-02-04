@@ -181,7 +181,7 @@ class ToneAnalyzerModel {
         for i in 0..<NewsCount.itemCount {
             
             // 感情分析結果が"Joy" && score0.5以上の要素を検索
-            if toneAnalysisArray[i]["tones"][NewsCount.zeroCount]["score"] > 0.5 && toneAnalysisArray[i]["tones"][NewsCount.zeroCount]["tone_name"] == "Joy" || toneAnalysisArray[i]["tones"][NewsCount.zeroCount]["tone_id"] == "joy" {
+            if toneAnalysisArray[i]["tones"][NewsCount.zeroCount]["score"] > 0.7 && toneAnalysisArray[i]["tones"][NewsCount.zeroCount]["tone_name"] == "Joy" || toneAnalysisArray[i]["tones"][NewsCount.zeroCount]["tone_id"] == "joy" {
                 
                 // 条件を満たした要素のindex番号を取得（-1で整合性）
                 joyCountArray.append(toneAnalysisArray[NewsCount.zeroCount].count+i-1)
