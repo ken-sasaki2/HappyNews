@@ -76,7 +76,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         signInGuide.translatesAutoresizingMaskIntoConstraints = false
         
         // テキストの内容とフォントと色を設定し、中央揃えにしてviewに反映
-        signInGuide.text = "ログインして通知設定を保存しましょう。"
+        signInGuide.text = "ログインしてアカウントページへ"
         signInGuide.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         signInGuide.textColor = UIColor(hex: "333333")
         signInGuide.backgroundColor = UIColor.clear
@@ -205,13 +205,13 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
     @objc func cancelTap() {
         
         // タブバーのインスタンスを取得
-        if let tabBarController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
-            
-            // ニュースタブを選択状態にする（0が一番左）
-            DispatchQueue.main.async {
-                tabBarController.selectedIndex = 0
-            }
-        }
+//        if let tabBarController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
+//            
+//            // ニュースタブを選択状態にする（0が一番左）
+//            DispatchQueue.main.async {
+//                tabBarController.selectedIndex = 0
+//            }
+//        }
         // モーダル画面を閉じるとニュースページに遷移
         dismiss(animated: true, completion: nil)
     }
