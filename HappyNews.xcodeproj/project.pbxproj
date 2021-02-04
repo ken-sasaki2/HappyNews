@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		45166C3C25BAAD580026045F /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166C3B25BAAD580026045F /* ApiKey.swift */; };
+		454A624525CBB0CC0035ACC9 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A624425CBB0CC0035ACC9 /* ChatViewController.swift */; };
 		457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */; };
 		457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */; };
 		4576898425453E5900D7E630 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4576898325453E5900D7E630 /* Translation.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		45166C3B25BAAD580026045F /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		452877452575417200A344E3 /* HappyNews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HappyNews.entitlements; sourceTree = "<group>"; };
+		454A624425CBB0CC0035ACC9 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		4573208E25A9E1E800F34C60 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTranslatorModel.swift; sourceTree = "<group>"; };
 		457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerModel.swift; sourceTree = "<group>"; };
@@ -117,6 +119,14 @@
 				459DB76B25C3B83F009822AD /* LocalNotificationModel.swift */,
 			);
 			path = NotificationGroup;
+			sourceTree = "<group>";
+		};
+		454A623E25CBB03E0035ACC9 /* ChatGroup */ = {
+			isa = PBXGroup;
+			children = (
+				454A624425CBB0CC0035ACC9 /* ChatViewController.swift */,
+			);
+			path = ChatGroup;
 			sourceTree = "<group>";
 		};
 		458017412588ADB4004A8176 /* ExtensionsGroup */ = {
@@ -215,6 +225,7 @@
 				458017412588ADB4004A8176 /* ExtensionsGroup */,
 				45BE9B50252802130013F34C /* TabBarGroup */,
 				45BE9B4F252801FF0013F34C /* AccountGroup */,
+				454A623E25CBB03E0035ACC9 /* ChatGroup */,
 				45BE9B4B252801AE0013F34C /* NewsGroup */,
 				45D8865724E4C0F000B32D02 /* AppDelegate.swift */,
 				45D8865924E4C0F000B32D02 /* SceneDelegate.swift */,
@@ -286,7 +297,7 @@
 				45D8865024E4C0F000B32D02 /* Sources */,
 				45D8865124E4C0F000B32D02 /* Frameworks */,
 				45D8865224E4C0F000B32D02 /* Resources */,
-				14C073ABCA5D8253C54AC22A /* [CP] Embed Pods Frameworks */,
+				1D3532AB88EAFC9B5FF83F23 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -346,7 +357,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		14C073ABCA5D8253C54AC22A /* [CP] Embed Pods Frameworks */ = {
+		1D3532AB88EAFC9B5FF83F23 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -402,6 +413,7 @@
 				4576898425453E5900D7E630 /* Translation.swift in Sources */,
 				45BE9B412526C7BB0013F34C /* TabBarController.swift in Sources */,
 				45FB2820257479ED0054A9B8 /* AccountViewController.swift in Sources */,
+				454A624525CBB0CC0035ACC9 /* ChatViewController.swift in Sources */,
 				45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */,
 				459DB76C25C3B83F009822AD /* LocalNotificationModel.swift in Sources */,
 				45E80A5F25B52FF1001A25AF /* TimeScheduleModel.swift in Sources */,
