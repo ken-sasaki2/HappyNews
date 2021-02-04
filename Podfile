@@ -11,6 +11,8 @@ target 'HappyNews' do
   pod 'SwiftyJSON'
   pod 'Firebase'
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
   pod 'PKHUD', '~> 5.0'
   pod 'Kingfisher'
+  pod 'IQKeyboardManagerSwift'
 end
