@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import UserNotifications
+import IQKeyboardManagerSwift
 
 @available(iOS 14.0, *)
 @UIApplicationMain
@@ -18,8 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // 通知を許可するかどうかを促す画面を表示する設定
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        //Sign In With Appleに必要
+        // Sign In With Appleに必要
         FirebaseApp.configure()
+        
+        // キーボードが上に出現すればviewも上に、閉じればviewも下に
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
