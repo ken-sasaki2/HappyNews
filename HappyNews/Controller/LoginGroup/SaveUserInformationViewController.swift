@@ -7,31 +7,54 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 // ユーザー情報(ユーザー名 & アカウント画像)を保存する
-class SaveUserInformationViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SaveUserInformationViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DoneCatchUserImageProtocol {
 
     
     // MARK: - Property
     // アカウント画像のインスタンス
     @IBOutlet weak var userImage: UIImageView!
     
+    // SendToFirebaseStorageModelから返ってくる値を保存
+    var userImageString: String?
+    
     // ユーザー名入力Fieldのインスタンス
-    @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var userNameTextField: UITextField!
+    
+    // 登録ボタンのインスタンス
+    @IBOutlet weak var registerButton: UIButton!
+    
+    // fireStoreDBのコレクション名が入る
+    var roomName: String?
+    
+    // FirebaseStorageへ画像データを送信するクラスのインスタンス
+    var sendToFirebaseStorageModel = SendToFirebaseStorageModel()
     
     
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // CheckPermissionクラスの呼び出し
-        let checkPermission = CheckPermission()
-            checkPermission.showCheckPermission()
         
         // アカウント画像の角丸
         userImage.layer.masksToBounds = false
         userImage.layer.cornerRadius = userImage.frame.width/2
         userImage.clipsToBounds = true
+        
+        // 登録ボタンの角丸
+        registerButton.layer.cornerRadius = 6.0
+        
+        // プロトコルの委託
+        sendToFirebaseStorageModel.doneCatchUserImageProtocol = self
+
+        // カメラにアクセスするかどうかを促すクラスの呼び出し
+        let checkPermission = CheckPermission()
+            checkPermission.showCheckPermission()
+        
+        // fireStoreDBのコレクションを指定して解析
+        roomName = "userName"
     }
     
     
@@ -131,7 +154,6 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
     // MARK: - TapUserImage
     // アカウント画像をタップすると呼ばれる
     @IBAction func tapUserImage(_ sender: Any) {
-        print("アイコンをタップ")
         
         // アラートの表示
         showImageAlert()
@@ -139,14 +161,54 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
     
     
     // MARK: - TapSaveButton
-    // 保存ボタンをタップすると呼ばれる
-    @IBAction func tapSaveButton(_ sender: Any) {
-        print("保存をタップ")
+    // 登録ボタンをタップすると呼ばれる
+    @IBAction func tapRegisterButton(_ sender: Any) {
         
-        // ユーザー名がnilでないかの確認
+        // ユーザー名とアカウント画像がnilでなければ呼ばれる
+        if userNameTextField.text?.isEmpty != true, let userImageValue = userImage.image {
+            
+            FirestoreItems.fireStoreDB.collection(roomName!).addDocument(data: ["userName": userNameTextField.text]) {
+                error in
+                
+                // エラー処理
+                if error != nil {
+                    
+                    print("Message save error: \(error.debugDescription)")
+                    return
+                }
+                
+                // UIImage型をData型に変換してインスタンス化
+                let data = userImageValue.jpegData(compressionQuality: 1.0)
+                
+                // sendToFirebaseStorageModelにアカウント画像を渡す
+                self.sendToFirebaseStorageModel.sendUserImageData(data: data!)
+                
+                // 非同期でUIを更新
+                DispatchQueue.main.async {
+                    
+                    // fireStoreDBへの保存を終えたらtextFieldを空にしてキーボードを閉じる
+                    self.userNameTextField.text = ""
+                    self.userNameTextField.resignFirstResponder()
+                }
+            }
+        } else {
+            
+            print("User name is empty")
+        }
+    }
+    
+    
+    // MARK: - CatchUserImage
+    // SendToFirebaseStorageModelから値を受け取って画面遷移
+    func catchUserImage(url: String) {
         
-        // 登録を行う
-        // - ユーザー画像
-        // - ユーザー名
+        // 返ってきた値をインスタンス化
+        userImageString = url
+        print("userImageString: \(userImageString)")
+        
+        if userImageString != nil {
+            // segueで画面遷移
+            self.performSegue(withIdentifier: "mainPage", sender: nil)
+        }
     }
 }
