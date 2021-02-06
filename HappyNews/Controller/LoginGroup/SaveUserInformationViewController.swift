@@ -42,6 +42,9 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
         // ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
         
+        // viewの背景色を設定
+        view.backgroundColor = UIColor(hex: "f4f8fa")
+        
         // アカウント画像の角丸
         userImage.layer.masksToBounds = false
         userImage.layer.cornerRadius = userImage.frame.width/2
@@ -163,41 +166,31 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
         showImageAlert()
     }
     
-    
     // MARK: - TapSaveButton
     // 登録ボタンをタップすると呼ばれる
     @IBAction func tapRegisterButton(_ sender: Any) {
         
-        // ユーザー名とアカウント画像がnilでなければ呼ばれる
-        if userNameTextField.text?.isEmpty != true, let userImageValue = userImage.image {
+        // ユーザー名とアカウント画像の両方を確認すると呼ばれる
+        if userNameTextField.text?.isEmpty != true && userImage.image != nil  {
             
-            FirestoreItems.fireStoreDB.collection(roomName!).addDocument(data: ["userName": userNameTextField.text]) {
-                error in
+            // ユーザー名の保存
+            UserDefault.standard.set(userNameTextField.text, forKey: "userName")
+            
+            // UIImage型をData型に変換してインスタンス化
+            let data = userImage.image!.jpegData(compressionQuality: 1.0)
+            
+            // sendToFirebaseStorageModelにアカウント画像を渡す
+            self.sendToFirebaseStorageModel.sendUserImageData(data: data!)
+            
+            // 非同期でUIを更新
+            DispatchQueue.main.async {
                 
-                // エラー処理
-                if error != nil {
-                    
-                    print("Message save error: \(error.debugDescription)")
-                    return
-                }
-                
-                // UIImage型をData型に変換してインスタンス化
-                let data = userImageValue.jpegData(compressionQuality: 1.0)
-                
-                // sendToFirebaseStorageModelにアカウント画像を渡す
-                self.sendToFirebaseStorageModel.sendUserImageData(data: data!)
-                
-                // 非同期でUIを更新
-                DispatchQueue.main.async {
-                    
-                    // fireStoreDBへの保存を終えたらtextFieldを空にしてキーボードを閉じる
-                    self.userNameTextField.text = ""
-                    self.userNameTextField.resignFirstResponder()
-                }
+                // fireStoreDBへの保存を終えたらtextFieldを空にしてキーボードを閉じる
+                self.userNameTextField.text = ""
+                self.userNameTextField.resignFirstResponder()
             }
         } else {
-            
-            print("User name is empty")
+            print("User name or account image is nil. Or both of them are nil.")
         }
     }
     
