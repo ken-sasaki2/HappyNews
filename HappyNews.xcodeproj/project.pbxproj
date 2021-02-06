@@ -29,6 +29,7 @@
 		45BE9B412526C7BB0013F34C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE9B402526C7BB0013F34C /* TabBarController.swift */; };
 		45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE9B442526D2120013F34C /* LoginViewController.swift */; };
 		45C7DDAC25CD778100D4DDB5 /* SaveUserInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7DDAB25CD778100D4DDB5 /* SaveUserInformationViewController.swift */; };
+		45C7DE2A25CE211700D4DDB5 /* CheckPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7DE2925CE211700D4DDB5 /* CheckPermission.swift */; };
 		45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865724E4C0F000B32D02 /* AppDelegate.swift */; };
 		45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865924E4C0F000B32D02 /* SceneDelegate.swift */; };
 		45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* NewsViewController.swift */; };
@@ -67,6 +68,7 @@
 		45BE9B402526C7BB0013F34C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		45BE9B442526D2120013F34C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		45C7DDAB25CD778100D4DDB5 /* SaveUserInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserInformationViewController.swift; sourceTree = "<group>"; };
+		45C7DE2925CE211700D4DDB5 /* CheckPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermission.swift; sourceTree = "<group>"; };
 		45D8865424E4C0F000B32D02 /* HappyNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D8865724E4C0F000B32D02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45D8865924E4C0F000B32D02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				45166C3B25BAAD580026045F /* ApiKey.swift */,
+				45C7DE2925CE211700D4DDB5 /* CheckPermission.swift */,
 			);
 			path = AuthenticationGroup;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				45166C3C25BAAD580026045F /* ApiKey.swift in Sources */,
 				4586794C25CBEECE006B9D9E /* ChatMessageCell.swift in Sources */,
 				458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */,
+				45C7DE2A25CE211700D4DDB5 /* CheckPermission.swift in Sources */,
 				459DB74B25C17D13009822AD /* UpdateTimes.swift in Sources */,
 				45C7DDAC25CD778100D4DDB5 /* SaveUserInformationViewController.swift in Sources */,
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
