@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import PKHUD
 
 // ユーザー情報(ユーザー名 & アカウント画像)を保存する
 class SaveUserInformationViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DoneCatchUserImageProtocol {
@@ -37,6 +38,9 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // ダークモード適用を回避
+        self.overrideUserInterfaceStyle = .light
         
         // アカウント画像の角丸
         userImage.layer.masksToBounds = false
@@ -207,8 +211,12 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
         print("userImageString: \(userImageString)")
         
         if userImageString != nil {
-            // segueで画面遷移
-            self.performSegue(withIdentifier: "mainPage", sender: nil)
+            
+            HUD.flash(.labeledSuccess(title: "登録完了", subtitle: nil), onView: self.view, delay: 0) { _ in
+                
+                // segueで画面遷移
+                self.performSegue(withIdentifier: "mainPage", sender: nil)
+            }
         }
     }
 }
