@@ -27,6 +27,11 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
         // CheckPermissionクラスの呼び出し
         let checkPermission = CheckPermission()
             checkPermission.showCheckPermission()
+        
+        // アカウント画像の角丸
+        userImage.layer.masksToBounds = false
+        userImage.layer.cornerRadius = userImage.frame.width/2
+        userImage.clipsToBounds = true
     }
     
     
@@ -124,7 +129,7 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
     
     
     // MARK: - TapUserImage
-    // デフォルトイメージをタップすると呼ばれる
+    // アカウント画像をタップすると呼ばれる
     @IBAction func tapUserImage(_ sender: Any) {
         print("アイコンをタップ")
         
