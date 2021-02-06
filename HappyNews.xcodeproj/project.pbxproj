@@ -14,6 +14,8 @@
 		457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */; };
 		4576898425453E5900D7E630 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4576898325453E5900D7E630 /* Translation.swift */; };
 		458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580174F2588B74C004A8176 /* UIColor+Colors.swift */; };
+		4586794C25CBEECE006B9D9E /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4586794A25CBEECE006B9D9E /* ChatMessageCell.swift */; };
+		4586794D25CBEECE006B9D9E /* ChatMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4586794B25CBEECE006B9D9E /* ChatMessageCell.xib */; };
 		4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4586DD502585B0CE00FAB922 /* Assets.xcassets */; };
 		459DB73F25C17CA5009822AD /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB73E25C17CA5009822AD /* UserDefault.swift */; };
 		459DB74225C17CD0009822AD /* NewsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB74125C17CD0009822AD /* NewsCount.swift */; };
@@ -26,6 +28,7 @@
 		45BCEE7824E545570023D738 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7724E545570023D738 /* WebViewController.swift */; };
 		45BE9B412526C7BB0013F34C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE9B402526C7BB0013F34C /* TabBarController.swift */; };
 		45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE9B442526D2120013F34C /* LoginViewController.swift */; };
+		45C7DDAC25CD778100D4DDB5 /* SaveUserInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7DDAB25CD778100D4DDB5 /* SaveUserInformationViewController.swift */; };
 		45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865724E4C0F000B32D02 /* AppDelegate.swift */; };
 		45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865924E4C0F000B32D02 /* SceneDelegate.swift */; };
 		45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* NewsViewController.swift */; };
@@ -47,6 +50,8 @@
 		457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerModel.swift; sourceTree = "<group>"; };
 		4576898325453E5900D7E630 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		4580174F2588B74C004A8176 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
+		4586794A25CBEECE006B9D9E /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
+		4586794B25CBEECE006B9D9E /* ChatMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageCell.xib; sourceTree = "<group>"; };
 		4586DD502585B0CE00FAB922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		459DB73E25C17CA5009822AD /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		459DB74125C17CD0009822AD /* NewsCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCount.swift; sourceTree = "<group>"; };
@@ -61,6 +66,7 @@
 		45BCEE7724E545570023D738 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		45BE9B402526C7BB0013F34C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		45BE9B442526D2120013F34C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		45C7DDAB25CD778100D4DDB5 /* SaveUserInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserInformationViewController.swift; sourceTree = "<group>"; };
 		45D8865424E4C0F000B32D02 /* HappyNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D8865724E4C0F000B32D02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45D8865924E4C0F000B32D02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -183,7 +189,6 @@
 		45BE9B4F252801FF0013F34C /* AccountGroup */ = {
 			isa = PBXGroup;
 			children = (
-				45BE9B442526D2120013F34C /* LoginViewController.swift */,
 				45FB281F257479ED0054A9B8 /* AccountViewController.swift */,
 			);
 			path = AccountGroup;
@@ -195,6 +200,15 @@
 				45BE9B402526C7BB0013F34C /* TabBarController.swift */,
 			);
 			path = TabBarGroup;
+			sourceTree = "<group>";
+		};
+		45C7DDAA25CD76C000D4DDB5 /* LoginGroup */ = {
+			isa = PBXGroup;
+			children = (
+				45BE9B442526D2120013F34C /* LoginViewController.swift */,
+				45C7DDAB25CD778100D4DDB5 /* SaveUserInformationViewController.swift */,
+			);
+			path = LoginGroup;
 			sourceTree = "<group>";
 		};
 		45D8864B24E4C0F000B32D02 = {
@@ -234,9 +248,10 @@
 			children = (
 				458017412588ADB4004A8176 /* ExtensionsGroup */,
 				45BE9B50252802130013F34C /* TabBarGroup */,
-				45BE9B4F252801FF0013F34C /* AccountGroup */,
-				454A623E25CBB03E0035ACC9 /* ChatGroup */,
+				45C7DDAA25CD76C000D4DDB5 /* LoginGroup */,
 				45BE9B4B252801AE0013F34C /* NewsGroup */,
+				454A623E25CBB03E0035ACC9 /* ChatGroup */,
+				45BE9B4F252801FF0013F34C /* AccountGroup */,
 				45D8865724E4C0F000B32D02 /* AppDelegate.swift */,
 				45D8865924E4C0F000B32D02 /* SceneDelegate.swift */,
 			);
@@ -248,6 +263,8 @@
 			children = (
 				4586DD502585B0CE00FAB922 /* Assets.xcassets */,
 				45D8865D24E4C0F000B32D02 /* Main.storyboard */,
+				4586794B25CBEECE006B9D9E /* ChatMessageCell.xib */,
+				4586794A25CBEECE006B9D9E /* ChatMessageCell.swift */,
 				45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -308,7 +325,7 @@
 				45D8865024E4C0F000B32D02 /* Sources */,
 				45D8865124E4C0F000B32D02 /* Frameworks */,
 				45D8865224E4C0F000B32D02 /* Resources */,
-				1D3532AB88EAFC9B5FF83F23 /* [CP] Embed Pods Frameworks */,
+				FF3AD051B2F126B8C0D35605 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -358,6 +375,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4586794D25CBEECE006B9D9E /* ChatMessageCell.xib in Resources */,
 				45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */,
 				45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */,
 				4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */,
@@ -368,23 +386,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1D3532AB88EAFC9B5FF83F23 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HappyNews/Pods-HappyNews-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HappyNews/Pods-HappyNews-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HappyNews/Pods-HappyNews-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C388B91F10210D3A0A7A3F07 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -405,6 +406,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF3AD051B2F126B8C0D35605 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyNews/Pods-HappyNews-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyNews/Pods-HappyNews-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HappyNews/Pods-HappyNews-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -432,8 +450,10 @@
 				45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */,
 				457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */,
 				45166C3C25BAAD580026045F /* ApiKey.swift in Sources */,
+				4586794C25CBEECE006B9D9E /* ChatMessageCell.swift in Sources */,
 				458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */,
 				459DB74B25C17D13009822AD /* UpdateTimes.swift in Sources */,
+				45C7DDAC25CD778100D4DDB5 /* SaveUserInformationViewController.swift in Sources */,
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */,
 			);

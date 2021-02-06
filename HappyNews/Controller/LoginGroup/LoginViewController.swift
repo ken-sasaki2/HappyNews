@@ -13,7 +13,7 @@ import Firebase
 import PKHUD
 import FirebaseAuth
 
-// ログインに関するプログラムを処理する
+// ログイン画面のUIとSignInWithAppleを設定
 class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     
@@ -262,7 +262,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
                 
                 HUD.flash(.labeledSuccess(title: "ログイン完了", subtitle: nil), onView: self.view, delay: 0) { _ in
                     
-                    self.dismiss(animated: true, completion: nil)
+                    // segueで画面遷移
+                    self.performSegue(withIdentifier: "nextSaveUser", sender: nil)
                 }
             }
         }
