@@ -10,10 +10,12 @@ target 'HappyNews' do
   pod 'IBMWatsonToneAnalyzerV3', '~> 3.6.0'
   pod 'IBMWatsonLanguageTranslatorV3', '~> 3.6.0'
   pod 'SwiftyJSON'
+  
   pod 'Firebase'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  
   pod 'PKHUD', '~> 5.0'
   pod 'Kingfisher'
   pod 'IQKeyboardManagerSwift'
