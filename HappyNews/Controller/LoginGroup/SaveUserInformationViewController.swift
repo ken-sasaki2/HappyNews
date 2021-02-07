@@ -190,7 +190,15 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
                 self.userNameTextField.resignFirstResponder()
             }
         } else {
-            print("User name or account image is nil. Or both of them are nil.")
+            
+            // ユーザーに制約を知らせるアラートの設定
+            let registerAlert = UIAlertController(title: "登録失敗", message: "アカウント画像とユーザー名の両方が必要です。", preferredStyle: .alert)
+            
+            // アラートのボタン
+            registerAlert.addAction(UIAlertAction(title: "やり直す", style: .default))
+            
+            // アラートの表示
+            present(registerAlert, animated: true, completion: nil)
         }
     }
     

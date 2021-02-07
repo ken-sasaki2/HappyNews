@@ -8,12 +8,13 @@
 
 import UIKit
 import Kingfisher
+import PKHUD
 
 // アカウント情報を編集するクラス
 class EditUserInfoViewController: UIViewController {
     
     
-    // MARK: - XML Property
+    // MARK: - Property
     // アカウント情報編集用のインスタンス
     @IBOutlet weak var editUserImage: UIImageView!
     
@@ -74,7 +75,33 @@ class EditUserInfoViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
+    
+    // MARK: - TapEditUpdateButton
     // 更新ボタンをタップすると呼ばれる
     @IBAction func tapEditUpdateButton(_ sender: Any) {
+        
+        // ユーザーに制約を知らせるアラートの設定
+        let updateAlert = UIAlertController(title: "確認", message: "アカウント情報を変更しますか？", preferredStyle: .alert)
+        
+        // アラートのボタン
+        updateAlert.addAction(UIAlertAction(title: "はい", style: .default, handler: {
+            action in
+            
+            // ユーザー名の保存
+            UserDefault.standard.set(self.editUserNameTextField.text, forKey: "userName")
+            
+            
+            
+            HUD.flash(.labeledSuccess(title: "変更完了", subtitle: nil), onView: self.view, delay: 0) { _ in
+                
+                // アカウントページへ遷移(戻る)
+                self.navigationController?.popViewController(animated: true)
+            }
+        }))
+        updateAlert.addAction(UIAlertAction(title: "いいえ", style: .destructive))
+        
+        // アラートの表示
+        present(updateAlert, animated: true, completion: nil)
+        
     }
 }
