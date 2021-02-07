@@ -78,6 +78,9 @@
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="th2-dx-XSZ" appends="YES" id="mb9-uX-08d"/>
+                                </connections>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ユーザー名を入力" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zHE-1O-H8L">
                                 <rect key="frame" x="60" y="335" width="293" height="34"/>
@@ -123,6 +126,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kHa-Ug-U9I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="th2-dx-XSZ">
+                    <connections>
+                        <action selector="tapeditUserImage:" destination="G59-h8-ZWV" id="ZgP-hM-YaY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="5024.6376811594209" y="414.50892857142856"/>
         </scene>

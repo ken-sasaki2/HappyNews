@@ -207,14 +207,9 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
     // SendToFirebaseStorageModelから値を受け取って画面遷移
     func catchUserImage(url: String) {
         
-        // 返ってきた値をインスタンス化
-        userImageString = url
-        print("userImageString: \(userImageString)")
-        
-        if userImageString != nil {
+        if url != nil {
             
             HUD.flash(.labeledSuccess(title: "登録完了", subtitle: nil), onView: self.view, delay: 0) { _ in
-                
                 // segueで画面遷移
                 self.performSegue(withIdentifier: "mainPage", sender: nil)
             }
