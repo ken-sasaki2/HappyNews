@@ -11,32 +11,39 @@ import Firebase
 import FirebaseAuth
 import StoreKit
 import MessageUI
+import Kingfisher
 
 // アプリの設定や、レビューなどをおこなえるメニュー画面
 class AccountViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
     
     // MARK: - Property
-    // インスタンス作成
+    // TableViewのインスタンス
     @IBOutlet var table: UITableView!
     
     // セクションのタイトル
-    let sectionTitleArray: [String] = ["設定", "このアプリについて", "アカウント"]
+    let sectionTitleArray: [String] = ["アカウント情報", "設定", "このアプリについて", "ログアウト"]
     
     // セクション毎のアイコンの配列
-    let settingSectionIconArray: [String] = ["notification"]
-    let appSectionIconArray    : [String] = ["share", "review", "mail", "twitter", "version"]
-    let accountSectionIconArray: [String] = ["logout"]
+    var userInfoSectionIconArray: [String] = []
+    let settingSectionIconArray : [String] = ["notification"]
+    let appSectionIconArray     : [String] = ["share", "review", "mail", "twitter", "version"]
+    let accountSectionIconArray : [String] = ["logout"]
     
     // セクション毎のセルのラベル
-    let settingCellLabelArray: [String] = ["通知の設定"]
-    let appCellLabelArray    : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者（Twitter）", "HappyNews ver. 1.0"]
+    var userInfoCellLabelArray: [String] = []
+    let settingCellLabelArray : [String] = ["通知の設定"]
+    let appCellLabelArray     : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者（Twitter）", "HappyNews ver. 1.0"]
     let accountCellLabelArray: [String] = ["ログアウト"]
     
     
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // アカウント画像とユーザー名を配列に追加
+        userInfoSectionIconArray.append(UserDefault.imageCapture!)
+        userInfoCellLabelArray.append(UserDefault.getUserName!)
         
         // ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
@@ -87,18 +94,23 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     // セルの数を決める
     func tableView(_ table: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        // 設定セクションの場合
-        if section == sectionTitleArray.firstIndex(of: "設定") {
+        // "アカウント情報"セクションの場合
+        if section == sectionTitleArray.firstIndex(of: "アカウント情報") {
+            return userInfoSectionIconArray.count
+        }
+        
+        // "設定"セクションの場合
+        else if section == sectionTitleArray.firstIndex(of: "設定") {
             return settingSectionIconArray.count
         }
         
-        // このアプリについてセクションの場合
+        // "このアプリについて"セクションの場合
         else if section == sectionTitleArray.firstIndex(of: "このアプリについて") {
             return appSectionIconArray.count
         }
         
-        // アカウントセクションの場合
-        else if section == sectionTitleArray.firstIndex(of: "アカウント") {
+        // "ログアウト"セクションの場合
+        else if section == sectionTitleArray.firstIndex(of: "ログアウト") {
             return accountSectionIconArray.count
         } else{
             return 0
@@ -107,7 +119,13 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // セルの高さを設定
     func tableView(_ table: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 65.0
+        
+        // アカウント情報とその他のセクションで高さを分岐
+        if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント情報") {
+            return 100
+        } else {
+            return 65.0
+        }
     }
     
     // セルを構築
@@ -116,48 +134,61 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         // tableCellのIDでUITableViewCellのインスタンスを生成
         let cell = table.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
         
-        // 設定セクションの場合
-        if indexPath.section == sectionTitleArray.firstIndex(of: "設定") {
+        // Tag番号(1)〜(2)でインスタンス作成(アイコン, セルの名前)
+        let settingIcon  = cell.viewWithTag(1) as! UIImageView
+        let settingLabel = cell.viewWithTag(2) as! UILabel
+        
+        // "アカウント情報"セクションの場合
+        if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント情報") {
+            
+            // Kingfisherを用いてアカウント画像を変換してデータを反映
+            settingIcon.kf.setImage(with: URL(string: userInfoSectionIconArray[0]))
+            
+            // アカウント画像の角丸
+            settingIcon.layer.masksToBounds = true
+            settingIcon.layer.cornerRadius = settingIcon.frame.width/2
+            settingIcon.clipsToBounds = true
+            
+            // ラベルの設定
+            settingLabel.text      = userInfoCellLabelArray[0]
+            settingLabel.textColor = UIColor(hex: "333333")
+            settingLabel.font      = UIFont.systemFont(ofSize: 20, weight: .regular)
+        }
+        
+        // "設定"セクションの場合
+        else if indexPath.section == sectionTitleArray.firstIndex(of: "設定") {
             
             // アイコンの設定
             let settingSectionIcon = UIImage(named: settingSectionIconArray[indexPath.row])
-            let settingIcon = cell.viewWithTag(1) as! UIImageView
-                settingIcon.image = settingSectionIcon
+            settingIcon.image = settingSectionIcon
             
             // ラベルの設定
-            let settingLabel = cell.viewWithTag(2) as! UILabel
-                settingLabel.text = settingCellLabelArray[indexPath.row]
-                settingLabel.textColor = UIColor(hex: "333333")
-            
+            settingLabel.text      = settingCellLabelArray[indexPath.row]
+            settingLabel.textColor = UIColor(hex: "333333")
         }
         
-        // このアプリについてセクションの場合
+        // "このアプリについて"セクションの場合
         else if indexPath.section == sectionTitleArray.firstIndex(of: "このアプリについて") {
             
             // アイコンの設定
             let appSectionIcon = UIImage(named: appSectionIconArray[indexPath.row])
-            let appIcon = cell.viewWithTag(1) as! UIImageView
-                appIcon.image = appSectionIcon
+            settingIcon.image = appSectionIcon
             
             // ラベルの設定
-            let appLabel = cell.viewWithTag(2) as! UILabel
-                appLabel.text = appCellLabelArray[indexPath.row]
-                appLabel.textColor = UIColor(hex: "333333")
-            
+            settingLabel.text      = appCellLabelArray[indexPath.row]
+            settingLabel.textColor = UIColor(hex: "333333")
         }
         
-        // アカウントセクションの場合
-        else if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント") {
+        // "ログアウト"セクション"の場合
+        else if indexPath.section == sectionTitleArray.firstIndex(of: "ログアウト") {
             
             // アイコンの設定
             let accountSectionIcon = UIImage(named: accountSectionIconArray[indexPath.row])
-            let accountIcon = cell.viewWithTag(1) as! UIImageView
-                accountIcon.image = accountSectionIcon
+            settingIcon.image = accountSectionIcon
             
             // ラベルの設定
-            let accountLabel = cell.viewWithTag(2) as! UILabel
-                accountLabel.text = accountCellLabelArray[indexPath.row]
-                accountLabel.textColor = UIColor.red
+            settingLabel.text      = accountCellLabelArray[indexPath.row]
+            settingLabel.textColor = UIColor.red
         }
         
         // セルとTableViewの背景色の設定
@@ -182,9 +213,22 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
         // セクション毎のタップアクションを分岐
-        // "設定"セクションの場合
-        if indexPath.section == sectionTitleArray.firstIndex(of: "設定") {
+        // "アカウント情報"セクションの場合
+        if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント情報") {
 
+            switch indexPath.row {
+            // ユーザー名のセルをタップした場合
+            case userInfoCellLabelArray.firstIndex(of: userInfoCellLabelArray[0]):
+                print("遷移")
+            default:
+                break
+            }
+            
+        }
+        
+        // "設定"セクションの場合
+        else if indexPath.section == sectionTitleArray.firstIndex(of: "設定") {
+        
             switch indexPath.row {
             // "通知の設定"セルをタップした場合
             case settingCellLabelArray.firstIndex(of: "通知の設定"):
@@ -220,8 +264,8 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             
         }
         
-        // "アカウント"セクションの場合
-        else if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント") {
+        // "ログアウト"セクションの場合
+        else if indexPath.section == sectionTitleArray.firstIndex(of: "ログアウト") {
             
             switch indexPath.row {
             // "ログアウト"セルをタップした場合
