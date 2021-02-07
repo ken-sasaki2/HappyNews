@@ -53,6 +53,18 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
+    // MARK: - viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // ユーザー情報編集ページから戻ってきた場合にTabBarを表示するように設定
+        self.tabBarController?.tabBar.isHidden = false
+        
+        // NavigationBarのbackボタンのタイトルを編集
+        self.navigationItem.backButtonTitle = ""
+    }
+    
+    
     // MARK: - Navigation
     // アカウントページのNavigationBarを設定
     func setAccountNavigationBar() {
@@ -68,10 +80,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         self.navigationController?.navigationBar.isTranslucent = false
         
         // NavigationBarの下線を削除
-        self.navigationController?.navigationBar.shadowImage = UIImage()    
-        
-        // ログイン後の'back'ボタンを削除
-        self.navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     

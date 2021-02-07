@@ -7,24 +7,74 @@
 //
 
 import UIKit
+import Kingfisher
 
+// アカウント情報を編集するクラス
 class EditUserInfoViewController: UIViewController {
-
+    
+    
+    // MARK: - XML Property
+    // アカウント情報編集用のインスタンス
+    @IBOutlet weak var editUserImage: UIImageView!
+    
+    // ユーザー名編集用TextFireldのインスタンス
+    @IBOutlet weak var editUserNameTextField: UITextField!
+    
+    // アカウント情報更新用ボタンのインスタンス
+    @IBOutlet weak var editUpdateButton: UIButton!
+    
+    
+    // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // TextFireldのデフォルト値
+        editUserNameTextField.text = UserDefault.getUserName
+        
+        // アカウント画像のデフォルト値
+        editUserImage.kf.setImage(with: URL(string: UserDefault.imageCapture!))
+        
+        // アカウント画像の角丸
+        editUserImage.layer.masksToBounds = false
+        editUserImage.layer.cornerRadius = editUserImage.frame.width/2
+        editUserImage.clipsToBounds = true
+        
+        // 登録ボタンの角丸
+        editUpdateButton.layer.cornerRadius = 6.0
+        
+        // Navigationbarの呼び出し
+        setEditPageNavigationBar()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: - viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // ユーザー情報編集ページではTabBarを非表示するように設定
+        self.tabBarController?.tabBar.isHidden = true
     }
-    */
-
+    
+    
+    // MARK: - Navigation
+    // ニュースページのNavigationBarを設定
+    func setEditPageNavigationBar() {
+        
+        // NavigationBarのタイトルとその色とフォント
+        navigationItem.title = "アカウント情報編集"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .semibold)]
+        
+        // NavigationBarの色
+        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "00AECC")
+        
+        // 一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
+        self.navigationController?.navigationBar.isTranslucent = false
+        
+        // NavigationBarの下線を削除
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    // 更新ボタンをタップすると呼ばれる
+    @IBAction func tapEditUpdateButton(_ sender: Any) {
+    }
 }
