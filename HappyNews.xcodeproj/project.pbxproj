@@ -35,8 +35,10 @@
 		45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* NewsViewController.swift */; };
 		45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8865D24E4C0F000B32D02 /* Main.storyboard */; };
 		45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */; };
+		45E1B44325CE399D00843780 /* SendToFirebaseStorageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E1B44225CE399D00843780 /* SendToFirebaseStorageModel.swift */; };
 		45E80A5F25B52FF1001A25AF /* TimeScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */; };
 		45F5C5E9258488030082119F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F5C5E8258488030082119F /* MessageUI.framework */; };
+		45F76D9825CF8D2E005E71B7 /* EditUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F76D9725CF8D2E005E71B7 /* EditUserInfoViewController.swift */; };
 		45FB2820257479ED0054A9B8 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB281F257479ED0054A9B8 /* AccountViewController.swift */; };
 		CCDCCAE33D0F59D6087F56F9 /* Pods_HappyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */; };
 /* End PBXBuildFile section */
@@ -76,8 +78,10 @@
 		45D8865E24E4C0F000B32D02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45D8866324E4C0F200B32D02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45D8866524E4C0F200B32D02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45E1B44225CE399D00843780 /* SendToFirebaseStorageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendToFirebaseStorageModel.swift; sourceTree = "<group>"; };
 		45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeScheduleModel.swift; sourceTree = "<group>"; };
 		45F5C5E8258488030082119F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		45F76D9725CF8D2E005E71B7 /* EditUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoViewController.swift; sourceTree = "<group>"; };
 		45FB281F257479ED0054A9B8 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		A94EF47B29A9CEAAB707D9D7 /* Pods-HappyNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyNews.release.xcconfig"; path = "Target Support Files/Pods-HappyNews/Pods-HappyNews.release.xcconfig"; sourceTree = "<group>"; };
 		E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				45FB281F257479ED0054A9B8 /* AccountViewController.swift */,
+				45F76D9725CF8D2E005E71B7 /* EditUserInfoViewController.swift */,
 			);
 			path = AccountGroup;
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 		45D8866D24E4C11900B32D02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				45E1B44125CE398400843780 /* FirebaseGroup */,
 				454E6BBA25CBDD0F002E5F02 /* ChatMessageGroup */,
 				45E80A5D25B52FF1001A25AF /* TimeScheduleGroup */,
 				453B79D725A5ABEB00ED1F25 /* LanguageTranslatorGroup */,
@@ -286,6 +292,14 @@
 				45166C3A25BAAD440026045F /* AuthenticationGroup */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		45E1B44125CE398400843780 /* FirebaseGroup */ = {
+			isa = PBXGroup;
+			children = (
+				45E1B44225CE399D00843780 /* SendToFirebaseStorageModel.swift */,
+			);
+			path = FirebaseGroup;
 			sourceTree = "<group>";
 		};
 		45E80A5D25B52FF1001A25AF /* TimeScheduleGroup */ = {
@@ -328,7 +342,7 @@
 				45D8865024E4C0F000B32D02 /* Sources */,
 				45D8865124E4C0F000B32D02 /* Frameworks */,
 				45D8865224E4C0F000B32D02 /* Resources */,
-				FF3AD051B2F126B8C0D35605 /* [CP] Embed Pods Frameworks */,
+				EAC2FCCA8EFDB47DA8A41614 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -411,7 +425,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FF3AD051B2F126B8C0D35605 /* [CP] Embed Pods Frameworks */ = {
+		EAC2FCCA8EFDB47DA8A41614 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -435,7 +449,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45E1B44325CE399D00843780 /* SendToFirebaseStorageModel.swift in Sources */,
 				459DB74225C17CD0009822AD /* NewsCount.swift in Sources */,
+				45F76D9825CF8D2E005E71B7 /* EditUserInfoViewController.swift in Sources */,
 				459DB73F25C17CA5009822AD /* UserDefault.swift in Sources */,
 				459DB74525C17D02009822AD /* DateItems.swift in Sources */,
 				459DB74825C17D08009822AD /* TimePoints.swift in Sources */,
@@ -622,6 +638,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -647,6 +664,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
+				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
