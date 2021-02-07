@@ -408,21 +408,19 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
             action in
             
-            // ログアウト(currentUser削除)
-            Auth.auth().currentUser?.delete() {
-                error in
+            // ログアウト機能
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
                 
-                if let error = error {
-                    
-                    print("Logout error: \(error.localizedDescription)")
-                } else {
-                    
-                    // UserDefaultsに保存したデータを全削除
-                    UserDefault.standard.removeAll()
-                    
-                    // LoginViewControllerへ遷移
-                    self.performSegue(withIdentifier: "goLogin", sender: nil)
-                }
+                // UserDefaultsに保存したデータを全削除
+                UserDefault.standard.removeAll()
+                
+                // LoginViewControllerへ遷移
+                self.performSegue(withIdentifier: "goLogin", sender: nil)
+                
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
             }
         }))
         
