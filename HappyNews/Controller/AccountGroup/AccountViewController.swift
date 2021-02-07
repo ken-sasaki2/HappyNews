@@ -417,6 +417,9 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                     print("Logout error: \(error.localizedDescription)")
                 } else {
                     
+                    // UserDefaultsに保存したデータを全削除
+                    UserDefault.standard.removeAll()
+                    
                     // LoginViewControllerへ遷移
                     self.performSegue(withIdentifier: "goLogin", sender: nil)
                 }
