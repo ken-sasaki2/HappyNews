@@ -21,17 +21,20 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     // TableViewのインスタンス
     @IBOutlet var table: UITableView!
     
+    // アカウント画像 & ユーザー名のインスタンスを保存
+    var changeUserImage: String?
+    var changeUsername : String?
+    
     // セクションのタイトル
     let sectionTitleArray: [String] = ["アカウント情報", "設定", "このアプリについて", "ログアウト"]
     
     // セクション毎のアイコンの配列
-    var userInfoSectionIconArray: [String] = []
     let settingSectionIconArray : [String] = ["notification"]
     let appSectionIconArray     : [String] = ["share", "review", "mail", "twitter", "version"]
     let accountSectionIconArray : [String] = ["logout"]
     
     // セクション毎のセルのラベル
-    var userInfoCellLabelArray: [String] = []
+    var userInfoCellLabelArray: [String] = ["ユーザー名"]
     let settingCellLabelArray : [String] = ["通知の設定"]
     let appCellLabelArray     : [String] = ["シェア", "レビュー", "ご意見・ご要望", "開発者（Twitter）", "HappyNews ver. 1.0"]
     let accountCellLabelArray: [String] = ["ログアウト"]
@@ -40,10 +43,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // アカウント画像とユーザー名を配列に追加
-        userInfoSectionIconArray.append(UserDefault.imageCapture!)
-        userInfoCellLabelArray.append(UserDefault.getUserName!)
         
         // ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
@@ -62,6 +61,13 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // NavigationBarのbackボタンのタイトルを編集
         self.navigationItem.backButtonTitle = ""
+        
+        // アカウント画像 & ユーザー名のインスタンス
+        changeUserImage = UserDefault.imageCapture!
+        changeUsername  = UserDefault.getUserName!
+        
+        // tableViewの更新
+        table.reloadData()
     }
     
     
@@ -105,7 +111,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // "アカウント情報"セクションの場合
         if section == sectionTitleArray.firstIndex(of: "アカウント情報") {
-            return userInfoSectionIconArray.count
+            return settingSectionIconArray.count
         }
         
         // "設定"セクションの場合
@@ -151,7 +157,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント情報") {
             
             // Kingfisherを用いてアカウント画像を変換してデータを反映
-            settingIcon.kf.setImage(with: URL(string: userInfoSectionIconArray[0]))
+            settingIcon.kf.setImage(with: URL(string: changeUserImage!))
             
             // アカウント画像の角丸
             settingIcon.layer.masksToBounds = true
@@ -159,7 +165,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             settingIcon.clipsToBounds = true
             
             // ラベルの設定
-            settingLabel.text      = userInfoCellLabelArray[0]
+            settingLabel.text      = changeUsername
             settingLabel.textColor = UIColor(hex: "333333")
             settingLabel.font      = UIFont.systemFont(ofSize: 20, weight: .regular)
         }
@@ -228,7 +234,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             switch indexPath.row {
             // ユーザー名のセルをタップした場合
             case userInfoCellLabelArray.firstIndex(of: userInfoCellLabelArray[0]):
-                print("遷移")
                 performSegue(withIdentifier: "editUserInfo", sender: nil)
             default:
                 break
@@ -392,35 +397,33 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     // MARK: - Logout
-    //ログアウト機能
+    // ログアウト機能
     func logoutAlert() {
         
-        //アラートの作成
-        let alert = UIAlertController(title: "ログアウトしますか？", message: "ログアウトすると通知の設定がリセットされます。", preferredStyle: .alert)
+        // アラートの作成
+        let logoutAlert = UIAlertController(title: "ログアウトしますか？",message: "ログアウトするとアプリ内の情報が \n リセットされます。", preferredStyle: .alert)
         
         // アラートのボタン
-        alert.addAction(UIAlertAction(title: "キャンセル", style: .default))
-        alert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
+        logoutAlert.addAction(UIAlertAction(title: "キャンセル", style: .default))
+        logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
             action in
             
-            // ログアウト機能
-            let firebaseAuth = Auth.auth()
-            do {
-                try firebaseAuth.signOut()
-            } catch let signOutError as NSError {
-                print ("Error signing out: %@", signOutError)
+            // ログアウト(currentUser削除)
+            Auth.auth().currentUser?.delete() {
+                error in
+                
+                if let error = error {
+                    
+                    print("Logout error: \(error.localizedDescription)")
+                } else {
+                    
+                    // LoginViewControllerへ遷移
+                    self.performSegue(withIdentifier: "goLogin", sender: nil)
+                }
             }
-
-            // ログインページのインスタンスを作成しNavigationを継承
-            let loginView = LoginViewController()
-            let loginViewController = UINavigationController(rootViewController: loginView)
-            
-            // モーダル画面をフルスクリーンに設定し遷移
-            loginViewController.modalPresentationStyle = .fullScreen
-            self.present(loginViewController, animated: true, completion: nil)
         }))
         
         // アラートの表示
-        present(alert, animated: true, completion: nil)
+        present(logoutAlert, animated: true, completion: nil)
     }
 }

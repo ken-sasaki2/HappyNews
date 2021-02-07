@@ -58,6 +58,7 @@
                     <connections>
                         <outlet property="table" destination="QMd-AH-zBC" id="9rK-Mt-NpQ"/>
                         <segue destination="G59-h8-ZWV" kind="push" identifier="editUserInfo" id="mOx-8C-dfi"/>
+                        <segue destination="RCD-A2-ok2" kind="presentation" identifier="goLogin" id="CjX-e4-FNk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CkB-kR-f4b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -137,7 +138,7 @@
         <!--Login View Controller-->
         <scene sceneID="a7U-YJ-ZRw">
             <objects>
-                <viewController id="RCD-A2-ok2" customClass="LoginViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RCD-A2-ok2" customClass="LoginViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6cc-TW-PhT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -224,7 +225,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="oef-3q-T1I">
             <objects>
-                <tabBarController modalPresentationStyle="fullScreen" id="GKE-uc-7Bx" customClass="TabBarController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GKE-uc-7Bx" customClass="TabBarController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="iYv-v7-B5M"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zfp-wr-nqD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
