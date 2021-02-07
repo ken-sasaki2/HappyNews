@@ -359,10 +359,10 @@
             </objects>
             <point key="canvasLocation" x="3545" y="415"/>
         </scene>
-        <!--Time Line View Controller2-->
+        <!--Time Line View Controller-->
         <scene sceneID="Quo-Yx-Y0A">
             <objects>
-                <viewController id="b9O-60-gTJ" customClass="TimeLineViewController2" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="b9O-60-gTJ" customClass="TimeLineViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CWw-g2-bG5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -388,7 +388,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fwh-zG-MWt"/>
                     <connections>
-                        <outlet property="timeLineTable" destination="t2C-en-5K6" id="K4L-i5-o7N"/>
+                        <outlet property="timeLineTable" destination="t2C-en-5K6" id="jRx-WF-7xp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyQ-VF-k85" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -421,7 +421,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="newspaper" catalog="system" width="32" height="32"/>
+        <image name="newspaper" catalog="system" width="128" height="108"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="timer" catalog="system" width="128" height="121"/>
         <systemColor name="linkColor">

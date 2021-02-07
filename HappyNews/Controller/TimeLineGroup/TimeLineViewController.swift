@@ -1,5 +1,5 @@
 //
-//  TimeLineViewController2.swift
+//  TimeLineViewController.swift
 //  HappyNews
 //
 //  Created by 佐々木　謙 on 2021/02/08.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeLineViewController2: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TimeLineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     // MARK: - Property
@@ -38,15 +38,19 @@ class TimeLineViewController2: UIViewController, UITableViewDelegate, UITableVie
         // カスタムセルの登録
         timeLineTable.register(UINib(nibName: "TimeLineTableViewCell", bundle: nil), forCellReuseIdentifier: "timeLineCustomCell")
         
+        // カスタムセルの高さの初期値を設定し、セルごとに可変するセルを作成
+        timeLineTable.estimatedRowHeight = 95
+        timeLineTable.rowHeight = UITableView.automaticDimension
+        
         // 最新投稿内容をTopに変更
         item = item.reversed()
         
         // NavigationBarの呼び出し
         setTimeLineNavigationBar()
         
-        // カスタムセルの高さの初期値を設定し、セルごとに可変するセルを作成
-        timeLineTable.estimatedRowHeight = 95
-        timeLineTable.rowHeight = UITableView.automaticDimension
+        // 投稿ボタンの呼び出し
+        sendMessageButton()
+        
     }
     
     
@@ -89,11 +93,6 @@ class TimeLineViewController2: UIViewController, UITableViewDelegate, UITableVie
         return item.count
     }
     
-    // セルの高さを設定
-//    func tableView(_ timeLineTable: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 95
-//    }
-    
     // セルを構築
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -129,4 +128,43 @@ class TimeLineViewController2: UIViewController, UITableViewDelegate, UITableVie
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
+    
+    // MARK: - SendMessageButton
+    // 投稿ページへ遷移するボタン
+    func sendMessageButton() {
+        
+        // 投稿ボタンのインスタンス
+        let sendButton = UIButton()
+        
+        // 'Autosizing'を'AutoLayout'に変換
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        // ボタンを化粧
+        sendButton.tintColor = .white
+        sendButton.backgroundColor = UIColor(hex: "00AECC")
+        sendButton.layer.cornerRadius = 25
+        sendButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        
+        // ボタンがタップされた時の挙動を記述してviewに反映
+        sendButton.addTarget(self, action: #selector(tapSendButton), for: .touchUpInside)
+        self.view.addSubview(sendButton)
+
+        // 以下、制約
+        // sendButtonの下端をViewの下端から上に95pt
+        sendButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -95).isActive = true
+        
+        // sendButtonの右端をViewの右端から左に15pt
+        sendButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -15).isActive = true
+        
+        // sendButtonの幅を50にする
+        sendButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        // sendButtonの高さを50にする
+        sendButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    // 投稿ボタンをタップすると呼ばれる
+    @objc func tapSendButton() {
+        print("投稿ボタン")
+    }
 }

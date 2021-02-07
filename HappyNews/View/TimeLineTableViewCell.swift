@@ -44,9 +44,7 @@ class TimeLineTableViewCell: UITableViewCell {
     }
     
     // いいねが押されたら呼ばれる
-    
     @IBAction func tapLikeButton(_ sender: Any) {
         print("「いいね」")
     }
-    
 }
