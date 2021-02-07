@@ -220,6 +220,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             // ユーザー名のセルをタップした場合
             case userInfoCellLabelArray.firstIndex(of: userInfoCellLabelArray[0]):
                 print("遷移")
+                performSegue(withIdentifier: "editUserInfo", sender: nil)
             default:
                 break
             }
