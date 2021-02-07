@@ -49,8 +49,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         setTimeLineNavigationBar()
         
         // 投稿ボタンの呼び出し
-        sendMessageButton()
-        
+        goSubmissionPage()
     }
     
     
@@ -131,7 +130,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: - SendMessageButton
     // 投稿ページへ遷移するボタン
-    func sendMessageButton() {
+    func goSubmissionPage() {
         
         // 投稿ボタンのインスタンス
         let sendButton = UIButton()
@@ -146,7 +145,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         sendButton.setImage(UIImage(systemName: "plus"), for: .normal)
         
         // ボタンがタップされた時の挙動を記述してviewに反映
-        sendButton.addTarget(self, action: #selector(tapSendButton), for: .touchUpInside)
+        sendButton.addTarget(self, action: #selector(tapSubmissionButton), for: .touchUpInside)
         self.view.addSubview(sendButton)
 
         // 以下、制約
@@ -164,7 +163,10 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     // 投稿ボタンをタップすると呼ばれる
-    @objc func tapSendButton() {
-        print("投稿ボタン")
+    @objc func tapSubmissionButton() {
+        print("投稿ページへ遷移")
+        
+        // 投稿ページへ遷移
+        self.performSegue(withIdentifier: "goSubmissionPage", sender: nil)
     }
 }
