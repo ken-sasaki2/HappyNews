@@ -395,12 +395,12 @@
             </objects>
             <point key="canvasLocation" x="4324.6376811594209" y="-312.05357142857139"/>
         </scene>
-        <!--チャット-->
+        <!--タイムライン-->
         <scene sceneID="UGH-aZ-UCA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Oh-6Q-enb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="チャット" id="tod-tE-aBe">
-                        <imageReference key="image" image="message" catalog="system" symbolScale="large"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="タイムライン" id="tod-tE-aBe">
+                        <imageReference key="image" image="timer" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z9a-tA-oub">
@@ -421,9 +421,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="message" catalog="system" width="128" height="113"/>
         <image name="newspaper" catalog="system" width="32" height="32"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="timer" catalog="system" width="128" height="121"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
