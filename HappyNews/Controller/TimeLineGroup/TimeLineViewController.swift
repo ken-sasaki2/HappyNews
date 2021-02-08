@@ -164,7 +164,6 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // 投稿ボタンをタップすると呼ばれる
     @objc func tapSubmissionButton() {
-        print("投稿ページへ遷移")
         
         // 投稿ページへ遷移
         self.performSegue(withIdentifier: "goSubmissionPage", sender: nil)

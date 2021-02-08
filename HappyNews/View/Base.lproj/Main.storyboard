@@ -389,7 +389,7 @@
                     <navigationItem key="navigationItem" id="fwh-zG-MWt"/>
                     <connections>
                         <outlet property="timeLineTable" destination="t2C-en-5K6" id="jRx-WF-7xp"/>
-                        <segue destination="tlA-96-3ya" kind="modal" identifier="goSubmissionPage" id="BdE-C0-UVw"/>
+                        <segue destination="tlA-96-3ya" kind="presentation" identifier="goSubmissionPage" id="BdE-C0-UVw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyQ-VF-k85" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -405,10 +405,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8X2-zh-F19">
-                                <rect key="frame" x="312" y="46" width="80" height="35"/>
+                                <rect key="frame" x="333" y="46" width="56" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.68235294117647061" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <state key="normal" title="投稿">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -418,16 +418,8 @@
                                     <action selector="tapsendMessageButton:" destination="tlA-96-3ya" eventType="touchUpInside" id="rCp-Uk-pGc"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" text="ここの投稿内容が入ります。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PMf-sq-Clr">
-                                <rect key="frame" x="20" y="89" width="374" height="807"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="yes" returnKeyType="done"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsm-oa-qM3">
-                                <rect key="frame" x="22" y="46" width="35" height="35"/>
+                                <rect key="frame" x="26" y="46" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="キャンセルボタン"/>
                                 <connections>
@@ -435,6 +427,15 @@
                                     <action selector="tapCancelButton:" destination="PE7-JW-bTy" eventType="touchUpInside" id="R18-NG-EQB"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" text="今何してる？" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PMf-sq-Clr">
+                                <rect key="frame" x="22" y="92" width="370" height="229"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" enablesReturnKeyAutomatically="YES"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xNO-h7-8Gc"/>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
@@ -442,12 +443,13 @@
                     <navigationItem key="navigationItem" id="M19-5W-Fno"/>
                     <connections>
                         <outlet property="sendMessageButton" destination="8X2-zh-F19" id="q7g-SJ-Otv"/>
+                        <outlet property="timeLineTextView" destination="PMf-sq-Clr" id="Hte-8c-HyV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPM-vE-NsJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="PE7-JW-bTy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5046" y="-312"/>
+            <point key="canvasLocation" x="5043.4782608695659" y="-312.05357142857139"/>
         </scene>
         <!--タイムライン-->
         <scene sceneID="UGH-aZ-UCA">

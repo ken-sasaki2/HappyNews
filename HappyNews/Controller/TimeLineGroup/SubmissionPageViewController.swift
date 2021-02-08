@@ -15,8 +15,9 @@ class SubmissionPageViewController: UIViewController {
     // MARK: - Property
     @IBOutlet weak var sendMessageButton: UIButton!
     
+    // テキストビューのインスタンス
+    @IBOutlet weak var timeLineTextView: UITextView!
     
-
     
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -24,12 +25,19 @@ class SubmissionPageViewController: UIViewController {
 
         // 投稿ボタンの角丸
         sendMessageButton.layer.cornerRadius = 6
+        
+        // テキストビューの化粧
+        timeLineTextView.textColor = UIColor(hex: "333333")
+        timeLineTextView.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        
+        // キーボードを自動的に表示
+        self.timeLineTextView.becomeFirstResponder()
     }
+    
     
     // MARK: - TapCancelButton
     // ×ボタンをタップすると呼ばれる
     @IBAction func tapCancelButton(_ sender: Any) {
-        print("投稿をキャンセル")
         
         // 投稿画面を閉じる
         dismiss(animated: true, completion: nil)
