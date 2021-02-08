@@ -142,7 +142,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         sendButton.tintColor = .white
         sendButton.backgroundColor = UIColor(hex: "00AECC")
         sendButton.layer.cornerRadius = 25
-        sendButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        sendButton.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
         
         // ボタンがタップされた時の挙動を記述してviewに反映
         sendButton.addTarget(self, action: #selector(tapSubmissionButton), for: .touchUpInside)
