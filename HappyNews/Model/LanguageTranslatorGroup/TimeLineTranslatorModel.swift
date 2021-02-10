@@ -17,7 +17,7 @@ import PKHUD
 // MARK: - Protocol
 // TimeLineViewControllerに値を返す
 protocol DoneCatchTimeLineTranslationProtocol {
-    func catchTranslation(timeLineTranslationData: String)
+    func catchTranslation(timeLineTranslationText: String)
 }
 
 // タイムライン投稿ページのテキストを翻訳してTimeLineViewControllerへ返す
@@ -62,7 +62,6 @@ class TimeLineTranslatorModel {
                 switch error {
                 case let .http(statusCode, message, metadata):
                     switch statusCode {
-                    // エラーが発生した場合
                     default:
                         if let statusCode = statusCode {
                             print("Error - code: \(statusCode), \(message ?? "")")
@@ -75,7 +74,7 @@ class TimeLineTranslatorModel {
             }
             
             // レスポンス結果を保存
-            guard let responseResult = response?.result else {
+            guard let translationResultTM = response?.result else {
                 print(error?.localizedDescription ?? "unknown error")
                 return
             }
@@ -87,18 +86,18 @@ class TimeLineTranslatorModel {
                 // レスポンス結果をJSON形式に整形
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .prettyPrinted
-                guard let timeLineJSON = try? encoder.encode(responseResult) else {
+                guard let translationJSONTM = try? encoder.encode(translationResultTM) else {
                     fatalError("Failed to encode to JSON.")
                 }
                 
                 // SwiftyJSONのJSON型へ変換
-                let timeLineValue: JSON = JSON(timeLineJSON)
+                let translationValueTM: JSON = JSON(translationJSONTM)
                 
                 // translation = 翻訳結果（JSON解析結果）
-                let translation = Translation(translation: timeLineValue["translations"][NewsCount.zeroCount]["translation"].string!)
+                let translationTM = Translation(translation: translationValueTM["translations"][NewsCount.zeroCount]["translation"].string!)
                 
                 // 値を返す
-                self.doneCatchTimeLineTranslationProtocol?.catchTranslation(timeLineTranslationData: translation.translation!)
+                self.doneCatchTimeLineTranslationProtocol?.catchTranslation(timeLineTranslationText: translationTM.translation!)
                 
             case false:
                 // statusCode = [400: "障害", 500: "内部システムエラー"]
