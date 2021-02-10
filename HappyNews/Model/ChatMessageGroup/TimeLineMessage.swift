@@ -1,5 +1,5 @@
 //
-//  ChatMessage.swift
+//  TimeLineMessage.swift
 //  HappyNews
 //
 //  Created by 佐々木　謙 on 2021/02/04.
@@ -13,8 +13,10 @@ import Foundation
 
 
 // Firestoreのドキュメントに保存された値の保存で扱う
-struct ChatMessage {
+struct TimeLineMessage {
     
-    let sender: String
-    let body  : String
+    let sender    : String
+    let body      : String
+    let aiconImage: String
+    let userName  : String
 }
