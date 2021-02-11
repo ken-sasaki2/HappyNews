@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
+import FirebaseAuth
+import Kingfisher
 
 class TimeLineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,15 +20,19 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var timeLineTable: UITableView!
     
     
-    var item = [
-            ["content": "2020年\nが\n終わります。\n今年も\n良い\n一年\nでした。", "date": Date().timeIntervalSince1970 - 313123123, "name": "斎藤"],
-            ["content": "良いお年をお過ごしください。", "date": Date().timeIntervalSince1970 - 123212312, "name": "本田"],
-            ["content": "新年明けましておめでとうございます。", "date": Date().timeIntervalSince1970 - 20000000, "name": "鈴木"],
-            ["content": "お年玉を1万円あげます。", "date": Date().timeIntervalSince1970 - 2323232, "name": "川崎"],
-            ["content": "2021年はもっと勉強を頑張ります。", "date": Date().timeIntervalSince1970 - 13213, "name": "三菱"],
-            ["content": "今年は本厄なので気を引き締めます。", "date": Date().timeIntervalSince1970 - 3333, "name": "豊田"],
-            ["content": "今年もよろしくお願いします。", "date": Date().timeIntervalSince1970 - 10, "name": "武田"]
-        ]
+    // MARK: - FireStore Property
+    // fireStoreのインスタンス
+    let fireStoreDB = Firestore.firestore()
+    
+    // fireStoreDBのコレクションが入る
+    var roomName: String?
+    
+    // アプリ内から取得する画像データとユーザー名
+    var aiconImageString: String?
+    var userNameString  : String?
+    
+    // 構造体のインスタンス
+    var timeLineMessages: [TimeLineMessage] = []
     
     
     // MARK: - ViewDidLoad
@@ -42,14 +50,66 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         timeLineTable.estimatedRowHeight = 95
         timeLineTable.rowHeight = UITableView.automaticDimension
         
-        // 最新投稿内容をTopに変更
-        item = item.reversed()
-        
         // NavigationBarの呼び出し
         setTimeLineNavigationBar()
         
         // 投稿ボタンの呼び出し
         goSubmissionPage()
+    }
+    
+    
+    // MARK: - ViewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // fireStoreDBのコレクションを指定して解析
+        roomName = "TimeLineMessage"
+        
+        // 日時の早い順に値をsnapShotに保存
+        fireStoreDB.collection(roomName!).order(by: "date").addSnapshotListener {
+            (snapShot, error) in
+            
+            // 投稿情報を受け取る準備
+            self.timeLineMessages = []
+            
+            // Firestoreの中身を確認
+            print("snapShot: \(snapShot?.documents)")
+            print("snapShot.count: \(snapShot?.documents.count)")
+            
+            // エラー処理
+            if error != nil {
+                
+                print("Message acquisition error: \(error.debugDescription)")
+                return
+            }
+            
+            // snapShotの中に保存されている値を取得する
+            if let snapShotDocuments = snapShot?.documents {
+                
+                for document in snapShotDocuments {
+                    
+                    // fireStoreDBのドキュメントのコレクションのインスタンス
+                    let documentData = document.data()
+                    
+                    // '送信者ID', '本文', "アカウント画像", "ユーザー名" がnilでなければ新規メッセージとしてnewMessageに保存
+                    let documentSender = documentData["sender"] as? String
+                    let documentBody = documentData["body"] as? String
+                    let documentAiconImage = documentData["aiconImage"] as? String
+                    let documentUserName = documentData["userName"] as? String
+                    let documentSendTime = documentData["date"] as? Date
+                    
+                    let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!)
+                    
+                    // 新規メッセージ （ChatMessage型）
+                    self.timeLineMessages.append(newMessage)
+                    
+                    print("timeLineMessages: \(self.timeLineMessages)")
+                    
+                    // チャット投稿内容の更新
+                    self.timeLineTable.reloadData()
+                }
+            }
+        }
     }
     
     
@@ -89,7 +149,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // セルの数を決める
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return item.count
+        return timeLineMessages.count
     }
     
     // セルを構築
@@ -98,14 +158,14 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         // カスタムセルのIDでTimeLineTableViewCellのインスタンスを生成
         let cell = timeLineTable.dequeueReusableCell(withIdentifier: "timeLineCustomCell", for: indexPath) as! TimeLineTableViewCell
         
-        // 現在時刻の取得
-        let now = DateItems.date.timeIntervalSince1970
+        // firestoreDBから取得した新規メッセージを保存
+        let timeLineMessage = timeLineMessages[indexPath.row]
         
-        let past = item[indexPath.row]["date"] as! TimeInterval
-        
-        cell.sendTime.text   = DateItems.timeCheck(now: now, past: past)
-        cell.sendBody.text   = (item[indexPath.row]["content"] as! String)
-        cell.senderName.text = (item[indexPath.row]["name"] as! String)
+        // セルに表示する内容を設定
+        cell.sendBody.text   = timeLineMessage.body
+        cell.senderName.text = timeLineMessage.userName
+//        cell.sendTime.text   = timeLineMessage.data
+        cell.sendImageView.kf.setImage(with: URL(string: timeLineMessage.aiconImage))
         
         // セルとTableViewの背景色の設定
         cell.backgroundColor          = UIColor(hex: "f4f8fa")
