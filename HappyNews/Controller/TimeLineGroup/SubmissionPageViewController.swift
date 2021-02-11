@@ -17,7 +17,6 @@ import PKHUD
 class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslationProtocol, DoneCatchTimeLineAnalyzerProtocol {
     
     
-    
     // MARK: - Property
     @IBOutlet weak var sendMessageButton: UIButton!
     
@@ -35,7 +34,7 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
     var userNameString  : String?
     
     // 構造体のインスタンス
-    var chatMessages: [ChatMessage] = []
+    var timeLineMessages: [TimeLineMessage] = []
     
     // 感情分析に投げる翻訳後のテキスト
     var toneAnalyzerText: String?
@@ -123,17 +122,17 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
     // 感情分析結果を受け取りBool型で次の指示を実行
     func catchAnalyzer(joyOrOther: Bool) {
         
+        // JoyならFirestoreへ保存して内容を反映
         if joyOrOther == true {
             print("評価: Joy")
             
             // 非同期で処理を実行
             DispatchQueue.main.async {
                 
-                // JoyならFirestoreへ保存して内容を反映
                 // テキストビューのテキストとユーザーのIDを取得してfireStoreDBのフィールドに合わせて保存
-                if let sender = Auth.auth().currentUser?.uid {
+                if let sender = Auth.auth().currentUser?.uid, let timeLineMessage = self.timeLineTextView.text {
                     
-                    self.fireStoreDB.collection(self.roomName!).addDocument(data: ["sender": sender, "body": self.timeLineTextView.text, "aiconImage": self.aiconImageString, "userName": self.userNameString, "date": DateItems.date]) {
+                    self.fireStoreDB.collection(self.roomName!).addDocument(data: ["sender": sender, "body": timeLineMessage, "aiconImage": self.aiconImageString, "userName": self.userNameString, "date": DateItems.date]) {
                         error in
                         
                         // エラー処理
@@ -158,15 +157,23 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
         } else {
             print("評価: NotJoy")
             
-            // 感情分析が終了したことをユーザーに伝える
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                HUD.show(.label("Happyと評価されませんでした。 \n 別の内容を投稿してください。"))
+            // 非同期で処理を実行
+            DispatchQueue.main.async {
+                
+                // PKHUDの終了
+                HUD.hide(animated: true)
+                
+                // 感情分析が終了したことをユーザーに伝えるアラートの設定
+                let notJoyAlert = UIAlertController(title: "投稿失敗", message: "投稿内容はHappyと検知されませんでした。", preferredStyle: .alert)
+                
+                // アラートのボタン
+                notJoyAlert.addAction(UIAlertAction(title: "やり直す", style: .default))
+                
+                // アラートの表示
+                self.present(notJoyAlert, animated: true, completion: nil)
                 
                 // 入力内容の削除
                 self.timeLineTextView.text = ""
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                    HUD.hide(animated: true)
-                }
             }
         }
     }
