@@ -8,15 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		45166C3C25BAAD580026045F /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166C3B25BAAD580026045F /* ApiKey.swift */; };
-		454A624525CBB0CC0035ACC9 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A624425CBB0CC0035ACC9 /* ChatViewController.swift */; };
-		454E6BBC25CBDD52002E5F02 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E6BBB25CBDD52002E5F02 /* ChatMessage.swift */; };
+		454A624525CBB0CC0035ACC9 /* GTimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A624425CBB0CC0035ACC9 /* GTimeLineViewController.swift */; };
+		454E6BBC25CBDD52002E5F02 /* TimeLineMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E6BBB25CBDD52002E5F02 /* TimeLineMessage.swift */; };
 		457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */; };
 		457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */; };
 		4576898425453E5900D7E630 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4576898325453E5900D7E630 /* Translation.swift */; };
 		458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4580174F2588B74C004A8176 /* UIColor+Colors.swift */; };
-		4586794C25CBEECE006B9D9E /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4586794A25CBEECE006B9D9E /* ChatMessageCell.swift */; };
-		4586794D25CBEECE006B9D9E /* ChatMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4586794B25CBEECE006B9D9E /* ChatMessageCell.xib */; };
 		4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4586DD502585B0CE00FAB922 /* Assets.xcassets */; };
+		458F88A925D088A90041842D /* SubmissionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F88A825D088A90041842D /* SubmissionPageViewController.swift */; };
+		458F88B225D2AAC70041842D /* TimeLineTranslatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F88B125D2AAC70041842D /* TimeLineTranslatorModel.swift */; };
+		458F88B525D2C6000041842D /* TimeLineToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F88B425D2C6000041842D /* TimeLineToneAnalyzerModel.swift */; };
 		459DB73F25C17CA5009822AD /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB73E25C17CA5009822AD /* UserDefault.swift */; };
 		459DB74225C17CD0009822AD /* NewsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB74125C17CD0009822AD /* NewsCount.swift */; };
 		459DB74525C17D02009822AD /* DateItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB74425C17D02009822AD /* DateItems.swift */; };
@@ -39,6 +40,9 @@
 		45E80A5F25B52FF1001A25AF /* TimeScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */; };
 		45F5C5E9258488030082119F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F5C5E8258488030082119F /* MessageUI.framework */; };
 		45F684B425CFFBA800BA9E46 /* UserDefaults+removeAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F684B325CFFBA800BA9E46 /* UserDefaults+removeAll.swift */; };
+		45F684B925D047C400BA9E46 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F684B825D047C400BA9E46 /* TimeLineViewController.swift */; };
+		45F684BD25D04AFB00BA9E46 /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F684BB25D04AFB00BA9E46 /* TimeLineTableViewCell.swift */; };
+		45F684BE25D04AFB00BA9E46 /* TimeLineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45F684BC25D04AFB00BA9E46 /* TimeLineTableViewCell.xib */; };
 		45F76D9825CF8D2E005E71B7 /* EditUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F76D9725CF8D2E005E71B7 /* EditUserInfoViewController.swift */; };
 		45FB2820257479ED0054A9B8 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB281F257479ED0054A9B8 /* AccountViewController.swift */; };
 		CCDCCAE33D0F59D6087F56F9 /* Pods_HappyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8741481E51FE88820ECF537 /* Pods_HappyNews.framework */; };
@@ -47,16 +51,17 @@
 /* Begin PBXFileReference section */
 		45166C3B25BAAD580026045F /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		452877452575417200A344E3 /* HappyNews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HappyNews.entitlements; sourceTree = "<group>"; };
-		454A624425CBB0CC0035ACC9 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		454E6BBB25CBDD52002E5F02 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		454A624425CBB0CC0035ACC9 /* GTimeLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTimeLineViewController.swift; sourceTree = "<group>"; };
+		454E6BBB25CBDD52002E5F02 /* TimeLineMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineMessage.swift; sourceTree = "<group>"; };
 		4573208E25A9E1E800F34C60 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTranslatorModel.swift; sourceTree = "<group>"; };
 		457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerModel.swift; sourceTree = "<group>"; };
 		4576898325453E5900D7E630 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		4580174F2588B74C004A8176 /* UIColor+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Colors.swift"; sourceTree = "<group>"; };
-		4586794A25CBEECE006B9D9E /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
-		4586794B25CBEECE006B9D9E /* ChatMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageCell.xib; sourceTree = "<group>"; };
 		4586DD502585B0CE00FAB922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		458F88A825D088A90041842D /* SubmissionPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionPageViewController.swift; sourceTree = "<group>"; };
+		458F88B125D2AAC70041842D /* TimeLineTranslatorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineTranslatorModel.swift; sourceTree = "<group>"; };
+		458F88B425D2C6000041842D /* TimeLineToneAnalyzerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineToneAnalyzerModel.swift; sourceTree = "<group>"; };
 		459DB73E25C17CA5009822AD /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		459DB74125C17CD0009822AD /* NewsCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCount.swift; sourceTree = "<group>"; };
 		459DB74425C17D02009822AD /* DateItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateItems.swift; sourceTree = "<group>"; };
@@ -83,6 +88,9 @@
 		45E80A5E25B52FF1001A25AF /* TimeScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeScheduleModel.swift; sourceTree = "<group>"; };
 		45F5C5E8258488030082119F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		45F684B325CFFBA800BA9E46 /* UserDefaults+removeAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+removeAll.swift"; sourceTree = "<group>"; };
+		45F684B825D047C400BA9E46 /* TimeLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
+		45F684BB25D04AFB00BA9E46 /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
+		45F684BC25D04AFB00BA9E46 /* TimeLineTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeLineTableViewCell.xib; sourceTree = "<group>"; };
 		45F76D9725CF8D2E005E71B7 /* EditUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoViewController.swift; sourceTree = "<group>"; };
 		45FB281F257479ED0054A9B8 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		A94EF47B29A9CEAAB707D9D7 /* Pods-HappyNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyNews.release.xcconfig"; path = "Target Support Files/Pods-HappyNews/Pods-HappyNews.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */,
+				458F88B125D2AAC70041842D /* TimeLineTranslatorModel.swift */,
 				4576898325453E5900D7E630 /* Translation.swift */,
 			);
 			path = LanguageTranslatorGroup;
@@ -138,20 +147,22 @@
 			path = NotificationGroup;
 			sourceTree = "<group>";
 		};
-		454A623E25CBB03E0035ACC9 /* ChatGroup */ = {
+		454A623E25CBB03E0035ACC9 /* TimeLineGroup */ = {
 			isa = PBXGroup;
 			children = (
-				454A624425CBB0CC0035ACC9 /* ChatViewController.swift */,
+				454A624425CBB0CC0035ACC9 /* GTimeLineViewController.swift */,
+				45F684B825D047C400BA9E46 /* TimeLineViewController.swift */,
+				458F88A825D088A90041842D /* SubmissionPageViewController.swift */,
 			);
-			path = ChatGroup;
+			path = TimeLineGroup;
 			sourceTree = "<group>";
 		};
-		454E6BBA25CBDD0F002E5F02 /* ChatMessageGroup */ = {
+		454E6BBA25CBDD0F002E5F02 /* TimeLineMessageGroup */ = {
 			isa = PBXGroup;
 			children = (
-				454E6BBB25CBDD52002E5F02 /* ChatMessage.swift */,
+				454E6BBB25CBDD52002E5F02 /* TimeLineMessage.swift */,
 			);
-			path = ChatMessageGroup;
+			path = TimeLineMessageGroup;
 			sourceTree = "<group>";
 		};
 		458017412588ADB4004A8176 /* ExtensionsGroup */ = {
@@ -175,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */,
+				458F88B425D2C6000041842D /* TimeLineToneAnalyzerModel.swift */,
 			);
 			path = ToneAnalyzerGroup;
 			sourceTree = "<group>";
@@ -261,7 +273,7 @@
 				45BE9B50252802130013F34C /* TabBarGroup */,
 				45C7DDAA25CD76C000D4DDB5 /* LoginGroup */,
 				45BE9B4B252801AE0013F34C /* NewsGroup */,
-				454A623E25CBB03E0035ACC9 /* ChatGroup */,
+				454A623E25CBB03E0035ACC9 /* TimeLineGroup */,
 				45BE9B4F252801FF0013F34C /* AccountGroup */,
 				45D8865724E4C0F000B32D02 /* AppDelegate.swift */,
 				45D8865924E4C0F000B32D02 /* SceneDelegate.swift */,
@@ -274,9 +286,9 @@
 			children = (
 				4586DD502585B0CE00FAB922 /* Assets.xcassets */,
 				45D8865D24E4C0F000B32D02 /* Main.storyboard */,
-				4586794B25CBEECE006B9D9E /* ChatMessageCell.xib */,
-				4586794A25CBEECE006B9D9E /* ChatMessageCell.swift */,
 				45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */,
+				45F684BC25D04AFB00BA9E46 /* TimeLineTableViewCell.xib */,
+				45F684BB25D04AFB00BA9E46 /* TimeLineTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -285,7 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				45E1B44125CE398400843780 /* FirebaseGroup */,
-				454E6BBA25CBDD0F002E5F02 /* ChatMessageGroup */,
+				454E6BBA25CBDD0F002E5F02 /* TimeLineMessageGroup */,
 				45E80A5D25B52FF1001A25AF /* TimeScheduleGroup */,
 				453B79D725A5ABEB00ED1F25 /* LanguageTranslatorGroup */,
 				459DB75025C25243009822AD /* ToneAnalyzerGroup */,
@@ -403,7 +415,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4586794D25CBEECE006B9D9E /* ChatMessageCell.xib in Resources */,
+				45F684BE25D04AFB00BA9E46 /* TimeLineTableViewCell.xib in Resources */,
 				45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */,
 				45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */,
 				4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */,
@@ -462,31 +474,35 @@
 			files = (
 				45E1B44325CE399D00843780 /* SendToFirebaseStorageModel.swift in Sources */,
 				459DB74225C17CD0009822AD /* NewsCount.swift in Sources */,
+				458F88B225D2AAC70041842D /* TimeLineTranslatorModel.swift in Sources */,
 				45F76D9825CF8D2E005E71B7 /* EditUserInfoViewController.swift in Sources */,
 				459DB73F25C17CA5009822AD /* UserDefault.swift in Sources */,
 				459DB74525C17D02009822AD /* DateItems.swift in Sources */,
 				459DB74825C17D08009822AD /* TimePoints.swift in Sources */,
 				457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */,
 				45BCEE7824E545570023D738 /* WebViewController.swift in Sources */,
+				45F684BD25D04AFB00BA9E46 /* TimeLineTableViewCell.swift in Sources */,
 				45F684B425CFFBA800BA9E46 /* UserDefaults+removeAll.swift in Sources */,
 				45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */,
 				4576898425453E5900D7E630 /* Translation.swift in Sources */,
 				45BE9B412526C7BB0013F34C /* TabBarController.swift in Sources */,
-				454E6BBC25CBDD52002E5F02 /* ChatMessage.swift in Sources */,
+				454E6BBC25CBDD52002E5F02 /* TimeLineMessage.swift in Sources */,
 				45FB2820257479ED0054A9B8 /* AccountViewController.swift in Sources */,
-				454A624525CBB0CC0035ACC9 /* ChatViewController.swift in Sources */,
+				454A624525CBB0CC0035ACC9 /* GTimeLineViewController.swift in Sources */,
 				45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */,
 				459DB76C25C3B83F009822AD /* LocalNotificationModel.swift in Sources */,
 				45E80A5F25B52FF1001A25AF /* TimeScheduleModel.swift in Sources */,
+				458F88A925D088A90041842D /* SubmissionPageViewController.swift in Sources */,
 				45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */,
 				457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */,
 				45166C3C25BAAD580026045F /* ApiKey.swift in Sources */,
-				4586794C25CBEECE006B9D9E /* ChatMessageCell.swift in Sources */,
 				458017502588B74C004A8176 /* UIColor+Colors.swift in Sources */,
 				45C7DE2A25CE211700D4DDB5 /* CheckPermission.swift in Sources */,
 				459DB74B25C17D13009822AD /* UpdateTimes.swift in Sources */,
+				45F684B925D047C400BA9E46 /* TimeLineViewController.swift in Sources */,
 				45C7DDAC25CD778100D4DDB5 /* SaveUserInformationViewController.swift in Sources */,
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
+				458F88B525D2C6000041842D /* TimeLineToneAnalyzerModel.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

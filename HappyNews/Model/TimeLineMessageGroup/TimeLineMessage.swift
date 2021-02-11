@@ -8,9 +8,6 @@
 
 import Foundation
 
-// ▼関係するclass
-// ChatViewController
-
 
 // Firestoreのドキュメントに保存された値の保存で扱う
 struct TimeLineMessage {
@@ -19,4 +16,5 @@ struct TimeLineMessage {
     let body      : String
     let aiconImage: String
     let userName  : String
+    let data      : String
 }
