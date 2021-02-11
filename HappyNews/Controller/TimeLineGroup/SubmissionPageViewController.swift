@@ -80,15 +80,29 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
     @IBAction func tapsendMessageButton(_ sender: Any) {
         print("投稿")
         
-        // 感情分析中であることをユーザーに伝える
-        HUD.show(.labeledProgress(title: "Happyを分析中...", subtitle: nil))
-        
-        // 感情分析モデルと通信
-        let timeLineTranslatorModel = TimeLineTranslatorModel(timeLineTranslatorApiKey: LANGUAGE_TRANSLATOR_APIKEY, timeLineTranslatorVersion: languageTranslatorVersion, timeLineTranslatorURL: languageTranslatorURL, timeLineBody: timeLineTextView.text)
-        
-        // プロトコルの委託と翻訳の開始
-        timeLineTranslatorModel.doneCatchTimeLineTranslationProtocol = self
-        timeLineTranslatorModel.setTimeLineTranslator()
+        // 投稿内容が空でなければ
+        if timeLineTextView.text.isEmpty != true {
+            
+            // 感情分析中であることをユーザーに伝える
+            HUD.show(.labeledProgress(title: "Happyを分析中...", subtitle: nil))
+            
+            // 感情分析モデルと通信
+            let timeLineTranslatorModel = TimeLineTranslatorModel(timeLineTranslatorApiKey: LANGUAGE_TRANSLATOR_APIKEY, timeLineTranslatorVersion: languageTranslatorVersion, timeLineTranslatorURL: languageTranslatorURL, timeLineBody: timeLineTextView.text)
+            
+            // プロトコルの委託と翻訳の開始
+            timeLineTranslatorModel.doneCatchTimeLineTranslationProtocol = self
+            timeLineTranslatorModel.setTimeLineTranslator()
+        } else {
+            
+            // 投稿内容がnilであることをユーザーに伝えるアラートの設定
+            let notTextAlert = UIAlertController(title: "投稿失敗", message: "テキストを入力してください。", preferredStyle: .alert)
+            
+            // アラートのボタン
+            notTextAlert.addAction(UIAlertAction(title: "やり直す", style: .default))
+            
+            // アラートの表示
+            self.present(notTextAlert, animated: true, completion: nil)
+        }
     }
     
     // TimeLineTranslatorModelから値を受け取る
