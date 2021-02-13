@@ -65,51 +65,8 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         // fireStoreDBのコレクションを指定して解析
         roomName = "TimeLineMessage"
         
-        // 日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection(roomName!).order(by: "date").addSnapshotListener {
-            (snapShot, error) in
-            
-            // 投稿情報を受け取る準備
-            self.timeLineMessages = []
-            
-            // Firestoreの中身を確認
-            print("snapShot: \(snapShot?.documents)")
-            print("snapShot.count: \(snapShot?.documents.count)")
-            
-            // エラー処理
-            if error != nil {
-                
-                print("Message acquisition error: \(error.debugDescription)")
-                return
-            }
-            
-            // snapShotの中に保存されている値を取得する
-            if let snapShotDocuments = snapShot?.documents {
-                
-                for document in snapShotDocuments {
-                    
-                    // fireStoreDBのドキュメントのコレクションのインスタンス
-                    let documentData = document.data()
-                    
-                    // '送信者ID', '本文', "アカウント画像", "ユーザー名" がnilでなければ新規メッセージとしてnewMessageに保存
-                    let documentSender = documentData["sender"] as? String
-                    let documentBody = documentData["body"] as? String
-                    let documentAiconImage = documentData["aiconImage"] as? String
-                    let documentUserName = documentData["userName"] as? String
-                    let documentSendTime = documentData["date"] as? Date
-                    
-                    let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!)
-                    
-                    // 新規メッセージ （ChatMessage型）
-                    self.timeLineMessages.append(newMessage)
-                    
-                    print("timeLineMessages: \(self.timeLineMessages)")
-                    
-                    // チャット投稿内容の更新
-                    self.timeLineTable.reloadData()
-                }
-            }
-        }
+        // タイムラインの更新(表示)をおこなう
+        loadTimeLine()
     }
     
     
@@ -137,6 +94,59 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
             navigationController?.setNavigationBarHidden(true, animated: true)
         } else {
             navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+    
+    
+    // MARK: - LoadTimeLine
+    // fireStoreDBから値を取得してタイムラインの更新(表示)をおこなう
+    func loadTimeLine() {
+        
+        // 日時の早い順に値をsnapShotに保存
+        fireStoreDB.collection(roomName!).order(by: "date").addSnapshotListener {
+            (snapShot, error) in
+            
+            // 投稿情報を受け取る準備
+            self.timeLineMessages = []
+            
+            // Firestoreの中身を確認
+            print("snapShot: \(snapShot?.documents)")
+            print("snapShot.count: \(snapShot?.documents.count)")
+            
+            // エラー処理
+            if error != nil {
+                
+                print("Message acquisition error: \(error.debugDescription)")
+                return
+            }
+            
+            // snapShotの中に保存されている値を取得する
+            if let snapShotDocuments = snapShot?.documents {
+                
+                for document in snapShotDocuments {
+                    
+                    // fireStoreDBのドキュメントのコレクションのインスタンス
+                    let documentData = document.data()
+                    
+                    // '送信者ID', '本文'などをインスタンス化して新規メッセージとしてnewMessageに保存
+                    let documentSender             = documentData["sender"] as? String
+                    let documentBody               = documentData["body"] as? String
+                    let documentAiconImage         = documentData["aiconImage"] as? String
+                    let documentUserName           = documentData["userName"] as? String
+                    let documentSendTime           = documentData["date"] as? Date
+                    
+                    let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!)
+                    
+                    // 新規メッセージ （ChatMessage型）
+                    self.timeLineMessages.append(newMessage)
+                    
+                    print("timeLineMessages: \(self.timeLineMessages)")
+                    
+                    // トップが最新になるようにチャット投稿内容の更新
+                    self.timeLineMessages.reverse()
+                    self.timeLineTable.reloadData()
+                }
+            }
         }
     }
     
@@ -227,5 +237,12 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         
         // 投稿ページへ遷移
         self.performSegue(withIdentifier: "goSubmissionPage", sender: nil)
+    }
+    
+    
+    // MARK: - TimeLineUpdate
+    // 更新ボタンをタップすると呼ばれる
+    @IBAction func timeLineUpdate(_ sender: Any) {
+        print("タップ")
     }
 }
