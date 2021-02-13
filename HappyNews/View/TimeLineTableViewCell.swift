@@ -24,10 +24,6 @@ class TimeLineTableViewCell: UITableViewCell {
     // タイムライン投稿時間のインスタンス
     @IBOutlet weak var sendTime: UILabel!
     
-    // 「いいね」ラベルのインスタンス
-    // 「いいね」件数ラベルのインスタンス
-    // 「いいね」ボタンのインスタンス
-    
     // ロード直後に呼ばれる
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,10 +37,5 @@ class TimeLineTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    // いいねが押されたら呼ばれる
-    @IBAction func tapLikeButton(_ sender: Any) {
-        print("「いいね」")
     }
 }
