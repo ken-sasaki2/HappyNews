@@ -334,7 +334,6 @@ PODS:
     - IBMSwiftSDKCore (~> 1.0.0)
   - IBMWatsonToneAnalyzerV3 (3.6.0):
     - IBMSwiftSDKCore (~> 1.0.0)
-  - IQKeyboardManagerSwift (6.5.6)
   - Kingfisher (6.1.0)
   - leveldb-library (1.22)
   - nanopb (2.30907.0):
@@ -353,7 +352,6 @@ DEPENDENCIES:
   - Firebase/Storage
   - IBMWatsonLanguageTranslatorV3 (~> 3.6.0)
   - IBMWatsonToneAnalyzerV3 (~> 3.6.0)
-  - IQKeyboardManagerSwift
   - Kingfisher
   - PKHUD (~> 5.0)
   - SwiftyJSON
@@ -379,7 +377,6 @@ SPEC REPOS:
     - IBMSwiftSDKCore
     - IBMWatsonLanguageTranslatorV3
     - IBMWatsonToneAnalyzerV3
-    - IQKeyboardManagerSwift
     - Kingfisher
     - leveldb-library
     - nanopb
@@ -407,7 +404,6 @@ SPEC CHECKSUMS:
   IBMSwiftSDKCore: 54ad77b03a4d27b218ba514580197db3b89a96ca
   IBMWatsonLanguageTranslatorV3: 41340a76ffad829bf1cedb269c890989ac7654c2
   IBMWatsonToneAnalyzerV3: eca44fa804c5d60156c5b05c64fa20fe4d99d5cc
-  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kingfisher: f5d8d60a0ef3edd642fd781bae60918599901aff
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
@@ -415,6 +411,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 469ed63267d14ba8ba3b4ec3f901cac1f48438ee
+PODFILE CHECKSUM: fe698e65ed0ba2bb39555ff076be7317a171eb2c
 
 COCOAPODS: 1.10.1
