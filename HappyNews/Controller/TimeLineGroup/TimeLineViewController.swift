@@ -11,6 +11,7 @@ import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 import Kingfisher
+import PKHUD
 
 class TimeLineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -184,9 +185,6 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         // 空のセルを削除
         timeLineTable.tableFooterView = UIView(frame: .zero)
         
-        // セルのタップを無効
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        
         return cell
     }
     
@@ -195,6 +193,9 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         
         // タップ時の選択色の常灯を消す
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        // 投稿ページへ遷移
+        self.performSegue(withIdentifier: "commentPage", sender: nil)
     }
     
     
@@ -243,6 +244,14 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - TimeLineUpdate
     // 更新ボタンをタップすると呼ばれる
     @IBAction func timeLineUpdate(_ sender: Any) {
-        print("タップ")
+
+        // タイムラインを更新中であることをユーザーに伝える
+        HUD.show(.labeledProgress(title: "更新中", subtitle: nil))
+        
+        // タイムラインの更新
+        loadTimeLine()
+        
+        // PKHUDの終了
+        HUD.flash(.labeledSuccess(title: "完了", subtitle: nil))
     }
 }
