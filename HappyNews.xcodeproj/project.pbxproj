@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		45166C3C25BAAD580026045F /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166C3B25BAAD580026045F /* ApiKey.swift */; };
+		4532A60525D90390002A998A /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4532A60425D90390002A998A /* CommentViewController.swift */; };
+		4532A60825D926F3002A998A /* CommentInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4532A60725D926F2002A998A /* CommentInputAccessoryView.xib */; };
+		4532A60D25D92B94002A998A /* CommentInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4532A60C25D92B94002A998A /* CommentInputAccessoryView.swift */; };
 		454E6BBC25CBDD52002E5F02 /* TimeLineMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E6BBB25CBDD52002E5F02 /* TimeLineMessage.swift */; };
-		455228AE25D62FE00043E9A8 /* LikeFunctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455228AD25D62FE00043E9A8 /* LikeFunctionModel.swift */; };
 		457689752542A70E00D7E630 /* LanguageTranslatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */; };
 		457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */; };
 		4576898425453E5900D7E630 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4576898325453E5900D7E630 /* Translation.swift */; };
@@ -51,8 +53,10 @@
 /* Begin PBXFileReference section */
 		45166C3B25BAAD580026045F /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		452877452575417200A344E3 /* HappyNews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HappyNews.entitlements; sourceTree = "<group>"; };
+		4532A60425D90390002A998A /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		4532A60725D926F2002A998A /* CommentInputAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentInputAccessoryView.xib; sourceTree = "<group>"; };
+		4532A60C25D92B94002A998A /* CommentInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputAccessoryView.swift; sourceTree = "<group>"; };
 		454E6BBB25CBDD52002E5F02 /* TimeLineMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineMessage.swift; sourceTree = "<group>"; };
-		455228AD25D62FE00043E9A8 /* LikeFunctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeFunctionModel.swift; sourceTree = "<group>"; };
 		4573208E25A9E1E800F34C60 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTranslatorModel.swift; sourceTree = "<group>"; };
 		457689782542A81C00D7E630 /* ToneAnalyzerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerModel.swift; sourceTree = "<group>"; };
@@ -120,6 +124,24 @@
 			path = AuthenticationGroup;
 			sourceTree = "<group>";
 		};
+		4532A60A25D92B26002A998A /* TimeLineCellGroup */ = {
+			isa = PBXGroup;
+			children = (
+				45F684BC25D04AFB00BA9E46 /* TimeLineTableViewCell.xib */,
+				45F684BB25D04AFB00BA9E46 /* TimeLineTableViewCell.swift */,
+			);
+			path = TimeLineCellGroup;
+			sourceTree = "<group>";
+		};
+		4532A60B25D92B4F002A998A /* CommentInputGroup */ = {
+			isa = PBXGroup;
+			children = (
+				4532A60725D926F2002A998A /* CommentInputAccessoryView.xib */,
+				4532A60C25D92B94002A998A /* CommentInputAccessoryView.swift */,
+			);
+			path = CommentInputGroup;
+			sourceTree = "<group>";
+		};
 		453B79D625A5ABD600ED1F25 /* NewsGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +174,7 @@
 			children = (
 				45F684B825D047C400BA9E46 /* TimeLineViewController.swift */,
 				458F88A825D088A90041842D /* SubmissionPageViewController.swift */,
+				4532A60425D90390002A998A /* CommentViewController.swift */,
 			);
 			path = TimeLineGroup;
 			sourceTree = "<group>";
@@ -160,7 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				454E6BBB25CBDD52002E5F02 /* TimeLineMessage.swift */,
-				455228AD25D62FE00043E9A8 /* LikeFunctionModel.swift */,
 			);
 			path = TimeLineMessageGroup;
 			sourceTree = "<group>";
@@ -287,8 +309,8 @@
 				4586DD502585B0CE00FAB922 /* Assets.xcassets */,
 				45D8865D24E4C0F000B32D02 /* Main.storyboard */,
 				45D8866224E4C0F200B32D02 /* LaunchScreen.storyboard */,
-				45F684BC25D04AFB00BA9E46 /* TimeLineTableViewCell.xib */,
-				45F684BB25D04AFB00BA9E46 /* TimeLineTableViewCell.swift */,
+				4532A60B25D92B4F002A998A /* CommentInputGroup */,
+				4532A60A25D92B26002A998A /* TimeLineCellGroup */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -415,6 +437,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4532A60825D926F3002A998A /* CommentInputAccessoryView.xib in Resources */,
 				45F684BE25D04AFB00BA9E46 /* TimeLineTableViewCell.xib in Resources */,
 				45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */,
 				45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */,
@@ -480,14 +503,15 @@
 				459DB74525C17D02009822AD /* DateItems.swift in Sources */,
 				459DB74825C17D08009822AD /* TimePoints.swift in Sources */,
 				457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */,
+				4532A60525D90390002A998A /* CommentViewController.swift in Sources */,
 				45BCEE7824E545570023D738 /* WebViewController.swift in Sources */,
 				45F684BD25D04AFB00BA9E46 /* TimeLineTableViewCell.swift in Sources */,
 				45F684B425CFFBA800BA9E46 /* UserDefaults+removeAll.swift in Sources */,
 				45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */,
 				4576898425453E5900D7E630 /* Translation.swift in Sources */,
 				45BE9B412526C7BB0013F34C /* TabBarController.swift in Sources */,
-				455228AE25D62FE00043E9A8 /* LikeFunctionModel.swift in Sources */,
 				454E6BBC25CBDD52002E5F02 /* TimeLineMessage.swift in Sources */,
+				4532A60D25D92B94002A998A /* CommentInputAccessoryView.swift in Sources */,
 				45FB2820257479ED0054A9B8 /* AccountViewController.swift in Sources */,
 				45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */,
 				459DB76C25C3B83F009822AD /* LocalNotificationModel.swift in Sources */,

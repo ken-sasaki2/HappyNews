@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommentInputAccessoryView" customModule="HappyNews" customModuleProvider="target">
+            <connections>
+                <outlet property="commentTextView" destination="ubd-Mp-D5l" id="toZ-Mt-ZLv"/>
+                <outlet property="sendCommentButton" destination="7pX-CH-LkD" id="nL5-2b-1AG"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="415" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="ここにコメントが入ります" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ubd-Mp-D5l">
+                    <rect key="frame" x="10" y="10" width="340" height="146"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" enablesReturnKeyAutomatically="YES"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pX-CH-LkD">
+                    <rect key="frame" x="360" y="68" width="45" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.68235294120000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="45" id="54i-aM-Tua"/>
+                        <constraint firstAttribute="height" constant="30" id="Cmd-Nc-1mo"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <state key="normal" title="送信"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ubd-Mp-D5l" secondAttribute="bottom" constant="10" id="8J4-Ex-Bon"/>
+                <constraint firstItem="7pX-CH-LkD" firstAttribute="leading" secondItem="ubd-Mp-D5l" secondAttribute="trailing" constant="10" id="PfC-qc-3EV"/>
+                <constraint firstItem="7pX-CH-LkD" firstAttribute="centerY" secondItem="ubd-Mp-D5l" secondAttribute="centerY" id="QKj-pt-Nvx"/>
+                <constraint firstItem="ubd-Mp-D5l" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="Sh8-bp-lTa"/>
+                <constraint firstItem="ubd-Mp-D5l" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="aOp-Mn-Iea"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7pX-CH-LkD" secondAttribute="trailing" constant="10" id="wRa-fV-lCp"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-85" y="-177"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

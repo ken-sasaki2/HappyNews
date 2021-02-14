@@ -132,7 +132,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="5024.6376811594209" y="414.50892857142856"/>
+            <point key="canvasLocation" x="5088" y="415"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="a7U-YJ-ZRw">
@@ -397,11 +397,74 @@
                     <connections>
                         <outlet property="timeLineTable" destination="t2C-en-5K6" id="jRx-WF-7xp"/>
                         <segue destination="tlA-96-3ya" kind="presentation" identifier="goSubmissionPage" id="BdE-C0-UVw"/>
+                        <segue destination="GrQ-iI-9ka" kind="presentation" identifier="commentPage" id="Qjd-nk-dgv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyQ-VF-k85" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4324.6376811594209" y="-312.05357142857139"/>
+        </scene>
+        <!--Comment View Controller-->
+        <scene sceneID="cap-ds-pdS">
+            <objects>
+                <viewController storyboardIdentifier="commentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GrQ-iI-9ka" customClass="CommentViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iWP-we-z5o">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cEY-Ns-boL">
+                                <rect key="frame" x="-9" y="63" width="433" height="697"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="JFz-1T-tOK">
+                                        <rect key="frame" x="0.0" y="28" width="433" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JFz-1T-tOK" id="4fr-KY-zOl">
+                                            <rect key="frame" x="0.0" y="0.0" width="433" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="klg-9y-WCI">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czm-cW-jKY">
+                                        <rect key="frame" x="10" y="15" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="VFj-dg-aNq"/>
+                                            <constraint firstAttribute="width" constant="35" id="zQj-MX-MZr"/>
+                                        </constraints>
+                                        <state key="normal" image="キャンセルボタン"/>
+                                        <connections>
+                                            <action selector="tapCloseComment:" destination="GrQ-iI-9ka" eventType="touchUpInside" id="FES-nG-m0v"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="czm-cW-jKY" firstAttribute="leading" secondItem="klg-9y-WCI" secondAttribute="leading" constant="10" id="EII-La-kx0"/>
+                                    <constraint firstAttribute="height" constant="65" id="a7w-R7-PhC"/>
+                                    <constraint firstItem="czm-cW-jKY" firstAttribute="top" secondItem="klg-9y-WCI" secondAttribute="top" constant="15" id="pIu-4o-qY1"/>
+                                    <constraint firstAttribute="width" constant="414" id="pca-AG-lSr"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="YHN-1g-l6n"/>
+                        <color key="backgroundColor" red="0.95686274509803915" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="klg-9y-WCI" firstAttribute="top" secondItem="YHN-1g-l6n" secondAttribute="top" id="5TN-Oe-ZWY"/>
+                            <constraint firstItem="klg-9y-WCI" firstAttribute="leading" secondItem="YHN-1g-l6n" secondAttribute="leading" id="QSz-0S-PmG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="EUn-3Q-ONC"/>
+                    <connections>
+                        <outlet property="commentTable" destination="cEY-Ns-boL" id="eWG-Dh-wVT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Uc-0I-viR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5086.9565217391309" y="-312.05357142857139"/>
         </scene>
         <!--Submission Page View Controller-->
         <scene sceneID="jVw-Cv-GXM">
@@ -456,7 +519,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPM-vE-NsJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="PE7-JW-bTy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5043.4782608695659" y="-312.05357142857139"/>
+            <point key="canvasLocation" x="5088" y="-1013"/>
         </scene>
         <!--タイムライン-->
         <scene sceneID="UGH-aZ-UCA">
