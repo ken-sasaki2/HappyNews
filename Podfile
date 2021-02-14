@@ -18,5 +18,4 @@ target 'HappyNews' do
   
   pod 'PKHUD', '~> 5.0'
   pod 'Kingfisher'
-  pod 'IQKeyboardManagerSwift'
 end

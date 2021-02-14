@@ -134,13 +134,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // セルの高さを設定
     func tableView(_ table: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        // アカウント情報とその他のセクションで高さを分岐
-        if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント情報") {
-            return 100
-        } else {
-            return 65.0
-        }
+        return 65.0
     }
     
     // セルを構築
@@ -166,8 +160,8 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             
             // ラベルの設定
             settingLabel.text      = changeUsername
+            settingLabel.font      = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
             settingLabel.textColor = UIColor(hex: "333333")
-            settingLabel.font      = UIFont.systemFont(ofSize: 20, weight: .regular)
         }
         
         // "設定"セクションの場合
