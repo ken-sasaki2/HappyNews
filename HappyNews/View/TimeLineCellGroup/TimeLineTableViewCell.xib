@@ -35,21 +35,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投稿内容" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTg-NZ-2Yd">
-                        <rect key="frame" x="75" y="32" width="313" height="29"/>
+                        <rect key="frame" x="75" y="32" width="313" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="「いいね」" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wor-oG-GhG">
-                        <rect key="frame" x="259" y="72" width="66.5" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" systemColor="systemGrayColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tn-a3-c2E">
-                        <rect key="frame" x="321.5" y="72" width="27.5" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RH0-Gx-4ZI">
@@ -62,35 +50,29 @@
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilN-dH-b0f">
-                        <rect key="frame" x="352" y="74" width="15" height="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コメントを見る＞" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18O-2Q-Fqc">
+                        <rect key="frame" x="256" y="63" width="130" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="15" id="afd-iC-KuA"/>
-                            <constraint firstAttribute="height" constant="13" id="qEb-ws-U7Q"/>
+                            <constraint firstAttribute="width" constant="130" id="SzL-5d-DIz"/>
+                            <constraint firstAttribute="height" constant="20" id="j5F-MN-6vL"/>
                         </constraints>
-                        <color key="tintColor" systemColor="systemGrayColor"/>
-                        <state key="normal" image="suit.heart" catalog="system"/>
-                        <connections>
-                            <action selector="tapLikeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FFc-z8-3T0"/>
-                        </connections>
-                    </button>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="ilN-dH-b0f" secondAttribute="trailing" constant="48" id="ImF-Al-PWG"/>
+                    <constraint firstAttribute="bottom" secondItem="18O-2Q-Fqc" secondAttribute="bottom" constant="12" id="Apq-GA-yKb"/>
+                    <constraint firstItem="18O-2Q-Fqc" firstAttribute="top" secondItem="YTg-NZ-2Yd" secondAttribute="bottom" constant="13" id="Kyu-rb-MvU"/>
+                    <constraint firstItem="18O-2Q-Fqc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="256" id="LGb-Yd-Ybx"/>
                     <constraint firstItem="YTg-NZ-2Yd" firstAttribute="top" secondItem="QrQ-MM-tI8" secondAttribute="bottom" constant="9" id="Ovu-Sn-W5i"/>
                     <constraint firstItem="YTg-NZ-2Yd" firstAttribute="leading" secondItem="TOT-a8-Lrc" secondAttribute="trailing" constant="9" id="QY9-1r-dS5"/>
-                    <constraint firstItem="Wor-oG-GhG" firstAttribute="top" secondItem="YTg-NZ-2Yd" secondAttribute="bottom" constant="11" id="Rmx-TH-Tce"/>
                     <constraint firstItem="RH0-Gx-4ZI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="TJp-jg-eog"/>
                     <constraint firstItem="TOT-a8-Lrc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="VSL-nb-8CS"/>
-                    <constraint firstItem="2Tn-a3-c2E" firstAttribute="top" secondItem="YTg-NZ-2Yd" secondAttribute="bottom" constant="11" id="Y37-TB-QhG"/>
                     <constraint firstAttribute="trailing" secondItem="YTg-NZ-2Yd" secondAttribute="trailing" constant="27" id="ZXW-p9-Kcf"/>
                     <constraint firstItem="TOT-a8-Lrc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="fRk-J2-ila"/>
-                    <constraint firstItem="Wor-oG-GhG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="259" id="fXG-Ji-xW5"/>
                     <constraint firstItem="QrQ-MM-tI8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="fgt-Qj-RFF"/>
-                    <constraint firstAttribute="trailing" secondItem="2Tn-a3-c2E" secondAttribute="trailing" constant="66" id="nHL-P2-X9c"/>
-                    <constraint firstAttribute="bottom" secondItem="Wor-oG-GhG" secondAttribute="bottom" constant="7" id="pdN-Os-1XI"/>
-                    <constraint firstAttribute="bottom" secondItem="ilN-dH-b0f" secondAttribute="bottom" constant="8" id="rnX-gL-rBb"/>
-                    <constraint firstAttribute="bottom" secondItem="2Tn-a3-c2E" secondAttribute="bottom" constant="7" id="vRH-Eo-Fr7"/>
+                    <constraint firstAttribute="trailing" secondItem="18O-2Q-Fqc" secondAttribute="trailing" constant="29" id="wh5-ta-Wv6"/>
                     <constraint firstAttribute="trailing" secondItem="RH0-Gx-4ZI" secondAttribute="trailing" constant="19" id="xVe-r8-Q1E"/>
                     <constraint firstItem="QrQ-MM-tI8" firstAttribute="leading" secondItem="TOT-a8-Lrc" secondAttribute="trailing" constant="7" id="ypd-MH-bA5"/>
                 </constraints>
@@ -98,6 +80,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="commentLabel" destination="18O-2Q-Fqc" id="xpd-tv-47g"/>
                 <outlet property="sendBody" destination="YTg-NZ-2Yd" id="r3m-gE-iEV"/>
                 <outlet property="sendImageView" destination="TOT-a8-Lrc" id="FMG-nF-oTh"/>
                 <outlet property="sendTime" destination="RH0-Gx-4ZI" id="hY6-6i-Pqk"/>
@@ -108,7 +91,6 @@
     </objects>
     <resources>
         <image name="person.fill" catalog="system" width="128" height="120"/>
-        <image name="suit.heart" catalog="system" width="128" height="109"/>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

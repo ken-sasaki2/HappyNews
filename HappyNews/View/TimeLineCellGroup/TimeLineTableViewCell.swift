@@ -24,6 +24,9 @@ class TimeLineTableViewCell: UITableViewCell {
     // タイムライン投稿時間のインスタンス
     @IBOutlet weak var sendTime: UILabel!
     
+    // コメントボタン
+    @IBOutlet weak var commentLabel: UILabel!
+    
     // ロード直後に呼ばれる
     override func awakeFromNib() {
         super.awakeFromNib()
