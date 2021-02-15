@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.makeKeyAndVisible()
             
             // Storyboardをインスタンス化
-            let storyboard     = UIStoryboard(name: "Main", bundle: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             // TabBarControllerをインスタンス化
             let tabVC = storyboard.instantiateViewController(identifier: "tabVC") as! TabBarController
@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.makeKeyAndVisible()
             
             // Storyboardをインスタンス化
-            let storyboard     = UIStoryboard(name: "Main", bundle: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             // LoginViewControllerをインスタンス化
             let loginVC = storyboard.instantiateViewController(identifier: "loginVC")
