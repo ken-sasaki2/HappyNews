@@ -404,10 +404,10 @@
             </objects>
             <point key="canvasLocation" x="4324.6376811594209" y="-312.05357142857139"/>
         </scene>
-        <!--Comment View Controller-->
+        <!--Time Line Comment View Controller-->
         <scene sceneID="cap-ds-pdS">
             <objects>
-                <viewController storyboardIdentifier="commentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GrQ-iI-9ka" customClass="CommentViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="commentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GrQ-iI-9ka" customClass="TimeLineCommentViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iWP-we-z5o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -438,7 +438,7 @@
                                         </constraints>
                                         <state key="normal" image="キャンセルボタン"/>
                                         <connections>
-                                            <action selector="tapCloseComment:" destination="GrQ-iI-9ka" eventType="touchUpInside" id="FES-nG-m0v"/>
+                                            <action selector="tapCloseCommentButton:" destination="GrQ-iI-9ka" eventType="touchUpInside" id="h6p-Tn-ULj"/>
                                         </connections>
                                     </button>
                                 </subviews>
