@@ -63,7 +63,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // fireStoreDBのコレクションを指定して解析
+        // fireStoreDBのコレクションを指定
         roomName = "TimeLineMessage"
         
         // タイムラインの更新(表示)をおこなう
@@ -136,7 +136,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
                     let documentUserName           = documentData["userName"] as? String
                     let documentSendTime           = documentData["date"] as? Date
                     
-                    let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!)
+                    let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!, documentID: document.documentID)
                     
                     // 新規メッセージ （ChatMessage型）
                     self.timeLineMessages.append(newMessage)
@@ -194,8 +194,23 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         // タップ時の選択色の常灯を消す
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
-        // 投稿ページへ遷移
-        self.performSegue(withIdentifier: "commentPage", sender: nil)
+        // コメントページへ遷移
+        self.performSegue(withIdentifier: "commentPage", sender: indexPath.row)
+    }
+    
+    // segue遷移を設定し、遷移先に値を渡す
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        // セグエの識別子を確認
+        if segue.identifier == "commentPage" {
+            
+            // 遷移先のインスタンスとindexPath.rowを指定
+            if let nextCommentPage = segue.destination as? TimeLineCommentViewController, let index = sender as? Int {
+                
+                // 値を渡す
+                nextCommentPage.idString = timeLineMessages[index].documentID
+            }
+        }
     }
     
     

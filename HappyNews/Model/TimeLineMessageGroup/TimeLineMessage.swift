@@ -16,5 +16,6 @@ struct TimeLineMessage {
     let body      : String
     let aiconImage: String
     let userName  : String
-    let data      : String
+    let documentID: String
+    //let data      : String
 }
