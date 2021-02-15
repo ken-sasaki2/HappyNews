@@ -19,21 +19,23 @@
             <rect key="frame" x="0.0" y="0.0" width="415" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="ここにコメントが入ります" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ubd-Mp-D5l">
-                    <rect key="frame" x="10" y="10" width="340" height="146"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ubd-Mp-D5l">
+                    <rect key="frame" x="10" y="10" width="350" height="146"/>
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" enablesReturnKeyAutomatically="YES"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pX-CH-LkD">
-                    <rect key="frame" x="360" y="68" width="45" height="30"/>
-                    <color key="backgroundColor" red="0.0" green="0.68235294120000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="370" y="65.5" width="35" height="35"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="45" id="54i-aM-Tua"/>
-                        <constraint firstAttribute="height" constant="30" id="Cmd-Nc-1mo"/>
+                        <constraint firstAttribute="width" constant="35" id="54i-aM-Tua"/>
+                        <constraint firstAttribute="height" constant="35" id="Cmd-Nc-1mo"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                    <state key="normal" title="送信"/>
+                    <state key="normal" image="送信ボタン"/>
+                    <connections>
+                        <action selector="tapSendCommentButton:" destination="-1" eventType="touchUpInside" id="06Y-sG-mG8"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -51,6 +53,7 @@
         </view>
     </objects>
     <resources>
+        <image name="送信ボタン" width="100" height="100"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

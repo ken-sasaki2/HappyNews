@@ -8,6 +8,11 @@
 
 import UIKit
 
+// MARK: - protocol
+protocol CommentInputAccessoryViewProtocol {
+    func tapedSendCommentButton(comment: String)
+}
+
 // コメント送信箇所のUIを構築
 class CommentInputAccessoryView: UIView {
     
@@ -17,6 +22,9 @@ class CommentInputAccessoryView: UIView {
     // コメント入力用テキストビューのインスタンス
     @IBOutlet weak var commentTextView: UITextView!
     
+    // プロトコルのインスタンス
+    var commentInputAccessoryViewProtocol: CommentInputAccessoryViewProtocol?
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -26,22 +34,31 @@ class CommentInputAccessoryView: UIView {
         autoresizingMask = .flexibleHeight
     }
     
-    // コメント送信箇所の化粧
+    // commentTextViewの設定
     private func setUpView() {
         
         // テキストビューの化粧
         commentTextView.layer.cornerRadius = 15
         commentTextView.layer.borderColor = UIColor.gray.cgColor
         commentTextView.layer.borderWidth = 1
+        commentTextView.textColor = UIColor(hex: "333333")
+        commentTextView.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         
-        // 送信ボタンの化粧
-        sendCommentButton.layer.cornerRadius = 6
-        sendCommentButton.imageView!.contentMode = .scaleAspectFill
-        sendCommentButton.contentHorizontalAlignment = .fill
-        sendCommentButton.contentVerticalAlignment = .fill
+        // 初期状態は空でタップできない
+        commentTextView.text = ""
         sendCommentButton.isEnabled = false
         
-        sendCommentButton.layer.cornerRadius = 6
+        // 委託
+        commentTextView.delegate = self
+    }
+    
+    // 投稿ボタンをタップすると呼ばれる
+    @IBAction func tapSendCommentButton(_ sender: Any) {
+        
+        print("commentTextView.text: \(commentTextView.text)")
+        
+        // テキストビューのテキストを渡す
+        commentInputAccessoryViewProtocol?.tapedSendCommentButton(comment: commentTextView.text)
     }
     
     override var intrinsicContentSize: CGSize {
@@ -63,5 +80,23 @@ class CommentInputAccessoryView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+// MARK: - extension
+// テキストビューを委託して使用可能に
+extension CommentInputAccessoryView: UITextViewDelegate {
+    
+    // テキストビューの入力を監視
+    func textViewDidChange(_ textView: UITextView) {
+        
+        // テキストビューのテキストが空だったらで分岐
+        if textView.text.isEmpty {
+            
+            sendCommentButton.isEnabled = false
+        } else {
+            sendCommentButton.isEnabled = true
+        }
     }
 }
