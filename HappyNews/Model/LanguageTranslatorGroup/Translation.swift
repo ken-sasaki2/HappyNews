@@ -12,7 +12,7 @@ import Foundation
 // LanguageTranslatorModel
 
 // JSON解析で扱う
-class Translation {
+struct Translation {
     
     var translation: String?
     

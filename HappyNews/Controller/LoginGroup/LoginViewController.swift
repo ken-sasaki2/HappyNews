@@ -13,7 +13,7 @@ import Firebase
 import PKHUD
 import FirebaseAuth
 
-// ログインに関するプログラムを処理する
+// ログイン画面のUIとSignInWithAppleを設定
 class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     
@@ -32,37 +32,48 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         // viewの背景を設定
         view = UIView()
         view.backgroundColor = UIColor(hex: "f4f8fa")
-
-        // NavigationBarの呼び出し
-        setAccountNavigationBar()
+        
+        // アプリのタイトルテキストの表示
+        appTitleText()
         
         // ログイン案内テキストの表示
         signInGuideText()
         
         // Sign In With Appleの呼び出し
         createSignInWithApple()
-        
-        // キャンセルボタンの呼び出し
-        createLoginCancelButton()
     }
     
     
-    // MARK: - Navigation
-    // アカウントページのNavigationBarを設定
-    func setAccountNavigationBar() {
+    // MARK: - AppTitleText
+    // アプリのタイトルテキスト
+    func appTitleText() {
         
-        // NavigationBarのタイトルとその色とフォント
-        navigationItem.title = "ログインページ"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19, weight: .semibold)]
+        let appTitle = UILabel()
         
-        // NavigationBarの色
-        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "00AECC")
+        // 'Autosizing'を'AutoLayout'に変換
+        appTitle.translatesAutoresizingMaskIntoConstraints = false
         
-        // 一部NavigationBarがすりガラス？のような感じになるのでfalseで統一
-        self.navigationController?.navigationBar.isTranslucent = false
+        // テキストの内容とフォントと色を設定し、中央揃えにしてviewに反映
+        appTitle.text = "HappyNews"
+        appTitle.font = UIFont.systemFont(ofSize: 56, weight: .bold)
+        appTitle.textColor = UIColor(hex: "00AECC")
+        appTitle.backgroundColor = UIColor.clear
+        appTitle.textAlignment = NSTextAlignment.center
+        view.addSubview(appTitle)
+            
+        // appTitleのY軸のAutoLayoutを設定
+        let appTitleTopConstraint = NSLayoutConstraint(item: appTitle, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 170)
         
-        // NavigationBarの下線を削除
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        // appTitleのX軸のAutoLayoutを設定
+        let appTitleLeadingConstraint = NSLayoutConstraint(item: appTitle, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1.0, constant: self.view.frame.maxX/2)
+        
+        // appTitleの幅を設定
+        let appTitleWidthConstraint = NSLayoutConstraint(item: appTitle, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1.0, constant: 0)
+        
+        // AutoLayoutを反映
+        self.view.addConstraint(appTitleTopConstraint)
+        self.view.addConstraint(appTitleLeadingConstraint)
+        self.view.addConstraint(appTitleWidthConstraint)
     }
     
     
@@ -75,16 +86,17 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         // 'Autosizing'を'AutoLayout'に変換
         signInGuide.translatesAutoresizingMaskIntoConstraints = false
         
-        // テキストの内容とフォントと色を設定し、中央揃えにしてviewに反映
-        signInGuide.text = "ログインしてアカウントページへ"
-        signInGuide.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        // テキストの内容とフォントと色を設定し、3行で中央揃えにしてviewに反映
+        signInGuide.text = "ログインしてユーザー名と \n アカウント画像を設定しよう"
+        signInGuide.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         signInGuide.textColor = UIColor(hex: "333333")
         signInGuide.backgroundColor = UIColor.clear
+        signInGuide.numberOfLines = 3
         signInGuide.textAlignment = NSTextAlignment.center
         view.addSubview(signInGuide)
         	
         // signInGuideのY軸のAutoLayoutを設定
-        let signInGuideTopConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 27)
+        let signInGuideTopConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 340)
         
         // signInGuideのX軸のAutoLayoutを設定
         let signInGuideLeadingConstraint = NSLayoutConstraint(item: signInGuide, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1.0, constant: self.view.frame.maxX/2)
@@ -117,7 +129,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         view.addSubview(appleButton)
         
         // appleButtonのY軸のAutoLayoutを設定
-        let appleButtonTopConstraint = NSLayoutConstraint(item: appleButton, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 67)
+        let appleButtonTopConstraint = NSLayoutConstraint(item: appleButton, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 420)
         
         // appleButtonのX軸のAutoLayoutを設定
         NSLayoutConstraint.activate([appleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
@@ -131,48 +143,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         // AutoLayoutを反映
         self.view.addConstraint(appleButtonTopConstraint)
         self.view.addConstraint(appleButtonWidthConstraint)
-    }
-    
-    
-    // MARK: - CreateLoginCancelButton
-    // キャンセルボタンの作成
-    func createLoginCancelButton() {
-        
-        let cancelButton = UIButton()
-        
-        // 'Autosizing'を'AutoLayout'に変換
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        // cancelButtonのテキストとサイズ
-        cancelButton.setTitle("キャンセル", for: UIControl.State.normal)
-        cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        
-        // cancelButtonの文字色と背景色
-        cancelButton.setTitleColor(UIColor.white, for: .normal)
-        cancelButton.backgroundColor = UIColor.gray
-        
-        // cancelButtonの角丸
-        cancelButton.layer.cornerRadius = 6.0
-        
-        // cancelButtonのアクションとviewに反映
-        cancelButton.addTarget(self, action: #selector(cancelTap), for: .touchUpInside)
-        view.addSubview(cancelButton)
-
-        // cancelButtonのy軸（縦）のAutoLayoutを設定
-        let cancelButtonTopConstraint = NSLayoutConstraint(item: cancelButton, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 127)
-
-        // cancelButtonのx軸（横）のAutoLayoutを設定
-        NSLayoutConstraint.activate([cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
-
-        // cancelButtonの高さを設定
-        cancelButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-
-        // cancelButtonの幅を設定
-        let cancelButtonWidthConstraint = NSLayoutConstraint(item: cancelButton, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 0.8, constant: 0)
-
-        // AutoLayoutを反映
-        self.view.addConstraint(cancelButtonTopConstraint)
-        self.view.addConstraint(cancelButtonWidthConstraint)
     }
     
     
@@ -197,23 +167,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         
         // ここでリクエストを投げる
         controller.performRequests()
-    }
-    
-    
-    // MARK: - CancelTap
-    // キャンセルボタンをタップすると呼ばれる
-    @objc func cancelTap() {
-        
-        // タブバーのインスタンスを取得
-//        if let tabBarController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
-//            
-//            // ニュースタブを選択状態にする（0が一番左）
-//            DispatchQueue.main.async {
-//                tabBarController.selectedIndex = 0
-//            }
-//        }
-        // モーダル画面を閉じるとニュースページに遷移
-        dismiss(animated: true, completion: nil)
     }
     
     
@@ -309,7 +262,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
                 
                 HUD.flash(.labeledSuccess(title: "ログイン完了", subtitle: nil), onView: self.view, delay: 0) { _ in
                     
-                    self.dismiss(animated: true, completion: nil)
+                    // segueで画面遷移
+                    self.performSegue(withIdentifier: "nextSaveUser", sender: nil)
                 }
             }
         }

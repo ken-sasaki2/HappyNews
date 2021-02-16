@@ -38,6 +38,22 @@ class TabBarController: UITabBarController {
         switch item.title {
         case "ニュース":
             tabBar.tintColor = UIColor(hex: "00AECC")
+        case "チャット":
+            tabBar.tintColor = UIColor(hex: "00AECC")
+            
+            // ログインの有無でログインページの出す出さないを決める
+            if Auth.auth().currentUser  == nil {
+                
+                // ログインページのインスタンスを作成しNavigationを継承
+                let loginView = LoginViewController()
+                let loginViewController = UINavigationController(rootViewController: loginView)
+                
+                // モーダル画面をフルスクリーンに設定し遷移
+                loginViewController.modalPresentationStyle = .fullScreen
+                present(loginViewController, animated: true, completion: nil)
+            } else {
+                break
+            }
         case "アカウント":
             tabBar.tintColor = UIColor(hex: "00AECC")
         

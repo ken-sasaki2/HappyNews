@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // 通知を許可するかどうかを促す画面を表示する設定
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        //Sign In With Appleに必要
+        // Sign In With Appleに必要
         FirebaseApp.configure()
         
         if #available(iOS 10.0, *) {

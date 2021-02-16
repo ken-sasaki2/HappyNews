@@ -20,6 +20,12 @@ class UserDefault {
     
     // UserDefaultsに値を保存する場合に扱う（Value, Keyを指定した保存処理はインスタンス化できない為）
     static var standard = UserDefaults.standard
+    
+    // アカウント画像の取り出しで扱う
+    static var imageCapture = UserDefaults.standard.string(forKey: "userImage")
+    
+    // ユーザー名の取り出しで扱う
+    static var getUserName = UserDefaults.standard.string(forKey: "userName")
 
     // アプリ起動時刻の取り出しで扱う
     static var lastActivation = UserDefaults.standard.string(forKey: "lastActivation")
