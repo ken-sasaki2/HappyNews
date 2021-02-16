@@ -11,8 +11,8 @@ import Foundation
 // コメント投稿で扱う構造体
 struct CommentStruct {
     
-    let comment   : String
-    let aiconImage: String
-    let userName  : String
-    //let data      : String
+    let comment    : String
+    let aiconImage : String
+    let userName   : String
+    let createdTime: String
 }

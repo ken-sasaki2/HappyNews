@@ -94,7 +94,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     func loadComment() {
         
         // 投稿日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection(roomName!).document(idString!).collection("comment").order(by: "date").addSnapshotListener {
+        fireStoreDB.collection(roomName!).document(idString!).collection("comment").order(by: "createdTime").addSnapshotListener {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備
@@ -118,10 +118,19 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
                     // 'ユーザー名', 'コメント'などをインスタンス化して新規コメントとしてnewCommentに保存
                     let documentUserName   = documentData["userName"] as? String
                     let documentAiconImage = documentData["aiconImage"] as? String
-                    let documentSendTime   = documentData["date"] as? Date
                     let documentComment    = documentData["comment"] as? String
                     
-                    let newComment = CommentStruct(comment: documentComment!, aiconImage: documentAiconImage!, userName: documentUserName!)
+                    // timestampを取得してDate型に変換
+                    let timestamp: Timestamp = documentData["createdTime"] as! Timestamp
+                    let dateValue = timestamp.dateValue()
+                    
+                    // 地域とスタイルを指定してString型へ変換
+                    DateItems.dateFormatter.locale = Locale(identifier: "ja_JP")
+                    DateItems.dateFormatter.dateStyle = .short
+                    DateItems.dateFormatter.timeStyle = .short
+                    let createdTime = DateItems.dateFormatter.string(from: dateValue)
+                    
+                    let newComment = CommentStruct(comment: documentComment!, aiconImage: documentAiconImage!, userName: documentUserName!, createdTime: createdTime)
                     
                     // / 新規コメント （commentStruct型）
                     self.commentStruct.append(newComment)
@@ -174,7 +183,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         cell.senderName.text = commentMessage.userName
         cell.sendBody.text   = commentMessage.comment
         cell.sendImageView.kf.setImage(with: URL(string: commentMessage.aiconImage))
-        //cell.sendTime.text   = commentMessage.
+        cell.sendTime.text   = commentMessage.createdTime
         
         // 「コメントを見る」ラベルを削除
         cell.commentLabel.isHidden = true
@@ -204,17 +213,17 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     
     // MARK: - TapedSendCommentButton
     // CommentInputAccessoryViewクラスから値を受け取る（送信内容）
-    func tapedSendCommentButton(comment: String) {
-        print("値を受け取りました: \(comment)")
+    func tapedSendCommentButton(comment: String, sendTime: Date) {
         
         // 受け取った値をインスタンス化
         let commentBody = comment
+        let createdTime = sendTime
         
         // 受け取った値がnilでなければ
-        if commentBody != nil {
+        if commentBody != nil && createdTime != nil {
             
             // 受け取った送信内容を含めてfireStoreDBへ保存
-            fireStoreDB.collection(roomName!).document(idString!).collection("comment").document().setData(["userName": userNameString, "aiconImage": aiconImageString, "comment": comment, "date": DateItems.date]
+            fireStoreDB.collection(roomName!).document(idString!).collection("comment").document().setData(["userName": userNameString, "aiconImage": aiconImageString, "comment": comment, "createdTime": createdTime]
             )
             
             // fireStoreDBに保存をしたら入力内容を空にしてキーボードを閉じる

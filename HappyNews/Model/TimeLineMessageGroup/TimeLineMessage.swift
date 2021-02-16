@@ -12,10 +12,10 @@ import Foundation
 // Firestoreのドキュメントに保存された値の保存で扱う
 struct TimeLineMessage {
     
-    let sender    : String
-    let body      : String
-    let aiconImage: String
-    let userName  : String
-    let documentID: String
-    //let data      : String
+    let sender     : String
+    let body       : String
+    let aiconImage : String
+    let userName   : String
+    let documentID : String
+    let createdTime: String
 }

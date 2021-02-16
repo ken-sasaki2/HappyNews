@@ -78,7 +78,6 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
     // MARK: - TapSendMessage
     // 投稿ボタンをタップすると呼ばれる
     @IBAction func tapsendMessageButton(_ sender: Any) {
-        print("投稿")
         
         // 投稿内容が空でなければ
         if timeLineTextView.text.isEmpty != true {
@@ -138,15 +137,25 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
         
         // JoyならFirestoreへ保存して内容を反映
         if joyOrOther == true {
-            print("評価: Joy")
             
             // 非同期で処理を実行
             DispatchQueue.main.async {
                 
+                // 投稿ボタンタップ時刻の取得（タップ時の現在時刻を取得したいのでDateTimesは使わない）
+                let now = Date()
+                
+                // 地域とフォーマットを指定
+                DateItems.dateFormatter.locale = Locale(identifier: "ja_JP")
+                DateItems.dateFormatter .dateFormat = "yyyy年M月d日(EEEEE) H時m分s秒"
+                
+                // 一度String型に変換してDate型に変換
+                let sendTimeString = DateItems.dateFormatter.string(from: now)
+                let sendTime       = DateItems.dateFormatter.date(from: sendTimeString)
+                
                 // テキストビューのテキストとユーザーのIDを取得してfireStoreDBのフィールドに合わせて保存
                 if let sender = Auth.auth().currentUser?.uid, let timeLineMessage = self.timeLineTextView.text {
                     
-                    self.fireStoreDB.collection(self.roomName!).addDocument(data: ["sender": sender, "body": timeLineMessage, "aiconImage": self.aiconImageString, "userName": self.userNameString, "date": DateItems.date]) {
+                    self.fireStoreDB.collection(self.roomName!).addDocument(data: ["sender": sender, "body": timeLineMessage, "aiconImage": self.aiconImageString, "userName": self.userNameString, "createdTime": sendTime]) {
                         error in
                         
                         // エラー処理
@@ -169,7 +178,6 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
                 }
             }
         } else {
-            print("評価: NotJoy")
             
             // 非同期で処理を実行
             DispatchQueue.main.async {

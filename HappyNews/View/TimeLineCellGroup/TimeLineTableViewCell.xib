@@ -25,9 +25,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QrQ-MM-tI8">
-                        <rect key="frame" x="73" y="8" width="235" height="15"/>
+                        <rect key="frame" x="73" y="8" width="180" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="235" id="DKP-pd-ga1"/>
+                            <constraint firstAttribute="width" constant="180" id="DKP-pd-ga1"/>
                             <constraint firstAttribute="height" constant="15" id="rI1-AK-bFa"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
@@ -41,12 +41,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RH0-Gx-4ZI">
-                        <rect key="frame" x="333" y="8" width="63" height="15"/>
+                        <rect key="frame" x="271" y="8" width="125" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="63" id="Hox-4A-xG7"/>
+                            <constraint firstAttribute="width" constant="125" id="Hox-4A-xG7"/>
                             <constraint firstAttribute="height" constant="15" id="nQr-4A-Xzv"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>

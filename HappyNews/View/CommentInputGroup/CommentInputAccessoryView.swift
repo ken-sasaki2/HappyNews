@@ -10,9 +10,8 @@ import UIKit
 
 // MARK: - protocol
 protocol CommentInputAccessoryViewProtocol {
-    func tapedSendCommentButton(comment: String)
+    func tapedSendCommentButton(comment: String, sendTime: Date)
 }
-
 // コメント送信箇所のUIを構築
 class CommentInputAccessoryView: UIView {
     
@@ -55,10 +54,19 @@ class CommentInputAccessoryView: UIView {
     // 投稿ボタンをタップすると呼ばれる
     @IBAction func tapSendCommentButton(_ sender: Any) {
         
-        print("commentTextView.text: \(commentTextView.text)")
+        // 投稿ボタンタップ時刻の取得（タップ時の現在時刻を取得したいのでDateTimesは使わない）
+        let now = Date()
+        
+        // 地域とフォーマットを指定
+        DateItems.dateFormatter.locale = Locale(identifier: "ja_JP")
+        DateItems.dateFormatter .dateFormat = "yyyy年M月d日(EEEEE) H時m分s秒"
+        
+        // 一度String型に変換してDate型に変換
+        let sendTimeString = DateItems.dateFormatter.string(from: now)
+        let sendTime       = DateItems.dateFormatter.date(from: sendTimeString)
         
         // テキストビューのテキストを渡す
-        commentInputAccessoryViewProtocol?.tapedSendCommentButton(comment: commentTextView.text)
+        commentInputAccessoryViewProtocol?.tapedSendCommentButton(comment: commentTextView.text, sendTime: sendTime!)
     }
     
     override var intrinsicContentSize: CGSize {

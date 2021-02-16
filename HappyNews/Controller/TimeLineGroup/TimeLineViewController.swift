@@ -104,7 +104,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     func loadTimeLine() {
         
         // 日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection(roomName!).order(by: "date").addSnapshotListener {
+        fireStoreDB.collection(roomName!).order(by: "createdTime").addSnapshotListener {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備
@@ -134,9 +134,18 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
                     let documentBody               = documentData["body"] as? String
                     let documentAiconImage         = documentData["aiconImage"] as? String
                     let documentUserName           = documentData["userName"] as? String
-                    let documentSendTime           = documentData["date"] as? Date
                     
-                    let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!, documentID: document.documentID)
+                    // timestampを取得してDate型に変換
+                    let timestamp: Timestamp = documentData["createdTime"] as! Timestamp
+                    let dateValue = timestamp.dateValue()
+                    
+                    // 地域とスタイルを指定してString型へ変換
+                    DateItems.dateFormatter.locale = Locale(identifier: "ja_JP")
+                    DateItems.dateFormatter.dateStyle = .short
+                    DateItems.dateFormatter.timeStyle = .short
+                    let createdTime = DateItems.dateFormatter.string(from: dateValue)
+                    
+                    let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!, documentID: document.documentID, createdTime: createdTime)
                     
                     // 新規メッセージ （ChatMessage型）
                     self.timeLineMessages.append(newMessage)
@@ -175,7 +184,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         // セルに表示する内容を設定
         cell.sendBody.text   = timeLineMessage.body
         cell.senderName.text = timeLineMessage.userName
-//        cell.sendTime.text   = timeLineMessage.data
+        cell.sendTime.text   = timeLineMessage.createdTime
         cell.sendImageView.kf.setImage(with: URL(string: timeLineMessage.aiconImage))
         
         // セルとTableViewの背景色の設定
