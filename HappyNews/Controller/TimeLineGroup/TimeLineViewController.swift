@@ -12,8 +12,9 @@ import FirebaseFirestore
 import FirebaseAuth
 import Kingfisher
 import PKHUD
+import MessageUI
 
-class TimeLineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TimeLineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
     
     
     // MARK: - Property
@@ -172,6 +173,32 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         return timeLineMessages.count
     }
     
+    // セルの編集許可
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // セルの削除とfireStoreDBから削除を設定
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let deleteID = timeLineMessages[indexPath.row].documentID
+        
+        // 投稿内容をfireStoreDBから削除
+        fireStoreDB.collection(roomName!).document(deleteID).delete() {
+            error in
+            
+            // エラー処理
+            if let error = error {
+                print("Error removing document: \(error)")
+            } else {
+                print("Document successfully removed!")
+                // タイムラインの更新(表示)をおこなう
+                self.loadTimeLine()
+
+            }
+        }
+    }
+    
     // セルを構築
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -277,5 +304,61 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         
         // PKHUDの終了
         HUD.flash(.labeledSuccess(title: "完了", subtitle: nil))
+    }
+    
+    
+    @IBAction func tapReportButton(_ sender: Any) {
+        
+        // メールを送信できるかどうかの確認
+        if !MFMailComposeViewController.canSendMail() {
+            print("Mail services are not available")
+            return
+        }
+        
+        // インスタンスの作成と委託
+        let mailViewController = MFMailComposeViewController()
+            mailViewController.mailComposeDelegate = self
+        
+        // 宛先の設定
+        let toRecipients = ["nkeiisasa222@gmail.com"]
+        
+        // 件名と宛先の表示
+        mailViewController.setSubject("'HappyNews'タイムライン及びそのコメント投稿内容の通報")
+        mailViewController.setToRecipients(toRecipients)
+        mailViewController.setMessageBody("1. 通報する投稿の内容 \n 2. 通報するユーザー名 \n 3. 通報する投稿の時間　\n \n 以上3点を記載してご連絡ください。 \n 1. \n 2. \n 3.", isHTML: false)
+        
+        self.present(mailViewController, animated: true, completion: nil)
+    }
+    
+    // メール機能終了処理
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        // メールの結果で条件分岐
+        switch result {
+        
+        // キャンセルの場合
+        case .cancelled:
+            print("Email Send Cancelled")
+            break
+            
+        // 下書き保存の場合
+        case .saved:
+            print("Email Saved as a Draft")
+            break
+            
+        // 送信成功の場合
+        case .sent:
+            print("Email Sent Successfully")
+            break
+            
+        // 送信失敗の場合
+        case .failed:
+            print("Email Send Failed")
+            break
+        default:
+            break
+        }
+        //メールを閉じる
+        controller.dismiss(animated: true, completion: nil)
     }
 }

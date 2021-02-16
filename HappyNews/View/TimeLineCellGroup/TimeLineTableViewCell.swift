@@ -24,7 +24,7 @@ class TimeLineTableViewCell: UITableViewCell {
     // タイムライン投稿時間のインスタンス
     @IBOutlet weak var sendTime: UILabel!
     
-    // コメントボタン
+    // コメント導線ラベル
     @IBOutlet weak var commentLabel: UILabel!
     
     // ロード直後に呼ばれる

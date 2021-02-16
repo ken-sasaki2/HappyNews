@@ -393,6 +393,13 @@
                                 <action selector="timeLineUpdate:" destination="b9O-60-gTJ" id="mKZ-BD-hm2"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="VLN-iJ-I6T">
+                            <imageReference key="image" image="flag" catalog="system" symbolScale="large"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="tapReportButton:" destination="b9O-60-gTJ" id="WxW-7K-rxi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="timeLineTable" destination="t2C-en-5K6" id="jRx-WF-7xp"/>
@@ -547,6 +554,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="flag" catalog="system" width="128" height="121"/>
         <image name="newspaper" catalog="system" width="128" height="108"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="timer" catalog="system" width="128" height="121"/>
