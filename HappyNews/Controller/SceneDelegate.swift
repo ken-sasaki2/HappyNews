@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         // ログインしていればTabBarから起動、そうでなければログイン画面から
-        if Auth.auth().currentUser?.uid != nil {
+        if UserDefault.getUID != nil {
             
             let window = UIWindow(windowScene: scene as! UIWindowScene)
             self.window = window

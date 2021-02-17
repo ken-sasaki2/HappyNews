@@ -262,6 +262,10 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
                 
                 HUD.flash(.labeledSuccess(title: "ログイン完了", subtitle: nil), onView: self.view, delay: 0) { _ in
                     
+                    // uidをインスタンス化して保存
+                    let uid = Auth.auth().currentUser?.uid
+                    UserDefault.standard.set(uid, forKey: "uid")
+                    
                     // segueで画面遷移
                     self.performSegue(withIdentifier: "nextSaveUser", sender: nil)
                 }

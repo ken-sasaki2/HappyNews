@@ -328,13 +328,13 @@
 		45D8866D24E4C11900B32D02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4532A62D25D952AF002A998A /* CommentGroup */,
 				45E1B44125CE398400843780 /* FirebaseGroup */,
-				454E6BBA25CBDD0F002E5F02 /* TimeLineMessageGroup */,
 				45E80A5D25B52FF1001A25AF /* TimeScheduleGroup */,
 				453B79D725A5ABEB00ED1F25 /* LanguageTranslatorGroup */,
 				459DB75025C25243009822AD /* ToneAnalyzerGroup */,
 				453B79D625A5ABD600ED1F25 /* NewsGroup */,
+				454E6BBA25CBDD0F002E5F02 /* TimeLineMessageGroup */,
+				4532A62D25D952AF002A998A /* CommentGroup */,
 				458084C625BD9D4B00C96472 /* UserDefaultsGroup */,
 				454A30F0259C8B2F008B1067 /* NotificationGroup */,
 				45166C3A25BAAD440026045F /* AuthenticationGroup */,

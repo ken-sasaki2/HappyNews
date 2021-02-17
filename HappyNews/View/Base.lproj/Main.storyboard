@@ -58,6 +58,7 @@
                     <connections>
                         <outlet property="table" destination="QMd-AH-zBC" id="9rK-Mt-NpQ"/>
                         <segue destination="G59-h8-ZWV" kind="push" identifier="editUserInfo" id="mOx-8C-dfi"/>
+                        <segue destination="RCD-A2-ok2" kind="presentation" identifier="goLogin" id="kSg-BF-2zf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CkB-kR-f4b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

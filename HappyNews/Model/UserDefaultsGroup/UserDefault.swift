@@ -26,6 +26,9 @@ class UserDefault {
     
     // ユーザー名の取り出しで扱う
     static var getUserName = UserDefaults.standard.string(forKey: "userName")
+    
+    // uidの取り出しで扱う
+    static var getUID = UserDefaults.standard.string(forKey: "uid")
 
     // アプリ起動時刻の取り出しで扱う
     static var lastActivation = UserDefaults.standard.string(forKey: "lastActivation")
