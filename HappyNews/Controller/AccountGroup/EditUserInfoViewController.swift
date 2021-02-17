@@ -24,6 +24,10 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
     // アカウント情報更新用ボタンのインスタンス
     @IBOutlet weak var editUpdateButton: UIButton!
     
+    // AccountViewControllerから値を受け取る
+    var getUserImage: String?
+    var getUserName : String?
+    
     // FirebaseStorageへ画像データを送信するクラスのインスタンス
     var sendToFirebaseStorageModel = SendToFirebaseStorageModel()
     
@@ -31,12 +35,6 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TextFireldのデフォルト値
-        editUserNameTextField.text = UserDefault.getUserName
-        
-        // アカウント画像のデフォルト値
-        editUserImage.kf.setImage(with: URL(string: UserDefault.imageCapture!))
         
         // プロトコルの委託
         sendToFirebaseStorageModel.doneCatchUserImageProtocol = self
@@ -60,6 +58,12 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
         
         // ユーザー情報編集ページではTabBarを非表示するように設定
         self.tabBarController?.tabBar.isHidden = true
+        
+        // アカウント名のデフォルト値
+        editUserNameTextField.text = getUserName
+        
+        // アカウント画像のデフォルト値
+        editUserImage.kf.setImage(with: URL(string: getUserImage!))
     }
     
     
@@ -212,12 +216,22 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
     
     
     // MARK: - CatchUserImage
-    // SendToFirebaseStorageModelから値を受け取って画面遷移
+    // SendToFirebaseStorageModelから値を受け取って画面遷移で値を渡す
     func catchUserImage(url: String) {
         
         if url != nil {
             
-            HUD.flash(.labeledSuccess(title: "変更完了", subtitle: nil), onView: self.view, delay: 0) { _ in
+            HUD.flash(.labeledSuccess(title: "変更完了", subtitle: nil), onView: self.view, delay: 0) { [self] _ in
+                
+                // NavigationControllerをインスタンス化
+                let navigationVC = self.navigationController
+                
+                // 一つ前のViewControllerを取得する
+                let accountVC = navigationVC?.viewControllers[(navigationVC?.viewControllers.count)!-2] as! AccountViewController
+                
+                // 値を渡す
+                accountVC.setEditUserInfo(EditUserImage: url, EditUserName: editUserNameTextField.text!)
+                
                 // アカウントページへ遷移(戻る)
                 self.navigationController?.popViewController(animated: true)
             }

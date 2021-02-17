@@ -47,6 +47,10 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         // ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
         
+        // アカウント画像 & ユーザー名のインスタンス
+        changeUserImage = UserDefault.imageCapture!
+        changeUsername  = UserDefault.getUserName!
+        
         // NavigationBarの呼び出し
         setAccountNavigationBar()
     }
@@ -61,10 +65,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // NavigationBarのbackボタンのタイトルを編集
         self.navigationItem.backButtonTitle = ""
-        
-        // アカウント画像 & ユーザー名のインスタンス
-        changeUserImage = UserDefault.imageCapture!
-        changeUsername  = UserDefault.getUserName!
         
         // tableViewの更新
         table.reloadData()
@@ -88,6 +88,15 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         // NavigationBarの下線を削除
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
+    
+    // EditUserInfoViewControllerから値を受け取る
+    func setEditUserInfo(EditUserImage: String, EditUserName: String) {
+        
+        // 編集後のアカウント画像 & ユーザー名が入る
+        changeUserImage = EditUserImage
+        changeUsername  = EditUserName
+    }
+
     
     
     // MARK: - TableView
@@ -228,11 +237,10 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             switch indexPath.row {
             // ユーザー名のセルをタップした場合
             case userInfoCellLabelArray.firstIndex(of: userInfoCellLabelArray[0]):
-                performSegue(withIdentifier: "editUserInfo", sender: nil)
+                performSegue(withIdentifier: "editUserInfo", sender: UserInfo(userName: changeUsername!, UserImage: changeUserImage!))
             default:
                 break
             }
-            
         }
         
         // "設定"セクションの場合
@@ -282,6 +290,22 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 logoutAlert()
             default:
                 break
+            }
+        }
+    }
+    
+    // segue遷移を設定し、遷移先に値を渡す（遷移前に呼ばれる）
+    override func prepare(for segue: UIStoryboardSegue, sender: (Any)?) {
+
+        // セグエの識別子を確認
+        if segue.identifier == "editUserInfo" {
+            
+            // 遷移先のインスタンスとindexPath.rowを指定
+            if let nextEditUserPage = segue.destination as? EditUserInfoViewController, let userInfo = sender as? UserInfo {
+                
+                // 値を渡す
+                nextEditUserPage.getUserName  = userInfo.userName
+                nextEditUserPage.getUserImage = userInfo.UserImage
             }
         }
     }
