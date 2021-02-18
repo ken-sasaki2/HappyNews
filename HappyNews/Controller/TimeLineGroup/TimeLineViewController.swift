@@ -175,7 +175,13 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // セルの編集許可
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        
+        // 投稿者が自身であった場合編集を許可
+        if timeLineMessages[indexPath.row].sender == UserDefault.getUID {
+            return true
+        } else {
+            return false
+        }
     }
     
     // セルの削除とfireStoreDBから削除を設定
@@ -210,9 +216,9 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         
         // セルに表示する内容を設定
         cell.sendBody.text   = timeLineMessage.body
-        cell.senderName.text = timeLineMessage.userName
+        cell.senderName.text = UserDefault.getUserName
         cell.sendTime.text   = timeLineMessage.createdTime
-        cell.sendImageView.kf.setImage(with: URL(string: timeLineMessage.aiconImage))
+        cell.sendImageView.kf.setImage(with: URL(string: UserDefault.imageCapture!))
         
         // セルとTableViewの背景色の設定
         cell.backgroundColor          = UIColor(hex: "f4f8fa")
@@ -325,7 +331,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         // 件名と宛先の表示
         mailViewController.setSubject("'HappyNews'タイムライン及びそのコメント投稿内容の通報")
         mailViewController.setToRecipients(toRecipients)
-        mailViewController.setMessageBody("1. 通報する投稿の内容 \n 2. 通報するユーザー名 \n 3. 通報する投稿の時間　\n \n 以上3点を記載してご連絡ください。 \n 1. \n 2. \n 3.", isHTML: false)
+        mailViewController.setMessageBody("1. 通報する投稿の内容 \n 2. 通報するユーザー名 \n 3. 通報する投稿の時間 \n 4. その他不快なコンテンツに対する連絡　\n \n ▼ 計4点を記載してご連絡ください。 \n 1. \n 2. \n 3. \n 4.", isHTML: false)
         
         self.present(mailViewController, animated: true, completion: nil)
     }
