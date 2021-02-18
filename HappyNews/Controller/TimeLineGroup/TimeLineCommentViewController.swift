@@ -169,6 +169,38 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         return commentStruct.count
     }
     
+    // セルの編集許可
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        // 投稿者が自身であった場合編集を許可
+        if timeLineMessages[indexPath.row].sender == UserDefault.getUID {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    // セルの削除とfireStoreDBから削除を設定
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let deleteID = timeLineMessages[indexPath.row].documentID
+        
+        // 投稿内容をfireStoreDBから削除
+        fireStoreDB.collection(roomName!).document(deleteID).delete() {
+            error in
+            
+            // エラー処理
+            if let error = error {
+                print("Error removing document: \(error)")
+            } else {
+                print("Document successfully removed!")
+                // タイムラインの更新(表示)をおこなう
+                self.loadTimeLine()
+
+            }
+        }
+    }
+    
     // セルを構築する
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -179,9 +211,9 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         let commentMessage = commentStruct[indexPath.row]
         
         // セルに表示する内容を設定
-        cell.senderName.text = commentMessage.userName
+        cell.senderName.text = UserDefault.getUserName
         cell.sendBody.text   = commentMessage.comment
-        cell.sendImageView.kf.setImage(with: URL(string: commentMessage.aiconImage))
+        cell.sendImageView.kf.setImage(with: URL(string: UserDefault.imageCapture!))
         cell.sendTime.text   = commentMessage.createdTime
         
         // 「コメントを見る」ラベルを削除
