@@ -50,7 +50,7 @@
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コメントを見る＞" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18O-2Q-Fqc">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="コメント＞" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18O-2Q-Fqc">
                         <rect key="frame" x="256" y="63" width="130" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="130" id="SzL-5d-DIz"/>
@@ -86,7 +86,7 @@
                 <outlet property="sendTime" destination="RH0-Gx-4ZI" id="hY6-6i-Pqk"/>
                 <outlet property="senderName" destination="QrQ-MM-tI8" id="bIV-Yu-Yfj"/>
             </connections>
-            <point key="canvasLocation" x="-4380.434782608696" y="-1384.4866071428571"/>
+            <point key="canvasLocation" x="-4515" y="-1412"/>
         </tableViewCell>
     </objects>
     <resources>
