@@ -119,6 +119,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
                     let documentUserName   = documentData["userName"] as? String
                     let documentAiconImage = documentData["aiconImage"] as? String
                     let documentComment    = documentData["comment"] as? String
+                    let documentSender     = documentData["sender"] as? String
                     
                     // timestampを取得してDate型に変換
                     let timestamp: Timestamp = documentData["createdTime"] as! Timestamp
@@ -130,7 +131,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
                     DateItems.dateFormatter.timeStyle = .short
                     let createdTime = DateItems.dateFormatter.string(from: dateValue)
                     
-                    let newComment = CommentStruct(comment: documentComment!, aiconImage: documentAiconImage!, userName: documentUserName!, createdTime: createdTime)
+                    let newComment = CommentStruct(sender: documentSender!, comment: documentComment!, aiconImage: documentAiconImage!, userName: documentUserName!, createdTime: createdTime, documentID: document.documentID)
                     
                     // / 新規コメント （commentStruct型）
                     self.commentStruct.append(newComment)
@@ -173,7 +174,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
         // 投稿者が自身であった場合編集を許可
-        if timeLineMessages[indexPath.row].sender == UserDefault.getUID {
+        if commentStruct[indexPath.row].sender == UserDefault.getUID {
             return true
         } else {
             return false
@@ -183,10 +184,9 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     // セルの削除とfireStoreDBから削除を設定
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        let deleteID = timeLineMessages[indexPath.row].documentID
-        
+        let deleteID = commentStruct[indexPath.row].documentID
         // 投稿内容をfireStoreDBから削除
-        fireStoreDB.collection(roomName!).document(deleteID).delete() {
+        fireStoreDB.collection(roomName!).document(idString!).collection("comment").document(deleteID).delete() {
             error in
             
             // エラー処理
@@ -195,8 +195,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
             } else {
                 print("Document successfully removed!")
                 // タイムラインの更新(表示)をおこなう
-                self.loadTimeLine()
-
+                self.commentTable.reloadData()
             }
         }
     }
@@ -253,8 +252,11 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         // 受け取った値がnilでなければ
         if commentBody != nil && createdTime != nil {
             
+            // uidを取得してインスタンス化
+            let sender = UserDefault.getUID
+            
             // 受け取った送信内容を含めてfireStoreDBへ保存
-            fireStoreDB.collection(roomName!).document(idString!).collection("comment").document().setData(["userName": userNameString, "aiconImage": aiconImageString, "comment": comment, "createdTime": createdTime]
+            fireStoreDB.collection(roomName!).document(idString!).collection("comment").document().setData(["userName": userNameString, "aiconImage": aiconImageString, "comment": comment, "createdTime": createdTime, "sender": sender]
             )
             
             // fireStoreDBに保存をしたら入力内容を空にしてキーボードを閉じる
