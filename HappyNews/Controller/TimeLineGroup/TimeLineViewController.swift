@@ -176,7 +176,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
         // 投稿者が自身であった場合編集を許可
-        if timeLineMessages[indexPath.row].sender == UserDefault.getUID {
+        if timeLineMessages[indexPath.row].sender == Auth.auth().currentUser?.uid {
             return true
         } else {
             return false

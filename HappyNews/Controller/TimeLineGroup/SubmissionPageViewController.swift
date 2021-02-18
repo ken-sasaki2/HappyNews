@@ -153,7 +153,7 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
                 let sendTime       = DateItems.dateFormatter.date(from: sendTimeString)
                 
                 // テキストビューのテキストとユーザーのIDを取得してfireStoreDBのフィールドに合わせて保存
-                if let sender = UserDefault.getUID, let timeLineMessage = self.timeLineTextView.text {
+                if let sender = Auth.auth().currentUser?.uid, let timeLineMessage = self.timeLineTextView.text {
                     
                     self.fireStoreDB.collection(self.roomName!).addDocument(data: ["sender": sender, "body": timeLineMessage, "aiconImage": self.aiconImageString, "userName": self.userNameString, "createdTime": sendTime]) {
                         error in

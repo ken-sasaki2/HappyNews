@@ -174,7 +174,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
         // 投稿者が自身であった場合編集を許可
-        if commentStruct[indexPath.row].sender == UserDefault.getUID {
+        if commentStruct[indexPath.row].sender == Auth.auth().currentUser?.uid {
             return true
         } else {
             return false
@@ -253,7 +253,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         if commentBody != nil && createdTime != nil {
             
             // uidを取得してインスタンス化
-            let sender = UserDefault.getUID
+            let sender = Auth.auth().currentUser?.uid
             
             // 受け取った送信内容を含めてfireStoreDBへ保存
             fireStoreDB.collection(roomName!).document(idString!).collection("comment").document().setData(["userName": userNameString, "aiconImage": aiconImageString, "comment": comment, "createdTime": createdTime, "sender": sender]
