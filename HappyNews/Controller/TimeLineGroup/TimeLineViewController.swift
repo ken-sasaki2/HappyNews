@@ -105,7 +105,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     func loadTimeLine() {
         
         // 日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection(roomName!).order(by: "createdTime").addSnapshotListener {
+        fireStoreDB.collection(roomName!).order(by: "createdTime", descending: true).addSnapshotListener {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備
@@ -153,8 +153,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
                     
                     print("timeLineMessages: \(self.timeLineMessages)")
                     
-                    // トップが最新になるようにチャット投稿内容の更新
-                    self.timeLineMessages.reverse()
+                    // チャット投稿内容の更新
                     self.timeLineTable.reloadData()
                 }
             }

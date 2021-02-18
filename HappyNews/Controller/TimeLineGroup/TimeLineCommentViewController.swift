@@ -94,7 +94,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     func loadComment() {
         
         // 投稿日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection(roomName!).document(idString!).collection("comment").order(by: "createdTime").addSnapshotListener {
+        fireStoreDB.collection(roomName!).document(idString!).collection("comment").order(by: "createdTime", descending: true).addSnapshotListener {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備
@@ -137,8 +137,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
                     
                     print("commentStruct: \(self.commentStruct)")
                     
-                    // トップが最新になるようにチャット投稿内容の更新
-                    self.commentStruct.reverse()
+                    // コメント投稿内容の更新
                     self.commentTable.reloadData()
                 }
             }
