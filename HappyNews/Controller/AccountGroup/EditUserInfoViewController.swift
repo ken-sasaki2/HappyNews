@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 import Kingfisher
 import PKHUD
 
@@ -24,9 +27,14 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
     // アカウント情報更新用ボタンのインスタンス
     @IBOutlet weak var editUpdateButton: UIButton!
     
-    // AccountViewControllerから値を受け取る
-    var getUserImage: String?
-    var getUserName : String?
+    // Firestoreのインスタンス
+    var fireStoreDB = Firestore.firestore()
+    
+    // fireStoreDBのコレクション名
+    var roomName: String?
+    
+    // 構造体のインスタンス
+    var userInfomation: [UserInfoStruct] = []
     
     // FirebaseStorageへ画像データを送信するクラスのインスタンス
     var sendToFirebaseStorageModel = SendToFirebaseStorageModel()
@@ -47,6 +55,9 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
         // 登録ボタンの角丸
         editUpdateButton.layer.cornerRadius = 6.0
         
+        // fireStoreDBのコレクション名
+        roomName = "users"
+        
         // Navigationbarの呼び出し
         setEditPageNavigationBar()
     }
@@ -59,11 +70,8 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
         // ユーザー情報編集ページではTabBarを非表示するように設定
         self.tabBarController?.tabBar.isHidden = true
         
-        // アカウント名のデフォルト値
-        editUserNameTextField.text = getUserName
-        
-        // アカウント画像のデフォルト値
-        editUserImage.kf.setImage(with: URL(string: getUserImage!))
+        // ユーザー情報の取得
+        loadUserInfomation()
     }
     
     
@@ -179,6 +187,59 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
     }
     
     
+    // MARK: - LoadUserInfo
+    // fireStoreDBからユーザー情報を取得する
+    func loadUserInfomation() {
+        
+        // 直列処理キュー作成
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "queue")
+        
+        // 直列処理開始
+        dispatchGroup.enter()
+        dispatchQueue.async(group: dispatchGroup) {
+            
+            // 日時の早い順に値をsnapShotに保存
+            self.fireStoreDB.collection(self.roomName!).document(Auth.auth().currentUser!.uid).getDocument {
+                (document, error) in
+                
+                // エラー処理
+                if error != nil {
+                    
+                    print("UserInfo acquisition error: \(error.debugDescription)")
+                    return
+                }
+                
+                // document == fireStoreDBからdocumentIDを指定して取得
+                if let document = document {
+                    let dataDescription = document.data()
+                    
+                    // アカウント情報を受け取る準備
+                    self.userInfomation = []
+                    
+                    // キー値を指定して値を取得
+                    let documentUserName  = dataDescription!["userName"] as? String
+                    let documentUserImage = dataDescription!["userImage"] as? String
+                    let documentSender    = dataDescription!["sender"] as? String
+                    
+                    // 構造体にまとめてユーザー情報を保管
+                    let userInfo = UserInfoStruct(userName: documentUserName!, userImage: documentUserImage!, sender: documentSender!)
+                    
+                    // UserInfoStruct型で保存してUIを更新
+                    self.userInfomation.append(userInfo)
+                    
+                    self.editUserNameTextField.text = self.userInfomation[0].userName
+                    self.editUserImage.kf.setImage(with: URL(string: self.userInfomation[0].userImage))
+                    
+                    print("userInfomation: \(self.userInfomation)")
+                }
+                // 直列処理終了
+                dispatchGroup.leave()
+            }
+        }
+    }
+    
+    
     // MARK: - TapUserImage
     // 編集用アカウント画像をタップすると呼ばれる
     @IBAction func tapeditUserImage(_ sender: Any) {
@@ -216,24 +277,48 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
     
     
     // MARK: - CatchUserImage
-    // SendToFirebaseStorageModelから値を受け取って画面遷移で値を渡す
+    // SendToFirebaseStorageModelから値を受け取って画面遷移
     func catchUserImage(url: String) {
         
-        if url != nil {
+        // fireStoreDBのコレクション名
+        roomName = "users"
+        
+        // アカウント登録作成日時を定義
+        let nowCreate = Date()
+        
+        // 地域とフォーマットを指定
+        DateItems.dateFormatter.locale = Locale(identifier: "ja_JP")
+        DateItems.dateFormatter .dateFormat = "yyyy年M月d日(EEEEE) H時m分s秒"
+        
+        // 一度String型に変換してDate型に変換
+        let createTimeString = DateItems.dateFormatter.string(from: nowCreate)
+        let createdTime      = DateItems.dateFormatter.date(from: createTimeString)
+        
+        // 1. userName
+        // 2. userImage
+        // 3. sender(uid)
+        // 4. createdTime
+        // 計4点をfireStoreDBに保存して成功すれば遷移
+        if let sender = Auth.auth().currentUser?.uid, let userName = self.editUserNameTextField.text {
             
-            HUD.flash(.labeledSuccess(title: "変更完了", subtitle: nil), onView: self.view, delay: 0) { [self] _ in
+            self.fireStoreDB.collection(self.roomName!).document(sender).setData(
+                ["userName"   : userName,
+                 "userImage"  : url,
+                 "sender"     : sender,
+                 "createdTime": createdTime]) {
+                error in
                 
-                // NavigationControllerをインスタンス化
-                let navigationVC = self.navigationController
+                // エラー処理
+                if error != nil {
+                    
+                    print("Message save error: \(error.debugDescription)")
+                    return
+                }
                 
-                // 一つ前のViewControllerを取得する
-                let accountVC = navigationVC?.viewControllers[(navigationVC?.viewControllers.count)!-2] as! AccountViewController
-                
-                // 値を渡す
-                accountVC.setEditUserInfo(EditUserImage: url, EditUserName: editUserNameTextField.text!)
-                
-                // アカウントページへ遷移(戻る)
-                self.navigationController?.popViewController(animated: true)
+                HUD.flash(.labeledSuccess(title: "登録完了", subtitle: nil), onView: self.view, delay: 0) { _ in
+                    // アカウントページへ遷移(戻る)
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }

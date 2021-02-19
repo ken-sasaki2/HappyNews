@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseFirestore
 import StoreKit
 import MessageUI
 import Kingfisher
@@ -21,9 +22,14 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     // TableViewのインスタンス
     @IBOutlet var table: UITableView!
     
-    // アカウント画像 & ユーザー名のインスタンスを保存
-    var changeUserImage: String?
-    var changeUsername : String?
+    // Firestoreのインスタンス
+    var fireStoreDB = Firestore.firestore()
+    
+    // fireStoreDBのコレクション名
+    var roomName: String?
+    
+    // 構造体のインスタンス
+    var userInfomation: [UserInfoStruct] = []
     
     // セクションのタイトル
     let sectionTitleArray: [String] = ["アカウント情報", "設定", "このアプリについて", "ログアウト"]
@@ -47,9 +53,8 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         // ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
         
-        // アカウント画像 & ユーザー名のインスタンス
-        changeUserImage = UserDefault.imageCapture!
-        changeUsername  = UserDefault.getUserName!
+        // fireStoreDBのコレクション名
+        roomName = "users"
         
         // NavigationBarの呼び出し
         setAccountNavigationBar()
@@ -66,8 +71,8 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         // NavigationBarのbackボタンのタイトルを編集
         self.navigationItem.backButtonTitle = ""
         
-        // tableViewの更新
-        table.reloadData()
+        // ユーザー情報の取得
+        loadUserInfomation()
     }
     
     
@@ -89,14 +94,56 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    // EditUserInfoViewControllerから値を受け取る
-    func setEditUserInfo(EditUserImage: String, EditUserName: String) {
+    
+    // MARK: - LoadUserInfo
+    // fireStoreDBからユーザー情報を取得する
+    func loadUserInfomation() {
         
-        // 編集後のアカウント画像 & ユーザー名が入る
-        changeUserImage = EditUserImage
-        changeUsername  = EditUserName
+        // 直列処理キュー作成
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "queue")
+        
+        // 直列処理開始
+        dispatchGroup.enter()
+        dispatchQueue.async(group: dispatchGroup) {
+            
+            // 日時の早い順に値をsnapShotに保存
+            self.fireStoreDB.collection(self.roomName!).document(Auth.auth().currentUser!.uid).getDocument {
+                (document, error) in
+                
+                // エラー処理
+                if error != nil {
+                    
+                    print("UserInfo acquisition error: \(error.debugDescription)")
+                    return
+                }
+                
+                // document == fireStoreDBからdocumentIDを指定して取得
+                if let document = document {
+                    let dataDescription = document.data()
+                    
+                    // アカウント情報を受け取る準備
+                    self.userInfomation = []
+                    
+                    // キー値を指定して値を取得
+                    let documentUserName  = dataDescription!["userName"] as? String
+                    let documentUserImage = dataDescription!["userImage"] as? String
+                    let documentSender    = dataDescription!["sender"] as? String
+                    
+                    // 構造体にまとめてユーザー情報を保管
+                    let userInfo = UserInfoStruct(userName: documentUserName!, userImage: documentUserImage!, sender: documentSender!)
+                    
+                    // UserInfoStruct型で保存してUIを更新
+                    self.userInfomation.append(userInfo)
+                    self.table.reloadData()
+                    
+                    print("userInfomation: \(self.userInfomation)")
+                }
+                // 直列処理終了
+                dispatchGroup.leave()
+            }
+        }
     }
-
     
     
     // MARK: - TableView
@@ -156,72 +203,79 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         let settingIcon  = cell.viewWithTag(1) as! UIImageView
         let settingLabel = cell.viewWithTag(2) as! UILabel
         
-        // "アカウント情報"セクションの場合
-        if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント情報") {
+        if userInfomation.count > NewsCount.zeroCount {
             
-            // Kingfisherを用いてアカウント画像を変換してデータを反映
-            settingIcon.kf.setImage(with: URL(string: changeUserImage!))
+            let user = userInfomation[0]
             
-            // アカウント画像の角丸
-            settingIcon.layer.masksToBounds = true
-            settingIcon.layer.cornerRadius = settingIcon.frame.width/2
-            settingIcon.clipsToBounds = true
+            // "アカウント情報"セクションの場合
+            if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント情報") {
+                
+                // Kingfisherを用いてアカウント画像を変換してデータを反映
+                settingIcon.kf.setImage(with: URL(string: user.userImage))
+                
+                // アカウント画像の角丸
+                settingIcon.layer.masksToBounds = true
+                settingIcon.layer.cornerRadius = settingIcon.frame.width/2
+                settingIcon.clipsToBounds = true
+                
+                // ラベルの設定
+                settingLabel.text      = user.userName
+                settingLabel.font      = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
+                settingLabel.textColor = UIColor(hex: "333333")
+            }
             
-            // ラベルの設定
-            settingLabel.text      = changeUsername
-            settingLabel.font      = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
-            settingLabel.textColor = UIColor(hex: "333333")
+            // "設定"セクションの場合
+            else if indexPath.section == sectionTitleArray.firstIndex(of: "設定") {
+                
+                // アイコンの設定
+                let settingSectionIcon = UIImage(named: settingSectionIconArray[indexPath.row])
+                settingIcon.image = settingSectionIcon
+                
+                // ラベルの設定
+                settingLabel.text      = settingCellLabelArray[indexPath.row]
+                settingLabel.textColor = UIColor(hex: "333333")
+            }
+            
+            // "このアプリについて"セクションの場合
+            else if indexPath.section == sectionTitleArray.firstIndex(of: "このアプリについて") {
+                
+                // アイコンの設定
+                let appSectionIcon = UIImage(named: appSectionIconArray[indexPath.row])
+                settingIcon.image = appSectionIcon
+                
+                // ラベルの設定
+                settingLabel.text      = appCellLabelArray[indexPath.row]
+                settingLabel.textColor = UIColor(hex: "333333")
+            }
+            
+            // "ログアウト"セクション"の場合
+            else if indexPath.section == sectionTitleArray.firstIndex(of: "ログアウト") {
+                
+                // アイコンの設定
+                let accountSectionIcon = UIImage(named: accountSectionIconArray[indexPath.row])
+                settingIcon.image = accountSectionIcon
+                
+                // ラベルの設定
+                settingLabel.text      = accountCellLabelArray[indexPath.row]
+                settingLabel.textColor = UIColor.red
+            }
+            
+            // セルとTableViewの背景色の設定
+            cell.backgroundColor  = UIColor(hex: "f4f8fa")
+            table.backgroundColor = UIColor(hex: "f4f8fa")
+            
+            // 空のセルを削除
+            table.tableFooterView = UIView(frame: .zero)
+            
+            // バージョンを表示するセルのタップを無効
+            if appCellLabelArray[indexPath.row] == appCellLabelArray[4] {
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            }
+            
+            return cell
+        } else {
+            return cell
         }
-        
-        // "設定"セクションの場合
-        else if indexPath.section == sectionTitleArray.firstIndex(of: "設定") {
-            
-            // アイコンの設定
-            let settingSectionIcon = UIImage(named: settingSectionIconArray[indexPath.row])
-            settingIcon.image = settingSectionIcon
-            
-            // ラベルの設定
-            settingLabel.text      = settingCellLabelArray[indexPath.row]
-            settingLabel.textColor = UIColor(hex: "333333")
-        }
-        
-        // "このアプリについて"セクションの場合
-        else if indexPath.section == sectionTitleArray.firstIndex(of: "このアプリについて") {
-            
-            // アイコンの設定
-            let appSectionIcon = UIImage(named: appSectionIconArray[indexPath.row])
-            settingIcon.image = appSectionIcon
-            
-            // ラベルの設定
-            settingLabel.text      = appCellLabelArray[indexPath.row]
-            settingLabel.textColor = UIColor(hex: "333333")
-        }
-        
-        // "ログアウト"セクション"の場合
-        else if indexPath.section == sectionTitleArray.firstIndex(of: "ログアウト") {
-            
-            // アイコンの設定
-            let accountSectionIcon = UIImage(named: accountSectionIconArray[indexPath.row])
-            settingIcon.image = accountSectionIcon
-            
-            // ラベルの設定
-            settingLabel.text      = accountCellLabelArray[indexPath.row]
-            settingLabel.textColor = UIColor.red
-        }
-        
-        // セルとTableViewの背景色の設定
-        cell.backgroundColor  = UIColor(hex: "f4f8fa")
-        table.backgroundColor = UIColor(hex: "f4f8fa")
-        
-        // 空のセルを削除
-        table.tableFooterView = UIView(frame: .zero)
-        
-        // バージョンを表示するセルのタップを無効
-        if appCellLabelArray[indexPath.row] == appCellLabelArray[4] {
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        }
-        
-        return cell
     }
     
     // セルをタップすると呼ばれる
@@ -237,7 +291,11 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             switch indexPath.row {
             // ユーザー名のセルをタップした場合
             case userInfoCellLabelArray.firstIndex(of: userInfoCellLabelArray[0]):
-                performSegue(withIdentifier: "editUserInfo", sender: UserInfo(userName: changeUsername!, UserImage: changeUserImage!))
+                //performSegue(withIdentifier: "editUserInfo", sender: UserInfoStruct(userName: changeUsername!, UserImage: changeUserImage!))
+                
+                // ユーザー情報編集ページへ画面遷移
+                performSegue(withIdentifier: "editUserInfo", sender: nil)
+                break
             default:
                 break
             }
@@ -290,22 +348,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 logoutAlert()
             default:
                 break
-            }
-        }
-    }
-    
-    // segue遷移を設定し、遷移先に値を渡す（遷移前に呼ばれる）
-    override func prepare(for segue: UIStoryboardSegue, sender: (Any)?) {
-
-        // セグエの識別子を確認
-        if segue.identifier == "editUserInfo" {
-            
-            // 遷移先のインスタンスとindexPath.rowを指定
-            if let nextEditUserPage = segue.destination as? EditUserInfoViewController, let userInfo = sender as? UserInfo {
-                
-                // 値を渡す
-                nextEditUserPage.getUserName  = userInfo.userName
-                nextEditUserPage.getUserImage = userInfo.UserImage
             }
         }
     }
