@@ -59,7 +59,7 @@ class SendToFirebaseStorageModel {
                 }
                 
                 // FirebaseStorageから返ってきたURLをString型で保存
-                UserDefault.standard.setValue(url?.absoluteString, forKeyPath: "userImage")
+                //UserDefault.standard.setValue(url?.absoluteString, forKeyPath: "userImage")
                 
                 // プロトコルを用いてFirebaseStorageから返ってきたURLを返す
                 self.doneCatchUserImageProtocol?.catchUserImage(url: url!.absoluteString)
