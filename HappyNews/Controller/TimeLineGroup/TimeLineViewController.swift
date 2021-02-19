@@ -68,6 +68,9 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         // fireStoreDBのコレクションを指定
         roomName = "TimeLineMessage"
         
+        // ユーザー情報の取得
+        loadUserInfomation()
+        
         // タイムラインの更新(表示)をおこなう
         loadTimeLine()
     }
@@ -101,12 +104,49 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
+    // MARK: - LoadUserInfo
+    // fireStoreDBからユーザー情報を取得する
+    func loadUserInfomation() {
+        
+        self.fireStoreDB.collection("users").document(Auth.auth().currentUser!.uid).getDocument {
+            (document, error) in
+            
+            // エラー処理
+            if error != nil {
+                
+                print("UserInfo acquisition error: \(error.debugDescription)")
+                return
+            }
+            
+            // document == fireStoreDBからdocumentIDを指定して取得
+            if let document = document {
+                let dataDescription = document.data()
+                
+                // アカウント情報を受け取る準備
+                self.userInfomation = []
+                
+                // キー値を指定して値を取得
+                let documentUserName  = dataDescription!["userName"] as? String
+                let documentUserImage = dataDescription!["userImage"] as? String
+                let documentSender    = dataDescription!["sender"] as? String
+                
+                // 構造体にまとめてユーザー情報を保管
+                let userInfo = UserInfoStruct(userName: documentUserName!, userImage: documentUserImage!, sender: documentSender!)
+                
+                // UserInfoStruct型で保存してUIを更新
+                self.userInfomation.append(userInfo)
+                self.timeLineTable.reloadData()
+            }
+        }
+    }
+    
+    
     // MARK: - LoadTimeLine
     // fireStoreDBから値を取得してタイムラインの更新(表示)をおこなう
     func loadTimeLine() {
         
         // 日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection(roomName!).order(by: "createdTime", descending: true).addSnapshotListener {
+        fireStoreDB.collection(roomName!).document(Auth.auth().currentUser!.uid).collection("TimeLine").order(by: "createdTime", descending: true).addSnapshotListener {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備
@@ -200,7 +240,6 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
                 print("Document successfully removed!")
                 // タイムラインの更新(表示)をおこなう
                 self.loadTimeLine()
-
             }
         }
     }
@@ -213,38 +252,6 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         
         // firestoreDBから取得した新規メッセージを保存
         let timeLineMessage = timeLineMessages[indexPath.row]
-        
-        
-        self.fireStoreDB.collection("users").document(Auth.auth().currentUser!.uid).getDocument {
-            (document, error) in
-            
-            // エラー処理
-            if error != nil {
-                
-                print("UserInfo acquisition error: \(error.debugDescription)")
-                return
-            }
-            
-            // document == fireStoreDBからdocumentIDを指定して取得
-            if let document = document {
-                let dataDescription = document.data()
-                
-                // アカウント情報を受け取る準備
-                self.userInfomation = []
-                
-                // キー値を指定して値を取得
-                let documentUserName  = dataDescription!["userName"] as? String
-                let documentUserImage = dataDescription!["userImage"] as? String
-                let documentSender    = dataDescription!["sender"] as? String
-                
-                // 構造体にまとめてユーザー情報を保管
-                let userInfo = UserInfoStruct(userName: documentUserName!, userImage: documentUserImage!, sender: documentSender!)
-                
-                // UserInfoStruct型で保存してUIを更新
-                self.userInfomation.append(userInfo)
-                self.timeLineTable.reloadData()
-            }
-        }
         
         if userInfomation.count > NewsCount.zeroCount {
             
