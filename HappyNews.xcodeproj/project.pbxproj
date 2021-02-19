@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		450A925225DD42DA00704107 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450A925125DD42DA00704107 /* UserInfo.swift */; };
+		450A925225DD42DA00704107 /* UserInfoStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450A925125DD42DA00704107 /* UserInfoStruct.swift */; };
 		45166C3C25BAAD580026045F /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166C3B25BAAD580026045F /* ApiKey.swift */; };
 		4532A60525D90390002A998A /* TimeLineCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4532A60425D90390002A998A /* TimeLineCommentViewController.swift */; };
 		4532A60825D926F3002A998A /* CommentInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4532A60725D926F2002A998A /* CommentInputAccessoryView.xib */; };
@@ -53,7 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		450A925125DD42DA00704107 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		450A925125DD42DA00704107 /* UserInfoStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStruct.swift; sourceTree = "<group>"; };
 		45166C3B25BAAD580026045F /* ApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		452877452575417200A344E3 /* HappyNews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HappyNews.entitlements; sourceTree = "<group>"; };
 		4532A60425D90390002A998A /* TimeLineCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineCommentViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		450A925025DD42B100704107 /* UserInfoGroup */ = {
 			isa = PBXGroup;
 			children = (
-				450A925125DD42DA00704107 /* UserInfo.swift */,
+				450A925125DD42DA00704107 /* UserInfoStruct.swift */,
 			);
 			path = UserInfoGroup;
 			sourceTree = "<group>";
@@ -550,7 +550,7 @@
 				45C7DDAC25CD778100D4DDB5 /* SaveUserInformationViewController.swift in Sources */,
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
 				458F88B525D2C6000041842D /* TimeLineToneAnalyzerModel.swift in Sources */,
-				450A925225DD42DA00704107 /* UserInfo.swift in Sources */,
+				450A925225DD42DA00704107 /* UserInfoStruct.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseFirestore
 import PKHUD
 
 // ユーザー情報(ユーザー名 & アカウント画像)を保存する
@@ -27,6 +28,9 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
     
     // 登録ボタンのインスタンス
     @IBOutlet weak var registerButton: UIButton!
+    
+    // Firestoreのインスタンス
+    var fireStoreDB = Firestore.firestore()
     
     // fireStoreDBのコレクション名が入る
     var roomName: String?
@@ -59,9 +63,6 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
         // カメラにアクセスするかどうかを促すクラスの呼び出し
         let checkPermission = CheckPermission()
             checkPermission.showCheckPermission()
-        
-        // fireStoreDBのコレクションを指定して解析
-        roomName = "userName"
     }
     
     
@@ -207,11 +208,45 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
     // SendToFirebaseStorageModelから値を受け取って画面遷移
     func catchUserImage(url: String) {
         
-        if url != nil {
+        // fireStoreDBのコレクション名
+        roomName = "users"
+        
+        // アカウント登録作成日時を定義
+        let nowCreate = Date()
+        
+        // 地域とフォーマットを指定
+        DateItems.dateFormatter.locale = Locale(identifier: "ja_JP")
+        DateItems.dateFormatter .dateFormat = "yyyy年M月d日(EEEEE) H時m分s秒"
+        
+        // 一度String型に変換してDate型に変換
+        let createTimeString = DateItems.dateFormatter.string(from: nowCreate)
+        let createdTime      = DateItems.dateFormatter.date(from: createTimeString)
+        
+        // 1. userName
+        // 2. userImage
+        // 3. sender(uid)
+        // 4. createdTime
+        // 計4点をfireStoreDBに保存して成功すれば遷移
+        if let sender = Auth.auth().currentUser?.uid, let userName = UserDefault.getUserName {
             
-            HUD.flash(.labeledSuccess(title: "登録完了", subtitle: nil), onView: self.view, delay: 0) { _ in
-                // segueで画面遷移
-                self.performSegue(withIdentifier: "mainPage", sender: nil)
+            self.fireStoreDB.collection(self.roomName!).document(sender).setData(
+                ["userName"   : userName,
+                 "userImage"  : url,
+                 "sender"     : sender,
+                 "createdTime": createdTime]) {
+                error in
+                
+                // エラー処理
+                if error != nil {
+                    
+                    print("Message save error: \(error.debugDescription)")
+                    return
+                }
+                
+                HUD.flash(.labeledSuccess(title: "登録完了", subtitle: nil), onView: self.view, delay: 0) { _ in
+                    // segueで画面遷移
+                    self.performSegue(withIdentifier: "mainPage", sender: nil)
+                }
             }
         }
     }
