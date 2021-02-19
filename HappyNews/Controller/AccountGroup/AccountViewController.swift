@@ -468,13 +468,28 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
             action in
             
-            // ログアウト機能
+            // ログアウト機能(削除する情報4点)
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
                 
-                // UserDefaultsに保存したデータを全削除
+                // 1. UserDefaultsに保存したデータを全削除
                 UserDefault.standard.removeAll()
+                
+                // 2. fireStoreDBに保存したユーザー情報を削除
+                self.fireStoreDB.collection("users").document(Auth.auth().currentUser!.uid).delete() {
+                    error in
+                    
+                    // エラー処理
+                    if let error = error {
+                        print("Error removing document: \(error)")
+                    } else {
+                        print("Document successfully removed!")
+                    }
+                }
+                
+                // 3. fireStoreDBに保存したTimeLine投稿内容を削除
+                // 4. ニュースに投稿したコメント内容を削除
                 
                 // LoginViewControllerへ遷移
                 self.performSegue(withIdentifier: "goLogin", sender: nil)
