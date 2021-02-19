@@ -35,6 +35,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // 構造体のインスタンス
     var timeLineMessages: [TimeLineMessage] = []
+    var userInfomation  : [UserInfoStruct]  = []
     
     
     // MARK: - ViewDidLoad
@@ -146,7 +147,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
                     DateItems.dateFormatter.timeStyle = .short
                     let createdTime = DateItems.dateFormatter.string(from: dateValue)
                     
-                    let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!, documentID: document.documentID, createdTime: createdTime)
+                    let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: "documentAiconImage!", userName: "documentUserName!", documentID: document.documentID, createdTime: createdTime)
                     
                     // 新規メッセージ （ChatMessage型）
                     self.timeLineMessages.append(newMessage)
@@ -213,20 +214,59 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         // firestoreDBから取得した新規メッセージを保存
         let timeLineMessage = timeLineMessages[indexPath.row]
         
-        // セルに表示する内容を設定
-        cell.sendBody.text   = timeLineMessage.body
-        cell.senderName.text = UserDefault.getUserName
-        cell.sendTime.text   = timeLineMessage.createdTime
-        cell.sendImageView.kf.setImage(with: URL(string: UserDefault.imageCapture!))
         
-        // セルとTableViewの背景色の設定
-        cell.backgroundColor          = UIColor(hex: "f4f8fa")
-        timeLineTable.backgroundColor = UIColor(hex: "f4f8fa")
+        self.fireStoreDB.collection("users").document(Auth.auth().currentUser!.uid).getDocument {
+            (document, error) in
+            
+            // エラー処理
+            if error != nil {
+                
+                print("UserInfo acquisition error: \(error.debugDescription)")
+                return
+            }
+            
+            // document == fireStoreDBからdocumentIDを指定して取得
+            if let document = document {
+                let dataDescription = document.data()
+                
+                // アカウント情報を受け取る準備
+                self.userInfomation = []
+                
+                // キー値を指定して値を取得
+                let documentUserName  = dataDescription!["userName"] as? String
+                let documentUserImage = dataDescription!["userImage"] as? String
+                let documentSender    = dataDescription!["sender"] as? String
+                
+                // 構造体にまとめてユーザー情報を保管
+                let userInfo = UserInfoStruct(userName: documentUserName!, userImage: documentUserImage!, sender: documentSender!)
+                
+                // UserInfoStruct型で保存してUIを更新
+                self.userInfomation.append(userInfo)
+                self.timeLineTable.reloadData()
+            }
+        }
         
-        // 空のセルを削除
-        timeLineTable.tableFooterView = UIView(frame: .zero)
-        
-        return cell
+        if userInfomation.count > NewsCount.zeroCount {
+            
+            let user = userInfomation[0]
+            
+            // セルに表示する内容を設定
+            cell.sendBody.text   = timeLineMessage.body
+            cell.senderName.text = user.userName
+            cell.sendTime.text   = timeLineMessage.createdTime
+            cell.sendImageView.kf.setImage(with: URL(string: user.userImage))
+            
+            // セルとTableViewの背景色の設定
+            cell.backgroundColor          = UIColor(hex: "f4f8fa")
+            timeLineTable.backgroundColor = UIColor(hex: "f4f8fa")
+            
+            // 空のセルを削除
+            timeLineTable.tableFooterView = UIView(frame: .zero)
+            
+            return cell
+        } else {
+            return cell
+        }
     }
     
     // セルをタップすると呼ばれる
