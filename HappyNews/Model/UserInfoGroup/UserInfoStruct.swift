@@ -1,5 +1,5 @@
 //
-//  UserInfo.swift
+//  UserInfoStruct.swift
 //  HappyNews
 //
 //  Created by 佐々木　謙 on 2021/02/17.
@@ -8,9 +8,10 @@
 
 import Foundation
 
-// segueで値を渡す場合に扱う
-struct UserInfo {
+// アカウント情報を取得する場合に扱う
+struct UserInfoStruct {
     
    var userName : String
-   var UserImage: String
+   var userImage: String
+   var sender   : String
 }
