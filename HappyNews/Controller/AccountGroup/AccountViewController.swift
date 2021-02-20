@@ -482,6 +482,18 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                     }
                 }
                 
+                // 3. ニュース情報を削除
+                self.fireStoreDB.collection(FirestoreCollectionName.newsInfomations).document(Auth.auth().currentUser!.uid).delete() {
+                    error in
+                    
+                    // エラー処理
+                    if let error = error {
+                        print("Error removing document: \(error)")
+                    } else {
+                        print("Document successfully removed!")
+                    }
+                }
+                
                 // LoginViewControllerへ遷移
                 self.performSegue(withIdentifier: "goLogin", sender: nil)
                 
