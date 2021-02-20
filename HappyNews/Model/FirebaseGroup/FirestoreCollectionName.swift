@@ -13,6 +13,8 @@ class FirestoreCollectionName {
     
     static var newsInfomations  = "NewsInfomations"
     static var timeLineMessages = "TimeLineMessages"
+    static var news             = "News"
+    static var favoriteNews     = "FavoriteNews"
     static var comments         = "Comments"
     static var users            = "Users"
 }

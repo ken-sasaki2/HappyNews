@@ -362,7 +362,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             // 3. ニュースの発行時刻
             // 4. ニュースのリンクURL
             // 計4点をfirestoreDBに保存
-            fireStoreDB.collection(FirestoreCollectionName.newsInfomations).document().setData(
+            fireStoreDB.collection(FirestoreCollectionName.newsInfomations).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.news).document().setData(
                 ["newsSumbnail" : self.joySelectionArray[i].image,
                  "newsTitle": self.joySelectionArray[i].title,
                  "newsPubData": self.joySelectionArray[i].pubDate,
@@ -387,7 +387,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     func loadNewsData() {
         
         // 日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection(FirestoreCollectionName.newsInfomations).getDocuments {
+        fireStoreDB.collection(FirestoreCollectionName.newsInfomations).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.news).getDocuments {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備
@@ -418,7 +418,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
                     let documentNewsPubDat   = documentData["newsPubData"] as? String
                     let documentNewsURL      = documentData["newsURL"] as? String
                     
-                    let newsInfo = NewsInfoStruct(newsTitle: documentNewsTitle!, newsSumbnail: documentNewsSumbnail!, newsPubData: documentNewsPubDat!, newsURL: documentNewsURL!)
+                    let newsInfo = NewsInfoStruct(newsTitle: documentNewsTitle!, newsSumbnail: documentNewsSumbnail!, newsPubData: documentNewsPubDat!, newsURL: documentNewsURL!, documentID: document.documentID)
                     
                     // 取得したニュース情報 （NewsInfoStruct型）
                     self.newsInfomation.append(newsInfo)
@@ -504,9 +504,10 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         let cell = newsTable.dequeueReusableCell(withIdentifier: "newsTable", for: indexPath)
         
         // Tag番号(1)〜(4)でインスタンス作成(サムネイル, タイトル, サブタイトル, コメントボタン)
-        let thumbnail          = cell.viewWithTag(1) as! UIImageView
-        let newsTitle          = cell.viewWithTag(2) as! UILabel
-        let subtitle           = newsTable.viewWithTag(3) as! UILabel
+        let thumbnail         = cell.viewWithTag(1) as! UIImageView
+        let newsTitle         = cell.viewWithTag(2) as! UILabel
+        let subtitle          = newsTable.viewWithTag(3) as! UILabel
+        let addFavoriteButton = newsTable.viewWithTag(4) as! UIButton?
         
         // サムネイルで扱うインスタンス(画像URL, 待機画像）
         let thumbnailURL = URL(string: news.newsSumbnail)
@@ -540,6 +541,10 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         // 空のセルを削除
         newsTable.tableFooterView = UIView(frame: .zero)
         
+        // IndexPathを取得するためのaddTarget
+        addFavoriteButton?.tag = indexPath.row
+        addFavoriteButton?.addTarget(self, action: #selector(tapAddFavoriteButton(_:)), for: .touchUpInside)
+        
         return cell
     }
     
@@ -570,8 +575,54 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     
     // MARK: - TapNewsCommentButton
-    // セルの吹き出しをタップすると呼ばれる
-    @IBAction func tapNewsCommentButton(_ sender: Any) {
-        print("ニュースコメント")
+    // セルの☆をタップすると呼ばれる
+    @objc func tapAddFavoriteButton(_ sender: UIButton) {
+        print("お気に入りへ追加")
+        
+        // タップしたコメントボタンのセルのindexPathのrowを取得する
+        let favoriteButtonID = sender.tag
+        
+        
+        // お気に入り追加を促すアラートの作成
+        let favoriteAlert = UIAlertController(title: "お気に入りに追加しますか？",message: "お気に入りに追加するといつでもニュースを見返せます。", preferredStyle: .alert)
+        
+        // アラートのボタン
+        favoriteAlert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
+        favoriteAlert.addAction(UIAlertAction(title: "追加", style: .default, handler: {
+            action in
+            
+            // 1. ニュースの画像
+            // 2. ニュースのタイトル
+            // 3. ニュースの発行時刻
+            // 4. ニュースのリンクURL
+            // 計4点をお気に入りニュースとしてfireStorDBへニュースを保存する
+            self.fireStoreDB.collection(FirestoreCollectionName.newsInfomations).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.favoriteNews).document().setData(
+                ["newsSumbnail": self.newsInfomation[favoriteButtonID].newsSumbnail,
+                 "newsTitle"   : self.newsInfomation[favoriteButtonID].newsTitle,
+                 "newsPubData" : self.newsInfomation[favoriteButtonID].newsPubData,
+                 "newsURL"     : self.newsInfomation[favoriteButtonID].newsURL]) {
+                (error) in
+                
+                // エラー処理
+                if error != nil {
+                    
+                    print("News save error: \(error.debugDescription)")
+                    return
+                }
+            }
+        }))
+        
+        // アラートの表示
+        present(favoriteAlert, animated: true, completion: nil)
     }
+    
+    
+    // MARK: - TapFavoritePageButton
+    // NavigationBarの☆をタップすると呼ばれる
+    @IBAction func tapFavoritePageButton(_ sender: Any) {
+        print("お気に入りページへ")
+        // お気に入りニュースページへ遷移
+        self.performSegue(withIdentifier: "favoritePage", sender: nil)
+    }
+    
 }
