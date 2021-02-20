@@ -107,6 +107,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
                 
                 // UserInfoStruct型で保存してUIを更新
                 self.userInfomation.append(userInfo)
+                self.commentTable.reloadData()
             }
         }
     }
