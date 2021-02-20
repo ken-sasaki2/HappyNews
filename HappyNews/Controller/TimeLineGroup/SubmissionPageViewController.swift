@@ -26,15 +26,9 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
     // FireStoreのインスタンス
     let fireStoreDB = Firestore.firestore()
     
-    // fireStoreDBのコレクションが入る
-    var roomName: String?
-    
-    // アプリ内から取得する画像データとユーザー名
-    var aiconImageString: String?
-    var userNameString  : String?
-    
     // 構造体のインスタンス
     var timeLineMessages: [TimeLineMessage] = []
+    var userInfomation  : [UserInfoStruct]  = []
     
     // 感情分析に投げる翻訳後のテキスト
     var toneAnalyzerText: String?
@@ -43,13 +37,6 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // アプリ内にアカウント画像データとユーザー名があれば代入
-        if  UserDefault.imageCapture != nil && UserDefault.getUserName != nil {
-            
-            aiconImageString = UserDefault.imageCapture
-            userNameString   = UserDefault.getUserName
-        }
 
         // 投稿ボタンの角丸
         sendMessageButton.layer.cornerRadius = 6
@@ -61,8 +48,58 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
         // キーボードを自動的に表示
         self.timeLineTextView.becomeFirstResponder()
         
-        // fireStoreDBのコレクションを指定して解析
-        roomName = "TimeLineMessage"
+        // ユーザー情報を取得
+        loadUserInfomation()
+    }
+    
+    
+    // MARK: - LoadUserInfo
+    // fireStoreDBからユーザー情報を取得する
+    func loadUserInfomation() {
+        
+        // 直列処理キュー作成
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "queue")
+        
+        // 直列処理開始
+        dispatchGroup.enter()
+        dispatchQueue.async(group: dispatchGroup) {
+            
+            // 日時の早い順に値をsnapShotに保存
+            self.fireStoreDB.collection("users").document(Auth.auth().currentUser!.uid).getDocument {
+                (document, error) in
+                
+                // エラー処理
+                if error != nil {
+                    
+                    print("UserInfo acquisition error: \(error.debugDescription)")
+                    return
+                }
+                
+                // document == fireStoreDBからdocumentIDを指定して取得
+                if let document = document {
+                    let dataDescription = document.data()
+                    
+                    // アカウント情報を受け取る準備
+                    self.userInfomation = []
+                    
+                    // キー値を指定して値を取得
+                    let documentUserName  = dataDescription!["userName"] as? String
+                    let documentUserImage = dataDescription!["userImage"] as? String
+                    let documentSender    = dataDescription!["sender"] as? String
+                    
+                    // 構造体にまとめてユーザー情報を保管
+                    let userInfo = UserInfoStruct(userName: documentUserName!, userImage: documentUserImage!, sender: documentSender!)
+                    
+                    // UserInfoStruct型で保存してUIを更新
+                    self.userInfomation.append(userInfo)
+                    
+                    print("userInfomation: \(self.userInfomation)")
+                }
+                // 直列処理終了
+                dispatchGroup.leave()
+            }
+        }
     }
     
     
@@ -155,7 +192,7 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
                 // テキストビューのテキストとユーザーのIDを取得してfireStoreDBのフィールドに合わせて保存
                 if let sender = Auth.auth().currentUser?.uid, let timeLineMessage = self.timeLineTextView.text {
                     
-                    self.fireStoreDB.collection(self.roomName!).addDocument(data: ["sender": sender, "body": timeLineMessage, "aiconImage": self.aiconImageString, "userName": self.userNameString, "createdTime": sendTime]) {
+                    self.fireStoreDB.collection("TimeLineMessages").document().setData(["sender": sender, "body": timeLineMessage, "aiconImage": self.userInfomation[0].userImage, "userName": self.userInfomation[0].userName, "createdTime": sendTime]) {
                         error in
                         
                         // エラー処理

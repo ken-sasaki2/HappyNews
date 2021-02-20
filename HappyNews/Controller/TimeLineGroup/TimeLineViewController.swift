@@ -26,13 +26,6 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     // fireStoreのインスタンス
     let fireStoreDB = Firestore.firestore()
     
-    // fireStoreDBのコレクションが入る
-    var roomName: String?
-    
-    // アプリ内から取得する画像データとユーザー名
-    var aiconImageString: String?
-    var userNameString  : String?
-    
     // 構造体のインスタンス
     var timeLineMessages: [TimeLineMessage] = []
     var userInfomation  : [UserInfoStruct]  = []
@@ -64,9 +57,6 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - ViewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // fireStoreDBのコレクションを指定
-        roomName = "TimeLineMessage"
         
         // ユーザー情報の取得
         loadUserInfomation()
@@ -146,7 +136,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     func loadTimeLine() {
         
         // 日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection(roomName!).document(Auth.auth().currentUser!.uid).collection("TimeLine").order(by: "createdTime", descending: true).addSnapshotListener {
+        fireStoreDB.collection("TimeLineMessages").order(by: "createdTime", descending: true).addSnapshotListener {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備
@@ -230,7 +220,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         let deleteID = timeLineMessages[indexPath.row].documentID
         
         // 投稿内容をfireStoreDBから削除
-        fireStoreDB.collection(roomName!).document(deleteID).delete() {
+        fireStoreDB.collection("TimeLineMessages").document(deleteID).delete() {
             error in
             
             // エラー処理
