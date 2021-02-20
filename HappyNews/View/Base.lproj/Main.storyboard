@@ -318,7 +318,7 @@
                                                     <rect key="frame" x="20" y="256" width="334" height="54"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                    <color key="textColor" systemColor="linkColor"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.8980392157" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQx-U5-Xu6">
@@ -334,7 +334,7 @@
                                                     <rect key="frame" x="19" y="320" width="334" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" systemColor="linkColor"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pf0-Mk-IgV">
@@ -372,7 +372,7 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="tapFavoritePageButton:" destination="MkZ-tb-Rve" id="cxh-lU-uiP"/>
-                                <segue destination="whI-WC-hPf" kind="presentation" identifier="favoritePage" id="7kY-TT-gCx"/>
+                                <segue destination="whI-WC-hPf" kind="push" identifier="favoritePage" id="7kY-TT-gCx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -384,69 +384,65 @@
             </objects>
             <point key="canvasLocation" x="4324.6376811594209" y="-1013.1696428571428"/>
         </scene>
-        <!--News Comment View Controller-->
+        <!--Favorite News View Controller-->
         <scene sceneID="n4W-NA-OMp">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sya-RN-spx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController id="whI-WC-hPf" customClass="NewsCommentViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="whI-WC-hPf" customClass="FavoriteNewsViewController" customModule="HappyNews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mk4-qK-gxJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="psC-hT-FKC">
-                                <rect key="frame" x="0.0" y="61" width="414" height="698"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="psC-hT-FKC">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Hx3-qB-1DU">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteNewsTable" rowHeight="355" id="AE3-Rr-pSq">
+                                        <rect key="frame" x="20" y="55.5" width="374" height="355"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hx3-qB-1DU" id="bux-xM-OkW">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AE3-Rr-pSq" id="uSM-ni-Ufd">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="355"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mPZ-bX-ACU">
+                                                    <rect key="frame" x="19" y="14" width="334" height="215"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ニュースのタイトルを表示" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLi-Kf-ssY">
+                                                    <rect key="frame" x="20" y="238" width="334" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.89803921568627454" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ニュース発行時刻" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oer-0g-Yu0">
+                                                    <rect key="frame" x="19" y="297" width="334" height="19"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X33-dS-jSs">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUU-2O-scQ">
-                                        <rect key="frame" x="10" y="15" width="35" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="AxD-TV-ejE"/>
-                                            <constraint firstAttribute="height" constant="35" id="QjI-A9-H1r"/>
-                                        </constraints>
-                                        <state key="normal" image="キャンセルボタン"/>
-                                        <connections>
-                                            <action selector="tapCloseCommentButton:" destination="GrQ-iI-9ka" eventType="touchUpInside" id="YtD-G5-StE"/>
-                                            <action selector="tapCloseNewsCommentButton:" destination="whI-WC-hPf" eventType="touchUpInside" id="ceP-Eg-pFG"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="NUU-2O-scQ" firstAttribute="leading" secondItem="X33-dS-jSs" secondAttribute="leading" constant="10" id="9ps-iG-q23"/>
-                                    <constraint firstAttribute="width" constant="414" id="BFD-2J-aSB"/>
-                                    <constraint firstItem="NUU-2O-scQ" firstAttribute="top" secondItem="X33-dS-jSs" secondAttribute="top" constant="15" id="rnU-rN-4Kh"/>
-                                    <constraint firstAttribute="height" constant="65" id="x5c-Ka-DnL"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hAn-8Z-Bfv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="X33-dS-jSs" firstAttribute="trailing" secondItem="hAn-8Z-Bfv" secondAttribute="trailing" id="VIl-TP-uVj"/>
-                            <constraint firstItem="X33-dS-jSs" firstAttribute="leading" secondItem="hAn-8Z-Bfv" secondAttribute="leading" id="byr-Jb-k9D"/>
-                            <constraint firstItem="X33-dS-jSs" firstAttribute="top" secondItem="hAn-8Z-Bfv" secondAttribute="top" id="o74-LA-KU0"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="LfS-Ww-Ybf"/>
+                    <navigationItem key="navigationItem" id="LfS-Ww-Ybf">
+                        <barButtonItem key="backBarButtonItem" title="戻る" id="9fV-Ac-oL2"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="newsCommentTable" destination="psC-hT-FKC" id="epX-LA-klB"/>
+                        <outlet property="favoriteNewsTable" destination="psC-hT-FKC" id="45j-jl-Y8m"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sya-RN-spx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5086.9565217391309" y="-1013.1696428571428"/>
         </scene>
@@ -700,9 +696,6 @@
         <image name="キャンセルボタン" width="150" height="150"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

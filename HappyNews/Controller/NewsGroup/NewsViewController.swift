@@ -361,12 +361,14 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             // 2. ニュースのタイトル
             // 3. ニュースの発行時刻
             // 4. ニュースのリンクURL
+            // 5. ユーザーのID
             // 計4点をfirestoreDBに保存
             fireStoreDB.collection(FirestoreCollectionName.newsInfomations).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.news).document().setData(
-                ["newsSumbnail" : self.joySelectionArray[i].image,
-                 "newsTitle": self.joySelectionArray[i].title,
-                 "newsPubData": self.joySelectionArray[i].pubDate,
-                 "newsURL": self.joySelectionArray[i].url]) {
+                ["newsSumbnail": self.joySelectionArray[i].image,
+                 "newsTitle"   : self.joySelectionArray[i].title,
+                 "newsPubData" : self.joySelectionArray[i].pubDate,
+                 "newsURL"     : self.joySelectionArray[i].url,
+                 "sender"      : Auth.auth().currentUser?.uid]) {
                 (error) in
                 
                 // エラー処理
@@ -417,8 +419,9 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
                     let documentNewsSumbnail = documentData["newsSumbnail"] as? String
                     let documentNewsPubDat   = documentData["newsPubData"] as? String
                     let documentNewsURL      = documentData["newsURL"] as? String
+                    let documentSender       = documentData["sender"] as? String
                     
-                    let newsInfo = NewsInfoStruct(newsTitle: documentNewsTitle!, newsSumbnail: documentNewsSumbnail!, newsPubData: documentNewsPubDat!, newsURL: documentNewsURL!, documentID: document.documentID)
+                    let newsInfo = NewsInfoStruct(newsTitle: documentNewsTitle!, newsSumbnail: documentNewsSumbnail!, newsPubData: documentNewsPubDat!, newsURL: documentNewsURL!, documentID: document.documentID, sender: documentSender!)
                     
                     // 取得したニュース情報 （NewsInfoStruct型）
                     self.newsInfomation.append(newsInfo)
@@ -595,12 +598,14 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             // 2. ニュースのタイトル
             // 3. ニュースの発行時刻
             // 4. ニュースのリンクURL
-            // 計4点をお気に入りニュースとしてfireStorDBへニュースを保存する
+            // 5. ユーザーのID
+            // 計5点をお気に入りニュースとしてfireStorDBへニュースを保存する
             self.fireStoreDB.collection(FirestoreCollectionName.newsInfomations).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.favoriteNews).document().setData(
                 ["newsSumbnail": self.newsInfomation[favoriteButtonID].newsSumbnail,
                  "newsTitle"   : self.newsInfomation[favoriteButtonID].newsTitle,
                  "newsPubData" : self.newsInfomation[favoriteButtonID].newsPubData,
-                 "newsURL"     : self.newsInfomation[favoriteButtonID].newsURL]) {
+                 "newsURL"     : self.newsInfomation[favoriteButtonID].newsURL,
+                 "sender"      : Auth.auth().currentUser?.uid]) {
                 (error) in
                 
                 // エラー処理

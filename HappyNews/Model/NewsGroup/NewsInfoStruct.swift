@@ -16,4 +16,5 @@ struct NewsInfoStruct {
     var newsPubData   : String
     var newsURL       : String
     let documentID    : String
+    let sender        : String
 }
