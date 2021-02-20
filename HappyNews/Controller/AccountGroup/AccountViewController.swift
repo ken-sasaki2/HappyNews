@@ -25,9 +25,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     // Firestoreのインスタンス
     var fireStoreDB = Firestore.firestore()
     
-    // fireStoreDBのコレクション名
-    var roomName: String?
-    
     // 構造体のインスタンス
     var userInfomation: [UserInfoStruct] = []
     
@@ -52,9 +49,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // ダークモード適用を回避
         self.overrideUserInterfaceStyle = .light
-        
-        // fireStoreDBのコレクション名
-        roomName = "users"
         
         // NavigationBarの呼び出し
         setAccountNavigationBar()
@@ -108,7 +102,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         dispatchQueue.async(group: dispatchGroup) {
             
             // 日時の早い順に値をsnapShotに保存
-            self.fireStoreDB.collection(self.roomName!).document(Auth.auth().currentUser!.uid).getDocument {
+            self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).getDocument {
                 (document, error) in
                 
                 // エラー処理

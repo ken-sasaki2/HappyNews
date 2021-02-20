@@ -30,9 +30,6 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
     // Firestoreのインスタンス
     var fireStoreDB = Firestore.firestore()
     
-    // fireStoreDBのコレクション名
-    var roomName: String?
-    
     // 構造体のインスタンス
     var userInfomation: [UserInfoStruct] = []
     

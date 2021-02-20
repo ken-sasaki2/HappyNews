@@ -70,9 +70,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     // FireStoreのインスタンス
     let fireStoreDB = Firestore.firestore()
     
-    // fireStoreDBのコレクションが入る
-    var roomName: String?
-    
     // ニュースを取得する構造体のインスタンス
     var newsInfomation: [NewsInfoStruct] = []
     
@@ -390,7 +387,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     func loadNewsData() {
         
         // 日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection("news").getDocuments {
+        fireStoreDB.collection(FirestoreCollectionName.newsInfomations).getDocuments {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備

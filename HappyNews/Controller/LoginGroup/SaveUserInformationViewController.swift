@@ -32,9 +32,6 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
     // Firestoreのインスタンス
     var fireStoreDB = Firestore.firestore()
     
-    // fireStoreDBのコレクション名が入る
-    var roomName: String?
-    
     // FirebaseStorageへ画像データを送信するクラスのインスタンス
     var sendToFirebaseStorageModel = SendToFirebaseStorageModel()
     
@@ -208,9 +205,6 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
     // SendToFirebaseStorageModelから値を受け取って画面遷移
     func catchUserImage(url: String) {
         
-        // fireStoreDBのコレクション名
-        roomName = "users"
-        
         // アカウント登録作成日時を定義
         let nowCreate = Date()
         
@@ -229,7 +223,7 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
         // 計4点をfireStoreDBに保存して成功すれば遷移
         if let sender = Auth.auth().currentUser?.uid, let userName = UserDefault.getUserName {
             
-            self.fireStoreDB.collection(self.roomName!).document(sender).setData(
+            self.fireStoreDB.collection(FirestoreCollectionName.users).document(sender).setData(
                 ["userName"   : userName,
                  "userImage"  : url,
                  "sender"     : sender,
