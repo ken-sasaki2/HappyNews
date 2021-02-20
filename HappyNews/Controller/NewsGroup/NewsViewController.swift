@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 import ToneAnalyzer
 import LanguageTranslator
 import SwiftyJSON
 import PKHUD
 import Kingfisher
+
 
 // ▼参照しているclass
 // NewsItems
@@ -27,7 +31,7 @@ import Kingfisher
 // XML解析をおこないニュースを取得、感情分析結果を受け取り、明るいニュースだけでUIを更新する主要クラス
 class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSource, UITableViewDelegate, DoneCatchTranslationProtocol, DoneCatchAnalyzerProtocol, DoneCatchTimeScheduleProtocol {
     
-
+    
     // MARK: - XML Property
     // XMLファイルを保存
     var xmlString: String?
@@ -37,7 +41,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // XMLパース内の現在の要素名を取得する変数
     var currentElementName: String?
-
+    
     // NewsItemsクラスのインスタンス作成
     var newsItems = [NewsItems]()
     
@@ -60,6 +64,17 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // joyの要素と認定されたニュースの配列
     var joySelectionArray = [NewsItems]()
+    
+    
+    // MARK: - Firebase Property
+    // FireStoreのインスタンス
+    let fireStoreDB = Firestore.firestore()
+    
+    // fireStoreDBのコレクションが入る
+    var roomName: String?
+    
+    // ニュースを取得する構造体のインスタンス
+    var newsInfomation: [NewsInfoStruct] = []
     
     
     // MARK: - NewsTableView
@@ -124,8 +139,8 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         // TimeScheduleModelと通信をおこないプロトコルを委託
         let timeScheduleModel = TimeScheduleModel(date: DateItems.date)
-            timeScheduleModel.doneCatchTimeScheduleProtocol = self
-            timeScheduleModel.setTimeSchedule()
+        timeScheduleModel.doneCatchTimeScheduleProtocol = self
+        timeScheduleModel.setTimeSchedule()
     }
     
     // TimeScheduleModelから返ってきた値の受け取り
@@ -134,15 +149,15 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         if updateOrCache == true {
             print("API通信開始")
             
-            // XMLパースを開始してAPI通信を開始
+            // XMLパースを開始してニュース情報をクリアしてAPI通信を開始
             settingXML()
-            startTranslation()
+            removeNewsData()
         } else {
             print("キャッシュでUI更新")
             
             // XMLパースを開始してキャッシュでUI更新
             settingXML()
-            reloadNewsData()
+            loadNewsData()
         }
     }
     
@@ -169,9 +184,9 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // XML解析を開始する場合(parser.parse())に呼ばれるメソッド
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-
+        
         currentElementName = nil
-
+        
         if elementName == "item" {
             newsItems.append(NewsItems())
         } else {
@@ -181,9 +196,9 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // <item>の中身を判定するメソッド(要素の解析開始と値取得）
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-
+        
         if newsItems.count > 0 {
-
+            
             // XMLファイルに特定のタグが存在する場合の処理
             // 'link'と'image'はstringに分割されて値が入るので初めて代入する値以外は取得しない
             let lastItem = newsItems[newsItems.count - 1]
@@ -236,10 +251,30 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         //新しい箱を準備
         self.currentElementName = nil
     }
-
+    
     //　XML解析でエラーが発生した場合に呼ばれるメソッド
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         print("error:" + parseError.localizedDescription)
+    }
+    
+    
+    // MARK: - RemoveNewsData
+    // fireStoreDBからニュース情報を削除
+    func removeNewsData() {
+        
+        fireStoreDB.collection("news").document().delete() {
+            error in
+            
+            // エラー処理
+            if let error = error {
+                print("Error removing document: \(error)")
+            } else {
+                print("Document successfully removed!")
+                
+                // API通信開始
+                self.startTranslation()
+            }
+        }
     }
     
     
@@ -257,10 +292,6 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         
         // XMLファイルのニュース順を確認
         print("newsTextArray: \(newsTextArray.debugDescription)")
-        
-        // LanguageTranslatorの認証アイテム
-        let languageTranslatorVersion = "2018-05-01"
-        let languageTranslatorURL     = "https://api.jp-tok.language-translator.watson.cloud.ibm.com"
         
         // LanguageTranslatorModelと通信
         let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: LANGUAGE_TRANSLATOR_APIKEY, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
@@ -287,15 +318,11 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             print("Failed because the value is nil.")
         }
     }
-
+    
     
     // MARK: - ToneAnalyzer
     // ToneAnalyzerModelと通信をおこない、感情分析結果を保存する
     func startToneAnalyzer() {
-        
-        // ToneAnalyzerの認証キー
-        let toneAnalyzerVersion = "2017-09-21"
-        let toneAnalyzerURL     = "https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com"
         
         // translationArrayとAPIToneAnalyzerの認証コードで通信
         let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: TONE_ANALYZER_APIKEY, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
@@ -305,7 +332,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         toneAnalyzerModel.setToneAnalyzer()
     }
     
-    // ToneAnalyzerModelから返ってきた値の受け取り
+    // ToneAnalyzerModelから返ってきた値の受け取り、fireStoreDBへ保存
     func catchAnalyzer(arrayAnalyzerData: Array<Int>) {
         
         // 感情分析結果の確認
@@ -313,18 +340,10 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         print("arrayAnalyzerData: \(arrayAnalyzerData.debugDescription)")
         
         // 感情分析結果の保存
-        UserDefault.standard.set(arrayAnalyzerData, forKey: "joyCountArray")
+        //UserDefault.standard.set(arrayAnalyzerData, forKey: "joyCountArray")
         
-        // UIの更新を行うメソッドの呼び出し
-        reloadNewsData()
-    }
-
-    // 感情分析結果を用いて新たにNewsの配列を作成し、UIの更新を行う
-    func reloadNewsData() {
-        
-        // 感情分析結果の取り出し
-        joyCountArray = UserDefault.joyCountArray
-        print("joyCountArray: \(joyCountArray)")
+        // ToneAnalyzerModelから返ってきた値をインスタンス化
+        joyCountArray = arrayAnalyzerData
         
         // joyCountArrayの中身を検索し、一致 = 意図するニュースを代入
         for i in 0..<joyCountArray.count {
@@ -340,22 +359,84 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
                 }
             }
             print("joySelectionArray\([i]): \(self.joySelectionArray[i].title.debugDescription)")
-        }
-   
-        // 感情分析結果と新たに作成した配列の比較
-        if joySelectionArray.count == joyCountArray.count {
             
-            // メインスレッドでUIの更新
-            DispatchQueue.main.async {
+            // 1. ニュースの画像
+            // 2. ニュースのタイトル
+            // 3. ニュースの発行時刻
+            // 4. ニュースのリンクURL
+            // 計4点をfirestoreDBに保存
+            fireStoreDB.collection("news").document().setData(
+                ["newsSumbnail" : self.joySelectionArray[i].image,
+                 "newsTitle": self.joySelectionArray[i].title,
+                 "newsPubData": self.joySelectionArray[i].pubDate,
+                 "newsURL": self.joySelectionArray[i].url]) {
+                (error) in
                 
-                // tableViewの更新
-                self.newsTable.reloadData()
+                // エラー処理
+                if error != nil {
+                    
+                    print("News save error: \(error.debugDescription)")
+                    return
+                }
+            }
+        }
+        // UIの更新を行うメソッドの呼び出し
+        loadNewsData()
+    }
+    
+    
+    // MARK: - LoadNewsData
+    // ニュースをfireStoreDBから取得
+    func loadNewsData() {
+        
+        // 日時の早い順に値をsnapShotに保存
+        fireStoreDB.collection("news").getDocuments {
+            (snapShot, error) in
+            
+            // 投稿情報を受け取る準備
+            self.newsInfomation = []
+            
+            // Firestoreの中身を確認
+            print("snapShot: \(snapShot?.documents)")
+            print("snapShot.count: \(snapShot?.documents.count)")
+            
+            // エラー処理
+            if error != nil {
                 
-                // 感情分析が終了したことをユーザーに伝える
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    HUD.show(.label("分析が終了しました"))
+                print("Message acquisition error: \(error.debugDescription)")
+                return
+            }
+            
+            // snapShotの中に保存されている値を取得する
+            if let snapShotDocuments = snapShot?.documents {
+                
+                for document in snapShotDocuments {
+                    
+                    // fireStoreDBのドキュメントのコレクションのインスタンス
+                    let documentData = document.data()
+                    
+                    // ニュース情報をインスタンス化して構造体に保存
+                    let documentNewsTitle    = documentData["newsTitle"] as? String
+                    let documentNewsSumbnail = documentData["newsSumbnail"] as? String
+                    let documentNewsPubDat   = documentData["newsPubData"] as? String
+                    let documentNewsURL      = documentData["newsURL"] as? String
+                    
+                    let newsInfo = NewsInfoStruct(newsTitle: documentNewsTitle!, newsSumbnail: documentNewsSumbnail!, newsPubData: documentNewsPubDat!, newsURL: documentNewsURL!)
+                    
+                    // 取得したニュース情報 （NewsInfoStruct型）
+                    self.newsInfomation.append(newsInfo)
+                    
+                    print("newsInfomation: \(self.newsInfomation)")
+                    
+                    // チャット投稿内容の更新
+                    self.newsTable.reloadData()
+                    
+                    // 感情分析が終了したことをユーザーに伝える
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        HUD.hide(animated: true)
+                        HUD.show(.label("分析が終了しました"))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            HUD.hide(animated: true)
+                        }
                     }
                 }
             }
@@ -396,18 +477,18 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     // セルの数を設定
     func tableView(_ newsTable: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return joySelectionArray.count
+        return newsInfomation.count
     }
     
     // セルの高さを設定
     func tableView(_ newsTable: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         // 除外ワードを設定して感情分析の誤評価をフォロー
-        if joySelectionArray[indexPath.row].title?.contains("コロナ") == true || joySelectionArray[indexPath.row].title?.contains("重症者") == true || joySelectionArray[indexPath.row].title?.contains("感染") == true || joySelectionArray[indexPath.row].title?.contains("遺体") == true || joySelectionArray[indexPath.row].title?.contains("逮捕") == true || joySelectionArray[indexPath.row].title?.contains("容疑者") == true ||
-            joySelectionArray[indexPath.row].title?.contains("重症者") == true ||
-            joySelectionArray[indexPath.row].title?.contains("不倫") == true ||
-            joySelectionArray[indexPath.row].title?.contains("死亡") == true ||
-            joySelectionArray[indexPath.row].title?.contains("事故") == true || joySelectionArray[indexPath.row].title?.contains("デモ") == true || joySelectionArray[indexPath.row].title?.contains("緊急事態宣言") == true || joySelectionArray[indexPath.row].title?.contains("火事") == true {
+        if newsInfomation[indexPath.row].newsTitle.contains("コロナ") == true || newsInfomation[indexPath.row].newsTitle.contains("重症者") == true || newsInfomation[indexPath.row].newsTitle.contains("感染") == true || newsInfomation[indexPath.row].newsTitle.contains("遺体") == true || newsInfomation[indexPath.row].newsTitle.contains("逮捕") == true || newsInfomation[indexPath.row].newsTitle.contains("容疑者") == true ||
+            newsInfomation[indexPath.row].newsTitle.contains("重症者") == true ||
+            newsInfomation[indexPath.row].newsTitle.contains("不倫") == true ||
+            newsInfomation[indexPath.row].newsTitle.contains("死亡") == true ||
+            newsInfomation[indexPath.row].newsTitle.contains("事故") == true || newsInfomation[indexPath.row].newsTitle.contains("デモ") == true || newsInfomation[indexPath.row].newsTitle.contains("緊急事態宣言") == true || newsInfomation[indexPath.row].newsTitle.contains("火事") == true {
             
             // 文字列検索で該当すれば'return 0.1'を設定することで事実上UIからセルを削除
             return 0.1
@@ -415,23 +496,23 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             return 360
         }
     }
-
+    
     // セルを構築
     func tableView(_ newsTable: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // XML解析から取得したニュースの値が入る
-        let joyNewsItem = joySelectionArray[indexPath.row]
+        let news = newsInfomation[indexPath.row]
         
         // tableCellのIDでUITableViewCellのインスタンスを生成
         let cell = newsTable.dequeueReusableCell(withIdentifier: "newsTable", for: indexPath)
         
-        // Tag番号(1)〜(3)でインスタンス作成(サムネイル, タイトル, サブタイトル)
-        let thumbnail = cell.viewWithTag(1) as! UIImageView
-        let newsTitle = cell.viewWithTag(2) as! UILabel
-        let subtitle  = newsTable.viewWithTag(3) as! UILabel
+        // Tag番号(1)〜(4)でインスタンス作成(サムネイル, タイトル, サブタイトル, コメントボタン)
+        let thumbnail          = cell.viewWithTag(1) as! UIImageView
+        let newsTitle          = cell.viewWithTag(2) as! UILabel
+        let subtitle           = newsTable.viewWithTag(3) as! UILabel
         
         // サムネイルで扱うインスタンス(画像URL, 待機画像）
-        let thumbnailURL = URL(string: joyNewsItem.image!.description)
+        let thumbnailURL = URL(string: news.newsSumbnail)
         let placeholder  = UIImage(named: "placeholder")
         
         // サムネイルの設定
@@ -441,7 +522,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         thumbnail.contentMode = .scaleToFill
         
         // ニュースのタイトルから社名を削除
-        let replacingOccurrencesString = joyNewsItem.title?.replacingOccurrences(of: "(ABEMA TIMES)", with: "")
+        let replacingOccurrencesString = news.newsTitle.replacingOccurrences(of: "(ABEMA TIMES)", with: "")
         
         // ニュースタイトルを化粧
         newsTitle.text = replacingOccurrencesString
@@ -449,7 +530,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         newsTitle.numberOfLines = 3
         
         // サブタイトルを化粧
-        subtitle.text = joyNewsItem.pubDate
+        subtitle.text = news.newsPubData
         subtitle.textColor = UIColor.gray
         
         // セルの境界線を削除
@@ -481,13 +562,23 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         webViewNavigation.modalPresentationStyle = .fullScreen
         
         // タップしたセルを検知
-        let tapCell = joySelectionArray[indexPath.row]
+        let tapCell = self.newsInfomation[indexPath.row]
         
         // 検知したセルのurlを取得
-        UserDefault.standard.set(tapCell.url, forKey: "url")
+        UserDefault.standard.set(tapCell.newsURL, forKey: "url")
         
         // WebViewControllerへ遷移
         present(webViewNavigation, animated: true)
+    }
+    
+    
+    // MARK: - TapNewsCommentButton
+    // コメントボタンをタップすると呼ばれる
+    @objc func tapNewsCommentButton(_ sender: Any) {
+        print("ニュースコメントを開く")
+        
+        // コメントページへ遷移
+        self.performSegue(withIdentifier: "newsCommentPage", sender: nil)
     }
 }
 
