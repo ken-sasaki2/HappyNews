@@ -32,19 +32,13 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     }()
     
     // 構造体のインスタンス
-    var commentStruct: [CommentStruct] = []
-    
-    // アプリ内から取得する画像データとユーザー名
-    var aiconImageString: String?
-    var userNameString  : String?
+    var commentStruct : [CommentStruct]   = []
+    var userInfomation: [UserInfoStruct]  = []
     
     
     // MARK: - FireStore Property
     // fireStoreのインスタンス
     let fireStoreDB = Firestore.firestore()
-    
-    // fireStoreDBのコレクションが入る
-    var roomName: String?
     
     // 選択した投稿内容のdocumentIDを受け取る
     var idString: String?
@@ -61,13 +55,6 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         commentTable.delegate   = self
         commentTable.dataSource = self
         
-        // アプリ内にアカウント画像データとユーザー名があれば代入
-        if  UserDefault.imageCapture != nil && UserDefault.getUserName != nil {
-            
-            aiconImageString = UserDefault.imageCapture
-            userNameString   = UserDefault.getUserName
-        }
-        
         // カスタムセルの登録
         commentTable.register(UINib(nibName: "TimeLineTableViewCell", bundle: nil), forCellReuseIdentifier: "timeLineCustomCell")
         
@@ -81,11 +68,47 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // fireStoreDBのコレクションを指定
-        roomName = "TimeLineMessage"
+        // fireStoreDBからユーザー情報を取得する
+        loadUserInfomation()
         
         // タイムラインの更新(表示)をおこなう
         loadComment()
+    }
+    
+    
+    // MARK: - LoadUserInfo
+    // fireStoreDBからユーザー情報を取得する
+    func loadUserInfomation() {
+        
+        self.fireStoreDB.collection("users").document(Auth.auth().currentUser!.uid).getDocument {
+            (document, error) in
+            
+            // エラー処理
+            if error != nil {
+                
+                print("UserInfo acquisition error: \(error.debugDescription)")
+                return
+            }
+            
+            // document == fireStoreDBからdocumentIDを指定して取得
+            if let document = document {
+                let dataDescription = document.data()
+                
+                // アカウント情報を受け取る準備
+                self.userInfomation = []
+                
+                // キー値を指定して値を取得
+                let documentUserName  = dataDescription!["userName"] as? String
+                let documentUserImage = dataDescription!["userImage"] as? String
+                let documentSender    = dataDescription!["sender"] as? String
+                
+                // 構造体にまとめてユーザー情報を保管
+                let userInfo = UserInfoStruct(userName: documentUserName!, userImage: documentUserImage!, sender: documentSender!)
+                
+                // UserInfoStruct型で保存してUIを更新
+                self.userInfomation.append(userInfo)
+            }
+        }
     }
     
     
@@ -94,7 +117,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     func loadComment() {
         
         // 投稿日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection(roomName!).document(idString!).collection("comment").order(by: "createdTime", descending: true).addSnapshotListener {
+        fireStoreDB.collection("TimeLineMessages").document(idString!).collection("comments").order(by: "createdTime", descending: true).addSnapshotListener {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備
@@ -185,8 +208,9 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         let deleteID = commentStruct[indexPath.row].documentID
+        
         // 投稿内容をfireStoreDBから削除
-        fireStoreDB.collection(roomName!).document(idString!).collection("comment").document(deleteID).delete() {
+        fireStoreDB.collection("TimeLineMessages").document(idString!).collection("comments").document(deleteID).delete() {
             error in
             
             // エラー処理
@@ -209,26 +233,34 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         // firestoreDBから取得した新規コメントを取得
         let commentMessage = commentStruct[indexPath.row]
         
-        // セルに表示する内容を設定
-        cell.senderName.text = UserDefault.getUserName
-        cell.sendBody.text   = commentMessage.comment
-        cell.sendImageView.kf.setImage(with: URL(string: UserDefault.imageCapture!))
-        cell.sendTime.text   = commentMessage.createdTime
-        
-        // 「コメントを見る」ラベルを削除
-        cell.commentLabel.isHidden = true
-        
-        // セルとTableViewの背景色の設定
-        cell.backgroundColor         = UIColor(hex: "f4f8fa")
-        commentTable.backgroundColor = UIColor(hex: "f4f8fa")
-
-        // 空のセルを削除
-        commentTable.tableFooterView = UIView(frame: .zero)
-
-        // セルのタップを無効
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        
-        return cell
+        // ユーザー情報の取得が完了したら呼ばれる
+        if userInfomation.count > NewsCount.zeroCount {
+            
+            let user = userInfomation[0]
+            
+            // セルに表示する内容を設定
+            cell.senderName.text = user.userName
+            cell.sendBody.text   = commentMessage.comment
+            cell.sendImageView.kf.setImage(with: URL(string: user.userImage))
+            cell.sendTime.text   = commentMessage.createdTime
+            
+            // 「コメントを見る」ラベルを削除
+            cell.commentLabel.isHidden = true
+            
+            // セルとTableViewの背景色の設定
+            cell.backgroundColor         = UIColor(hex: "f4f8fa")
+            commentTable.backgroundColor = UIColor(hex: "f4f8fa")
+            
+            // 空のセルを削除
+            commentTable.tableFooterView = UIView(frame: .zero)
+            
+            // セルのタップを無効
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
+            return cell
+        } else {
+            return cell
+        }
     }
     
     
@@ -256,7 +288,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
             let sender = Auth.auth().currentUser?.uid
             
             // 受け取った送信内容を含めてfireStoreDBへ保存
-            fireStoreDB.collection(roomName!).document(idString!).collection("comment").document().setData(["userName": userNameString, "aiconImage": aiconImageString, "comment": comment, "createdTime": createdTime, "sender": sender]
+            fireStoreDB.collection("TimeLineMessages").document(idString!).collection("comments").document().setData(["userName": userInfomation[0].userName, "aiconImage": userInfomation[0].userImage, "comment": comment, "createdTime": createdTime, "sender": sender]
             )
             
             // fireStoreDBに保存をしたら入力内容を空にしてキーボードを閉じる
