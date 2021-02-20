@@ -462,7 +462,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
             action in
             
-            // ログアウト機能(削除する情報4点)
+            // ログアウト機能(削除する情報2点)
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
