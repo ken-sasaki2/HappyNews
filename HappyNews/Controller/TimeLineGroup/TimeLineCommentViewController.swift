@@ -80,7 +80,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     // fireStoreDBからユーザー情報を取得する
     func loadUserInfomation() {
         
-        self.fireStoreDB.collection("users").document(Auth.auth().currentUser!.uid).getDocument {
+        self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).getDocument {
             (document, error) in
             
             // エラー処理
@@ -117,7 +117,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     func loadComment() {
         
         // 投稿日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection("TimeLineMessages").document(idString!).collection("comments").order(by: "createdTime", descending: true).addSnapshotListener {
+        fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(idString!).collection(FirestoreCollectionName.comments).order(by: "createdTime", descending: true).addSnapshotListener {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備
@@ -210,7 +210,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         let deleteID = commentStruct[indexPath.row].documentID
         
         // 投稿内容をfireStoreDBから削除
-        fireStoreDB.collection("TimeLineMessages").document(idString!).collection("comments").document(deleteID).delete() {
+        fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(idString!).collection(FirestoreCollectionName.comments).document(deleteID).delete() {
             error in
             
             // エラー処理
@@ -288,7 +288,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
             let sender = Auth.auth().currentUser?.uid
             
             // 受け取った送信内容を含めてfireStoreDBへ保存
-            fireStoreDB.collection("TimeLineMessages").document(idString!).collection("comments").document().setData(["userName": userInfomation[0].userName, "aiconImage": userInfomation[0].userImage, "comment": comment, "createdTime": createdTime, "sender": sender]
+            fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(idString!).collection(FirestoreCollectionName.comments).document().setData(["userName": userInfomation[0].userName, "aiconImage": userInfomation[0].userImage, "comment": comment, "createdTime": createdTime, "sender": sender]
             )
             
             // fireStoreDBに保存をしたら入力内容を空にしてキーボードを閉じる

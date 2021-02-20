@@ -365,7 +365,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
             // 3. ニュースの発行時刻
             // 4. ニュースのリンクURL
             // 計4点をfirestoreDBに保存
-            fireStoreDB.collection("news").document().setData(
+            fireStoreDB.collection(FirestoreCollectionName.newsInfomations).document().setData(
                 ["newsSumbnail" : self.joySelectionArray[i].image,
                  "newsTitle": self.joySelectionArray[i].title,
                  "newsPubData": self.joySelectionArray[i].pubDate,

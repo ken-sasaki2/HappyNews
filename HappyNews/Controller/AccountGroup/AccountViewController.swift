@@ -477,7 +477,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 UserDefault.standard.removeAll()
                 
                 // 2. fireStoreDBに保存したユーザー情報を削除
-                self.fireStoreDB.collection("users").document(Auth.auth().currentUser!.uid).delete() {
+                self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).delete() {
                     error in
                     
                     // エラー処理

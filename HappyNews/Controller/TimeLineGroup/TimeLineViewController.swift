@@ -98,7 +98,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     // fireStoreDBからユーザー情報を取得する
     func loadUserInfomation() {
         
-        self.fireStoreDB.collection("users").document(Auth.auth().currentUser!.uid).getDocument {
+        self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).getDocument {
             (document, error) in
             
             // エラー処理
@@ -136,7 +136,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     func loadTimeLine() {
         
         // 日時の早い順に値をsnapShotに保存
-        fireStoreDB.collection("TimeLineMessages").order(by: "createdTime", descending: true).addSnapshotListener {
+        fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).order(by: "createdTime", descending: true).addSnapshotListener {
             (snapShot, error) in
             
             // 投稿情報を受け取る準備
@@ -220,7 +220,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         let deleteID = timeLineMessages[indexPath.row].documentID
         
         // 投稿内容をfireStoreDBから削除
-        fireStoreDB.collection("TimeLineMessages").document(deleteID).delete() {
+        fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(deleteID).delete() {
             error in
             
             // エラー処理

@@ -66,7 +66,7 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
         dispatchQueue.async(group: dispatchGroup) {
             
             // 日時の早い順に値をsnapShotに保存
-            self.fireStoreDB.collection("users").document(Auth.auth().currentUser!.uid).getDocument {
+            self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).getDocument {
                 (document, error) in
                 
                 // エラー処理
@@ -192,7 +192,7 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
                 // テキストビューのテキストとユーザーのIDを取得してfireStoreDBのフィールドに合わせて保存
                 if let sender = Auth.auth().currentUser?.uid, let timeLineMessage = self.timeLineTextView.text {
                     
-                    self.fireStoreDB.collection("TimeLineMessages").document().setData(["sender": sender, "body": timeLineMessage, "aiconImage": self.userInfomation[0].userImage, "userName": self.userInfomation[0].userName, "createdTime": sendTime]) {
+                    self.fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document().setData(["sender": sender, "body": timeLineMessage, "aiconImage": self.userInfomation[0].userImage, "userName": self.userInfomation[0].userName, "createdTime": sendTime]) {
                         error in
                         
                         // エラー処理

@@ -55,9 +55,6 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
         // 登録ボタンの角丸
         editUpdateButton.layer.cornerRadius = 6.0
         
-        // fireStoreDBのコレクション名
-        roomName = "users"
-        
         // Navigationbarの呼び出し
         setEditPageNavigationBar()
     }
@@ -200,7 +197,7 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
         dispatchQueue.async(group: dispatchGroup) {
             
             // 日時の早い順に値をsnapShotに保存
-            self.fireStoreDB.collection(self.roomName!).document(Auth.auth().currentUser!.uid).getDocument {
+            self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).getDocument {
                 (document, error) in
                 
                 // エラー処理
@@ -280,9 +277,6 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
     // SendToFirebaseStorageModelから値を受け取って画面遷移
     func catchUserImage(url: String) {
         
-        // fireStoreDBのコレクション名
-        roomName = "users"
-        
         // アカウント登録作成日時を定義
         let nowCreate = Date()
         
@@ -301,7 +295,7 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
         // 計4点をfireStoreDBに保存して成功すれば遷移
         if let sender = Auth.auth().currentUser?.uid, let userName = self.editUserNameTextField.text {
             
-            self.fireStoreDB.collection(self.roomName!).document(sender).setData(
+            self.fireStoreDB.collection(FirestoreCollectionName.users).document(sender).setData(
                 ["userName"   : userName,
                  "userImage"  : url,
                  "sender"     : sender,
