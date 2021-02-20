@@ -35,8 +35,9 @@
 		45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE9B442526D2120013F34C /* LoginViewController.swift */; };
 		45C7DDAC25CD778100D4DDB5 /* SaveUserInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7DDAB25CD778100D4DDB5 /* SaveUserInformationViewController.swift */; };
 		45C7DE2A25CE211700D4DDB5 /* CheckPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C7DE2925CE211700D4DDB5 /* CheckPermission.swift */; };
-		45D1C92525E0047D00BB1E18 /* NewsCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1C92425E0047D00BB1E18 /* NewsCommentViewController.swift */; };
 		45D1C92925E09ECC00BB1E18 /* NewsInfoStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1C92825E09ECC00BB1E18 /* NewsInfoStruct.swift */; };
+		45D1C92D25E0BACB00BB1E18 /* FirestoreCollectionName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1C92C25E0BACB00BB1E18 /* FirestoreCollectionName.swift */; };
+		45D1C93025E0E03700BB1E18 /* NewsCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1C92F25E0E03700BB1E18 /* NewsCommentViewController.swift */; };
 		45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865724E4C0F000B32D02 /* AppDelegate.swift */; };
 		45D8865A24E4C0F000B32D02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865924E4C0F000B32D02 /* SceneDelegate.swift */; };
 		45D8865C24E4C0F000B32D02 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8865B24E4C0F000B32D02 /* NewsViewController.swift */; };
@@ -87,8 +88,9 @@
 		45BE9B442526D2120013F34C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		45C7DDAB25CD778100D4DDB5 /* SaveUserInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserInformationViewController.swift; sourceTree = "<group>"; };
 		45C7DE2925CE211700D4DDB5 /* CheckPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermission.swift; sourceTree = "<group>"; };
-		45D1C92425E0047D00BB1E18 /* NewsCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCommentViewController.swift; sourceTree = "<group>"; };
 		45D1C92825E09ECC00BB1E18 /* NewsInfoStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsInfoStruct.swift; sourceTree = "<group>"; };
+		45D1C92C25E0BACB00BB1E18 /* FirestoreCollectionName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreCollectionName.swift; sourceTree = "<group>"; };
+		45D1C92F25E0E03700BB1E18 /* NewsCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCommentViewController.swift; sourceTree = "<group>"; };
 		45D8865424E4C0F000B32D02 /* HappyNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D8865724E4C0F000B32D02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45D8865924E4C0F000B32D02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -250,8 +252,8 @@
 			isa = PBXGroup;
 			children = (
 				45D8865B24E4C0F000B32D02 /* NewsViewController.swift */,
-				45D1C92425E0047D00BB1E18 /* NewsCommentViewController.swift */,
 				45BCEE7724E545570023D738 /* WebViewController.swift */,
+				45D1C92F25E0E03700BB1E18 /* NewsCommentViewController.swift */,
 			);
 			path = NewsGroup;
 			sourceTree = "<group>";
@@ -363,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				45E1B44225CE399D00843780 /* SendToFirebaseStorageModel.swift */,
+				45D1C92C25E0BACB00BB1E18 /* FirestoreCollectionName.swift */,
 			);
 			path = FirebaseGroup;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				459DB73F25C17CA5009822AD /* UserDefault.swift in Sources */,
 				4532A62F25D952D3002A998A /* CommentStruct.swift in Sources */,
 				459DB74525C17D02009822AD /* DateItems.swift in Sources */,
+				45D1C93025E0E03700BB1E18 /* NewsCommentViewController.swift in Sources */,
 				459DB74825C17D08009822AD /* TimePoints.swift in Sources */,
 				457689792542A81C00D7E630 /* ToneAnalyzerModel.swift in Sources */,
 				4532A60525D90390002A998A /* TimeLineCommentViewController.swift in Sources */,
@@ -542,6 +546,7 @@
 				454E6BBC25CBDD52002E5F02 /* TimeLineMessage.swift in Sources */,
 				4532A60D25D92B94002A998A /* CommentInputAccessoryView.swift in Sources */,
 				45FB2820257479ED0054A9B8 /* AccountViewController.swift in Sources */,
+				45D1C92D25E0BACB00BB1E18 /* FirestoreCollectionName.swift in Sources */,
 				45D8865824E4C0F000B32D02 /* AppDelegate.swift in Sources */,
 				459DB76C25C3B83F009822AD /* LocalNotificationModel.swift in Sources */,
 				45E80A5F25B52FF1001A25AF /* TimeScheduleModel.swift in Sources */,
@@ -557,7 +562,6 @@
 				45C7DDAC25CD778100D4DDB5 /* SaveUserInformationViewController.swift in Sources */,
 				45BE9B452526D2120013F34C /* LoginViewController.swift in Sources */,
 				458F88B525D2C6000041842D /* TimeLineToneAnalyzerModel.swift in Sources */,
-				45D1C92525E0047D00BB1E18 /* NewsCommentViewController.swift in Sources */,
 				450A925225DD42DA00704107 /* UserInfoStruct.swift in Sources */,
 				45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */,
 			);

@@ -570,12 +570,8 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     
     
     // MARK: - TapNewsCommentButton
-    // コメントボタンをタップすると呼ばれる
-    @objc func tapNewsCommentButton(_ sender: Any) {
-        print("ニュースコメントを開く")
-        
-        // コメントページへ遷移
-        self.performSegue(withIdentifier: "newsCommentPage", sender: nil)
+    // セルの吹き出しをタップすると呼ばれる
+    @IBAction func tapNewsCommentButton(_ sender: Any) {
+        print("ニュースコメント")
     }
 }
-
