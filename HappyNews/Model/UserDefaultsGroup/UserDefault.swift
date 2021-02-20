@@ -21,9 +21,6 @@ class UserDefault {
     // UserDefaultsに値を保存する場合に扱う（Value, Keyを指定した保存処理はインスタンス化できない為）
     static var standard = UserDefaults.standard
     
-    // アカウント画像の取り出しで扱う
-    static var imageCapture = UserDefaults.standard.string(forKey: "userImage")
-    
     // ユーザー名の取り出しで扱う
     static var getUserName = UserDefaults.standard.string(forKey: "userName")
     
@@ -32,9 +29,6 @@ class UserDefault {
 
     // アプリ起動時刻の取り出しで扱う
     static var lastActivation = UserDefaults.standard.string(forKey: "lastActivation")
-    
-    // ToneAnalyzerModelから返ってきた感情分析結果の取り出しで扱う
-    static var joyCountArray = UserDefaults.standard.array(forKey: "joyCountArray") as! [Int]
     
     // TimeScheduleModelの時間割でAPI通信をおこなった履歴の取り出しで扱う
     static var outputMorningUpdate   = UserDefaults.standard.string(forKey: "morningUpdate")

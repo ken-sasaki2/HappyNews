@@ -488,9 +488,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                     }
                 }
                 
-                // 3. fireStoreDBに保存したTimeLine投稿内容を削除
-                // 4. ニュースに投稿したコメント内容を削除
-                
                 // LoginViewControllerへ遷移
                 self.performSegue(withIdentifier: "goLogin", sender: nil)
                 
