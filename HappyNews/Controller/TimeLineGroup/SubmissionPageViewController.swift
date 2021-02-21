@@ -206,8 +206,8 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
                     
                     self.fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document().setData(["sender"     : sender,
                          "body"       : timeLineMessage,
-                         "aiconImage" : self.userInfomation[0].userImage,
-                         "userName"   : self.userInfomation[0].userName,
+                         "aiconImage" : self.userInfomation[NewsCount.zeroCount].userImage,
+                         "userName"   : self.userInfomation[NewsCount.zeroCount].userName,
                          "createdTime": sendTime]) {
                         error in
                         

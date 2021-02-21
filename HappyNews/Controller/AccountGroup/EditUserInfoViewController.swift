@@ -229,8 +229,8 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
                     // UserInfoStruct型で保存してUIを更新
                     self.userInfomation.append(userInfo)
                     
-                    self.editUserNameTextField.text = self.userInfomation[0].userName
-                    self.editUserImage.kf.setImage(with: URL(string: self.userInfomation[0].userImage))
+                    self.editUserNameTextField.text = self.userInfomation[NewsCount.zeroCount].userName
+                    self.editUserImage.kf.setImage(with: URL(string: self.userInfomation[NewsCount.zeroCount].userImage))
                     
                     print("userInfomation: \(self.userInfomation)")
                 }
