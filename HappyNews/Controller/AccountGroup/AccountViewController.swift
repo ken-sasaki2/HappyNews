@@ -14,6 +14,12 @@ import StoreKit
 import MessageUI
 import Kingfisher
 
+// ▼参照しているclass
+// NewsCount
+// UserDefault
+// UserInfoStruct
+// FirestoreCollectionName
+
 // アプリの設定や、レビューなどをおこなえるメニュー画面
 class AccountViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
@@ -199,7 +205,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if userInfomation.count > NewsCount.zeroCount {
             
-            let user = userInfomation[0]
+            let user = userInfomation[NewsCount.zeroCount]
             
             // "アカウント情報"セクションの場合
             if indexPath.section == sectionTitleArray.firstIndex(of: "アカウント情報") {
@@ -285,8 +291,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             switch indexPath.row {
             // ユーザー名のセルをタップした場合
             case userInfoCellLabelArray.firstIndex(of: userInfoCellLabelArray[0]):
-                //performSegue(withIdentifier: "editUserInfo", sender: UserInfoStruct(userName: changeUsername!, UserImage: changeUserImage!))
-                
                 // ユーザー情報編集ページへ画面遷移
                 performSegue(withIdentifier: "editUserInfo", sender: nil)
                 break
@@ -462,46 +466,39 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
             action in
             
-            // ログアウト機能(削除する情報2点)
-            let firebaseAuth = Auth.auth()
-            do {
-                try firebaseAuth.signOut()
+            // カレントユーザーをインスタンス化
+            let user = Auth.auth().currentUser
+            
+            // 1. Auth.auth().currentUser
+            // 2. UserDefaultsに保存したデータ
+            // 計2点と合わせてfireStoreに保存したユーザー情報を削除
+            self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).delete() {
+                error in
                 
-                // 1. UserDefaultsに保存したデータを全削除
-                UserDefault.standard.removeAll()
-                
-                // 2. fireStoreDBに保存したユーザー情報を削除
-                self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).delete() {
-                    error in
+                // エラー処理
+                if let error = error {
+                    print("Error removing document: \(error)")
+                } else {
                     
-                    // エラー処理
-                    if let error = error {
-                        print("Error removing document: \(error)")
-                    } else {
-                        print("Document successfully removed!")
-                    }
+                    // 1. Auth.auth().currentUserを削除
+                    user?.delete(completion: {
+                        (error) in
+                        
+                        if let error = error {
+                            print("Failed to delete user.")
+                        } else {
+                            print("Successfully deleted user.")
+                            
+                            // UserDefaultsに保存したデータを全削除
+                            UserDefault.standard.removeAll()
+                            
+                            // LoginViewControllerへ遷移
+                            self.performSegue(withIdentifier: "Logout", sender: nil)
+                        }
+                    })
                 }
-                
-                // 3. ニュース情報を削除
-                self.fireStoreDB.collection(FirestoreCollectionName.newsInfomations).document(Auth.auth().currentUser!.uid).delete() {
-                    error in
-                    
-                    // エラー処理
-                    if let error = error {
-                        print("Error removing document: \(error)")
-                    } else {
-                        print("Document successfully removed!")
-                    }
-                }
-                
-                // LoginViewControllerへ遷移
-                self.performSegue(withIdentifier: "goLogin", sender: nil)
-                
-            } catch let signOutError as NSError {
-                print ("Error signing out: %@", signOutError)
             }
         }))
-        
         // アラートの表示
         present(logoutAlert, animated: true, completion: nil)
     }
