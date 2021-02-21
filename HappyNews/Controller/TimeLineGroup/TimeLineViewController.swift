@@ -345,7 +345,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         loadTimeLine()
         
         // PKHUDの終了
-        HUD.flash(.labeledSuccess(title: "完了", subtitle: nil))
+        HUD.hide(animated: true)
     }
     
     
