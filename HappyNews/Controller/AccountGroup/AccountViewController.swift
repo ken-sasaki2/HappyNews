@@ -489,11 +489,14 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                         } else {
                             print("Successfully deleted user.")
                             
-                            // UserDefaultsに保存したデータを全削除
+                            // 2. UserDefaultsに保存したデータを全削除
                             UserDefault.standard.removeAll()
                             
-                            // LoginViewControllerへ遷移
-                            self.performSegue(withIdentifier: "Logout", sender: nil)
+                            // UserDefaults全削除を終えて0.3秒後に呼ばれる
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                // LoginViewControllerへ遷移
+                                self.performSegue(withIdentifier: "Logout", sender: nil)
+                            }
                         }
                     })
                 }
