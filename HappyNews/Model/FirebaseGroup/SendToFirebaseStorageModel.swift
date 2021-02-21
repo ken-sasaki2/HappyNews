@@ -9,7 +9,12 @@
 import Foundation
 import FirebaseStorage
 
-// SaveUserInformationViewControllerに値を返す
+
+// ▼関係するclass
+// SaveUserInformationViewController
+// EditUserInfoViewController
+
+// 値を返す
 protocol DoneCatchUserImageProtocol {
     func catchUserImage(url: String)
 }
@@ -33,7 +38,7 @@ class SendToFirebaseStorageModel {
         // imageDataをjpegに圧縮
         let userImage = imageData?.jpegData(compressionQuality: 0.1)
         
-        // FirebaseStorageのフォルダを作成
+        // FirebaseStorageのフォルダを作成（一意性）
         let imageDataReference = Storage.storage().reference().child("userImage").child("\(UUID().uuidString + String(DateItems.date.timeIntervalSince1970)).jpg")
         
         // jpegに変換した画像データをFirebaseStorageに保存
@@ -57,9 +62,6 @@ class SendToFirebaseStorageModel {
                     print(error.debugDescription)
                     return
                 }
-                
-                // FirebaseStorageから返ってきたURLをString型で保存
-                //UserDefault.standard.setValue(url?.absoluteString, forKeyPath: "userImage")
                 
                 // プロトコルを用いてFirebaseStorageから返ってきたURLを返す
                 self.doneCatchUserImageProtocol?.catchUserImage(url: url!.absoluteString)
