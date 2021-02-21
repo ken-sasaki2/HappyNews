@@ -243,34 +243,26 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         // firestoreDBから取得した新規コメントを取得
         let commentMessage = commentStruct[indexPath.row]
         
-        // ユーザー情報の取得が完了したら呼ばれる
-        if userInfomation.count > NewsCount.zeroCount {
-            
-            let user = userInfomation[NewsCount.zeroCount]
-            
-            // セルに表示する内容を設定
-            cell.senderName.text = user.userName
-            cell.sendBody.text   = commentMessage.comment
-            cell.sendImageView.kf.setImage(with: URL(string: user.userImage))
-            cell.sendTime.text   = commentMessage.createdTime
-            
-            // 「コメントを見る」ラベルを削除
-            cell.commentLabel.isHidden = true
-            
-            // セルとTableViewの背景色の設定
-            cell.backgroundColor         = UIColor(hex: "f4f8fa")
-            commentTable.backgroundColor = UIColor(hex: "f4f8fa")
-            
-            // 空のセルを削除
-            commentTable.tableFooterView = UIView(frame: .zero)
-            
-            // セルのタップを無効
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            
-            return cell
-        } else {
-            return cell
-        }
+        // セルに表示する内容を設定
+        cell.senderName.text = commentMessage.userName
+        cell.sendBody.text   = commentMessage.comment
+        cell.sendImageView.kf.setImage(with: URL(string: commentMessage.aiconImage))
+        cell.sendTime.text   = commentMessage.createdTime
+        
+        // 「コメントを見る」ラベルを削除
+        cell.commentLabel.isHidden = true
+        
+        // セルとTableViewの背景色の設定
+        cell.backgroundColor         = UIColor(hex: "f4f8fa")
+        commentTable.backgroundColor = UIColor(hex: "f4f8fa")
+        
+        // 空のセルを削除
+        commentTable.tableFooterView = UIView(frame: .zero)
+        
+        // セルのタップを無効
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
+        return cell
     }
     
     
