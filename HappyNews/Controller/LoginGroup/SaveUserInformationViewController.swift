@@ -216,10 +216,10 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
         let createTimeString = DateItems.dateFormatter.string(from: nowCreate)
         let createdTime      = DateItems.dateFormatter.date(from: createTimeString)
         
-        // 1. userName
-        // 2. userImage
-        // 3. sender(uid)
-        // 4. createdTime
+        // 1. ユーザー名
+        // 2. アイコン画像
+        // 3. 投稿者のuid
+        // 4. 投稿日時
         // 計4点をfireStoreDBに保存して成功すれば遷移
         if let sender = Auth.auth().currentUser?.uid, let userName = UserDefault.getUserName {
             

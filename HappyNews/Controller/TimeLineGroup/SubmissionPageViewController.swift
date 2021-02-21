@@ -196,10 +196,19 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
                 let sendTimeString = DateItems.dateFormatter.string(from: now)
                 let sendTime       = DateItems.dateFormatter.date(from: sendTimeString)
                 
-                // テキストビューのテキストとユーザーのIDを取得してfireStoreDBのフィールドに合わせて保存
+                // 1. 送信者のuid
+                // 2. 投稿内容
+                // 3. アイコン画像
+                // 4. ユーザー名
+                // 5. 投稿日時
+                // 計5点をfireStoreDBへ保存
                 if let sender = Auth.auth().currentUser?.uid, let timeLineMessage = self.timeLineTextView.text {
                     
-                    self.fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document().setData(["sender": sender, "body": timeLineMessage, "aiconImage": self.userInfomation[0].userImage, "userName": self.userInfomation[0].userName, "createdTime": sendTime]) {
+                    self.fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document().setData(["sender"     : sender,
+                         "body"       : timeLineMessage,
+                         "aiconImage" : self.userInfomation[0].userImage,
+                         "userName"   : self.userInfomation[0].userName,
+                         "createdTime": sendTime]) {
                         error in
                         
                         // エラー処理

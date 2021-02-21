@@ -297,9 +297,18 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
             // uidを取得してインスタンス化
             let sender = Auth.auth().currentUser?.uid
             
-            // 受け取った送信内容を含めてfireStoreDBへ保存
-            fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(idString!).collection(FirestoreCollectionName.comments).document().setData(["userName": userInfomation[NewsCount.zeroCount].userName, "aiconImage": userInfomation[NewsCount.zeroCount].userImage, "comment": comment, "createdTime": createdTime, "sender": sender]
-            )
+            // 1. ユーザー名
+            // 2. アイコン画像
+            // 3. コメント内容
+            // 4. 投稿日時
+            // 5. 送信者のuid
+            // 計5点をfireStoreDBへ保存
+            fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(idString!).collection(FirestoreCollectionName.comments).document().setData(
+                ["userName"   : userInfomation[NewsCount.zeroCount].userName,
+                 "aiconImage" : userInfomation[NewsCount.zeroCount].userImage,
+                 "comment"    : comment,
+                 "createdTime": createdTime,
+                 "sender"     : sender])
             
             // fireStoreDBに保存をしたら入力内容を空にしてキーボードを閉じる
             commentInputAccessoryView.commentTextView.text = ""
