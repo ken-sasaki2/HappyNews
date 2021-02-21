@@ -12,6 +12,11 @@ import Foundation
 // LanguageTranslatorModel
 // ToneAnalyzerModel
 // NewsViewController
+// TimeLineTranslatorModel
+// TimeLineToneAnalyzerModel
+// TimeLineViewController
+// TimeLineCommentViewController
+// AccountViewController
 
 // 上記classにてfor文やJSON解析で共通の値として扱う
 class NewsCount {

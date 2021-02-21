@@ -8,6 +8,9 @@
 
 import Foundation
 
+// ▼関係するclass
+// TimeLineCommentViewController
+
 // コメント投稿で扱う構造体
 struct CommentStruct {
     

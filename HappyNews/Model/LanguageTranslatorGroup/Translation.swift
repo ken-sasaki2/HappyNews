@@ -10,6 +10,7 @@ import Foundation
 
 // ▼関係するclass
 // LanguageTranslatorModel
+// TimeLineTranslatorModel
 
 // JSON解析で扱う
 struct Translation {

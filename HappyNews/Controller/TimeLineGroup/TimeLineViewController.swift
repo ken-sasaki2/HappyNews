@@ -14,6 +14,14 @@ import Kingfisher
 import PKHUD
 import MessageUI
 
+// ▼参照しているclass
+// TimeLineMessage
+// NewsCount
+// UserDefault
+// UserInfoStruct
+// FirestoreCollectionName
+// DateItems
+
 class TimeLineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
     
     

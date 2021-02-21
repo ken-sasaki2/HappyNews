@@ -8,6 +8,9 @@
 
 import Foundation
 
+// ▼関係するclass
+// Firestoreと通信を行うクラス全て
+
 // Firestoreのコレクション名のインスタンスを扱うクラス
 class FirestoreCollectionName {
     

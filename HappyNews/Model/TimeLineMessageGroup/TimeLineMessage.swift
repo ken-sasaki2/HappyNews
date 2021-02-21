@@ -8,6 +8,10 @@
 
 import Foundation
 
+// ▼関係するclass
+// TimeLineViewController
+// SubmissionPageViewController
+// TimeLineCommentViewController
 
 // Firestoreのドキュメントに保存された値の保存で扱う
 struct TimeLineMessage {

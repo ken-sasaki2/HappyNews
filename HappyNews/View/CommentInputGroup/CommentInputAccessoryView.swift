@@ -8,10 +8,14 @@
 
 import UIKit
 
+// ▼関係するclass
+// TimeLineCommentViewController
+
 // MARK: - protocol
 protocol CommentInputAccessoryViewProtocol {
     func tapedSendCommentButton(comment: String, sendTime: Date)
 }
+
 // コメント送信箇所のUIを構築
 class CommentInputAccessoryView: UIView {
     
@@ -47,7 +51,7 @@ class CommentInputAccessoryView: UIView {
         commentTextView.text = ""
         sendCommentButton.isEnabled = false
         
-        // 委託
+        // delegateを委託
         commentTextView.delegate = self
     }
     

@@ -13,6 +13,13 @@ import FirebaseFirestore
 import Kingfisher
 import PKHUD
 
+// ▼参照しているclass
+// DateItems
+// UserDefault
+// UserInfoStruct
+// FirestoreCollectionName
+// SendToFirebaseStorageModel
+
 // アカウント情報を編集するクラス
 class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, DoneCatchUserImageProtocol {
     

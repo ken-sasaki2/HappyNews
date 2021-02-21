@@ -8,6 +8,10 @@
 
 import Foundation
 
+// ▼関係するclass
+// NewsViewController
+// FavoriteNewsViewController
+
 // ニュースを保存する場合に扱う
 struct NewsInfoStruct {
     

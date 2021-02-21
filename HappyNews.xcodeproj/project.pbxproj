@@ -182,8 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				457689742542A70E00D7E630 /* LanguageTranslatorModel.swift */,
-				458F88B125D2AAC70041842D /* TimeLineTranslatorModel.swift */,
 				4576898325453E5900D7E630 /* Translation.swift */,
+				458F88B125D2AAC70041842D /* TimeLineTranslatorModel.swift */,
 			);
 			path = LanguageTranslatorGroup;
 			sourceTree = "<group>";

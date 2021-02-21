@@ -8,6 +8,13 @@
 
 import Foundation
 
+// ▼関係するclass
+// FavoriteNewsViewController
+// TimeLineViewController
+// TimeLineCommentViewController
+// AccountViewController
+// EditUserInfoViewController
+
 // アカウント情報を取得する場合に扱う
 struct UserInfoStruct {
     

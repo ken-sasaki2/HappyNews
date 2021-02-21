@@ -19,6 +19,7 @@ protocol DoneCatchTimeLineAnalyzerProtocol {
 }
 
 // ▼参照しているclass
+// NewsCount
 
 // LanguageTranslatorModelで翻訳したニュースの感情を分析しNewsViewControllerへ返す
 class TimeLineToneAnalyzerModel {

@@ -12,6 +12,8 @@ import SwiftyJSON
 import PKHUD
 
 // ▼参照しているclass
+// NewsCount
+// Translation
 
 
 // MARK: - Protocol
@@ -51,7 +53,7 @@ class TimeLineTranslatorModel {
         // API認証子
         let timeLineTranslatorKey = WatsonIAMAuthenticator(apiKey: timeLineTranslatorAccessKey!)
         let timeLineTranslator    = LanguageTranslator(version: timeLineTranslatorAccessversion!, authenticator: timeLineTranslatorKey)
-        timeLineTranslator.serviceURL = timeLineTranslatorAccessURL
+            timeLineTranslator.serviceURL = timeLineTranslatorAccessURL
         
         // リクエスト送信
         timeLineTranslator.translate(text: [timeLineText], modelID: "ja-en") {

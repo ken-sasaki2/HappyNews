@@ -8,6 +8,10 @@
 
 import UIKit
 
+// ▼関係するclass
+// TimeLineViewController
+// TimeLineCommentViewController
+
 // カスタムセルを扱うクラス
 class TimeLineTableViewCell: UITableViewCell {
 

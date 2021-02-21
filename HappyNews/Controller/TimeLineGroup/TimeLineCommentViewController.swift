@@ -11,6 +11,15 @@ import Firebase
 import FirebaseFirestore
 import Kingfisher
 
+// ▼参照しているclass
+// CommentStruct
+// NewsCount
+// UserDefault
+// UserInfoStruct
+// FirestoreCollectionName
+// DateItems
+// CommentInputAccessoryView
+
 // コメントページを扱うクラス
 class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CommentInputAccessoryViewProtocol {
     
@@ -237,7 +246,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         // ユーザー情報の取得が完了したら呼ばれる
         if userInfomation.count > NewsCount.zeroCount {
             
-            let user = userInfomation[0]
+            let user = userInfomation[NewsCount.zeroCount]
             
             // セルに表示する内容を設定
             cell.senderName.text = user.userName
@@ -289,7 +298,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
             let sender = Auth.auth().currentUser?.uid
             
             // 受け取った送信内容を含めてfireStoreDBへ保存
-            fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(idString!).collection(FirestoreCollectionName.comments).document().setData(["userName": userInfomation[0].userName, "aiconImage": userInfomation[0].userImage, "comment": comment, "createdTime": createdTime, "sender": sender]
+            fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(idString!).collection(FirestoreCollectionName.comments).document().setData(["userName": userInfomation[NewsCount.zeroCount].userName, "aiconImage": userInfomation[NewsCount.zeroCount].userImage, "comment": comment, "createdTime": createdTime, "sender": sender]
             )
             
             // fireStoreDBに保存をしたら入力内容を空にしてキーボードを閉じる

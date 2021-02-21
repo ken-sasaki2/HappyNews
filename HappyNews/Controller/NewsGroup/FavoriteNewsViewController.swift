@@ -12,6 +12,13 @@ import Firebase
 import FirebaseFirestore
 import Kingfisher
 
+// ▼参照しているclass
+// NewsCount
+// UserDefault
+// WebViewController
+// NewsInfoStruct
+// FirestoreCollectionName
+
 // ニュースへのコメントを扱うクラス
 class FavoriteNewsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

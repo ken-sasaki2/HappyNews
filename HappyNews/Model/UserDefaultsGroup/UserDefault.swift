@@ -9,11 +9,7 @@
 import Foundation
 
 // ▼関係するclass
-// TimeScheduleModel
-// LanguageTranslatorModel
-// ToneAnalyzerModel
-// NewsViewController
-// WebViewController
+// UserDefaultsを扱う全てのクラス
 
 // UserDefaultsで保存した値の取り出し or 削除で扱う
 class UserDefault {

@@ -12,6 +12,13 @@ import FirebaseFirestore
 import FirebaseAuth
 import PKHUD
 
+// ▼参照しているclass
+// TimeLineMessage
+// NewsCount
+// UserDefault
+// UserInfoStruct
+// FirestoreCollectionName
+// DateItems
 
 // タイムラインへの投稿と感情分析とFirestoreとのやりとりをおこなう
 class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslationProtocol, DoneCatchTimeLineAnalyzerProtocol {
