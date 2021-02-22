@@ -466,41 +466,32 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
             action in
             
+            // 1. Auth.auth().currentUser
+            // 2. UserDefaultsに保存したデータ
+            // 計2点を削除
+            
             // カレントユーザーをインスタンス化
             let user = Auth.auth().currentUser
             
-            // 1. Auth.auth().currentUser
-            // 2. UserDefaultsに保存したデータ
-            // 計2点と合わせてfireStoreに保存したユーザー情報を削除
-            self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).delete() {
-                error in
+            // 1. Auth.auth().currentUserを削除
+            user?.delete(completion: {
+                (error) in
                 
-                // エラー処理
                 if let error = error {
-                    print("Error removing document: \(error)")
+                    print("Failed to delete user.")
                 } else {
+                    print("Successfully deleted user.")
                     
-                    // 1. Auth.auth().currentUserを削除
-                    user?.delete(completion: {
-                        (error) in
-                        
-                        if let error = error {
-                            print("Failed to delete user.")
-                        } else {
-                            print("Successfully deleted user.")
-                            
-                            // 2. UserDefaultsに保存したデータを全削除
-                            UserDefault.standard.removeAll()
-                            
-                            // UserDefaults全削除を終えて0.3秒後に呼ばれる
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                // LoginViewControllerへ遷移
-                                self.performSegue(withIdentifier: "Logout", sender: nil)
-                            }
-                        }
-                    })
+                    // 2. UserDefaultsに保存したデータを全削除
+                    UserDefault.standard.removeAll()
+                    
+                    // UserDefaults全削除を終えて0.3秒後に呼ばれる
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        // LoginViewControllerへ遷移
+                        self.performSegue(withIdentifier: "Logout", sender: nil)
+                    }
                 }
-            }
+            })
         }))
         // アラートの表示
         present(logoutAlert, animated: true, completion: nil)
