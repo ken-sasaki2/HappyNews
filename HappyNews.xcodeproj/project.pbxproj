@@ -22,13 +22,13 @@
 		458F88A925D088A90041842D /* SubmissionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F88A825D088A90041842D /* SubmissionPageViewController.swift */; };
 		458F88B225D2AAC70041842D /* TimeLineTranslatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F88B125D2AAC70041842D /* TimeLineTranslatorModel.swift */; };
 		458F88B525D2C6000041842D /* TimeLineToneAnalyzerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F88B425D2C6000041842D /* TimeLineToneAnalyzerModel.swift */; };
+		4591D20F25E381F600F24E90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4591D20E25E381F600F24E90 /* GoogleService-Info.plist */; };
 		459DB73F25C17CA5009822AD /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB73E25C17CA5009822AD /* UserDefault.swift */; };
 		459DB74225C17CD0009822AD /* NewsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB74125C17CD0009822AD /* NewsCount.swift */; };
 		459DB74525C17D02009822AD /* DateItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB74425C17D02009822AD /* DateItems.swift */; };
 		459DB74825C17D08009822AD /* TimePoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB74725C17D08009822AD /* TimePoints.swift */; };
 		459DB74B25C17D13009822AD /* UpdateTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB74A25C17D13009822AD /* UpdateTimes.swift */; };
 		459DB76C25C3B83F009822AD /* LocalNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459DB76B25C3B83F009822AD /* LocalNotificationModel.swift */; };
-		45B8239025739340005F435B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45B8238F25739340005F435B /* GoogleService-Info.plist */; };
 		45BCEE7624E4F1970023D738 /* NewsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7524E4F1970023D738 /* NewsItems.swift */; };
 		45BCEE7824E545570023D738 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BCEE7724E545570023D738 /* WebViewController.swift */; };
 		45BE9B412526C7BB0013F34C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE9B402526C7BB0013F34C /* TabBarController.swift */; };
@@ -73,6 +73,7 @@
 		458F88A825D088A90041842D /* SubmissionPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionPageViewController.swift; sourceTree = "<group>"; };
 		458F88B125D2AAC70041842D /* TimeLineTranslatorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineTranslatorModel.swift; sourceTree = "<group>"; };
 		458F88B425D2C6000041842D /* TimeLineToneAnalyzerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineToneAnalyzerModel.swift; sourceTree = "<group>"; };
+		4591D20E25E381F600F24E90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		459DB73E25C17CA5009822AD /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		459DB74125C17CD0009822AD /* NewsCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCount.swift; sourceTree = "<group>"; };
 		459DB74425C17D02009822AD /* DateItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateItems.swift; sourceTree = "<group>"; };
@@ -81,7 +82,6 @@
 		459DB76B25C3B83F009822AD /* LocalNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationModel.swift; sourceTree = "<group>"; };
 		45B8238C25739103005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		45B8238D25739104005F435B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		45B8238F25739340005F435B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45BCEE7524E4F1970023D738 /* NewsItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItems.swift; sourceTree = "<group>"; };
 		45BCEE7724E545570023D738 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		45BE9B402526C7BB0013F34C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -311,7 +311,7 @@
 				45D8866C24E4C11300B32D02 /* View */,
 				45D8866B24E4C10800B32D02 /* Controller */,
 				45D8866524E4C0F200B32D02 /* Info.plist */,
-				45B8238F25739340005F435B /* GoogleService-Info.plist */,
+				4591D20E25E381F600F24E90 /* GoogleService-Info.plist */,
 			);
 			path = HappyNews;
 			sourceTree = "<group>";
@@ -473,7 +473,7 @@
 				45D8866424E4C0F200B32D02 /* LaunchScreen.storyboard in Resources */,
 				45D8865F24E4C0F000B32D02 /* Main.storyboard in Resources */,
 				4586DD512585B0CE00FAB922 /* Assets.xcassets in Resources */,
-				45B8239025739340005F435B /* GoogleService-Info.plist in Resources */,
+				4591D20F25E381F600F24E90 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -722,7 +722,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ken.HappyNews;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ken-sasaki.HappyNews";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -748,7 +748,7 @@
 				ORDER_FILE = "";
 				"ORDER_FILE[arch=*]" = "";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ken.HappyNews;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ken-sasaki.HappyNews";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
