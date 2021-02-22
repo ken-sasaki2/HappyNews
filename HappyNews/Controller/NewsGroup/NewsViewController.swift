@@ -343,6 +343,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
                     break
                 }
             }
+            print("joySelectionArray\([i]): \(self.joySelectionArray[i].title)")
         }
         
         // 感情分析結果と新たに作成した配列の比較

@@ -198,12 +198,17 @@ class FavoriteNewsViewController: UIViewController, UITableViewDelegate, UITable
         // 投稿内容をfireStoreDBから削除
         fireStoreDB.collection(FirestoreCollectionName.newsInfomations).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.favoriteNews).document(deleteID).delete() {
             error in
-
+            
             // エラー処理
             if let error = error {
                 print("Error removing document: \(error)")
             } else {
                 print("Document successfully removed!")
+                
+                // 配列からindexPath.rowを削除することでクラッシュをを回避する
+                self.favoriteNewsInfomation.remove(at: indexPath.row)
+                self.favoriteNewsTable.deleteRows(at: [indexPath], with: .fade)
+                
                 // タイムラインの更新(表示)をおこなう
                 self.loadFavoriteNews()
             }
