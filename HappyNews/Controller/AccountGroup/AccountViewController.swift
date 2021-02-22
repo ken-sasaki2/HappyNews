@@ -214,9 +214,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 settingIcon.kf.setImage(with: URL(string: user.userImage))
                 
                 // アカウント画像の角丸
-                settingIcon.layer.masksToBounds = true
-                settingIcon.layer.cornerRadius = settingIcon.frame.width/2
-                settingIcon.clipsToBounds = true
+                settingIcon.layer.cornerRadius = settingIcon.frame.width / 2
                 
                 // ラベルの設定
                 settingLabel.text      = user.userName

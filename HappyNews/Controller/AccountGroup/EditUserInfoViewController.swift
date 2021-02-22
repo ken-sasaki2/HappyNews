@@ -52,9 +52,7 @@ class EditUserInfoViewController: UIViewController,UIImagePickerControllerDelega
         sendToFirebaseStorageModel.doneCatchUserImageProtocol = self
         
         // アカウント画像の角丸
-        editUserImage.layer.masksToBounds = false
-        editUserImage.layer.cornerRadius = editUserImage.frame.width/2
-        editUserImage.clipsToBounds = true
+        editUserImage.layer.cornerRadius = editUserImage.frame.width / 2
         
         // 登録ボタンの角丸
         editUpdateButton.layer.cornerRadius = 6.0

@@ -36,7 +36,7 @@ class TimeLineTableViewCell: UITableViewCell {
         super.awakeFromNib()
     
         // アイコンの角丸
-        sendImageView.layer.cornerRadius = 22
+        sendImageView.layer.cornerRadius = sendImageView.frame.width / 2
     }
 
     // 選択状態と通常状態の状態アニメーション処理の処理

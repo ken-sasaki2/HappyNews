@@ -47,9 +47,7 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
         view.backgroundColor = UIColor(hex: "f4f8fa")
         
         // アカウント画像の角丸
-        userImage.layer.masksToBounds = false
-        userImage.layer.cornerRadius = userImage.frame.width/2
-        userImage.clipsToBounds = true
+        userImage.layer.cornerRadius = userImage.frame.width / 2
         
         // 登録ボタンの角丸
         registerButton.layer.cornerRadius = 6.0
