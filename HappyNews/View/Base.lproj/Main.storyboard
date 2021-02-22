@@ -368,6 +368,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="wAa-68-yOj">
+                        <barButtonItem key="backBarButtonItem" title=" " id="eQb-Kr-tOC"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Xmq-gE-wwS" customClass="favoritePage">
                             <imageReference key="image" image="star" catalog="system" symbolScale="large"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -405,7 +406,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mPZ-bX-ACU">
-                                                    <rect key="frame" x="19" y="14" width="334" height="215"/>
+                                                    <rect key="frame" x="19" y="14" width="334" height="214"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -436,9 +437,7 @@
                         <viewLayoutGuide key="safeArea" id="hAn-8Z-Bfv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="LfS-Ww-Ybf">
-                        <barButtonItem key="backBarButtonItem" title="戻る" id="9fV-Ac-oL2"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="LfS-Ww-Ybf"/>
                     <connections>
                         <outlet property="favoriteNewsTable" destination="psC-hT-FKC" id="45j-jl-Y8m"/>
                     </connections>
