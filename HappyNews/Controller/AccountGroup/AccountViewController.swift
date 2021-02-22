@@ -459,39 +459,30 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     func logoutAlert() {
         
         // アラートの作成
-        let logoutAlert = UIAlertController(title: "ログアウトしますか？",message: "ログアウトするとアプリ内の情報が \n リセットされます。", preferredStyle: .alert)
+        let logoutAlert = UIAlertController(title: "ログアウトしますか？",message: "", preferredStyle: .alert)
         
         // アラートのボタン
         logoutAlert.addAction(UIAlertAction(title: "キャンセル", style: .default))
         logoutAlert.addAction(UIAlertAction(title: "ログアウト", style: .destructive, handler: {
             action in
             
-            // 1. Auth.auth().currentUser
-            // 2. UserDefaultsに保存したデータ
-            // 計2点を削除
-            
-            // カレントユーザーをインスタンス化
-            let user = Auth.auth().currentUser
-            
-            // 1. Auth.auth().currentUserを削除
-            user?.delete(completion: {
-                (error) in
+            // ログアウト機能
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
                 
-                if let error = error {
-                    print("Failed to delete user.")
-                } else {
-                    print("Successfully deleted user.")
-                    
-                    // 2. UserDefaultsに保存したデータを全削除
-                    UserDefault.standard.removeAll()
-                    
-                    // UserDefaults全削除を終えて0.3秒後に呼ばれる
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        // LoginViewControllerへ遷移
-                        self.performSegue(withIdentifier: "Logout", sender: nil)
-                    }
+                // UserDefaultsに保存したデータを全削除
+                UserDefault.standard.removeAll()
+                
+                // UserDefaults全削除を終えて0.3秒後に呼ばれる
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    // LoginViewControllerへ遷移
+                    self.performSegue(withIdentifier: "Logout", sender: nil)
                 }
-            })
+                
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
         }))
         // アラートの表示
         present(logoutAlert, animated: true, completion: nil)
