@@ -362,7 +362,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     func shareFunction() {
         
         // Twitterシェア用テキスト
-        let shareText = "『話題のAIを使ったニュース?!』 \n いますぐ'HappyNews'をダウンロードしよう! \n AppStoreURL"
+        let shareText = "『今、話題の機械学習を使ったニュース登場！』 \n いますぐ'HappyNews'をダウンロードしよう!"
         
         // URLクエリ内で使用できる文字列に変換
         guard let encodedText = shareText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
