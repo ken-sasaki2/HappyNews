@@ -270,7 +270,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
         print("newsTextArray: \(newsTextArray.debugDescription)")
         
         // LanguageTranslatorModelと通信
-        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: LANGUAGE_TRANSLATOR_APIKEY, languageTranslatorVersion: languageTranslatorVersion,  languageTranslatorURL: languageTranslatorURL, newsTextArray: newsTextArray)
+        let languageTranslatorModel = LanguageTranslatorModel(languageTranslatorApiKey: LANGUAGE_TRANSLATOR_CHARGEKEY, languageTranslatorVersion: LANGUAGE_TRANSLATOR_VERSION,  languageTranslatorURL: LANGUAGE_TRANSLATOR_URL, newsTextArray: newsTextArray)
         
         // LanguageTranslatorModelの委託とJSON解析をセット
         languageTranslatorModel.doneCatchTranslationProtocol = self
@@ -301,7 +301,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     func startToneAnalyzer() {
         
         // translationArrayとAPIToneAnalyzerの認証コードで通信
-        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: TONE_ANALYZER_APIKEY, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, translationArray: translationArray)
+        let toneAnalyzerModel = ToneAnalyzerModel(toneAnalyzerApiKey: TONE_ANALYZER_CHARGEKEY, toneAnalyzerVersion: TONE_ANALYZER_VERSION, toneAnalyzerURL: TONE_ANALYZER_URL, translationArray: translationArray)
         
         // ToneAnalyzerModelの委託とJSON解析をセット
         toneAnalyzerModel.doneCatchAnalyzerProtocol = self

@@ -130,7 +130,7 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
             HUD.show(.labeledProgress(title: "Happyを分析中...", subtitle: nil))
             
             // 感情分析モデルと通信
-            let timeLineTranslatorModel = TimeLineTranslatorModel(timeLineTranslatorApiKey: LANGUAGE_TRANSLATOR_APIKEY, timeLineTranslatorVersion: languageTranslatorVersion, timeLineTranslatorURL: languageTranslatorURL, timeLineBody: timeLineTextView.text)
+            let timeLineTranslatorModel = TimeLineTranslatorModel(timeLineTranslatorApiKey: LANGUAGE_TRANSLATOR_CHARGEKEY, timeLineTranslatorVersion: LANGUAGE_TRANSLATOR_VERSION, timeLineTranslatorURL: LANGUAGE_TRANSLATOR_URL, timeLineBody: timeLineTextView.text)
             
             // プロトコルの委託と翻訳の開始
             timeLineTranslatorModel.doneCatchTimeLineTranslationProtocol = self
@@ -169,7 +169,7 @@ class SubmissionPageViewController: UIViewController, DoneCatchTimeLineTranslati
     func startTimeLineToneAnalyzer() {
         
         // sampleとAPIToneAnalyzerの認証コードで通信
-        let timeLineToneAnalyzerModel = TimeLineToneAnalyzerModel(toneAnalyzerApiKey: TONE_ANALYZER_APIKEY, toneAnalyzerVersion: toneAnalyzerVersion, toneAnalyzerURL: toneAnalyzerURL, toneAnalyzerText: toneAnalyzerText!)
+        let timeLineToneAnalyzerModel = TimeLineToneAnalyzerModel(toneAnalyzerApiKey: TONE_ANALYZER_CHARGEKEY, toneAnalyzerVersion: TONE_ANALYZER_VERSION, toneAnalyzerURL: TONE_ANALYZER_URL, toneAnalyzerText: toneAnalyzerText!)
         
         // プロトコルの委託と感情分析を開始
         timeLineToneAnalyzerModel.doneCatchTimeLineAnalyzerProtocol = self
