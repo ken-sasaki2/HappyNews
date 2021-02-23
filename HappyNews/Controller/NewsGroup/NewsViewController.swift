@@ -106,7 +106,7 @@ class NewsViewController: UIViewController, XMLParserDelegate, UITableViewDataSo
     func setNewsNavigationBar() {
         
         // NavigationBarのタイトルとその色とフォント
-        navigationItem.title = "HapyNews"
+        navigationItem.title = "HappyNews"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0, weight: .semibold)]
         
         // NavigationBarの色
