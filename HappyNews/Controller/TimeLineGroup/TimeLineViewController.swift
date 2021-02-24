@@ -173,33 +173,54 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // セルの編集許可
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        
-        // 投稿者が自身であった場合編集を許可
-        if timeLineMessages[indexPath.row].sender == Auth.auth().currentUser?.uid {
-            return true
-        } else {
-            return false
-        }
+        return true
     }
     
-    // セルの削除とfireStoreDBから削除を設定
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    // セルの編集アクションをカスタム
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let deleteID = timeLineMessages[indexPath.row].documentID
-        
-        // 投稿内容をfireStoreDBから削除
-        fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(deleteID).delete() {
-            error in
+        let deleteAction = UITableViewRowAction(style: .default, title: "削除", handler: {
+            (rowAction, indexPath) in
             
-            // エラー処理
-            if let error = error {
-                print("Error removing document: \(error)")
-            } else {
-                print("Document successfully removed!")
-                // タイムラインの更新(表示)をおこなう
-                self.loadTimeLine()
+            // 投稿者が自身であった場合編集を許可
+            if self.timeLineMessages[indexPath.row].sender == Auth.auth().currentUser?.uid {
+                
+                // 削除するセルのDdokyumenntoID
+                let deleteID = self.timeLineMessages[indexPath.row].documentID
+                
+                // 投稿内容をfireStoreDBから削除
+                self.fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(deleteID).delete() {
+                    error in
+                    
+                    // エラー処理
+                    if let error = error {
+                        print("Error removing document: \(error)")
+                    } else {
+                        print("Document successfully removed!")
+                        // タイムラインの更新(表示)をおこなう
+                        self.loadTimeLine()
+                    }
+                }
             }
+        })
+        
+        let blockAction = UITableViewRowAction(style: .normal, title: "ブロック", handler: {
+            (rowAction, indexPath) in
+            
+        })
+        
+        // カスタムアクションの背景色
+        deleteAction.backgroundColor = UIColor.red
+        blockAction.backgroundColor  = UIColor.blue
+        
+        // 投稿内容がカレントユーザーの場合はブロックをfalse、そうでない場合は削除をfalse
+        if self.timeLineMessages[indexPath.row].sender == Auth.auth().currentUser?.uid {
+            return [deleteAction]
+        } else {
+            return [blockAction]
         }
+        
+        return [deleteAction, blockAction]
     }
     
     // セルを構築
