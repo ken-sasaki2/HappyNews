@@ -39,6 +39,9 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         // ログイン案内テキストの表示
         signInGuideText()
         
+        // 利用規約ボタンの表示
+        termsOfUseText()
+        
         // Sign In With Appleの呼び出し
         createSignInWithApple()
     }
@@ -88,7 +91,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         
         // テキストの内容とフォントと色を設定し、3行で中央揃えにしてviewに反映
         signInGuide.text = "ログインしてユーザー名と \n アカウント画像を設定しよう"
-        signInGuide.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        signInGuide.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         signInGuide.textColor = UIColor(hex: "333333")
         signInGuide.backgroundColor = UIColor.clear
         signInGuide.numberOfLines = 3
@@ -108,6 +111,44 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         self.view.addConstraint(signInGuideTopConstraint)
         self.view.addConstraint(signInGuideLeadingConstraint)
         self.view.addConstraint(signInGuideWidthConstraint)
+    }
+    
+    
+    // MARK: - TermsOfUseButton
+    // 利用規約へ遷移するボタンの作成
+    func termsOfUseText() {
+        
+        // ボタンのタイプとデザインを設定
+        let termsOfUseButton = UIButton()
+        
+        // 'Autosizing'を'AutoLayout'に変換
+        termsOfUseButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 利用規約ボタンを化粧
+        termsOfUseButton.backgroundColor  = UIColor.clear
+        termsOfUseButton.setTitle("利用規約", for: UIControl.State.normal)
+        termsOfUseButton.setTitleColor(UIColor.link, for: .normal)
+        termsOfUseButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        
+        // ボタンがタップされた時の挙動を記述してviewに反映
+        termsOfUseButton.addTarget(self, action: #selector(tapTermsOfUseButton(_:)), for: .touchUpInside)
+        view.addSubview(termsOfUseButton)
+        
+        // appleButtonのY軸のAutoLayoutを設定
+        let termsOfUseButtonTopConstraint = NSLayoutConstraint(item: termsOfUseButton, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 480)
+        
+        // appleButtonのX軸のAutoLayoutを設定
+        NSLayoutConstraint.activate([termsOfUseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+        
+        // appleButtonの高さを設定
+        termsOfUseButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        // appleButtonの幅を設定
+        let termsOfUseButtonWidthConstraint = NSLayoutConstraint(item: termsOfUseButton, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 0.2, constant: 0)
+        
+        // AutoLayoutを反映
+        self.view.addConstraint(termsOfUseButtonTopConstraint)
+        self.view.addConstraint(termsOfUseButtonWidthConstraint)
     }
     
     
@@ -143,6 +184,30 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
         // AutoLayoutを反映
         self.view.addConstraint(appleButtonTopConstraint)
         self.view.addConstraint(appleButtonWidthConstraint)
+    }
+    
+    
+    // MARK: - TapTermsOfUseButton
+    // 利用規約ボタンをタップすると遷移する
+    @objc func tapTermsOfUseButton(_ sender: Any) {
+        
+        // WebViewControllerのインスタンス作成
+        let termsOfUseViewController = TermsOfUseViewController()
+
+        // WebViewのNavigationControllerを定義
+        let termsOfUseViewNavigation = UINavigationController(rootViewController: termsOfUseViewController)
+
+        // WebViewをフルスクリーンに
+        termsOfUseViewNavigation.modalPresentationStyle = .fullScreen
+
+         // 利用規約のリンク
+        let termsOfUseLink = "https://peraichi.com/landing_pages/view/happynews"
+
+        // 検知したセルのurlを取得
+        UserDefault.standard.set(termsOfUseLink, forKey: "termsOfUseLink")
+        
+        // WebViewControllerへ遷移
+        performSegue(withIdentifier: "termsOfUse", sender: nil)
     }
     
     
