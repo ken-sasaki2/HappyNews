@@ -43,6 +43,7 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
     // 構造体のインスタンス
     var commentStruct : [CommentStruct]   = []
     var userInfomation: [UserInfoStruct]  = []
+    var blockUsers    : [BlockUsers]      = []
     
     
     // MARK: - FireStore Property
@@ -80,8 +81,8 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         // fireStoreDBからユーザー情報を取得する
         loadUserInfomation()
         
-        // タイムラインの更新(表示)をおこなう
-        loadComment()
+        // ブロッツしたユーザーを取得する
+        searchBlockUser()
     }
     
     
@@ -118,6 +119,49 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
                 self.userInfomation.append(userInfo)
                 self.commentTable.reloadData()
             }
+        }
+    }
+    
+    // MARK: - SearchBlockUser
+    func searchBlockUser() {
+        
+        fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.blockUsers).getDocuments {
+            (snapShot, error) in
+            
+            // ブロックしたユーザー情報を受け取る準備
+            self.blockUsers = []
+            
+            // エラー処理
+            if error != nil {
+                
+                print("Message acquisition error: \(error.debugDescription)")
+                return
+            }
+            
+            // snapShotの中に保存されている値を取得する
+            if let snapShotDocuments = snapShot?.documents {
+                
+                for document in snapShotDocuments {
+                    
+                    // fireStoreDBのドキュメントのコレクションのインスタンス
+                    let documentData = document.data()
+                    
+                    // fireStoreDBから値を取得してblockUserInfoに保存
+                    let documentBlockUserID   = documentData["blockUserID"] as? String
+                    let documentBlockUserName = documentData["blockUserName"] as? String
+                    
+                    let blockUserInfo = BlockUsers(blockUserID: documentBlockUserID!, blockUserName: documentBlockUserName!)
+                    
+                    // ブロックしたユーザ一覧（BlockUsers型）
+                    self.blockUsers.append(blockUserInfo)
+                    
+                    print("blockUsers: \(self.blockUsers)")
+                    
+                    // タイムラインの更新(表示)をおこなう
+                    self.loadComment()
+                }
+            }
+                    
         }
     }
     
@@ -166,8 +210,18 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
                     
                     let newComment = CommentStruct(sender: documentSender!, comment: documentComment!, aiconImage: documentAiconImage!, userName: documentUserName!, createdTime: createdTime, documentID: document.documentID)
                     
-                    // / 新規コメント （commentStruct型）
-                    self.commentStruct.append(newComment)
+                    // ブロックユーザーを検索
+                    for i in 0..<self.blockUsers.count {
+                        
+                        // ブロックユーザーの投稿は新規コメントとして追加しない
+                        if self.blockUsers[i].blockUserID != newComment.sender {
+                            
+                            // 新規コメント （CommentStruct型）
+                            self.commentStruct.append(newComment)
+                        } else {
+                            break
+                        }
+                    }
                     
                     print("commentStruct: \(self.commentStruct)")
                     
@@ -214,31 +268,42 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         let deleteAction = UITableViewRowAction(style: .default, title: "削除", handler: {
             (rowAction, indexPath) in
             
-            // 投稿者が自身であった場合編集を許可
-            if self.commentStruct[indexPath.row].sender == Auth.auth().currentUser?.uid {
+            // 削除するセルのDdokyumenntoID
+            let deleteID = self.commentStruct[indexPath.row].documentID
+            
+            // 投稿内容をfireStoreDBから削除
+            self.fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(self.idString!).collection(FirestoreCollectionName.comments).document(deleteID).delete() {
+                error in
                 
-                // 削除するセルのDdokyumenntoID
-                let deleteID = self.commentStruct[indexPath.row].documentID
-                
-                // 投稿内容をfireStoreDBから削除
-                self.fireStoreDB.collection(FirestoreCollectionName.timeLineMessages).document(deleteID).delete() {
-                    error in
-                    
-                    // エラー処理
-                    if let error = error {
-                        print("Error removing document: \(error)")
-                    } else {
-                        print("Document successfully removed!")
-                        // タイムラインの更新(表示)をおこなう
-                        self.loadComment()
-                    }
+                // エラー処理
+                if let error = error {
+                    print("Error removing document: \(error)")
+                } else {
+                    print("Document successfully removed!")
+                    // タイムラインの更新(表示)をおこなう
+                    self.loadComment()
                 }
             }
         })
         
-        let blockAction = UITableViewRowAction(style: .normal, title: "ブロック", handler: {
+        // 他ユーザーをブロックするアクションをカスタム
+        let blockAction = UITableViewRowAction(style: .default, title: "ブロック", handler: {
             (rowAction, indexPath) in
             
+            
+            self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.blockUsers).document().setData(
+                ["blockUserID"   : self.commentStruct[indexPath.row].sender,
+                 "blockUserName" : self.commentStruct[indexPath.row].userName
+                ]) {
+                error in
+                
+                // エラー処理
+                if error != nil {
+                    
+                    print("Message save error: \(error.debugDescription)")
+                    return
+                }
+            }
         })
         
         // カスタムアクションの背景色

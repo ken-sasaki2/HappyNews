@@ -20,4 +20,5 @@ class FirestoreCollectionName {
     static var favoriteNews     = "FavoriteNews"
     static var comments         = "Comments"
     static var users            = "Users"
+    static var blockUsers       = "BlockUsers"
 }
