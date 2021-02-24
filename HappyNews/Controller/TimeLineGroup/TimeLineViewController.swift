@@ -68,7 +68,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewWillAppear(animated)
         
         // ブロッツしたユーザーを取得する
-        searchBlockUser()
+        searchTimeLineBlockUser()
     }
     
     
@@ -100,45 +100,49 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     // MARK: - SearchBlockUser
-    func searchBlockUser() {
+    func searchTimeLineBlockUser() {
         
         fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.blockUsers).getDocuments {
             (snapShot, error) in
             
-            // ブロックしたユーザー情報を受け取る準備
-            self.blockUsers = []
-            
-            // エラー処理
-            if error != nil {
+            if snapShot?.count != NewsCount.zeroCount {
                 
-                print("Message acquisition error: \(error.debugDescription)")
-                return
-            }
-            
-            // snapShotの中に保存されている値を取得する
-            if let snapShotDocuments = snapShot?.documents {
+                // ブロックしたユーザー情報を受け取る準備
+                self.blockUsers = []
                 
-                for document in snapShotDocuments {
+                // エラー処理
+                if error != nil {
                     
-                    // fireStoreDBのドキュメントのコレクションのインスタンス
-                    let documentData = document.data()
+                    print("Message acquisition error: \(error.debugDescription)")
+                    return
+                }
+                
+                // snapShotの中に保存されている値を取得する
+                if let snapShotDocuments = snapShot?.documents {
                     
-                    // fireStoreDBから値を取得してblockUserInfoに保存
-                    let documentBlockUserID   = documentData["blockUserID"] as? String
-                    let documentBlockUserName = documentData["blockUserName"] as? String
-                    
-                    let blockUserInfo = BlockUsers(blockUserID: documentBlockUserID!, blockUserName: documentBlockUserName!)
-                    
-                    // ブロックしたユーザ一覧（BlockUsers型）
-                    self.blockUsers.append(blockUserInfo)
-                    
+                    for document in snapShotDocuments {
+                        
+                        // fireStoreDBのドキュメントのコレクションのインスタンス
+                        let documentData = document.data()
+                        
+                        // fireStoreDBから値を取得してblockUserInfoに保存
+                        let documentBlockUserID   = documentData["blockUserID"] as? String
+                        let documentBlockUserName = documentData["blockUserName"] as? String
+                        
+                        let blockUserInfo = BlockUsers(blockUserID: documentBlockUserID!, blockUserName: documentBlockUserName!)
+                        
+                        // ブロックしたユーザ一覧（BlockUsers型）
+                        self.blockUsers.append(blockUserInfo)
+                    }
                     print("blockUsers: \(self.blockUsers)")
                     
                     // タイムラインの更新(表示)をおこなう
                     self.loadTimeLine()
                 }
+            } else {
+                // タイムラインの更新(表示)をおこなう
+                self.loadTimeLine()
             }
-                    
         }
     }
     
@@ -191,28 +195,40 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
                     
                     let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!, documentID: document.documentID, createdTime: createdTime)
                     
-                    // ブロックユーザーを検索
-                    for i in 0..<self.blockUsers.count {
+                    // ブロックしたユーザーがいない場合
+                    if self.blockUsers.count == NewsCount.zeroCount {
                         
-                        // ブロックユーザーの投稿は新規メッセージとして追加しない
-                        if self.blockUsers[i].blockUserID != newMessage.sender {
+                        // 新規メッセージ （ChatMessage型）
+                        self.timeLineMessages.append(newMessage)
+                        
+                        print("timeLineMessages: \(self.timeLineMessages)")
+                        
+                        // チャット投稿内容の更新
+                        self.timeLineTable.reloadData()
+                    } else {
+                        
+                        // ブロックユーザーを検索
+                        for i in 0..<self.blockUsers.count {
                             
-                            // 新規メッセージ （ChatMessage型）
-                            self.timeLineMessages.append(newMessage)
-                        } else {
-                            break
+                            // ブロックユーザーの投稿は新規メッセージとして追加しない
+                            if self.blockUsers[i].blockUserID != newMessage.sender {
+                                
+                                // 新規メッセージ （ChatMessage型）
+                                self.timeLineMessages.append(newMessage)
+                            } else {
+                                break
+                            }
                         }
+                        print("timeLineMessages: \(self.timeLineMessages)")
+                        
+                        // チャット投稿内容の更新
+                        self.timeLineTable.reloadData()
                     }
-                    
-                    print("timeLineMessages: \(self.timeLineMessages)")
-                    
-                    // チャット投稿内容の更新
-                    self.timeLineTable.reloadData()
                 }
             }
         }
     }
-    
+            
     
     // MARK: - TableView
     // セクションの数を設定
@@ -234,10 +250,10 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // 自身の投稿内容を削除するアクションをカスタム
-        let deleteAction = UITableViewRowAction(style: .default, title: "削除", handler: {
+        let deleteTimeLineAction = UITableViewRowAction(style: .default, title: "削除", handler: {
             (rowAction, indexPath) in
             
-            // 削除するセルのDdokyumenntoID
+            // 削除するセルのドキュメントID
             let deleteID = self.timeLineMessages[indexPath.row].documentID
             
             // 投稿内容をfireStoreDBから削除
@@ -256,37 +272,51 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         })
         
         // 他ユーザーをブロックするアクションをカスタム
-        let blockAction = UITableViewRowAction(style: .default, title: "ブロック", handler: {
+        let blockUserAction = UITableViewRowAction(style: .default, title: "ブロック", handler: {
             (rowAction, indexPath) in
             
-            // fireStoreDBにブロックしたユーザー情報を保存
-            self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.blockUsers).document().setData(
-                ["blockUserID"   : self.timeLineMessages[indexPath.row].sender,
-                 "blockUserName" : self.timeLineMessages[indexPath.row].userName
-                ]) {
-                error in
+            // アラートの作成
+            let blockUserAlert = UIAlertController(title: "ブロックの確認",message: "\(self.timeLineMessages[indexPath.row].userName)さんを本当にブロックしますか？", preferredStyle: .alert)
+            
+            // アラートのボタン
+            blockUserAlert.addAction(UIAlertAction(title: "いいえ", style: .cancel))
+            blockUserAlert.addAction(UIAlertAction(title: "はい", style: .destructive, handler: {
+                action in
                 
-                // エラー処理
-                if error != nil {
+                // fireStoreDBにブロックしたユーザー情報を保存
+                self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.blockUsers).document().setData(
+                    ["blockUserID"   : self.timeLineMessages[indexPath.row].sender,
+                     "blockUserName" : self.timeLineMessages[indexPath.row].userName
+                    ]) {
+                    error in
                     
-                    print("Message save error: \(error.debugDescription)")
-                    return
+                    // エラー処理
+                    if error != nil {
+                        
+                        print("Message save error: \(error.debugDescription)")
+                        return
+                    } else {
+                        // タイムラインの更新(表示)をおこなう
+                        self.searchTimeLineBlockUser()
+                    }
                 }
-            }
+            }))
+            // アラートの表示
+            self.present(blockUserAlert, animated: true, completion: nil)
         })
         
         // カスタムアクションの背景色
-        deleteAction.backgroundColor = UIColor.red
-        blockAction.backgroundColor  = UIColor.blue
+        deleteTimeLineAction.backgroundColor = UIColor.red
+        blockUserAction.backgroundColor      = UIColor.blue
         
         // 投稿内容がカレントユーザーの場合はブロックをfalse、そうでない場合は削除をfalse
         if self.timeLineMessages[indexPath.row].sender == Auth.auth().currentUser?.uid {
-            return [deleteAction]
+            return [deleteTimeLineAction]
         } else {
-            return [blockAction]
+            return [blockUserAction]
         }
         
-        return [deleteAction, blockAction]
+        return [deleteTimeLineAction, blockUserAction]
     }
     
     // セルを構築
