@@ -249,4 +249,27 @@ class SaveUserInformationViewController: UIViewController, UIImagePickerControll
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    // MARK: - TapTermsOfUseButton
+    // 利用規約ボタンををタップすると呼ばれる
+    @IBAction func tapTermsOfUseButton(_ sender: Any) {
+        
+        // WebViewControllerのインスタンス作成
+        let termsOfUseViewController = TermsOfUseViewController()
+
+        // WebViewのNavigationControllerを定義
+        let termsOfUseViewNavigation = UINavigationController(rootViewController: termsOfUseViewController)
+
+        // WebViewをフルスクリーンに
+        termsOfUseViewNavigation.modalPresentationStyle = .fullScreen
+
+         // 利用規約のリンク
+        let termsOfUseLink = "https://peraichi.com/landing_pages/view/happynews"
+
+        // 検知したセルのurlを取得
+        UserDefault.standard.set(termsOfUseLink, forKey: "termsOfUseLink")
+        
+        // WebViewControllerへ遷移
+        performSegue(withIdentifier: "termsOfUse", sender: nil)
+    }
 }
