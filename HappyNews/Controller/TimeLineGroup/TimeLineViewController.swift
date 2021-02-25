@@ -67,8 +67,8 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // ブロッツしたユーザーを取得する
-        searchTimeLineBlockUser()
+        // 投稿内容を取得する
+        loadTimeLine()
     }
     
     
@@ -99,53 +99,6 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    // MARK: - SearchBlockUser
-    func searchTimeLineBlockUser() {
-        
-        fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.blockUsers).getDocuments {
-            (snapShot, error) in
-            
-            if snapShot?.count != NewsCount.zeroCount {
-                
-                // ブロックしたユーザー情報を受け取る準備
-                self.blockUsers = []
-                
-                // エラー処理
-                if error != nil {
-                    
-                    print("Message acquisition error: \(error.debugDescription)")
-                    return
-                }
-                
-                // snapShotの中に保存されている値を取得する
-                if let snapShotDocuments = snapShot?.documents {
-                    
-                    for document in snapShotDocuments {
-                        
-                        // fireStoreDBのドキュメントのコレクションのインスタンス
-                        let documentData = document.data()
-                        
-                        // fireStoreDBから値を取得してblockUserInfoに保存
-                        let documentBlockUserID   = documentData["blockUserID"] as? String
-                        let documentBlockUserName = documentData["blockUserName"] as? String
-                        
-                        let blockUserInfo = BlockUsers(blockUserID: documentBlockUserID!, blockUserName: documentBlockUserName!)
-                        
-                        // ブロックしたユーザ一覧（BlockUsers型）
-                        self.blockUsers.append(blockUserInfo)
-                    }
-                    print("blockUsers: \(self.blockUsers)")
-                    
-                    // タイムラインの更新(表示)をおこなう
-                    self.loadTimeLine()
-                }
-            } else {
-                // タイムラインの更新(表示)をおこなう
-                self.loadTimeLine()
-            }
-        }
-    }
-    
     
     // MARK: - LoadTimeLine
     // fireStoreDBから値を取得してタイムラインの更新(表示)をおこなう
@@ -157,6 +110,18 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
             
             // 投稿情報を受け取る準備
             self.timeLineMessages = []
+            
+            // ブロックしたユーザーが存在しない場合（ブロック履歴がない場合）
+            if UserDefault.standard.object(forKey: "blocked") == nil {
+                
+                let blocked = ["エラー回避値" : true]
+                
+                // エラー回避のためにキー値に初期値を保存
+                UserDefault.standard.set(blocked, forKey: "blocked")
+            }
+            
+            // 事前にブロックユーザーの情報を取得する
+            let blockList: [String:Bool] = UserDefault.standard.object(forKey: "blocked") as! [String : Bool]
             
             // Firestoreの中身を確認
             print("snapShot: \(snapShot?.documents)")
@@ -193,33 +158,16 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
                     DateItems.dateFormatter.timeStyle = .short
                     let createdTime = DateItems.dateFormatter.string(from: dateValue)
                     
-                    let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!, documentID: document.documentID, createdTime: createdTime)
-                    
-                    // ブロックしたユーザーがいない場合
-                    if self.blockUsers.count == NewsCount.zeroCount {
-                        
-                        // 新規メッセージ （ChatMessage型）
-                        self.timeLineMessages.append(newMessage)
-                        
-                        print("timeLineMessages: \(self.timeLineMessages)")
-                        
-                        // チャット投稿内容の更新
-                        self.timeLineTable.reloadData()
+                    // key[documentSender(sender)]が存在し、値がtrueならtimeLineMessagesに加えない
+                    if let blockFlag = blockList[documentSender!], blockFlag == true {
+                        // ここは何もしない
                     } else {
                         
-                        // ブロックユーザーを検索
-                        for i in 0..<self.blockUsers.count {
-                            
-                            // ブロックユーザーの投稿は新規メッセージとして追加しない
-                            if self.blockUsers[i].blockUserID != newMessage.sender {
-                                
-                                // 新規メッセージ （ChatMessage型）
-                                self.timeLineMessages.append(newMessage)
-                            } else {
-                                break
-                            }
-                        }
-                        print("timeLineMessages: \(self.timeLineMessages)")
+                        // fireStoreDBから取得した情報を構造体を用いて保存
+                        let newMessage = TimeLineMessage(sender: documentSender!, body: documentBody!, aiconImage: documentAiconImage!, userName: documentUserName!, documentID: document.documentID, createdTime: createdTime)
+                        
+                        // TimeLineMessage型の最新投稿内容（ブロックユーザーは含まない）
+                        self.timeLineMessages.append(newMessage)
                         
                         // チャット投稿内容の更新
                         self.timeLineTable.reloadData()
@@ -228,7 +176,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
-            
+    
     
     // MARK: - TableView
     // セクションの数を設定
@@ -264,7 +212,6 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
                 if let error = error {
                     print("Error removing document: \(error)")
                 } else {
-                    print("Document successfully removed!")
                     // タイムラインの更新(表示)をおこなう
                     self.loadTimeLine()
                 }
@@ -283,23 +230,26 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
             blockUserAlert.addAction(UIAlertAction(title: "はい", style: .destructive, handler: {
                 action in
                 
-                // fireStoreDBにブロックしたユーザー情報を保存
-                self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.blockUsers).document().setData(
-                    ["blockUserID"   : self.timeLineMessages[indexPath.row].sender,
-                     "blockUserName" : self.timeLineMessages[indexPath.row].userName
-                    ]) {
-                    error in
+                // ブロックしたユーザーが存在しない場合（ブロック履歴がない場合）
+                if UserDefault.standard.object(forKey: "blocked") == nil {
                     
-                    // エラー処理
-                    if error != nil {
-                        
-                        print("Message save error: \(error.debugDescription)")
-                        return
-                    } else {
-                        // タイムラインの更新(表示)をおこなう
-                        self.searchTimeLineBlockUser()
-                    }
+                    let blocked = ["エラー回避値" : true]
+                    
+                    // エラー回避のためにキー値に初期値を保存
+                    UserDefault.standard.set(blocked, forKey: "blocked")
                 }
+                
+                // この時点でキー値blockedに保存されている値をblockDictionaryに代入する
+                var blockDictionary: [String:Bool] = UserDefault.standard.object(forKey: "blocked") as! [String : Bool]
+
+                // 辞書型blockDictionaryに、key[sender], value-trueで値を追加
+                blockDictionary[self.timeLineMessages[indexPath.row].sender] = true
+                
+                // キー値blockedに辞書型blockDictionaryを保存
+                UserDefault.standard.set(blockDictionary, forKey: "blocked")
+                
+                // タイムラインの更新
+                self.loadTimeLine()
             }))
             // アラートの表示
             self.present(blockUserAlert, animated: true, completion: nil)

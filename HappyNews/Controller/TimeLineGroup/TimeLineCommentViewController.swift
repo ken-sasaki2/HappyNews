@@ -81,8 +81,8 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         // fireStoreDBからユーザー情報を取得する
         loadUserInfomation()
         
-        // ブロッツしたユーザーを取得する
-        searchBlockUser()
+        // コメント投稿内容を取得する
+        loadComment()
     }
     
     
@@ -122,55 +122,6 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
-    // MARK: - SearchBlockUser
-    func searchBlockUser() {
-        
-        fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.blockUsers).getDocuments {
-            (snapShot, error) in
-            
-            if snapShot?.documents.count != NewsCount.zeroCount {
-                
-                // ブロックしたユーザー情報を受け取る準備
-                self.blockUsers = []
-                
-                // エラー処理
-                if error != nil {
-                    
-                    print("Message acquisition error: \(error.debugDescription)")
-                    return
-                }
-                
-                // snapShotの中に保存されている値を取得する
-                if let snapShotDocuments = snapShot?.documents {
-                    
-                    for document in snapShotDocuments {
-                        
-                        // fireStoreDBのドキュメントのコレクションのインスタンス
-                        let documentData = document.data()
-                        
-                        // fireStoreDBから値を取得してblockUserInfoに保存
-                        let documentBlockUserID   = documentData["blockUserID"] as? String
-                        let documentBlockUserName = documentData["blockUserName"] as? String
-                        
-                        let blockUserInfo = BlockUsers(blockUserID: documentBlockUserID!, blockUserName: documentBlockUserName!)
-                        
-                        // ブロックしたユーザ一覧（BlockUsers型）
-                        self.blockUsers.append(blockUserInfo)
-                        
-                        print("blockUsers: \(self.blockUsers)")
-                        
-                        // タイムラインの更新(表示)をおこなう
-                        self.loadComment()
-                    }
-                }
-            } else {
-                // タイムラインの更新(表示)をおこなう
-                self.loadComment()
-            }
-            
-        }
-    }
-    
     
     // MARK: - LoadComment
     // fireStoreDBから値を取得してUIを更新
@@ -182,6 +133,18 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
             
             // 投稿情報を受け取る準備
             self.commentStruct = []
+            
+            // ブロックしたユーザーが存在しない場合（ブロック履歴がない場合）
+            if UserDefault.standard.object(forKey: "blocked") == nil {
+                
+                let blocked = ["エラー回避値" : true]
+                
+                // エラー回避のためにキー値に初期値を保存
+                UserDefault.standard.set(blocked, forKey: "blocked")
+            }
+            
+            // 事前にブロックユーザーの情報を取得する
+            let blockList: [String:Bool] = UserDefault.standard.object(forKey: "blocked") as! [String : Bool]
             
             // エラー処理
             if error != nil {
@@ -214,47 +177,26 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
                     DateItems.dateFormatter.timeStyle = .short
                     let createdTime = DateItems.dateFormatter.string(from: dateValue)
                     
-                    let newComment = CommentStruct(sender: documentSender!, comment: documentComment!, aiconImage: documentAiconImage!, userName: documentUserName!, createdTime: createdTime, documentID: document.documentID)
-                    
-                    // ブロックしたユーザーがいない場合
-                    if self.blockUsers.count == NewsCount.zeroCount {
-                        
-                        // 新規メッセージ （ChatMessage型）
-                        self.commentStruct.append(newComment)
-                        
-                        print("commentStruct: \(self.commentStruct)")
-                        
-                        // チャット投稿内容の更新
-                        self.commentTable.reloadData()
+                    // key[documentSender(sender)]が存在し、値がtrueならtimeLineMessagesに加えない
+                    if let blockFlag = blockList[documentSender!], blockFlag == true {
+                        // ここは何もしない
                     } else {
                         
-                        // ブロックユーザーを検索
-                        for i in 0..<self.blockUsers.count {
-                            
-                            print("aaa: \(self.blockUsers[i])")
-                            
-                            // ブロックユーザーの投稿は新規コメントとして追加しない
-                            if self.blockUsers[i].blockUserID != newComment.sender {
-                                
-                                // 新規コメント （CommentStruct型）
-                                self.commentStruct.append(newComment)
-                                break
-                            } else {
-                                break
-                            }
-                        }
+                        // fireStoreDBから取得した情報を構造体を用いて保存
+                        let newComment = CommentStruct(sender: documentSender!, comment: documentComment!, aiconImage: documentAiconImage!, userName: documentUserName!, createdTime: createdTime, documentID: document.documentID)
                         
-                        print("commentStruct: \(self.commentStruct)")
+                        // CommentStruct型の最新投稿内容（ブロックユーザーは含まない）
+                        self.commentStruct.append(newComment)
                         
-                        // コメント投稿内容の更新
+                        // チャット投稿内容の更新
                         self.commentTable.reloadData()
                     }
                 }
             }
         }
     }
-    
-    
+
+
     // MARK: - InputAccessoryView
     // CommentViewControllerにcommentInputAccessoryViewを反映
     override var inputAccessoryView: UIView? {
@@ -301,45 +243,61 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
                 if let error = error {
                     print("Error removing document: \(error)")
                 } else {
-                    print("Document successfully removed!")
-                    // タイムラインの更新(表示)をおこなう
-                    self.loadComment()
+                    // コメントページを閉じる
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
         })
         
         // 他ユーザーをブロックするアクションをカスタム
-        let blockAction = UITableViewRowAction(style: .default, title: "ブロック", handler: {
+        let blockUserAction = UITableViewRowAction(style: .default, title: "ブロック", handler: {
             (rowAction, indexPath) in
             
+            // アラートの作成
+            let blockUserAlert = UIAlertController(title: "ブロックの確認",message: "\(self.commentStruct[indexPath.row].userName)さんを本当にブロックしますか？", preferredStyle: .alert)
             
-            self.fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.blockUsers).document().setData(
-                ["blockUserID"   : self.commentStruct[indexPath.row].sender,
-                 "blockUserName" : self.commentStruct[indexPath.row].userName
-                ]) {
-                error in
+            // アラートのボタン
+            blockUserAlert.addAction(UIAlertAction(title: "いいえ", style: .cancel))
+            blockUserAlert.addAction(UIAlertAction(title: "はい", style: .destructive, handler: {
+                action in
                 
-                // エラー処理
-                if error != nil {
+                // ブロックしたユーザーが存在しない場合（ブロック履歴がない場合）
+                if UserDefault.standard.object(forKey: "blocked") == nil {
                     
-                    print("Message save error: \(error.debugDescription)")
-                    return
+                    let blocked = ["エラー回避値" : true]
+                    
+                    // エラー回避のためにキー値に初期値を保存
+                    UserDefault.standard.set(blocked, forKey: "blocked")
                 }
-            }
+                
+                // この時点でキー値blockedに保存されている値をblockDictionaryに代入する
+                var blockDictionary: [String:Bool] = UserDefault.standard.object(forKey: "blocked") as! [String : Bool]
+
+                // 辞書型blockDictionaryに、key[sender], value-trueで値を追加
+                blockDictionary[self.commentStruct[indexPath.row].sender] = true
+                
+                // キー値blockedに辞書型blockDictionaryを保存
+                UserDefault.standard.set(blockDictionary, forKey: "blocked")
+                
+                // コメントページを閉じる
+                self.dismiss(animated: true, completion: nil)
+            }))
+            // アラートの表示
+            self.present(blockUserAlert, animated: true, completion: nil)
         })
         
         // カスタムアクションの背景色
-        deleteAction.backgroundColor = UIColor.red
-        blockAction.backgroundColor  = UIColor.blue
+        deleteAction.backgroundColor    = UIColor.red
+        blockUserAction.backgroundColor = UIColor.blue
         
         // 投稿内容がカレントユーザーの場合はブロックをfalse、そうでない場合は削除をfalse
         if self.commentStruct[indexPath.row].sender == Auth.auth().currentUser?.uid {
             return [deleteAction]
         } else {
-            return [blockAction]
+            return [blockUserAction]
         }
         
-        return [deleteAction, blockAction]
+        return [deleteAction, blockUserAction]
     }
     
     // セルを構築する
