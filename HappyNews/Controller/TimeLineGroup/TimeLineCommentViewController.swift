@@ -128,40 +128,46 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
         fireStoreDB.collection(FirestoreCollectionName.users).document(Auth.auth().currentUser!.uid).collection(FirestoreCollectionName.blockUsers).getDocuments {
             (snapShot, error) in
             
-            // ブロックしたユーザー情報を受け取る準備
-            self.blockUsers = []
-            
-            // エラー処理
-            if error != nil {
+            if snapShot?.documents.count != NewsCount.zeroCount {
                 
-                print("Message acquisition error: \(error.debugDescription)")
-                return
-            }
-            
-            // snapShotの中に保存されている値を取得する
-            if let snapShotDocuments = snapShot?.documents {
+                // ブロックしたユーザー情報を受け取る準備
+                self.blockUsers = []
                 
-                for document in snapShotDocuments {
+                // エラー処理
+                if error != nil {
                     
-                    // fireStoreDBのドキュメントのコレクションのインスタンス
-                    let documentData = document.data()
-                    
-                    // fireStoreDBから値を取得してblockUserInfoに保存
-                    let documentBlockUserID   = documentData["blockUserID"] as? String
-                    let documentBlockUserName = documentData["blockUserName"] as? String
-                    
-                    let blockUserInfo = BlockUsers(blockUserID: documentBlockUserID!, blockUserName: documentBlockUserName!)
-                    
-                    // ブロックしたユーザ一覧（BlockUsers型）
-                    self.blockUsers.append(blockUserInfo)
-                    
-                    print("blockUsers: \(self.blockUsers)")
-                    
-                    // タイムラインの更新(表示)をおこなう
-                    self.loadComment()
+                    print("Message acquisition error: \(error.debugDescription)")
+                    return
                 }
-            }
+                
+                // snapShotの中に保存されている値を取得する
+                if let snapShotDocuments = snapShot?.documents {
                     
+                    for document in snapShotDocuments {
+                        
+                        // fireStoreDBのドキュメントのコレクションのインスタンス
+                        let documentData = document.data()
+                        
+                        // fireStoreDBから値を取得してblockUserInfoに保存
+                        let documentBlockUserID   = documentData["blockUserID"] as? String
+                        let documentBlockUserName = documentData["blockUserName"] as? String
+                        
+                        let blockUserInfo = BlockUsers(blockUserID: documentBlockUserID!, blockUserName: documentBlockUserName!)
+                        
+                        // ブロックしたユーザ一覧（BlockUsers型）
+                        self.blockUsers.append(blockUserInfo)
+                        
+                        print("blockUsers: \(self.blockUsers)")
+                        
+                        // タイムラインの更新(表示)をおこなう
+                        self.loadComment()
+                    }
+                }
+            } else {
+                // タイムラインの更新(表示)をおこなう
+                self.loadComment()
+            }
+            
         }
     }
     
@@ -210,23 +216,39 @@ class TimeLineCommentViewController: UIViewController, UITableViewDelegate, UITa
                     
                     let newComment = CommentStruct(sender: documentSender!, comment: documentComment!, aiconImage: documentAiconImage!, userName: documentUserName!, createdTime: createdTime, documentID: document.documentID)
                     
-                    // ブロックユーザーを検索
-                    for i in 0..<self.blockUsers.count {
+                    // ブロックしたユーザーがいない場合
+                    if self.blockUsers.count == NewsCount.zeroCount {
                         
-                        // ブロックユーザーの投稿は新規コメントとして追加しない
-                        if self.blockUsers[i].blockUserID != newComment.sender {
+                        // 新規メッセージ （ChatMessage型）
+                        self.commentStruct.append(newComment)
+                        
+                        print("commentStruct: \(self.commentStruct)")
+                        
+                        // チャット投稿内容の更新
+                        self.commentTable.reloadData()
+                    } else {
+                        
+                        // ブロックユーザーを検索
+                        for i in 0..<self.blockUsers.count {
                             
-                            // 新規コメント （CommentStruct型）
-                            self.commentStruct.append(newComment)
-                        } else {
-                            break
+                            print("aaa: \(self.blockUsers[i])")
+                            
+                            // ブロックユーザーの投稿は新規コメントとして追加しない
+                            if self.blockUsers[i].blockUserID != newComment.sender {
+                                
+                                // 新規コメント （CommentStruct型）
+                                self.commentStruct.append(newComment)
+                                break
+                            } else {
+                                break
+                            }
                         }
+                        
+                        print("commentStruct: \(self.commentStruct)")
+                        
+                        // コメント投稿内容の更新
+                        self.commentTable.reloadData()
                     }
-                    
-                    print("commentStruct: \(self.commentStruct)")
-                    
-                    // コメント投稿内容の更新
-                    self.commentTable.reloadData()
                 }
             }
         }
