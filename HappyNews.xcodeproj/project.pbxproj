@@ -727,6 +727,7 @@
 				CODE_SIGN_ENTITLEMENTS = HappyNews/HappyNews.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = ZXZ96723Y7;
 				INFOPLIST_FILE = HappyNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -752,6 +753,7 @@
 				CODE_SIGN_ENTITLEMENTS = HappyNews/HappyNews.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = ZXZ96723Y7;
 				INFOPLIST_FILE = HappyNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
